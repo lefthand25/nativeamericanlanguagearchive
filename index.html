@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native American Language Archive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid #fff;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        nav {
+            background: #fff;
+            border-bottom: 2px solid #000;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-right: 1px solid #000;
+            transition: background 0.3s;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            background: #f0f0f0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            min-width: 200px;
+            border: 2px solid #000;
+            border-top: none;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            border-right: none;
+            border-bottom: 1px solid #000;
+            padding: 0.75rem 1rem;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 2px solid #000;
+            background: #fff;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .story-form {
+            margin-top: 2rem;
+        }
+
+        .story-form input,
+        .story-form textarea,
+        .story-form select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 2px solid #000;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .story-form button {
+            background: #000;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .story-form button:hover {
+            background: #333;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .story-card {
+            border: 2px solid #000;
+            padding: 1.5rem;
+            background: #f9f9f9;
+        }
+
+        .story-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .story-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .story-text {
+            line-height: 1.8;
+        }
+
+        .resource-list {
+            margin-top: 1.5rem;
+        }
+
+        .resource-item {
+            padding: 1.5rem;
+            border: 2px solid #000;
+            margin-bottom: 1.5rem;
+            background: #f9f9f9;
+        }
+
+        .resource-item h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        .resource-item p {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .resource-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .resource-item a {
+            color: #000;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .resource-item a:hover {
+            background: #000;
+            color: #fff;
+            padding: 0.2rem 0.4rem;
+        }
+
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid #000;
+            }
+
+            .dropdown-content {
+                position: static;
+                border: none;
+                border-top: 1px solid #000;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .resource-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Native American Language Archive</h1>
+        <p>Preserving Voices, Honoring Heritage</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li class="dropdown">
+                <a href="#websites">Websites/Digital Archives</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showResources('websites', 'california')">California</a>
+                    <a href="#" onclick="showResources('websites', 'eastern')">Eastern Woodlands</a>
+                    <a href="#" onclick="showResources('websites', 'basin')">Great Basin</a>
+                    <a href="#" onclick="showResources('websites', 'northwest')">Northwest Coast</a>
+                    <a href="#" onclick="showResources('websites', 'plateau')">Plateau</a>
+                    <a href="#" onclick="showResources('websites', 'plains')">Great Plains</a>
+                    <a href="#" onclick="showResources('websites', 'southwest')">Southwest</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#books">Books</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showResources('books', 'california')">California</a>
+                    <a href="#" onclick="showResources('books', 'eastern')">Eastern Woodlands</a>
+                    <a href="#" onclick="showResources('books', 'basin')">Great Basin</a>
+                    <a href="#" onclick="showResources('books', 'northwest')">Northwest Coast</a>
+                    <a href="#" onclick="showResources('books', 'plateau')">Plateau</a>
+                    <a href="#" onclick="showResources('books', 'plains')">Great Plains</a>
+                    <a href="#" onclick="showResources('books', 'southwest')">Southwest</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#apps">Apps</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showResources('apps', 'california')">California</a>
+                    <a href="#" onclick="showResources('apps', 'eastern')">Eastern Woodlands</a>
+                    <a href="#" onclick="showResources('apps', 'basin')">Great Basin</a>
+                    <a href="#" onclick="showResources('apps', 'northwest')">Northwest Coast</a>
+                    <a href="#" onclick="showResources('apps', 'plateau')">Plateau</a>
+                    <a href="#" onclick="showResources('apps', 'plains')">Great Plains</a>
+                    <a href="#" onclick="showResources('apps', 'southwest')">Southwest</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#museums">Museums</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showResources('museums', 'california')">California</a>
+                    <a href="#" onclick="showResources('museums', 'eastern')">Eastern Woodlands</a>
+                    <a href="#" onclick="showResources('museums', 'basin')">Great Basin</a>
+                    <a href="#" onclick="showResources('museums', 'northwest')">Northwest Coast</a>
+                    <a href="#" onclick="showResources('museums', 'plateau')">Plateau</a>
+                    <a href="#" onclick="showResources('museums', 'plains')">Great Plains</a>
+                    <a href="#" onclick="showResources('museums', 'southwest')">Southwest</a>
+                </div>
+            </li>
+            <li><a href="#share" onclick="showSection('share')">Share a Story</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Our Mission</h2>
+            <p>Indigenous languages carry the wisdom, stories, and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists, and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
+            <p>Here, you'll find resources for learners, documentation projects led by native speakers, and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts, or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
+        </section>
+
+        <section id="resources" class="hidden">
+            <h2 id="resource-title">Resources</h2>
+            <div id="resource-list" class="resource-list"></div>
+        </section>
+
+        <section id="share" class="hidden">
+            <h2>Share a Story</h2>
+            <p>Contribute to our growing archive by sharing a story in English or in a Native American language. Your contribution helps preserve linguistic heritage for future generations.</p>
+            
+            <div class="story-form">
+                <input type="text" id="story-title" placeholder="Story Title" required>
+                <input type="text" id="story-author" placeholder="Your Name (optional)">
+                <select id="story-language">
+                    <option value="">Select Language</option>
+                    <option value="English">English</option>
+                    <option value="Navajo">Navajo (Diné bizaad)</option>
+                    <option value="Cherokee">Cherokee (ᏣᎳᎩ)</option>
+                    <option value="Lakota">Lakota</option>
+                    <option value="Ojibwe">Ojibwe (Anishinaabemowin)</option>
+                    <option value="Other">Other (specify in story)</option>
+                </select>
+                <textarea id="story-text" rows="8" placeholder="Share your story here..." required></textarea>
+                <button onclick="submitStory()">Submit Story</button>
+            </div>
+
+            <h3 style="margin-top: 3rem; border-top: 2px solid #000; padding-top: 2rem;">Community Stories</h3>
+            <div id="stories-container" class="stories-grid">
+                <div class="story-card">
+                    <h3>Welcome to Our Archive</h3>
+                    <div class="story-meta">Submitted in English</div>
+                    <div class="story-text">This is a space for sharing stories that preserve and celebrate indigenous languages. Your contributions help keep these vital languages alive for future generations. We encourage stories in both English and Native American languages.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Native American Language Archive | Honoring Indigenous Voices</p>
+        <p>This is a community resource dedicated to language preservation and cultural heritage.</p>
+    </footer>
+
+    <script>
+        const stories = [
+            {
+                title: "Welcome to Our Archive",
+                author: "",
+                language: "English",
+                text: "This is a space for sharing stories that preserve and celebrate indigenous languages. Your contributions help keep these vital languages alive for future generations. We encourage stories in both English and Native American languages."
+            }
+        ];
+
+        const resources = {
+            websites: {
+                california: [
+                    {title: "Native Languages of the Americas (California Section)", desc: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages.", lang: "California Languages", pub: "Native Languages Org", link: "https://www.native-languages.org/california.htm"},
+                    {title: "California State Parks - California Indians Language", desc: "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts.", lang: "California Languages", pub: "CA State Parks", link: "https://www.parks.ca.gov/?page_id=23548"},
+                    {title: "College of the Redwoods - Local Languages Guide", desc: "Library guide supporting student understanding of northwestern California Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe.", lang: "Multiple CA Languages", pub: "College of the Redwoods", link: "https://redwoods.libguides.com/native-americans/la"}
+                ],
+                eastern: [
+                    {title: "Cherokee Nation Language Platform", desc: "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses and interactive learning portal.", lang: "Cherokee", pub: "Cherokee Nation", link: "https://cnlearn.cherokee.org/"},
+                    {title: "Cherokee Learner Community Resources", desc: "Community-driven educational resource collection with curated materials, learning guides, grammar references designed for Cherokee language learners at various proficiency levels.", lang: "Cherokee", pub: "Community-based", link: "https://cherokeelearner.com/"},
+                    {title: "Eastern Band Cherokee Immersion Program", desc: "Eastern Band Cherokee immersion program offering online Cherokee lessons, dictionary database addressing Cherokee language emergency status.", lang: "Cherokee", pub: "Eastern Band Cherokee", link: "https://newkituwah.com/"},
+                    {title: "Ojibwe Language Learning Platform", desc: "Comprehensive Anishinaabemowin learning website providing beginner through advanced lessons with immersion support materials and master-apprentice program resources.", lang: "Ojibwe", pub: "Community-based", link: "https://ojibwe.net/"},
+                    {title: "Learning Ojibwe Platform", desc: "Dedicated platform focused on Ojibwe language instruction providing structured learning materials and community support for speakers, learners, and educators.", lang: "Ojibwe", pub: "Community-based", link: "https://learningojibwe.com/"},
+                    {title: "Western Carolina University Cherokee Collection", desc: "Academic research collection featuring Cherokee-language materials including children's books, textbooks, hymnals, and biblical translations.", lang: "Cherokee", pub: "Western Carolina University", link: "https://www.wcu.edu/library/cherokee/index.aspx"}
+                ],
+                basin: [
+                    {title: "Northern Paiute Language Project", desc: "Comprehensive documentation project creating audio dictionary and text collections with thousands of words with pronunciation guides and cultural context.", lang: "Northern Paiute", pub: "UC Santa Cruz", link: "https://paiute.ucsc.edu/"},
+                    {title: "Shoshoni Language Project", desc: "Academic language preservation initiative housing Wick R. Miller Collection archive with irreplaceable texts, images, and audio recordings.", lang: "Shoshoni", pub: "University of Utah", link: "https://shoshoniproject.utah.edu/"},
+                    {title: "Shoshoni Talking Dictionary", desc: "Searchable online language resource supporting Newe Taikwa (Shoshoni) language use with thousands of entries with audio pronunciation.", lang: "Shoshoni", pub: "University of Utah", link: "https://shoshoniproject.utah.edu/language-materia"},
+                    {title: "Pyramid Lake Paiute Tribe Language Department", desc: "Tribal language preservation program offering community-based instruction and cultural education for Northern Paiute language learning.", lang: "Northern Paiute", pub: "Pyramid Lake Paiute Tribe", link: "https://plpt.nsn.us/language/"},
+                    {title: "Shoshone-Bannock Tribes Language & Cultural Program", desc: "Tribal department providing instruction in both Shoshone and Bannock languages by tribal member instructors combining language with cultural values.", lang: "Shoshone, Bannock", pub: "Shoshone-Bannock Tribes", link: "https://www.sbtribes.com/language-culture/"},
+                    {title: "California Language Archive - Northern Paiute Resources", desc: "Academic repository featuring linguistic documentation, grammatical analysis, and cultural materials for Northern Paiute language.", lang: "Northern Paiute", pub: "UC Berkeley", link: "https://cla.berkeley.edu/languages/northern-paiute"}
+                ],
+                northwest: [
+                    {title: "Lingít Yoo X̱ʼatángi - The Tlingit Language", desc: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries with extensive audio materials and workbooks.", lang: "Tlingit", pub: "Community-based", link: "https://tlingitlanguage.com/"},
+                    {title: "Sealaska Heritage Institute Language Department", desc: "Official Southeast Alaska language revitalization hub for Lingít (Tlingit), X̱aad Kíl (Haida), and Sm'algyax (Tsimshian) with downloadable materials.", lang: "Tlingit, Haida, Tsimshian", pub: "Sealaska Heritage Institute", link: "https://sealaskaheritage.org/shi-language-departm"},
+                    {title: "Haida Language Main Page", desc: "Dedicated website for Haida language study, preservation, and revitalization efforts with linguistic resources and cultural context.", lang: "Haida", pub: "Community-based", link: "http://haidalanguage.org/"},
+                    {title: "Yukon Native Language Centre - Tlingit Resources", desc: "Academic center providing Interior Tlingit language materials including noun dictionaries, story books, language lessons, and audio resources.", lang: "Interior Tlingit", pub: "Yukon Native Language Centre", link: "https://ynlc.ca/about-the-tlingit-language/"},
+                    {title: "University of Alaska Southeast - X̱aad Kíl Resources", desc: "Academic library guide featuring Haida language revitalization resources, historical linguistic studies, and comparative Northwest Coast language materials.", lang: "Haida", pub: "University of Alaska Southeast", link: "https://uas.alaska.libguides.com/c.php?g=1436288"},
+                    {title: "FirstVoices - Northwest Coast Languages", desc: "Community-controlled digital platform featuring various Northwest Coast Indigenous languages including Halkomelem, Squamish, and other Salishan languages.", lang: "Multiple Salishan Languages", pub: "First Peoples' Cultural Council", link: "https://www.firstvoices.com/"}
+                ],
+                plateau: [
+                    {title: "Nez Perce Language Resources - OLAC", desc: "Online Language Archives Community repository providing access to Nez Perce (nimípuutímt) language materials including historical recordings and linguistic analyses.", lang: "Nez Perce", pub: "OLAC", link: "http://www.language-archives.org/language/nez"},
+                    {title: "Yakama Nation Cultural Resources", desc: "Official tribal education program requiring two-year Sahaptin language instruction with community-based learning involving elders and tribal members.", lang: "Sahaptin (Ichishkíin)", pub: "Yakama Nation", link: "https://www.yakama.org/academics/"},
+                    {title: "Syilx Okanagan Nation nsyilxcən Language", desc: "Official Okanagan Nation Alliance language resource featuring nsyilxcən (Colville-Okanagan) materials and cultural information with linguistic resources.", lang: "nsyilxcən (Colville-Okanagan)", pub: "Syilx Okanagan Nation", link: "https://syilx.org/about-us/syilx-nation/nsyilxen-lang"},
+                    {title: "Thompson Rivers University Salish Resources", desc: "Academic library guide featuring Interior Salish language materials including storytelling traditions, legends, songs from multiple Salishan-speaking communities.", lang: "Interior Salish Languages", pub: "Thompson Rivers University", link: "https://libguides.tru.ca/indigenouslanguages/salish"}
+                ],
+                plains: [
+                    {title: "Fort Belknap Language Preservation Program", desc: "Tribally-run program in Harlem, Montana focusing on community-based preservation of Assiniboine and Gros Ventre languages working directly with elders.", lang: "Assiniboine, Gros Ventre", pub: "Fort Belknap Tribes", link: "https://www.ftbelknaplanguagepreservation.com/"},
+                    {title: "Fort Peck Community College", desc: "Native language immersion programs for Dakota and Nakota (Assiniboine) languages including pre-school immersion schools and community education services.", lang: "Dakota, Nakota (Assiniboine)", pub: "Fort Peck Community College", link: "https://www.fpcc.edu/"},
+                    {title: "Indiana University - Fort Belknap Research", desc: "Academic research documenting oral traditions and language use at Fort Belknap Reservation capturing cross-border dialectical variations.", lang: "Assiniboine, Gros Ventre", pub: "Indiana University", link: "https://indigenousknowledge.indiana.edu/research-"},
+                    {title: "Native-Languages.org - Assiniboine", desc: "Online collection providing accessible Assiniboine vocabulary, pronunciation guides, and cultural background serving as gateway to specialized materials.", lang: "Assiniboine", pub: "Native Languages Org", link: "https://www.native-languages.org/"},
+                    {title: "Montana Digital Academy - Indigenous Language Courses", desc: "Online high school courses serving grades 9-12 across Montana with academic credit providing formal Indigenous language education within state system.", lang: "Multiple Montana Languages", pub: "Montana Digital Academy", link: "https://montanadigitalacademy.org/programs/indige"},
+                    {title: "Aaniiih Nakoda College", desc: "College on Fort Belknap Reservation preserving and promoting A'anin (Gros Ventre) and Nakoda (Assiniboine) languages with immersion programs.", lang: "A'anin (Gros Ventre), Nakoda", pub: "Aaniiih Nakoda College", link: "https://www.nakonauniversity.org/"}
+                ],
+                southwest: []
+            },
+            books: {
+                california: [
+                    {title: "HathiTrust Digital Library - California Native Collections", desc: "Millions of digitized books online including rare materials on California Native languages. Full-view volumes freely available for public domain works.", lang: "California Languages", pub: "HathiTrust"},
+                    {title: "Surviving Through the Days", desc: "Anthology of treasures from oral literature of Native California with translations of Native California stories and songs with cultural context.", lang: "Multiple California Languages", pub: "Various Publishers"},
+                    {title: "Handbook of North American Indians, Volume 8 (California)", desc: "Smithsonian Institution's scholarly reference series on Native American studies dedicated to California tribes with authoritative academic documentation.", lang: "California Languages", pub: "Smithsonian Institution"},
+                    {title: "Kumeyaay Library Department - California Indian Books", desc: "Approved book list deemed culturally accurate by Kumeyaay panel for describing Southern California and northern Mexico Indigenous peoples.", lang: "Kumeyaay and Southern California Languages", pub: "Kumeyaay Library Department"},
+                    {title: "Coast Miwok & California Native American History Collection", desc: "Staff-curated collection focusing on Coast Miwok people, culture, and history documenting transformation through Spanish, Mexican, and American settler contact.", lang: "Coast Miwok", pub: "Marin Library"},
+                    {title: "Indigenous & Native Culture Books", desc: "Collection celebrating Native people's resilience including specialized titles like Chumash Ethnobotany and The Rediscovery of America.", lang: "Multiple California Languages", pub: "ForestWatch Store"}
+                ],
+                eastern: [
+                    {title: "Native American Language and Culture Preservation Project", desc: "New York State Library's 66-reel microfilm collection featuring books on Native American education, Jesuit relations, and religious works in Iroquoian and Algonquin languages.", lang: "Iroquoian and Algonquin Languages", pub: "New York State Library"},
+                    {title: "Cherokees Writing the Keetoowah Way Collection", desc: "Comprehensive translation collection including Dollie Duncan letters, Echota Funeral Notices, Willie Jumper Stories, and government documents providing authentic Cherokee documentation.", lang: "Cherokee", pub: "Various Cherokee Communities"}
+                ],
+                basin: [
+                    {title: "Southern Ute Cultural Center Publications", desc: "Community-created educational materials including language learning books, cultural guides, and traditional stories in Ute language with tribal member contributions.", lang: "Ute", pub: "Southern Ute Cultural Center"},
+                    {title: "University Linguistic Collections", desc: "Academic publications from UC Berkeley, University of Utah providing grammatical analyses, dictionaries, and ethnolinguistic studies of Great Basin language families.", lang: "Great Basin Language Families", pub: "Multiple Universities"},
+                    {title: "Traditional Story Collections", desc: "Compiled collections of traditional tales, oral histories, and cultural narratives preserved in original Great Basin languages with community-approved translations.", lang: "Multiple Great Basin Languages", pub: "Various Tribal Communities"}
+                ],
+                northwest: [
+                    {title: "Sealaska Heritage Institute Publications", desc: "Comprehensive collection of dictionaries, workbooks, and cultural materials for Tlingit, Haida, and Tsimshian languages featuring the most comprehensive dictionaries ever published.", lang: "Tlingit, Haida, Tsimshian", pub: "Sealaska Heritage Institute"},
+                    {title: "Tlingit Language Materials Collection", desc: "Extensive library of Beginning Tlingit workbooks by Xʼunei, Tlingit Dictionary drafts, Verb Dictionary by Constance Naish developed by language teachers and researchers.", lang: "Tlingit", pub: "Various Tlingit Communities"}
+                ],
+                plateau: [
+                    {title: "Nez Perce Language Materials", desc: "Historical collection including ACLS materials by Livingston Farrand, Archie Phinney, Morris Swadesh featuring traditional stories and linguistic analyses from early 20th-century fieldwork.", lang: "Nez Perce", pub: "Various Academic Institutions"},
+                    {title: "Sahaptin Language Collections", desc: "Academic and community publications covering Yakama, Umatilla, Warm Springs dialects with grammatical analyses, vocabulary collections, and cultural materials.", lang: "Sahaptin (Yakama, Umatilla, Warm Springs)", pub: "University of Oregon & Tribal Communities"},
+                    {title: "Interior Salish Publications", desc: "Comprehensive collections including Secwepemctsín dictionaries, grammatical studies, and cultural materials for Shuswap, Thompson, Okanagan-Colville languages.", lang: "Interior Salishan Languages", pub: "Academic & Tribal Institutions"},
+                    {title: "Plateau Penutian Studies", desc: "Academic publications covering Klamath-Modoc language family with linguistic documentation, grammatical analyses, and comparative studies.", lang: "Klamath-Modoc", pub: "University Presses"}
+                ],
+                plains: [
+                    {title: "A Grammar of Nakoda (Assiniboine)", desc: "First complete grammatical analysis of Assiniboine language providing comprehensive linguistic analysis including phonetics, morphology, and syntax for academic researchers.", lang: "Assiniboine (Nakoda)", pub: "Linda A. Cumberland"},
+                    {title: "A Concise Dictionary of Nakoda (Assiniboine)", desc: "Publication created with community member Wilma Kennedy offering the most current comprehensive dictionary for practical use by learners and community members.", lang: "Assiniboine (Nakoda)", pub: "Vincent Collette"},
+                    {title: "Caddo Language Grammar and Materials", desc: "Published August 2018 Caddo grammar and in-depth 2004 examination of Caddo verb structure supporting comprehensive language study.", lang: "Caddo", pub: "Academic Publishers"},
+                    {title: "Pawnee Educational Materials", desc: "Alphabet book acting as quick reference guide for beginners and novice learners available from Pawnee Nation Education Department.", lang: "Pawnee", pub: "Pawnee Nation Education Department"},
+                    {title: "Cheyenne and Arapaho Language Books and CDs", desc: "Educational materials produced by Cheyenne and Arapaho Tribes Language Program helping preserve and teach Arapaho language.", lang: "Cheyenne and Arapaho", pub: "Cheyenne and Arapaho Tribes Language Program"}
+                ],
+                southwest: [
+                    {title: "Diné Bizaad: Speak, Read, Write Navajo", desc: "Comprehensive textbook providing structured approach to Navajo language learning with grammar instruction, vocabulary building, and cultural context with systematic progression.", lang: "Navajo (Diné bizaad)", pub: "Various Publishers"},
+                    {title: "Navajo Audio Programs (Audible)", desc: "Professional audio language learning programs available through Audible platform providing pronunciation guidance, conversational practice, and immersive listening experiences.", lang: "Navajo (Diné bizaad)", pub: "Audible Platform"},
+                    {title: "Academic Southwest Language Publications", desc: "University presses and academic institutions publish scholarly works covering Southwest Indigenous linguistics including
