@@ -188,3 +188,80 @@
   </script>
 </body>
 </html>
+
+  <footer>
+    <p>&copy; 2025 Native American Language Archive | Honoring Indigenous Voices</p>
+  </footer>
+
+  <script>
+    const regions = ["california", "eastern", "basin", "northwest", "plateau", "plains"];
+
+    const resources = {/* same datasets from previous version (websites, books, apps, museums) */};
+
+    function buildMenus() {
+      ["websites", "books", "apps", "museums"].forEach(cat => {
+        const menu = document.getElementById(cat + "-menu");
+        regions.forEach(region => {
+          const a = document.createElement("a");
+          a.href = `#${cat}`;
+          a.innerText = region.charAt(0).toUpperCase() + region.slice(1).replace(/-/g, ' ');
+          a.onclick = () => showResources(cat, region);
+          menu.appendChild(a);
+        });
+      });
+    }
+
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+    }
+
+    function showResources(category, region) {
+      showSection('resources');
+      document.getElementById("resource-title").innerText = category.charAt(0).toUpperCase() + category.slice(1) + " Resources";
+      renderResources(resources[category][region] || []);
+    }
+
+    function renderResources(listData) {
+      const list = document.getElementById("resource-list");
+      list.innerHTML = "";
+      listData.forEach(r => {
+        const item = document.createElement("div");
+        item.classList.add("resource-item");
+        item.innerHTML = `
+          <h3>${r.title}</h3>
+          <div class="resource-meta"><strong>Type:</strong> ${r.type} | <strong>Coverage:</strong> ${r.coverage}</div>
+          <div class="resource-meta"><strong>Language:</strong> ${r.lang} | <strong>Publisher:</strong> ${r.pub}</div>
+          <p>${r.desc}</p>
+          ${r.identifier ? `<a href="${r.identifier}" target="_blank">Visit Resource</a>` : ""}
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function() {
+      const query = this.value.toLowerCase();
+      let results = [];
+      for (let category in resources) {
+        for (let region in resources[category]) {
+          resources[category][region].forEach(r => {
+            if (
+              r.title.toLowerCase().includes(query) ||
+              r.desc.toLowerCase().includes(query) ||
+              r.lang.toLowerCase().includes(query) ||
+              r.pub.toLowerCase().includes(query)
+            ) {
+              results.push(r);
+            }
+          });
+        }
+      }
+      renderResources(results);
+    });
+
+    // Story functions remain unchanged from last version (drag-drop, edit, delete with confirm)
+
+    buildMenus();
+  </script>
+</body>
+</html>
