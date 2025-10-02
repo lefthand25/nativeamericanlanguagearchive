@@ -22,6 +22,8 @@
     section { margin-bottom: 3rem; padding: 2rem; background: #fff; border: 1px solid #ddd; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     section h2 { font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee; }
     .hidden { display: none; }
+    .about-images { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .about-images img { width: 100%; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
     .resource-list { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
     .resource-item { background: #fdfdfd; padding: 1.5rem; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); transition: transform 0.2s; }
     .resource-item:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -35,7 +37,16 @@
     form input, form textarea { padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
     form button { background: #0066cc; color: #fff; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
     form button:hover { background: #004999; }
-    .story { background: #fdfdfd; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; margin-top: 1rem; }
+    #storyList { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .story { background: #fefefe; padding: 1rem; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); word-wrap: break-word; cursor: grab; position: relative; }
+    .story.dragging { opacity: 0.5; }
+    .story h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .story em { font-size: 0.9rem; color: #555; }
+    .delete-btn, .edit-btn { position: absolute; top: 8px; width: 24px; height: 24px; border: none; border-radius: 50%; text-align: center; cursor: pointer; font-size: 0.8rem; line-height: 22px; color: #fff; }
+    .delete-btn { right: 8px; background: #e63946; }
+    .delete-btn:hover { background: #c1121f; }
+    .edit-btn { right: 40px; background: #457b9d; }
+    .edit-btn:hover { background: #1d3557; }
     @media (max-width: 768px) { nav ul { flex-direction: column; } nav a { padding: 1rem; } }
   </style>
 </head>
@@ -60,6 +71,11 @@
     <section id="about">
       <h2>About Our Mission</h2>
       <p>Indigenous languages carry wisdom, stories, and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists, and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
+      <div class="about-images">
+        <img src="https://cdn.pixabay.com/photo/2016/11/18/18/36/forest-1834780_1280.jpg" alt="California redwoods (Pixabay)">
+        <img src="https://cdn.pixabay.com/photo/2018/06/14/13/28/native-american-3472855_1280.jpg" alt="Cultural preservation (Pixabay)">
+        <img src="https://cdn.pixabay.com/photo/2017/05/28/21/13/teepee-2357663_1280.jpg" alt="Great Plains teepee (Pixabay)">
+      </div>
     </section>
 
     <section id="resources" class="hidden">
@@ -85,18 +101,10 @@
   </footer>
 
   <script>
-    // Regions
     const regions = ["california", "eastern", "basin", "northwest", "plateau", "plains"];
 
-    // Placeholder datasets (Books, Apps, Museums to be populated fully)
-    const resources = {
-      websites: {},
-      books: {},
-      apps: {},
-      museums: {}
-    };
+    const resources = { websites: {}, books: {}, apps: {}, museums: {} };
 
-    // Populate dropdown menus
     function buildMenus() {
       ["websites", "books", "apps", "museums"].forEach(cat => {
         const menu = document.getElementById(cat + "-menu");
@@ -135,25 +143,120 @@
       }
     }
 
-    // Handle story submissions
     const storyForm = document.getElementById("storyForm");
     const storyList = document.getElementById("storyList");
+
+    function loadStories() {
+      const saved = JSON.parse(localStorage.getItem("stories")) || [];
+      storyList.innerHTML = "";
+      saved.forEach(story => addStoryToDOM(story));
+      enableDragDrop();
+    }
+
+    function addStoryToDOM(story) {
+      const storyDiv = document.createElement("div");
+      storyDiv.classList.add("story");
+      storyDiv.setAttribute("draggable", "true");
+      storyDiv.innerHTML = `
+        <button class="edit-btn">✎</button>
+        <button class="delete-btn">×</button>
+        <h3>${story.title}</h3>
+        <p><em>${story.language}</em></p>
+        <p>${story.content}</p>
+      `;
+      storyDiv.querySelector(".delete-btn").addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete this story?")) {
+          deleteStory(storyDiv);
+        }
+      });
+      storyDiv.querySelector(".edit-btn").addEventListener("click", () => editStory(storyDiv));
+      storyList.appendChild(storyDiv);
+    }
 
     storyForm.addEventListener("submit", function(e) {
       e.preventDefault();
       const title = document.getElementById("storyTitle").value;
       const language = document.getElementById("storyLanguage").value;
       const content = document.getElementById("storyContent").value;
-
-      const storyDiv = document.createElement("div");
-      storyDiv.classList.add("story");
-      storyDiv.innerHTML = `<h3>${title}</h3><p><em>${language}</em></p><p>${content}</p>`;
-
-      storyList.appendChild(storyDiv);
+      const newStory = {title, language, content};
+      const saved = JSON.parse(localStorage.getItem("stories")) || [];
+      saved.push(newStory);
+      localStorage.setItem("stories", JSON.stringify(saved));
+      addStoryToDOM(newStory);
+      enableDragDrop();
       storyForm.reset();
     });
 
+    function enableDragDrop() {
+      const draggables = document.querySelectorAll(".story");
+      const container = document.getElementById("storyList");
+
+      draggables.forEach(draggable => {
+        draggable.addEventListener("dragstart", () => {
+          draggable.classList.add("dragging");
+        });
+        draggable.addEventListener("dragend", () => {
+          draggable.classList.remove("dragging");
+          saveOrder();
+        });
+      });
+
+      container.addEventListener("dragover", e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const dragging = document.querySelector(".dragging");
+        if (afterElement == null) {
+          container.appendChild(dragging);
+        } else {
+          container.insertBefore(dragging, afterElement);
+        }
+      });
+    }
+
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll(".story:not(.dragging)")];
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function saveOrder() {
+      const stories = [];
+      document.querySelectorAll(".story").forEach(storyDiv => {
+        const title = storyDiv.querySelector("h3").innerText;
+        const language = storyDiv.querySelector("em").innerText;
+        const content = storyDiv.querySelectorAll("p")[1].innerText;
+        stories.push({title, language, content});
+      });
+      localStorage.setItem("stories", JSON.stringify(stories));
+    }
+
+    function deleteStory(storyDiv) {
+      storyDiv.remove();
+      saveOrder();
+    }
+
+    function editStory(storyDiv) {
+      const title = storyDiv.querySelector("h3").innerText;
+      const language = storyDiv.querySelector("em").innerText;
+      const content = storyDiv.querySelectorAll("p")[1].innerText;
+
+      document.getElementById("storyTitle").value = title;
+      document.getElementById("storyLanguage").value = language;
+      document.getElementById("storyContent").value = content;
+
+      deleteStory(storyDiv);
+      showSection('share');
+    }
+
     buildMenus();
+    loadStories();
   </script>
 </body>
 </html>
