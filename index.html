@@ -11,13 +11,15 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
     line-height: 1.6; 
     color: #222; 
-    background: #fafafa;
+    background: #f4f4f4; /* Slightly darker background to highlight sections */
 }
 
-/* --- BLACK HEADER: Main Navigation (Sticky and Black) --- */
+/* --- BLACK HEADER: Main Navigation (FORCED BLACK) --- */
 header { 
-    background: #000; /* Explicitly Black Header */
-    color: #fff; 
+    /* !!! FORCED STYLES FOR OVERRIDE !!! */
+    background: #000 !important; /* Explicitly Black Header, forced */
+    color: #fff !important; 
+    
     padding: 2rem 1rem; 
     text-align: center; 
     border-bottom: 4px solid #444; 
@@ -53,7 +55,7 @@ nav a:hover {
 /* --- TWO-COLUMN LAYOUT WITH GRID --- */
 .main-wrapper {
     display: grid;
-    /* Sidebar width (280px) and main content (1 fraction unit) */
+    /* Fixed 280px sidebar, remainder for content */
     grid-template-columns: 280px 1fr; 
     max-width: 1400px;
     margin: 0 auto;
@@ -61,22 +63,28 @@ nav a:hover {
     padding: 1.5rem 1rem;
 }
 
-/* --- LEFT SIDEBAR: Sticky Search and Filters --- */
+/* --- LEFT SIDEBAR: Sticky Search and Filters (Distinct Background) --- */
 .sidebar {
     padding: 0;
+    /* Added background and styling to make it visually distinct */
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    
     position: sticky; /* Key: Makes the sidebar sticky */
-    top: 1.5rem; /* Space from the top edge */
+    top: 1.5rem; /* Space from the top edge (below the black header) */
     height: fit-content; /* Only takes up necessary height */
 }
 
 /* Search Bar & Filters Styles (Adapted for Sidebar) */
 .search-container {
     background: #fff;
-    padding: 1rem;
-    border: 1px solid #ddd; 
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    margin-bottom: 1rem;
+    padding: 0;
+    border: none; 
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 1.5rem;
 }
 .search-bar input { 
     width: 100%; 
@@ -91,11 +99,8 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    padding: 1rem;
-    background: #fff;
-    border: 1px solid #ddd; 
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding-top: 1rem;
+    border-top: 1px dashed #ddd;
 }
 .filter-controls select {
     padding: 0.5rem;
@@ -111,15 +116,29 @@ nav a:hover {
 
 
 /* --- RIGHT CONTENT AREA Styles --- */
-section { margin-bottom: 2.5rem; padding: 2rem; background: #fff; border: 1px solid #ddd; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.main-content {
+    /* Use a light background for the content sections */
+    background: #fff; 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 2.5rem;
+}
+section { margin-bottom: 2.5rem; padding: 0; background: none; border: none; box-shadow: none;}
 section h2 { font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee; }
 .hidden { display: none; }
 .resource-list { margin-top: 1.5rem; padding: 0; background: none; border: none; }
-.resource-item { background: #fff; padding: 1.5rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.resource-item { background: #fafafa; padding: 1.5rem; margin-bottom: 1rem; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
 
 
 /* --- Footer --- */
-footer { background: #000; color: #fff; text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 4px solid #444; }
+footer { 
+    background: #000; 
+    color: #fff; 
+    text-align: center; 
+    padding: 2rem 1rem; 
+    margin-top: 3rem; 
+    border-top: 4px solid #444; 
+}
 
 /* --- Responsive Design: Stack Columns on Small Screens --- */
 @media (max-width: 900px) {
@@ -130,19 +149,10 @@ footer { background: #000; color: #fff; text-align: center; padding: 2rem 1rem; 
     .sidebar {
         position: static; /* Remove sticky on small screens */
         margin-bottom: 1rem;
-        /* Make sidebar look like a standard section when stacked */
-        background: #fff;
         padding: 1rem;
-        border: 1px solid #ddd; 
-        border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .filter-controls {
-        background: none;
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        margin-top: 1rem;
+    .main-content {
+        padding: 1.5rem;
     }
 }
 </style>
@@ -224,7 +234,7 @@ footer { background: #000; color: #fff; text-align: center; padding: 2rem 1rem; 
 </footer>
 
 <script>
-    // --- START: DATABASE CONTENT (Simplified for brevity, identical content as last version) ---
+    // --- START: DATABASE CONTENT (Omitted for brevity, but it's the same array as before) ---
     const resources = {
       "websites": {
         "California": [
