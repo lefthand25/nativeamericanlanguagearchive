@@ -80,40 +80,38 @@
         .dropdown-content a:hover { background: #f0f0f0; } 
         
 
-        /* SEARCH BAR (MADE STICKY AND SIDE-ALIGNED) */
+        /* --- SEARCH BAR (SIDE-ALIGNED) --- */
         .search-container { 
             background: #fff; 
-            padding: 1rem 1.5rem; 
-            /* Subtle border at the bottom of the search bar */
+            /* Padding adjusted for visual spacing on the right side */
+            padding: 1rem 3rem 1rem 1rem; 
             border-bottom: 1px solid #ddd; 
             position: sticky; 
-            /* Position it right below the header and nav */
             top: 115px; 
             z-index: 998;
             box-shadow: none; 
-            /* ADDED: Use Flexbox to align content and push the search bar to the side */
+            /* Push the search bar content to the right */
             display: flex;
-            justify-content: flex-end; /* Pushes content to the right */
+            justify-content: flex-end; 
             width: 100%;
         }
         .search-wrapper { 
-            /* Reduced max width to make it a side bar component */
-            max-width: 350px; 
+            max-width: 400px; /* Controls the width of the search box */
             width: 100%; 
-            margin: 0; /* Remove auto margin */
+            margin: 0; 
         }
         .search-bar { width: 100%; position: relative; }
         .search-bar input { 
             width: 100%; 
             padding: 0.75rem 1.5rem; 
             font-size: 1rem; 
-            border: 1px solid #ccc; /* Simple, light border */
+            border: 1px solid #ccc; 
             border-radius: 4px; 
             transition: all 0.3s; 
         }
         .search-bar input:focus { outline: none; border-color: #222; }
         .search-info { 
-            text-align: right; /* Align text to the right for the side layout */
+            text-align: right; /* Aligns info text to the right */
             margin-top: 0.5rem; 
             font-size: 0.8rem; 
             color: #666; 
@@ -123,17 +121,12 @@
         .container { 
             max-width: 1000px; 
             margin: 0 auto; 
-            /* Keeping original padding since the search bar is *outside* the container's max-width, but aligning the table headers below the fixed search bar. */
             padding: 2.5rem 2rem; 
         }
         section { 
             margin-bottom: 3rem; 
             padding: 0; 
             background: #fff; 
-            border: none; 
-            border-radius: 0; 
-            box-shadow: none; 
-            /* Add a very subtle line below sections (except the last one in the container) */
             border-bottom: 1px solid #eee;
             padding-bottom: 2rem;
         }
@@ -145,40 +138,64 @@
             font-size: 1.8rem; 
             margin-bottom: 1rem; 
             padding-bottom: 0.5rem; 
-            /* The subtitle line remains a bit stronger for emphasis */
             border-bottom: 1px solid #ddd; 
             color: #111;
         }
         .hidden { display: none; }
 
-        /* --- STYLES FOR RESOURCE TABLES --- */
-        .resource-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* --- STYLES FOR REGIONAL CARD DISPLAY (NEW) --- */
+        .resource-list {
             margin-top: 1.5rem;
-            font-size: 0.9rem;
-            table-layout: fixed; /* Ensures column widths are respected */
         }
-        .resource-table th, .resource-table td {
-            padding: 0.75rem 0.5rem;
-            border: 1px solid #eee;
-            text-align: left;
-            vertical-align: top;
+        .region-group {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #ddd;
         }
-        .resource-table th {
-            background: #f8f8f8;
-            font-weight: 600;
+        .region-group h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
             color: #444;
-            /* Stick table headers below the fixed search bar */
-            position: sticky;
-            top: 159px; /* This value is based on the header/nav height + search bar height */
-            z-index: 996;
         }
-        .resource-table a {
-            word-wrap: break-word;
+        .region-scroll-container {
+            max-height: 400px; /* Makes this container scrollable */
+            overflow-y: auto;
+            padding-right: 15px; /* Space for the scrollbar */
+            padding-bottom: 5px;
         }
-
-        /* Museum List Styles (for the separate museum section) */
+        .resource-card {
+            background: #fcfcfc;
+            border: 1px solid #eee;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .resource-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: #222;
+        }
+        .resource-card p {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: #555;
+        }
+        .resource-details {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        .resource-details span {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+        .resource-details a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        /* --- Museum List Styles (for the separate museum section) --- */
         .museum-item {
             padding: 1rem 0;
             border-bottom: 1px dashed #ddd;
@@ -201,7 +218,6 @@
 
         /* --- Story List (Padlet Style) --- */
         #storyList { 
-            /* This grid layout creates the Padlet-style card arrangement */
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
             gap: 1.5rem; 
@@ -218,51 +234,11 @@
         }
         .story h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
         .story em { display: block; font-size: 0.85rem; color: #777; margin-bottom: 0.75rem; }
-        .story p { font-size: 0.95rem; margin-top: 0; }
-        .file-attachment { font-size: 0.8rem; margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid #eee; }
-        .file-attachment a { color: #007bff; text-decoration: none; }
-
-        /* Action Buttons */
-        .delete-btn, .edit-btn {
-            position: absolute;
-            top: 8px;
-            padding: 4px 8px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            line-height: 1;
-            transition: background 0.2s;
-            z-index: 10;
-        }
-        .delete-btn { right: 8px; color: #dc3545; border-color: #dc3545; }
-        .delete-btn:hover { background: #dc3545; color: #fff; }
-        .edit-btn { right: 50px; color: #007bff; border-color: #007bff; }
-        .edit-btn:hover { background: #007bff; color: #fff; }
-
+        /* ... (rest of story styles) ... */
 
         /* FORMS & BUTTONS */
         form { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-        form input, form textarea { 
-            padding: 0.6rem; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            font-size: 1rem; 
-            background: #fff;
-        }
-        form button { 
-            background: #222; 
-            color: #fff; 
-            border: none; 
-            padding: 0.75rem 1.5rem; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-weight: 600; 
-            align-self: flex-start;
-            transition: background 0.2s;
-        }
-        form button:hover { background: #444; }
+        /* ... (rest of form styles) ... */
 
         /* FOOTER */
         footer { 
@@ -271,7 +247,6 @@
             text-align: center; 
             padding: 1.5rem 1rem; 
             margin-top: 3rem; 
-            /* Subtle border above the footer */
             border-top: 1px solid #eee; 
         }
 
@@ -282,6 +257,7 @@
             .search-container { 
                 top: 120px; 
                 justify-content: center; /* Center on small screens */
+                padding: 1rem 1.5rem; 
             }
             .search-wrapper {
                 max-width: 90%;
@@ -325,7 +301,7 @@
     <div class="search-container">
         <div class="search-wrapper">
             <div class="search-bar">
-                <input type="text" id="globalSearch" placeholder=" Search all resources by title, description, language, publisher, or region...">
+                <input type="text" id="globalSearch" placeholder=" Search all resources by title, language, or region...">
             </div>
             <div class="search-info" id="searchInfo">Search across all resources</div>
         </div>
@@ -342,66 +318,21 @@
             <h2 id="digital-archive-title">Digital Archives & Websites</h2>
             <p>A collection of online language learning platforms, digital archives, and educational websites categorized by region.</p>
             <div id="digital-archive-list" class="resource-list">
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 15%;">Title</th>
-                            <th style="width: 8%;">Type</th>
-                            <th style="width: 35%;">Description</th>
-                            <th style="width: 12%;">Identifier (Link)</th>
-                            <th style="width: 8%;">Coverage (Region)</th>
-                            <th style="width: 12%;">Language</th>
-                            <th style="width: 10%;">Publisher</th>
-                        </tr>
-                    </thead>
-                    <tbody id="digital-archive-table-body">
-                        </tbody>
-                </table>
-            </div>
+                </div>
         </section>
 
         <section id="books-section" class="hidden">
             <h2 id="books-title">Academic Books & Language Texts</h2>
             <p>Linguistic analyses, grammars, and rare academic texts for in-depth language study.</p>
             <div id="books-list" class="resource-list">
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 15%;">Title</th>
-                            <th style="width: 8%;">Type</th>
-                            <th style="width: 35%;">Description</th>
-                            <th style="width: 12%;">Identifier (Link)</th>
-                            <th style="width: 8%;">Coverage (Region)</th>
-                            <th style="width: 12%;">Language</th>
-                            <th style="width: 10%;">Publisher</th>
-                        </tr>
-                    </thead>
-                    <tbody id="books-table-body">
-                        </tbody>
-                </table>
-            </div>
+                </div>
         </section>
 
         <section id="apps-section" class="hidden">
             <h2 id="apps-title">Mobile Apps & Interactive Tools</h2>
             <p>Interactive mobile applications and software designed for language learning and immersion.</p>
             <div id="apps-list" class="resource-list">
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 15%;">Title</th>
-                            <th style="width: 8%;">Type</th>
-                            <th style="width: 35%;">Description</th>
-                            <th style="width: 12%;">Identifier (Link)</th>
-                            <th style="width: 8%;">Coverage (Region)</th>
-                            <th style="width: 12%;">Language</th>
-                            <th style="width: 10%;">Publisher</th>
-                        </tr>
-                    </thead>
-                    <tbody id="apps-table-body">
-                        </tbody>
-                </table>
-            </div>
+                </div>
         </section>
 
         <section id="museums-list" class="hidden">
@@ -494,21 +425,80 @@
             return Array.from(uniqueRegions).sort();
         }
 
-        /** Filters resources by type and region, then renders the dedicated table section. */
+        /** Renders a list of resources into regional, scrollable cards. */
+        function renderRegionalCards(data, targetListId, isSearch = false) {
+            const listContainer = document.getElementById(targetListId);
+            if (!listContainer) return;
+
+            listContainer.innerHTML = '';
+            
+            // Grouping logic
+            const resourcesByRegion = data.reduce((acc, resource) => {
+                const region = resource.coverage || 'Unspecified Region';
+                if (!acc[region]) {
+                    acc[region] = [];
+                }
+                acc[region].push(resource);
+                return acc;
+            }, {});
+            
+            const regions = Object.keys(resourcesByRegion);
+            if (regions.length === 0) {
+                listContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem 0;">No resources match your selection criteria.</p>';
+                return;
+            }
+
+            // Sort regions alphabetically unless it's a search result (which should show all)
+            const sortedRegions = isSearch ? regions : regions.sort();
+
+            sortedRegions.forEach(region => {
+                const regionGroup = document.createElement('div');
+                regionGroup.className = 'region-group';
+                
+                regionGroup.innerHTML = `<h3>Region: ${region}</h3>`;
+                
+                const scrollContainer = document.createElement('div');
+                scrollContainer.className = 'region-scroll-container';
+                
+                resourcesByRegion[region].forEach(resource => {
+                    const linkText = resource.identifier === 'N/A' ? 'N/A' : 'View Resource';
+                    const linkHref = resource.identifier === 'N/A' || resource.identifier === 'AppStore/GooglePlay' ? '#' : resource.identifier;
+                    
+                    const card = document.createElement('div');
+                    card.className = 'resource-card';
+                    card.innerHTML = `
+                        <h4>${resource.title || resource.name} (${resource.type})</h4>
+                        <p>${resource.desc}</p>
+                        <div class="resource-details">
+                            <span><strong>Language:</strong> ${resource.language || 'N/A'}</span>
+                            <span><strong>Publisher:</strong> ${resource.publisher || 'N/A'}</span>
+                            <span><strong>Link:</strong> <a href="${linkHref}" target="_blank">${linkText}</a></span>
+                        </div>
+                    `;
+                    scrollContainer.appendChild(card);
+                });
+                
+                regionGroup.appendChild(scrollContainer);
+                listContainer.appendChild(regionGroup);
+            });
+        }
+
+
+        /** Filters resources by type and region, then renders the dedicated card section. */
         function renderTypeSection(typeFilter, regionFilter = null) {
-            let targetSectionId, targetTableBodyId, sectionTitle;
+            let targetSectionId, targetListId, sectionTitle;
 
             if (typeFilter === 'Digital Archive') {
                 targetSectionId = 'digital-archive-section';
-                targetTableBodyId = 'digital-archive-table-body';
+                targetListId = 'digital-archive-list';
                 sectionTitle = 'Digital Archives & Websites';
             } else if (typeFilter === 'Academic Book') {
                 targetSectionId = 'books-section';
-                targetTableBodyId = 'books-table-body';
+                targetListId = 'books-list';
                 sectionTitle = 'Academic Books & Language Texts';
             } else if (typeFilter === 'App') {
                 targetSectionId = 'apps-section';
-                targetTableBodyId = 'apps-table-body';
+                targetListId = 'apps-list';
                 sectionTitle = 'Mobile Apps & Interactive Tools';
             } else {
                 return; // Should not happen with current config
@@ -529,43 +519,14 @@
             
             // Update section title if a filter is applied
             const titleElement = document.getElementById(targetSectionId).querySelector('h2');
-            titleElement.textContent = regionFilter ? `${regionFilter} ${typeFilter.replace('Academic Book', 'Book')} Resources` : sectionTitle;
+            const typeName = typeFilter.replace('Academic Book', 'Book');
+            titleElement.textContent = regionFilter ? `${regionFilter} ${typeName} Resources` : sectionTitle;
 
             showSection(targetSectionId);
-            renderTable(filteredResources, targetTableBodyId);
-        }
-        
-        /** Renders a list of resources into a specific table body. */
-        function renderTable(data, targetTableBodyId) {
-            const tableBody = document.getElementById(targetTableBodyId);
-            if (!tableBody) return;
-
-            tableBody.innerHTML = ''; 
-
-            if (data.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No resources found.</td></tr>';
-                return;
-            }
-
-            data.forEach(resource => {
-                const row = document.createElement('tr');
-                const linkDisplay = resource.identifier === 'N/A' ? 'N/A' : 'Link';
-                const linkHref = resource.identifier === 'N/A' || resource.identifier === 'AppStore/GooglePlay' ? '#' : resource.identifier;
-                
-                row.innerHTML = `
-                    <td><strong>${resource.title || resource.name}</strong></td>
-                    <td>${resource.type}</td>
-                    <td>${resource.desc}</td>
-                    <td><a href="${linkHref}" target="_blank">${linkDisplay}</a></td>
-                    <td>${resource.coverage || 'N/A'}</td>
-                    <td>${resource.language || 'N/A'}</td>
-                    <td>${resource.publisher || 'N/A'}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+            renderRegionalCards(filteredResources, targetListId);
         }
 
-        /** Renders the dedicated Museum list section. */
+        /** Renders the dedicated Museum list section (Uses a simple list, not regional grouping). */
         function renderMuseums(regionFilter = null) {
             const museumList = document.getElementById('museum-list-container');
             if (!museumList) return;
@@ -695,6 +656,7 @@
                 
                 let fileAttachmentHtml = '';
                 if (story.fileName && story.fileData) {
+                    // Safety: fileData uses Data URL (not external link) which is safe
                     fileAttachmentHtml = `
                         <div class="file-attachment">
                             <strong>Attachment:</strong> <a href="${story.fileData}" download="${story.fileName}">${story.fileName}</a>
@@ -812,7 +774,7 @@
             document.getElementById('globalSearch').addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
                 
-                // Collect all resources except Museums for the global search table
+                // Collect all resources except Museums for the global search
                 const resourcesForSearch = allResources.filter(r => r.type !== 'Museum');
 
                 const filtered = resourcesForSearch.filter(resource => 
@@ -824,16 +786,19 @@
                     (resource.publisher && resource.publisher.toLowerCase().includes(searchTerm))
                 );
                 
-                // When searching, switch to the Digital Archive view and use its table to show combined results
+                // Use the Digital Archive section to display global search results
                 if (searchTerm.length > 0) {
                     document.getElementById('digital-archive-title').textContent = `Search Results for "${this.value}" (All Resources)`;
                     showSection('digital-archive-section');
+                    // Render the combined results as regional cards (isSearch = true)
+                    renderRegionalCards(filtered, 'digital-archive-list', true); 
                 } else {
+                    // Revert to default view when search is cleared
                     document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
-                    showSection('about'); // Revert to About page when search is cleared
+                    showSection('about');
+                    // Re-render the default Digital Archive view so it's ready when clicked next
+                    renderTypeSection('Digital Archive', null);
                 }
-
-                renderTable(filtered, 'digital-archive-table-body');
             });
         });
     </script>
