@@ -48,6 +48,7 @@
             text-decoration: none; 
             font-weight: 500; 
             transition: background 0.2s; 
+            cursor: pointer; /* Ensure link areas are clearly clickable */
         }
         nav a:hover { background: #f5f5f5; border-radius: 0; }
         
@@ -62,6 +63,11 @@
             box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
             z-index: 1000; 
         }
+        /* FIX: Use .show class to force display on click */
+        .dropdown:hover .dropdown-content, .dropdown-content.show { 
+            display: block; 
+        }
+
         .dropdown-content a { 
             padding: 0.75rem 1rem; 
             /* Subtle lines within the dropdown */
@@ -70,7 +76,7 @@
         }
         .dropdown-content a:last-child { border-bottom: none; }
         .dropdown-content a:hover { background: #f0f0f0; } 
-        .dropdown:hover .dropdown-content { display: block; }
+        
 
         /* SEARCH BAR (MADE STICKY) */
         .search-container { 
@@ -248,21 +254,21 @@
 
     <nav>
         <ul>
-            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li><a onclick="showSection('about')">About</a></li>
             <li class="dropdown">
-                <a href="#websites">Archive</a>
+                <a onclick="toggleDropdown(this)">Archive</a>
                 <div class="dropdown-content" id="websites-menu"></div>
             </li>
             <li class="dropdown">
-                <a href="#books">Languages</a>
+                <a onclick="toggleDropdown(this)">Languages</a>
                 <div class="dropdown-content" id="books-menu"></div>
             </li>
             <li class="dropdown">
-                <a href="#museums">Museums</a>
+                <a onclick="toggleDropdown(this)">Museums</a>
                 <div class="dropdown-content" id="museums-menu"></div>
             </li>
-            <li><a href="#share" onclick="showSection('share')">Share a Story</a></li>
-            <li><a href="#contact" onclick="showSection('contact')">Get in touch</a></li>
+            <li><a onclick="showSection('share')">Share a Story</a></li>
+            <li><a onclick="showSection('contact')">Get in touch</a></li>
         </ul>
     </nav>
 
@@ -636,7 +642,6 @@
                     }
                 ]
             },
-            // 'apps' category removed
             "museums": {},
         };
         
@@ -644,7 +649,34 @@
 
         // JAVASCRIPT FUNCTIONS 
 
-        function showSection(id) {
+        // FIX: Function to reliably toggle the dropdown menu
+        window.toggleDropdown = function(element) {
+            const dropdownContent = element.nextElementSibling;
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                if (content !== dropdownContent) {
+                    content.classList.remove('show');
+                }
+            });
+
+            // Toggle the clicked dropdown
+            if (dropdownContent) {
+                dropdownContent.classList.toggle('show');
+            }
+        }
+        
+        // FIX: Added event listener to close dropdowns when clicking anywhere else on the page
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.classList.remove('show');
+                });
+            }
+        });
+
+
+        window.showSection = function(id) {
             document.querySelectorAll('section').forEach(section => {
                 section.classList.add('hidden');
             });
@@ -653,6 +685,11 @@
             if (targetSection) {
                 targetSection.classList.remove('hidden');
             }
+            
+            // Close all dropdowns when navigating to a static section
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.classList.remove('show');
+            });
             
             // FIX: Ensure the search bar is only visible when showing the 'resources' section.
             const searchContainer = document.querySelector('.search-container');
@@ -666,7 +703,7 @@
         }
         
         // Resource rendering (maintains all requested fields)
-        function renderResources(data, title) {
+        window.renderResources = function(data, title) {
             const resourceList = document.getElementById('resource-list');
             const resourceTitle = document.getElementById('resource-title');
             
@@ -684,6 +721,7 @@
                 const div = document.createElement('div');
                 div.className = 'resource-item';
                 
+                // Explicitly including all requested metadata fields
                 let metaHTML = `
                     <strong>Type:</strong> ${item.type || 'N/A'}<br>
                     <strong>Coverage:</strong> ${item.coverage || 'N/A'}<br>
@@ -708,7 +746,7 @@
             showSection('resources');
         }
         
-        function filterResources(category) {
+        window.filterResources = function(category) {
             let title = '';
             let data = {};
 
@@ -721,7 +759,6 @@
                     title = 'Books and Publications';
                     data = resources.books;
                     break;
-                // 'apps' case removed
                 case 'museums':
                     title = 'Museums and Archives';
                     data = resources.museums;
@@ -734,7 +771,6 @@
         }
         
         function buildMenus() {
-            // FIX: Removed 'apps' from the menu structure
             const menus = {
                 'websites': 'websites-menu',
                 'books': 'books-menu',
@@ -747,15 +783,15 @@
                     menuElement.innerHTML = '';
                     
                     const allLink = document.createElement('a');
-                    let categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+                    let categoryTitle = '';
                     if (category === 'websites') categoryTitle = 'Archive';
                     if (category === 'books') categoryTitle = 'Languages';
                     if (category === 'museums') categoryTitle = 'Museums';
                     
-                    allLink.href = `#${category}`;
                     allLink.textContent = `All ${categoryTitle}`;
                     allLink.onclick = (e) => {
                         e.preventDefault();
+                        // FIX: Explicitly call showSection/filterResources
                         filterResources(category);
                     };
                     menuElement.appendChild(allLink);
@@ -763,10 +799,10 @@
                     if (resources[category]) {
                         Object.keys(resources[category]).forEach(region => {
                             const link = document.createElement('a');
-                            link.href = `#${category}-${region.replace(/\s/g, '_')}`;
                             link.textContent = region.replace(/_/g, ' '); 
                             link.onclick = (e) => {
                                 e.preventDefault();
+                                // FIX: Explicitly call renderResources with region data
                                 renderResources({ [region]: resources[category][region] }, `${categoryTitle}: ${region.replace(/_/g, ' ')}`);
                             };
                             menuElement.appendChild(link);
@@ -787,7 +823,6 @@
                 return;
             }
 
-            // Removed 'apps' from the search loop
             ['websites', 'books', 'museums'].forEach(category => {
                 if (resources[category]) {
                     Object.keys(resources[category]).forEach(region => {
