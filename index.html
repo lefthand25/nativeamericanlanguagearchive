@@ -129,6 +129,26 @@ section h2 { font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; borde
 .resource-list { margin-top: 1.5rem; padding: 0; background: none; border: none; }
 .resource-item { background: #fafafa; padding: 1.5rem; margin-bottom: 1rem; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
 
+/* --- RESOURCE TEXT SIZE ADJUSTMENTS --- */
+.resource-item h3 { 
+    font-size: 1.2rem; 
+    margin-bottom: 0.5rem; 
+} 
+.resource-meta { 
+    font-size: 0.85rem; /* Reduced size for metadata */
+    color: #555; 
+    margin-bottom: 0.75rem; 
+} 
+/* Add a little margin to separate the meta lines */
+.resource-meta div {
+    margin-bottom: 0.2rem; 
+}
+.resource-item p { 
+    font-size: 0.95rem; /* Reduced size for description */
+    margin-top: 0.5rem; 
+}
+/* --- END RESOURCE TEXT SIZE ADJUSTMENTS --- */
+
 
 /* --- Footer --- */
 footer { 
@@ -316,7 +336,7 @@ footer {
     };
     // --- END: DATABASE CONTENT ---
 
-    // --- START: JAVASCRIPT LOGIC (Updated to work with new filter location) ---
+    // --- START: JAVASCRIPT LOGIC (Updated renderResources) ---
     const allSections = ["about", "resources", "share"];
 
     // Combine all resources into a flat array for easy searching/filtering
@@ -399,18 +419,22 @@ footer {
 
         const itemDiv = document.createElement('div');
         itemDiv.className = 'resource-item';
+        
+        // --- MODIFICATION HERE: Separate metadata onto new lines using <div> tags ---
         itemDiv.innerHTML = `
           <h3>${item.title.trim()}</h3>
           <div class="resource-meta">
-            <strong>Category:</strong> ${categoryDisplayName} |
-            <strong>Region:</strong> ${regionDisplayName} |
-            <strong>Type:</strong> ${item.type.trim()} | 
-            <strong>Language:</strong> ${displayLang} | 
-            <strong>Publisher:</strong> ${displayPub}
+            <div><strong>Category:</strong> ${categoryDisplayName}</div>
+            <div><strong>Region:</strong> ${regionDisplayName}</div>
+            <div><strong>Type:</strong> ${item.type.trim()}</div>
+            <div><strong>Language:</strong> ${displayLang}</div>
+            <div><strong>Publisher:</strong> ${displayPub}</div>
           </div>
           <p>${displayDesc}</p>
           ${identifierLink}
         `;
+        // --- END MODIFICATION ---
+        
         list.appendChild(itemDiv);
       });
     }
@@ -571,4 +595,4 @@ footer {
     // --- END: JAVASCRIPT LOGIC ---
 </script>
 </body>
-</html>
+</html> 
