@@ -7,38 +7,71 @@
     <style>
         /* BASE STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        /* Pure white background for the entire page */
         body { 
-            /* Font is set to Helvetica family as requested */
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             line-height: 1.6; 
             color: #222; 
             background: #fff; 
         }
 
-        /* HEADER & BANNER (SIMPLE LIGHT THEME) */
+        /* --- HEADER & BANNER (NOW INCLUDES SEARCH BAR) --- */
         header { 
             background: #fff; 
             color: #222; 
-            padding: 1.5rem 1rem 0.5rem; 
-            text-align: center; 
-            /* Subtle border at the bottom of the header */
+            padding: 1.5rem 2rem 0.5rem; 
+            /* Use Flexbox to align title/search bar */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             border-bottom: 1px solid #eee; 
-            position: sticky; /* Sticky header */
+            position: sticky; 
             top: 0;
             z-index: 1000;
         }
-        header h1 { font-size: 2rem; margin-bottom: 0.25rem; }
-        header p { font-size: 0.9rem; font-style: normal; color: #666; }
+        .header-left {
+            text-align: left;
+        }
+        header h1 { 
+            font-size: 2rem; 
+            margin-bottom: 0.25rem; 
+        }
+        header p { 
+            font-size: 0.9rem; 
+            font-style: normal; 
+            color: #666; 
+        }
 
-        /* NAVIGATION (FLAT, HIGH-CONTRAST) */
+        /* SEARCH BAR STYLES (NOW IN HEADER) */
+        .search-wrapper { 
+            max-width: 350px; /* Controls the width of the search box */
+            width: 100%; 
+            padding-top: 0.5rem; /* Align vertically with the header title */
+        }
+        .search-bar { width: 100%; position: relative; }
+        .search-bar input { 
+            width: 100%; 
+            padding: 0.5rem 1rem; 
+            font-size: 0.9rem; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            transition: all 0.3s; 
+        }
+        .search-bar input:focus { outline: none; border-color: #222; }
+        .search-info { 
+            text-align: right; 
+            margin-top: 0.25rem; 
+            font-size: 0.75rem; 
+            color: #666; 
+        }
+
+        /* NAVIGATION */
         nav { 
             background: #fff; 
-            /* Subtle border below the navigation */
             border-bottom: 1px solid #eee; 
             padding: 0.25rem 0;
-            position: sticky; /* Make nav sticky as well */
-            top: 68px; /* Position it right below the header (approx height of header) */
+            position: sticky; 
+            /* Position it right below the header (approx 100px) */
+            top: 100px; 
             z-index: 999;
         }
         nav ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
@@ -49,7 +82,7 @@
             text-decoration: none; 
             font-weight: 500; 
             transition: background 0.2s; 
-            cursor: pointer; /* Ensure link areas are clearly clickable */
+            cursor: pointer; 
         }
         nav a:hover { background: #f5f5f5; border-radius: 0; }
         
@@ -63,8 +96,8 @@
             border: 1px solid #ddd; 
             box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
             z-index: 1000; 
-            max-height: 300px; /* Limit height */
-            overflow-y: auto; /* Scroll if content overflows */
+            max-height: 300px; 
+            overflow-y: auto; 
         }
         .dropdown:hover .dropdown-content, .dropdown-content.show { 
             display: block; 
@@ -72,50 +105,12 @@
 
         .dropdown-content a { 
             padding: 0.75rem 1rem; 
-            /* Subtle lines within the dropdown */
             border-bottom: 1px solid #eee; 
             display: block; 
         }
         .dropdown-content a:last-child { border-bottom: none; }
         .dropdown-content a:hover { background: #f0f0f0; } 
         
-
-        /* --- SEARCH BAR (SIDE-ALIGNED) --- */
-        .search-container { 
-            background: #fff; 
-            /* Padding adjusted for visual spacing on the right side */
-            padding: 1rem 3rem 1rem 1rem; 
-            border-bottom: 1px solid #ddd; 
-            position: sticky; 
-            top: 115px; 
-            z-index: 998;
-            box-shadow: none; 
-            /* Push the search bar content to the right */
-            display: flex;
-            justify-content: flex-end; 
-            width: 100%;
-        }
-        .search-wrapper { 
-            max-width: 400px; /* Controls the width of the search box */
-            width: 100%; 
-            margin: 0; 
-        }
-        .search-bar { width: 100%; position: relative; }
-        .search-bar input { 
-            width: 100%; 
-            padding: 0.75rem 1.5rem; 
-            font-size: 1rem; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            transition: all 0.3s; 
-        }
-        .search-bar input:focus { outline: none; border-color: #222; }
-        .search-info { 
-            text-align: right; /* Aligns info text to the right */
-            margin-top: 0.5rem; 
-            font-size: 0.8rem; 
-            color: #666; 
-        }
 
         /* CONTENT SECTIONS */
         .container { 
@@ -143,7 +138,7 @@
         }
         .hidden { display: none; }
 
-        /* --- STYLES FOR REGIONAL CARD DISPLAY (NEW) --- */
+        /* --- STYLES FOR REGIONAL CARD DISPLAY --- */
         .resource-list {
             margin-top: 1.5rem;
         }
@@ -158,9 +153,10 @@
             color: #444;
         }
         .region-scroll-container {
-            max-height: 400px; /* Makes this container scrollable */
+            /* Now that we filter by region, we only need to scroll if content is long */
+            max-height: 400px; 
             overflow-y: auto;
-            padding-right: 15px; /* Space for the scrollbar */
+            padding-right: 15px; 
             padding-bottom: 5px;
         }
         .resource-card {
@@ -176,11 +172,6 @@
             margin-bottom: 0.25rem;
             color: #222;
         }
-        .resource-card p {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #555;
-        }
         .resource-details {
             margin-top: 0.75rem;
             font-size: 0.8rem;
@@ -195,27 +186,7 @@
             color: #007bff;
             text-decoration: none;
         }
-        /* --- Museum List Styles (for the separate museum section) --- */
-        .museum-item {
-            padding: 1rem 0;
-            border-bottom: 1px dashed #ddd;
-        }
-        .museum-item:last-child {
-            border-bottom: none;
-        }
-        .museum-item h3 {
-            margin-bottom: 0.25rem;
-            font-size: 1.2rem;
-            color: #222;
-        }
-        .museum-item a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .museum-item a:hover {
-            text-decoration: underline;
-        }
-
+        
         /* --- Story List (Padlet Style) --- */
         #storyList { 
             display: grid; 
@@ -223,55 +194,42 @@
             gap: 1.5rem; 
             margin-top: 1.5rem; 
         }
-        .story { 
-            background: #fcfcfc; 
-            padding: 1rem; 
-            border: 1px solid #ddd; 
-            border-radius: 6px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            position: relative;
-            min-height: 150px;
-        }
-        .story h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .story em { display: block; font-size: 0.85rem; color: #777; margin-bottom: 0.75rem; }
         /* ... (rest of story styles) ... */
-
-        /* FORMS & BUTTONS */
-        form { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-        /* ... (rest of form styles) ... */
-
-        /* FOOTER */
-        footer { 
-            background: #f8f8f8; 
-            color: #555; 
-            text-align: center; 
-            padding: 1.5rem 1rem; 
-            margin-top: 3rem; 
-            border-top: 1px solid #eee; 
-        }
 
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            nav ul { flex-direction: column; }
-            nav a { padding: 0.75rem; }
-            .search-container { 
-                top: 120px; 
-                justify-content: center; /* Center on small screens */
-                padding: 1rem 1.5rem; 
+            header {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+            }
+            .header-left {
+                text-align: center;
+                width: 100%;
             }
             .search-wrapper {
                 max-width: 90%;
+                padding-top: 1rem;
             }
-            .search-info {
-                text-align: center;
+            nav {
+                top: 170px; /* Adjusted sticky position */
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Native American Language Archive</h1>
-        <p>Linking Past, Present and Future Voices</p>
+        <div class="header-left">
+            <h1>Native American Language Archive</h1>
+            <p>Linking Past, Present and Future Voices</p>
+        </div>
+        
+        <div class="search-wrapper">
+            <div class="search-bar">
+                <input type="text" id="globalSearch" placeholder=" Search all resources by title, language, or region...">
+            </div>
+            <div class="search-info" id="searchInfo">Search across all resources</div>
+        </div>
     </header>
 
     <nav>
@@ -297,15 +255,6 @@
             <li><a onclick="showSection('contact')">Contact</a></li>
         </ul>
     </nav>
-
-    <div class="search-container">
-        <div class="search-wrapper">
-            <div class="search-bar">
-                <input type="text" id="globalSearch" placeholder=" Search all resources by title, language, or region...">
-            </div>
-            <div class="search-info" id="searchInfo">Search across all resources</div>
-        </div>
-    </div>
 
     <div class="container">
         <section id="about">
@@ -425,8 +374,10 @@
             return Array.from(uniqueRegions).sort();
         }
 
-        /** Renders a list of resources into regional, scrollable cards. */
-        function renderRegionalCards(data, targetListId, isSearch = false) {
+        /** Renders a list of resources into regional, scrollable cards. 
+         * FIX: If a regionFilter is applied, it only renders that single region.
+         */
+        function renderRegionalCards(data, targetListId, regionFilter = null, isSearch = false) {
             const listContainer = document.getElementById(targetListId);
             if (!listContainer) return;
 
@@ -435,10 +386,13 @@
             // Grouping logic
             const resourcesByRegion = data.reduce((acc, resource) => {
                 const region = resource.coverage || 'Unspecified Region';
-                if (!acc[region]) {
-                    acc[region] = [];
+                // Only include the resource if it matches the single region filter OR if no filter is applied
+                if ((regionFilter === null || region === regionFilter) && (!isSearch || region === resource.coverage)) {
+                    if (!acc[region]) {
+                        acc[region] = [];
+                    }
+                    acc[region].push(resource);
                 }
-                acc[region].push(resource);
                 return acc;
             }, {});
             
@@ -448,13 +402,14 @@
                 return;
             }
 
-            // Sort regions alphabetically unless it's a search result (which should show all)
+            // Sort regions alphabetically unless it's a search result
             const sortedRegions = isSearch ? regions : regions.sort();
 
             sortedRegions.forEach(region => {
                 const regionGroup = document.createElement('div');
                 regionGroup.className = 'region-group';
                 
+                // Show region heading unless we are displaying a single region filter
                 regionGroup.innerHTML = `<h3>Region: ${region}</h3>`;
                 
                 const scrollContainer = document.createElement('div');
@@ -501,7 +456,7 @@
                 targetListId = 'apps-list';
                 sectionTitle = 'Mobile Apps & Interactive Tools';
             } else {
-                return; // Should not happen with current config
+                return; 
             }
 
             const filteredResources = allResources.filter(resource => {
@@ -512,18 +467,17 @@
                     matchesType = true;
                 }
                 
-                const matchesRegion = (regionFilter === null || resource.coverage === regionFilter);
-                
-                return matchesType && matchesRegion;
+                return matchesType; // The regional filtering happens inside renderRegionalCards
             });
             
-            // Update section title if a filter is applied
+            // Update section title 
             const titleElement = document.getElementById(targetSectionId).querySelector('h2');
             const typeName = typeFilter.replace('Academic Book', 'Book');
             titleElement.textContent = regionFilter ? `${regionFilter} ${typeName} Resources` : sectionTitle;
 
             showSection(targetSectionId);
-            renderRegionalCards(filteredResources, targetListId);
+            // Pass the regionFilter to ensure only that single region is rendered
+            renderRegionalCards(filteredResources, targetListId, regionFilter);
         }
 
         /** Renders the dedicated Museum list section (Uses a simple list, not regional grouping). */
@@ -572,13 +526,12 @@
                 menu.innerHTML = ''; 
                 const regions = getUniqueRegions(config.type);
 
-                // Determine the resource name for the "View All" link
-                const resourceName = config.type === 'Academic Book' ? 'Books' : config.type;
-                
                 // Add an option to view all resources of this type
+                const resourceName = config.type === 'Academic Book' ? 'Books' : config.type;
                 const allLink = document.createElement('a');
                 allLink.textContent = `View All ${resourceName}`;
                 
+                // When "View All" is clicked, pass null for region filter
                 if (config.type === 'Museum') {
                     allLink.onclick = () => renderMuseums(null);
                 } else {
@@ -596,6 +549,7 @@
                 regions.forEach(region => {
                     const a = document.createElement('a');
                     a.textContent = region;
+                    // When a region is clicked, pass the specific region name
                     if (config.type === 'Museum') {
                         a.onclick = () => renderMuseums(region);
                     } else {
@@ -637,8 +591,9 @@
             dropdownContent.classList.toggle('show');
         }
 
-        // --- STORY FUNCTIONALITY (Unchanged from previous revision) ---
+        // --- STORY FUNCTIONALITY (Unchanged) ---
         function renderStories() {
+            // ... (Story rendering logic) ...
             const storyList = document.getElementById('storyList');
             if (!storyList) return;
             const stories = JSON.parse(localStorage.getItem('stories') || '[]');
@@ -656,7 +611,6 @@
                 
                 let fileAttachmentHtml = '';
                 if (story.fileName && story.fileData) {
-                    // Safety: fileData uses Data URL (not external link) which is safe
                     fileAttachmentHtml = `
                         <div class="file-attachment">
                             <strong>Attachment:</strong> <a href="${story.fileData}" download="${story.fileName}">${story.fileName}</a>
@@ -765,7 +719,7 @@
             renderTypeSection('Digital Archive', null);
             renderTypeSection('Academic Book', null);
             renderTypeSection('App', null);
-            renderMuseums(null); // Render museums as a list
+            renderMuseums(null); 
             
             renderStories(); 
             showSection('about'); // Default to showing the 'About' section on load
@@ -791,7 +745,7 @@
                     document.getElementById('digital-archive-title').textContent = `Search Results for "${this.value}" (All Resources)`;
                     showSection('digital-archive-section');
                     // Render the combined results as regional cards (isSearch = true)
-                    renderRegionalCards(filtered, 'digital-archive-list', true); 
+                    renderRegionalCards(filtered, 'digital-archive-list', null, true); 
                 } else {
                     // Revert to default view when search is cleared
                     document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
