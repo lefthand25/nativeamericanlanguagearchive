@@ -64,7 +64,7 @@
             box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
             z-index: 1000; 
         }
-        /* FIX: Use .show class to force display on click */
+        /* FIXED: Use .show class to force display on click */
         .dropdown:hover .dropdown-content, .dropdown-content.show { 
             display: block; 
         }
@@ -86,7 +86,7 @@
             /* Subtle border at the bottom of the search bar */
             border-bottom: 1px solid #ddd; 
             position: sticky; 
-            /* FIXED: Adjusted position to stick properly below the header and nav */
+            /* Adjusted position to stick properly below the header and nav */
             top: 115px; 
             z-index: 998;
             box-shadow: none; 
@@ -277,23 +277,27 @@
         <ul>
             <li><a onclick="showSection('about')">About</a></li>
             <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Archive</a>
-                <div class="dropdown-content" id="websites-menu"></div>
+                <a onclick="toggleDropdown(this)">Digital Archive</a>
+                <div class="dropdown-content" id="digital-archive-menu"></div>
             </li>
             <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Languages</a>
+                <a onclick="toggleDropdown(this)">Books</a>
                 <div class="dropdown-content" id="books-menu"></div>
+            </li>
+            <li class="dropdown">
+                <a onclick="toggleDropdown(this)">Apps</a>
+                <div class="dropdown-content" id="apps-menu"></div>
             </li>
             <li class="dropdown">
                 <a onclick="toggleDropdown(this)">Museums</a>
                 <div class="dropdown-content" id="museums-menu"></div>
             </li>
             <li><a onclick="showSection('share')">Share a Story</a></li>
-            <li><a onclick="showSection('contact')">Get in touch</a></li>
+            <li><a onclick="showSection('contact')">Contact</a></li>
         </ul>
     </nav>
 
-    <div class="search-container hidden">
+    <div class="search-container">
         <div class="search-wrapper">
             <div class="search-bar">
                 <input type="text" id="globalSearch" placeholder=" Search all resources by title, description, language, publisher, or region...">
@@ -311,7 +315,7 @@
 
         <section id="resources" class="hidden">
             <h2 id="resource-title">Complete Resource Database</h2>
-            <p>Below is the complete list of resources, including **Title, Type, Description, Identifier, Coverage, Language, and Publisher**.</p>
+            <p>Below is the complete list of resources. Use the search bar or navigation filters above to narrow your results.</p>
             <div id="resource-list" class="resource-list">
                 <table class="resource-table">
                     <thead>
@@ -330,12 +334,7 @@
                 </table>
             </div>
         </section>
-        <section id="museums-list" class="hidden">
-            <h2>Native American Museums & Cultural Centers</h2>
-            <p>These institutions offer collections, archives, and cultural programming related to Native American languages and history.</p>
-            <div id="museum-list-container" class="resource-list">
-                </div>
-        </section>
+
         <section id="share" class="hidden">
             <h2>Share a Story</h2>
             <p>Contribute your own story in English or in a Native American language. 
@@ -354,6 +353,7 @@
                 <p style="padding: 1.5rem 0; grid-column: 1 / -1; text-align: center; color: #666;">No stories added yet. Be the first!</p>
             </div>
         </section>
+
         <section id="contact" class="hidden">
             <h2>Contact Us</h2>
             <p>Use the form below to send a message to our team. Your message will be drafted in your local email client.</p>
@@ -364,33 +364,89 @@
                 <button type="submit">Send Message</button>
             </form>
         </section>
-        </div>
+        
+    </div>
 
     <footer>
         <p>&copy; 2025 Native American Language Archive | Honoring Indigenous Voices</p>
     </footer>
 
     <script>
-        // --- Resource Data Extracted from Native American Language Database .pdf ---
+        // --- RESOURCE DATA (Combined resources and museums into a single list) ---
+        // Resource Types for filtering: "Website", "Digital Archive", "Academic Book", "App", "Museum"
         const allResources = [
-            { title: "Native Languages of the Americas (California Section)", type: "Website", desc: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials", identifier: "https://www.native-languages.org/california.htm", coverage: "California", language: "California Languages", publisher: "Native Languages Org" },
-            { title: "Cherokee Nation Language Platform", type: "Website", desc: "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources", identifier: "https://cnlearn.cherokee.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
-            { title: "Shoshoni Language Project", type: "Digital Archive", desc: "Academic language preservation initiative housing Wick R. Miller Collection archive with irreplaceable texts, images, and audio recordings", identifier: "https://shoshoniproject.utah.edu/", coverage: "Great Basin", language: "Shoshoni", publisher: "University of Utah" },
-            { title: "Lingit Yoo X'atangi - The Tlingit Language", type: "Website", desc: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources", identifier: "https://tlingitlanguage.com/", coverage: "Northwest Coast", language: "Tlingit", publisher: "Community-based" },
-            { title: "Hathi Trust Digital Library", type: "Digital Archive", desc: "California Native Collections - Millions of digitized books online including rare materials on California Native languages. Full-view volumes are freely available", identifier: "N/A", coverage: "California", language: "California Languages", publisher: "HathiTrust" },
-            { title: "A Grammar of Nakoda (Assiniboine)", type: "Academic Book", desc: "This is the first complete grammatical analysis of Assiniboine language. Provides comprehensive linguistic analysis", identifier: "N/A", coverage: "Great Plains", language: "Assiniboine (Nakoda)", publisher: "Linda A. Cumberland" },
+            // Websites & Digital Archives (simulated from PDF)
+            { title: "Native Languages of the Americas (California Section)", type: "Website", desc: "Small non-profit organization dedicated to Native American language survival...", identifier: "https://www.native-languages.org/california.htm", coverage: "California", language: "California Languages", publisher: "Native Languages Org" },
+            { title: "Cherokee Nation Language Platform", type: "App", desc: "Cherokee Nation's official online language learning platform offering free Cherokee language classes...", identifier: "https://cnlearn.cherokee.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
+            { title: "Shoshoni Language Project", type: "Digital Archive", desc: "Academic language preservation initiative housing Wick R. Miller Collection archive...", identifier: "https://shoshoniproject.utah.edu/", coverage: "Great Basin", language: "Shoshoni", publisher: "University of Utah" },
+            { title: "Lingit Yoo X'atangi - The Tlingit Language", type: "Website", desc: "Comprehensive Tlingit language learning platform offering lessons, dictionaries, and community resources", identifier: "https://tlingitlanguage.com/", coverage: "Northwest Coast", language: "Tlingit", publisher: "Community-based" },
+            { title: "Hathi Trust Digital Library", type: "Digital Archive", desc: "California Native Collections - Millions of digitized books online including rare materials...", identifier: "N/A", coverage: "California", language: "California Languages", publisher: "HathiTrust" },
+            { title: "A Grammar of Nakoda (Assiniboine)", type: "Academic Book", desc: "The first complete grammatical analysis of Assiniboine language.", identifier: "N/A", coverage: "Great Plains", language: "Assiniboine (Nakoda)", publisher: "Linda A. Cumberland" },
+            { title: "Salish Language Kit", type: "App", desc: "Interactive mobile application for learning Salish language basics.", identifier: "AppStore/GooglePlay", coverage: "Plateau", language: "Salish", publisher: "Salish Culture Center" },
+            
+            // Museums (simulated from PDF, classified as "Museum" type)
+            { title: "Sam Noble Museum", type: "Museum", desc: "Extensive Native American Languages Collection with 175+ languages represented...", identifier: "https://samnoblemuseum.ou.edu/", coverage: "Great Plains", language: "175+ Languages", publisher: "University of Oklahoma" },
+            { title: "Museum of Indian Arts and Culture", type: "Museum", desc: "World-renowned museum centering Indigenous perspectives and voices of Pueblo, Navajo (Diné) and Apache cultures...", identifier: "https://www.newmexicoculture.org/", coverage: "Southwest", language: "Pueblo, Navajo, Apache", publisher: "New Mexico Dept of Cultural Affairs" },
+            { title: "Heard Museum", type: "Museum", desc: "Major museum with 12 galleries of American Indian art, over 40,000 items...", identifier: "https://heard.org/", coverage: "Southwest", language: "Southwest Languages", publisher: "Heard Museum" },
+            { title: "Indian Pueblo Cultural Center", type: "Museum", desc: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture...", identifier: "https://indianpueblo.org/", coverage: "Southwest", language: "Pueblo Languages", publisher: "Indian Pueblo Cultural Center" },
         ];
 
-        // --- Museum Data Extracted from Native American Language Database .pdf snippet ---
-        const museums = [
-            { name: "Sam Noble Museum", url: "https://samnoblemuseum.ou.edu/collections-and-research/native-american-languages/", coverage: "Great Plains", description: "Extensive Native American Languages Collection with 175+ languages represented through audio/video recordings, manuscripts, books, journals, and teaching curricula" },
-            { name: "Museum of Indian Arts and Culture", url: "https://www.newmexicoculture.org/museums/museum-of-indian-arts-culture", coverage: "Southwest", description: "World-renowned museum centering Indigenous perspectives and voices of Pueblo, Navajo (Diné) and Apache cultures of the Southwest" },
-            { name: "Heard Museum", url: "https://heard.org/", coverage: "Southwest", description: "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000+ volumes, focus on Southwest Indigenous cultures" },
-            { name: "Indian Pueblo Cultural Center", url: "https://indianpueblo.org/", coverage: "Southwest", description: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists, and cultural programs" },
-        ];
+        let editingIndex = null; 
         
-        let editingIndex = null; // State to track which story is being edited
+        // --- UTILITY FUNCTIONS ---
 
+        /** Extracts unique regions from the dataset. */
+        function getUniqueRegions(type) {
+            const uniqueRegions = new Set();
+            allResources.forEach(resource => {
+                if (type === 'Museums' && resource.type === 'Museum' && resource.coverage) {
+                    uniqueRegions.add(resource.coverage);
+                } else if (resource.type === type && resource.coverage) {
+                    uniqueRegions.add(resource.coverage);
+                }
+            });
+            // Alphabetize the regions
+            return Array.from(uniqueRegions).sort();
+        }
+
+        /** Filters resources based on type and region, then renders the table. */
+        function filterAndShowResources(typeFilter, regionFilter) {
+            const filteredResources = allResources.filter(resource => {
+                // Determine resource type based on nav section
+                let matchesType;
+                if (typeFilter === 'Digital Archive') {
+                    matchesType = (resource.type === 'Digital Archive' || resource.type === 'Website');
+                } else if (typeFilter === 'Books') {
+                    matchesType = (resource.type === 'Academic Book');
+                } else if (typeFilter === 'Apps') {
+                    matchesType = (resource.type === 'App');
+                } else if (typeFilter === 'Museums') {
+                    matchesType = (resource.type === 'Museum');
+                } else {
+                    matchesType = true; // Show all if no type filter (e.g., initial search page)
+                }
+
+                const matchesRegion = (regionFilter === null || resource.coverage === regionFilter);
+                
+                return matchesType && matchesRegion;
+            });
+
+            // Update title and show section
+            const titleElement = document.getElementById('resource-title');
+            let titleText = "Complete Resource Database";
+            
+            if (regionFilter) {
+                titleText = `${regionFilter} ${typeFilter} Resources`;
+            } else if (typeFilter) {
+                titleText = `${typeFilter} Resources`;
+            }
+            titleElement.textContent = titleText;
+
+            showSection('resources');
+            renderResources(filteredResources);
+        }
+
+        /** Populates the resource table with data. */
         function renderResources(data) {
             const tableBody = document.getElementById('resource-table-body');
             if (!tableBody) return;
@@ -398,57 +454,66 @@
             tableBody.innerHTML = ''; 
 
             if (data.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No resources match your search criteria.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No resources match your selection criteria.</td></tr>';
                 return;
             }
 
             data.forEach(resource => {
                 const row = document.createElement('tr');
+                // Ensure link works if identifier is not 'N/A'
+                const linkDisplay = resource.identifier === 'N/A' ? 'N/A' : 'Link';
+                const linkHref = resource.identifier === 'N/A' ? '#' : resource.identifier;
+                
                 row.innerHTML = `
                     <td><strong>${resource.title}</strong></td>
                     <td>${resource.type}</td>
                     <td>${resource.desc}</td>
-                    <td><a href="${resource.identifier}" target="_blank">${resource.identifier === 'N/A' ? 'N/A' : 'Link'}</a></td>
-                    <td>${resource.coverage}</td>
-                    <td>${resource.language}</td>
-                    <td>${resource.publisher}</td>
+                    <td><a href="${linkHref}" target="_blank">${linkDisplay}</a></td>
+                    <td>${resource.coverage || 'N/A'}</td>
+                    <td>${resource.language || 'N/A'}</td>
+                    <td>${resource.publisher || 'N/A'}</td>
                 `;
                 tableBody.appendChild(row);
             });
         }
-
-        function renderMuseums() {
-            const museumList = document.getElementById('museum-list-container');
-            if (!museumList) return;
-            
-            museumList.innerHTML = '';
-            
-            museums.forEach(museum => {
-                const item = document.createElement('div');
-                item.className = 'museum-item';
-                item.innerHTML = `
-                    <h3><a href="${museum.url}" target="_blank">${museum.name}</a></h3>
-                    <p>${museum.description}</p>
-                    <p><strong>Coverage:</strong> ${museum.coverage}</p>
-                `;
-                museumList.appendChild(item);
-            });
-        }
         
+        /** Builds navigation dropdown menus based on regions and types. */
         function buildMenus() {
-            const museumsMenu = document.getElementById('museums-menu');
-            if (museumsMenu) {
-                museums.forEach(museum => {
-                    const a = document.createElement('a');
-                    a.href = museum.url;
-                    a.textContent = museum.name;
-                    a.target = "_blank";
-                    museumsMenu.appendChild(a);
-                });
-            }
+            const menuConfigs = [
+                { id: 'digital-archive-menu', type: 'Digital Archive' },
+                { id: 'books-menu', type: 'Academic Book' },
+                { id: 'apps-menu', type: 'App' },
+                { id: 'museums-menu', type: 'Museums' } // 'Museums' is a special case for type filtering
+            ];
 
-            document.getElementById('websites-menu').innerHTML = '<a onclick="showSection(\'resources\')">View All Archive</a>';
-            document.getElementById('books-menu').innerHTML = '<a onclick="showSection(\'resources\')">View All Languages</a>';
+            menuConfigs.forEach(config => {
+                const menu = document.getElementById(config.id);
+                if (!menu) return;
+
+                menu.innerHTML = ''; // Clear previous content
+
+                // Add an option to view all of that resource type
+                const allLink = document.createElement('a');
+                allLink.textContent = `View All ${config.type.replace('Academic Book', 'Books').replace('Museums', 'Museums')}`;
+                allLink.onclick = () => filterAndShowResources(config.type, null);
+                menu.appendChild(allLink);
+                
+                // Add a divider
+                const divider = document.createElement('div');
+                divider.style.borderTop = '1px solid #eee';
+                divider.style.margin = '0.5rem 0';
+                menu.appendChild(divider);
+
+
+                // Add region filters
+                const regions = getUniqueRegions(config.type === 'Museums' ? 'Museum' : config.type);
+                regions.forEach(region => {
+                    const a = document.createElement('a');
+                    a.textContent = region;
+                    a.onclick = () => filterAndShowResources(config.type, region);
+                    menu.appendChild(a);
+                });
+            });
         }
 
         function showSection(sectionId) {
@@ -463,18 +528,6 @@
                 targetSection.classList.remove('hidden');
             }
             
-            if (sectionId === 'museums-list') {
-                document.getElementById('museums-list').classList.remove('hidden');
-            }
-
-            // Show or hide search container based on section
-            const searchContainer = document.querySelector('.search-container');
-            if (sectionId === 'resources') {
-                searchContainer.classList.remove('hidden');
-            } else {
-                searchContainer.classList.add('hidden');
-            }
-
             // Close all dropdowns
             document.querySelectorAll('.dropdown-content').forEach(content => {
                 content.classList.remove('show');
@@ -629,10 +682,31 @@
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             buildMenus(); 
+            // Show the entire database in the background when the page loads
             renderResources(allResources);
-            renderMuseums();
-            renderStories(); // Renders persistent stories on load
-            showSection('about');
+            showSection('about'); // Default to showing the 'About' section on load
+            
+            // Initializing the search bar filtering (can be expanded to filter real-time)
+            document.getElementById('globalSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filtered = allResources.filter(resource => 
+                    (resource.title && resource.title.toLowerCase().includes(searchTerm)) ||
+                    (resource.desc && resource.desc.toLowerCase().includes(searchTerm)) ||
+                    (resource.language && resource.language.toLowerCase().includes(searchTerm)) ||
+                    (resource.coverage && resource.coverage.toLowerCase().includes(searchTerm)) ||
+                    (resource.publisher && resource.publisher.toLowerCase().includes(searchTerm))
+                );
+                
+                // Automatically switch to the resources view when searching
+                if (searchTerm.length > 0) {
+                    document.getElementById('resource-title').textContent = `Search Results for "${this.value}"`;
+                    showSection('resources');
+                } else {
+                    document.getElementById('resource-title').textContent = `Complete Resource Database`;
+                }
+
+                renderResources(filtered);
+            });
         });
     </script>
 </body>
