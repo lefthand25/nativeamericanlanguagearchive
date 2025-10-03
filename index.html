@@ -138,17 +138,24 @@
         .resource-item { 
             background: #fff; 
             padding: 1.5rem 0;
-            margin-bottom: 0; /* Removed margin-bottom to rely on border separation */
+            margin-bottom: 0; 
             border: none; 
             /* Very subtle line separating individual resources */
             border-bottom: 1px dashed #f0f0f0; 
             box-shadow: none; 
         }
         .resource-item:last-child { border-bottom: none; }
-        .resource-item h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
-        .resource-meta { font-size: 0.85rem; color: #777; margin-bottom: 0.5rem; }
-        .resource-item p { margin-top: 0.5rem; }
-        .resource-item a { color: #333; text-decoration: underline; font-weight: 500;}
+        .resource-item h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .resource-desc { margin-top: 0.75rem; color: #444; }
+        .resource-meta { 
+            font-size: 0.9rem; 
+            color: #777; 
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #f9f9f9;
+        }
+        .resource-meta strong { font-weight: 600; color: #222; }
+        .resource-item a { color: #007bff; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 0.75rem;}
 
         /* FORMS & BUTTONS */
         form { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
@@ -176,16 +183,15 @@
         #storyList { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-            gap: 1.5rem; /* Increased gap for better separation */
+            gap: 1.5rem; 
             margin-top: 1.5rem; 
         }
         .story { 
             background: #fcfcfc; 
             padding: 1rem; 
-            /* Subtle border for the individual story cards */
             border: 1px solid #ddd; 
-            border-radius: 6px; /* Slightly rounded corners */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Very light lift */
+            border-radius: 6px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
             position: relative;
             min-height: 150px;
         }
@@ -207,6 +213,7 @@
             border-radius: 3px;
             line-height: 1;
             transition: background 0.2s;
+            z-index: 10;
         }
         .delete-btn { right: 8px; color: #dc3545; border-color: #dc3545; }
         .delete-btn:hover { background: #dc3545; color: #fff; }
@@ -251,10 +258,6 @@
                 <div class="dropdown-content" id="books-menu"></div>
             </li>
             <li class="dropdown">
-                <a href="#apps">Learning Tools</a>
-                <div class="dropdown-content" id="apps-menu"></div>
-            </li>
-            <li class="dropdown">
                 <a href="#museums">Museums</a>
                 <div class="dropdown-content" id="museums-menu"></div>
             </li>
@@ -276,7 +279,7 @@
         <section id="about">
             <h2>About Our Mission</h2>
             <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
-            <p style="margin-top: 1rem;">Here, you'll find **resources for learners, documentation projects led by native speakers and tools** to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enriches us all. Whether you're **reconnecting with your heritage language, supporting revitalization efforts or exploring** how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
+            <p style="margin-top: 1rem;">Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
         </section>
 
         <section id="resources" class="hidden">
@@ -299,7 +302,7 @@
             
             <h2 style="margin-top: 3rem;">Community Stories</h2>
             <div id="storyList">
-                <p>No stories added yet. Be the first!</p>
+                <p style="padding: 1.5rem 0; grid-column: 1 / -1; text-align: center; color: #666;">No stories added yet. Be the first!</p>
             </div>
         </section>
 
@@ -321,7 +324,7 @@
     </footer>
 
     <script>
-        // RESOURCE DATA (kept intact from original code)
+        // RESOURCE DATA (Apps/Learning Tools removed)
         const resources = {
             "websites": {
                 "California ": [
@@ -633,10 +636,8 @@
                     }
                 ]
             },
-            "apps": {},
+            // 'apps' category removed
             "museums": {},
-            // Duplicate keys found in the user's provided resource object have been cleaned up and merged under the correct top-level category where possible.
-            // The remaining data structure will match the initial clean-up.
         };
         
         let stories = JSON.parse(localStorage.getItem('stories')) || [];
@@ -647,8 +648,13 @@
             document.querySelectorAll('section').forEach(section => {
                 section.classList.add('hidden');
             });
-            document.getElementById(id).classList.remove('hidden');
+            // FIX: Ensure the target section is shown
+            const targetSection = document.getElementById(id);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
             
+            // FIX: Ensure the search bar is only visible when showing the 'resources' section.
             const searchContainer = document.querySelector('.search-container');
             if (id === 'resources') {
                 searchContainer.classList.remove('hidden');
@@ -659,8 +665,7 @@
             window.scrollTo(0, 0); 
         }
         
-        // (Resource rendering and filtering functions remain the same as the last working version)
-
+        // Resource rendering (maintains all requested fields)
         function renderResources(data, title) {
             const resourceList = document.getElementById('resource-list');
             const resourceTitle = document.getElementById('resource-title');
@@ -679,15 +684,22 @@
                 const div = document.createElement('div');
                 div.className = 'resource-item';
                 
-                let metaHTML = `<strong>Region:</strong> ${item.coverage || 'N/A'}<br>
-                                <strong>Language:</strong> ${item.lang || 'N/A'}<br>
-                                <strong>Publisher:</strong> ${item.pub || 'N/A'}`;
+                let metaHTML = `
+                    <strong>Type:</strong> ${item.type || 'N/A'}<br>
+                    <strong>Coverage:</strong> ${item.coverage || 'N/A'}<br>
+                    <strong>Language:</strong> ${item.lang || 'N/A'}<br>
+                    <strong>Publisher:</strong> ${item.pub || 'N/A'}<br>
+                    <strong>Identifier:</strong> ${item.identifier && item.identifier !== '-' ? item.identifier : 'N/A'}
+                `;
                 
+                const identifierLink = item.identifier && item.identifier !== '-' && item.identifier.startsWith('http') ? 
+                    `<a href="${item.identifier}" target="_blank">View Resource</a>` : '';
+
                 div.innerHTML = `
                     <h3>${item.title}</h3>
+                    <p class="resource-desc">${item.desc}</p>
                     <div class="resource-meta">${metaHTML}</div>
-                    <p>${item.desc}</p>
-                    ${item.identifier && item.identifier !== '-' ? `<a href="${item.identifier}" target="_blank">View Resource</a>` : ''}
+                    ${identifierLink}
                 `;
                 
                 resourceList.appendChild(div);
@@ -709,10 +721,7 @@
                     title = 'Books and Publications';
                     data = resources.books;
                     break;
-                case 'apps':
-                    title = 'Apps and Learning Tools';
-                    data = resources.apps;
-                    break;
+                // 'apps' case removed
                 case 'museums':
                     title = 'Museums and Archives';
                     data = resources.museums;
@@ -725,10 +734,10 @@
         }
         
         function buildMenus() {
+            // FIX: Removed 'apps' from the menu structure
             const menus = {
                 'websites': 'websites-menu',
                 'books': 'books-menu',
-                'apps': 'apps-menu',
                 'museums': 'museums-menu'
             };
 
@@ -741,7 +750,6 @@
                     let categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
                     if (category === 'websites') categoryTitle = 'Archive';
                     if (category === 'books') categoryTitle = 'Languages';
-                    if (category === 'apps') categoryTitle = 'Learning Tools';
                     if (category === 'museums') categoryTitle = 'Museums';
                     
                     allLink.href = `#${category}`;
@@ -756,7 +764,7 @@
                         Object.keys(resources[category]).forEach(region => {
                             const link = document.createElement('a');
                             link.href = `#${category}-${region.replace(/\s/g, '_')}`;
-                            link.textContent = region.replace(/_/g, ' '); // Clean up region name for display
+                            link.textContent = region.replace(/_/g, ' '); 
                             link.onclick = (e) => {
                                 e.preventDefault();
                                 renderResources({ [region]: resources[category][region] }, `${categoryTitle}: ${region.replace(/_/g, ' ')}`);
@@ -779,8 +787,8 @@
                 return;
             }
 
-
-            ['websites', 'books', 'apps', 'museums'].forEach(category => {
+            // Removed 'apps' from the search loop
+            ['websites', 'books', 'museums'].forEach(category => {
                 if (resources[category]) {
                     Object.keys(resources[category]).forEach(region => {
                         resources[category][region].forEach(item => {
@@ -788,7 +796,6 @@
                             if (searchFields.includes(query)) {
                                 if (!results[region]) results[region] = [];
                                 
-                                // Simple way to prevent duplicates within the immediate search results
                                 if (!results[region].some(r => r.title === item.title && r.identifier === item.identifier)) {
                                      results[region].push(item);
                                      matchCount++;
@@ -806,9 +813,9 @@
         document.getElementById('globalSearch').addEventListener('input', globalSearch);
 
 
-        // --- Story Submission/Editing/Rendering FIXES ---
+        // --- Story Submission/Editing/Rendering (Confirmed working) ---
         
-        let editingIndex = null; // Variable to track which story is being edited
+        let editingIndex = null; 
 
         function renderStories() {
             const storyList = document.getElementById('storyList');
@@ -816,22 +823,19 @@
             storyList.innerHTML = '';
             
             if (stories.length === 0) {
-                 storyList.innerHTML = `<p style="padding: 1.5rem 0; grid-column: 1 / -1;">No stories added yet. Be the first!</p>`;
+                 storyList.innerHTML = `<p style="padding: 1.5rem 0; grid-column: 1 / -1; text-align: center; color: #666;">No stories added yet. Be the first!</p>`;
             }
 
             stories.forEach((story, index) => {
                 const div = document.createElement('div');
                 div.className = 'story';
-                // Drag and drop is disabled for simplicity, but the index is kept
                 div.dataset.index = index;
 
                 let fileAttachmentHTML = '';
-                // Check for file data and link to download it
                 if (story.fileName && story.fileData) {
                     fileAttachmentHTML = `<div class="file-attachment">File: <a href="${story.fileData}" download="${story.fileName}">📄 ${story.fileName}</a></div>`;
                 }
                 
-                // Truncate content for card view
                 const displayContent = story.content.length > 150 ? story.content.substring(0, 150) + '...' : story.content;
 
                 div.innerHTML = `
@@ -844,11 +848,9 @@
                 `;
                 storyList.appendChild(div);
             });
-            // Drag and drop logic removed for simplicity as it's purely frontend
         }
         
-        function deleteStory(index) {
-            // FIX: Ensure the correct index is deleted and local storage is updated
+        window.deleteStory = function(index) {
             if (confirm('Are you sure you want to delete this story?')) {
                 stories.splice(index, 1);
                 localStorage.setItem('stories', JSON.stringify(stories));
@@ -856,23 +858,19 @@
             }
         }
 
-        function editStory(index) {
+        window.editStory = function(index) {
             const story = stories[index];
             document.getElementById('storyTitle').value = story.title;
             document.getElementById('storyLanguage').value = story.language;
             document.getElementById('storyContent').value = story.content;
             
-            // Set the global editing index
             editingIndex = index;
             document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Update Story';
             
-            // Scroll to the form to make editing easy
             document.getElementById('share').scrollIntoView({ behavior: 'smooth' });
             
-            // File input is cleared for security, user must re-upload or leave blank
             document.getElementById('storyFile').value = ''; 
             
-            // Optional: Provide visual feedback
             alert(`Now editing: "${story.title}". Use the form above to save changes.`);
         }
 
@@ -887,24 +885,20 @@
             
             const saveStory = (storyData) => {
                 if (editingIndex !== null) {
-                    // FIX: Ensure it's using the stored index
                     stories[parseInt(editingIndex)] = storyData;
                     alert("Story updated successfully!");
                 } else {
-                    // Add new story
                     stories.push(storyData);
                     alert("Thank you! Your story has been submitted and added to the list below.");
                 }
                 
-                // Finalize and reset
                 localStorage.setItem('stories', JSON.stringify(stories));
-                editingIndex = null; // Clear editing state
+                editingIndex = null; 
                 document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Submit Story';
                 this.reset();
                 renderStories();
             };
 
-            // FIX: Correctly handle file data for new uploads AND preserving old data on edit
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 const reader = new FileReader();
@@ -917,7 +911,6 @@
                 
                 reader.readAsDataURL(file);
             } else {
-                // If editing and no new file uploaded, preserve the old file (if one existed)
                 if (editingIndex !== null) {
                     const originalStory = stories[parseInt(editingIndex)];
                     if (originalStory && originalStory.fileName) {
@@ -936,7 +929,6 @@
             renderStories();
             showSection('about'); // Default to showing the 'About' section on load
         });
-        // --- END: JAVASCRIPT LOGIC ---
     </script>
 </body>
 </html>
