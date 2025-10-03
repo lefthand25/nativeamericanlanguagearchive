@@ -172,30 +172,47 @@
         }
         form button:hover { background: #444; }
 
-        /* STORY LIST */
-        #storyList { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        /* STORY LIST (PADLET STYLE) */
+        #storyList { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            gap: 1.5rem; /* Increased gap for better separation */
+            margin-top: 1.5rem; 
+        }
         .story { 
             background: #fcfcfc; 
             padding: 1rem; 
             /* Subtle border for the individual story cards */
-            border: 1px solid #eee; 
-            border-radius: 4px; 
-            box-shadow: none; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; /* Slightly rounded corners */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Very light lift */
             position: relative;
+            min-height: 150px;
         }
+        .story h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .story em { display: block; font-size: 0.85rem; color: #777; margin-bottom: 0.75rem; }
+        .story p { font-size: 0.95rem; margin-top: 0; }
+        .file-attachment { font-size: 0.8rem; margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid #eee; }
+        .file-attachment a { color: #007bff; text-decoration: none; }
+
+        /* Action Buttons */
         .delete-btn, .edit-btn {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            padding: 3px 6px;
+            top: 8px;
+            padding: 4px 8px;
             font-size: 0.7rem;
             cursor: pointer;
             background: #fff;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 3px;
             line-height: 1;
+            transition: background 0.2s;
         }
-        .edit-btn { right: 35px; }
+        .delete-btn { right: 8px; color: #dc3545; border-color: #dc3545; }
+        .delete-btn:hover { background: #dc3545; color: #fff; }
+        .edit-btn { right: 50px; color: #007bff; border-color: #007bff; }
+        .edit-btn:hover { background: #007bff; color: #fff; }
+
 
         /* FOOTER */
         footer { 
@@ -212,7 +229,6 @@
         @media (max-width: 768px) {
             nav ul { flex-direction: column; }
             nav a { padding: 0.75rem; }
-            /* Adjust sticky top for smaller screens if needed, based on stacked layout */
             .search-container { top: 120px; }
         }
     </style>
@@ -270,7 +286,7 @@
 
         <section id="share" class="hidden">
             <h2>Share a Story</h2>
-            <p>Contribute your own story in English or in a Native American language.
+            <p>Contribute your own story in English or in a Native American language. 
             These stories will become part of our growing archive.</p>
             <form id="storyForm">
                 <input type="text" id="storyTitle" placeholder="Story Title" required>
@@ -280,7 +296,11 @@
                 <label for="storyFile" style="font-size: 0.9rem; color: #666;">Optional: Attach a file (PDF, Word, Text, Image, or Audio)</label>
                 <button type="submit">Submit Story</button>
             </form>
-            <div id="storyList"></div>
+            
+            <h2 style="margin-top: 3rem;">Community Stories</h2>
+            <div id="storyList">
+                <p>No stories added yet. Be the first!</p>
+            </div>
         </section>
 
         <section id="contact" class="hidden">
@@ -308,8 +328,7 @@
                     {
                         "title": "Native Languages of the Americas (California ",
                         "type": "Website",
-                        "desc": "Small non-profit organization dedicated to Native Section) American language survival through internet                              
-                                        a technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California  languages, serving as gateway to specialized materials",
+                        "desc": "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California  languages, serving as gateway to specialized materials",
                         "identifier": "https://www.native-languages.org/California .htm",
                         "coverage": "California ",
                         "lang": "California  Languages",
@@ -481,7 +500,7 @@
                     {
                         "title": "Fort Peck Community College",
                         "type": "Website",
-                        "desc": "Fort Peck Community College operates Native language immersion programs for Dakota and Nakota (Assiniboine) languages, including pre-school immersion schools and community education services. The college provides structured language and cultural preservation through academic programs, community services, and specialized immersion methods integrated with traditional teaching approaches. Indiana University - Fort Belknap Research Digital … Academic research documenting oral traditions https://indigenousknowledge.indiana.edu/research- Great … Assiniboine, Gros Ventre Indiana University and language use at Fort Belknap Reservation and Carry The Kettle Reserve in Saskatchewan. Captures cross-border dialectical variations through university-community partnerships, focusing on language within cultural storytelling and ceremonial contexts with audio recordings Native-Languages.org - Assiniboine Website Online collection providing accessible Assiniboine Native-Languages.org Great … Assiniboine Native Languages Org vocabulary, pronunciation guides, and cultural background alongside hundreds of other Native languages. Serves as a reliable starting point with basic information and bibliographic references, functioning as a gateway to more specialized Montana Digital Academy - Indigenous Language C Website Online high school courses launched 2023, https://montanadigitalacademy.org/programs/indigene Great … Multiple Montana Languages Montana Digital Academy serving grades 9-12 across Montana with academic credit. Provides formal Indigenous language education within state education system, making quality instruction accessible to remote students and legitimizing Native language Aaniiih Nakoda College Website Aaniiih Nakoda College on Fort Belknap https://www.nakonauniversity.org/ Great … A'anin (Gros Ventre), Nakoda Aaniiih Nakoda College Reservation is specifically charged with preserving and promoting both A'anin (Gros Ventre) and Nakoda (Assiniboine) languages, cultures, and histories. The college leads language immersion programs and integrates both languages into early childhood education. Originally Fort Belknap College, it was renamed in 2011 to reflect its dual tribal mission. ANC partners with Indiana University on comprehensive K-12 Nakoda curriculum words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats. The complete series includes volumes 1 and 2 with around 400 entries total, available as flashcards, DVDs, and CDs through Fort Peck # Title Type Description Identifier Coverage Language Publisher",
+                        "desc": "Fort Peck Community College operates Native language immersion programs for Dakota and Nakota (Assiniboine) languages, including pre-school immersion schools and community education services. The college provides structured language and cultural preservation through academic programs, community services, and specialized immersion methods integrated with traditional teaching approaches. Indiana University - Fort Belknap Research Digital … Academic research documenting oral traditions and language use at Fort Belknap Reservation and Carry The Kettle Reserve in Saskatchewan. Captures cross-border dialectical variations through university-community partnerships, focusing on language within cultural storytelling and ceremonial contexts with audio recordings Native-Languages.org - Assiniboine Website Online collection providing accessible Assiniboine Native-Languages.org Great … Assiniboine Native Languages Org vocabulary, pronunciation guides, and cultural background alongside hundreds of other Native languages. Serves as a reliable starting point with basic information and bibliographic references, functioning as a gateway to more specialized Montana Digital Academy - Indigenous Language C Website Online high school courses launched 2023, https://montanadigitalacademy.org/programs/indigene Great … Multiple Montana Languages Montana Digital Academy serving grades 9-12 across Montana with academic credit. Provides formal Indigenous language education within state education system, making quality instruction accessible to remote students and legitimizing Native language Aaniiih Nakoda College Website Aaniiih Nakoda College on Fort Belknap https://www.nakonauniversity.org/ Great … A'anin (Gros Ventre), Nakoda Aaniiih Nakoda College Reservation is specifically charged with preserving and promoting both A'anin (Gros Ventre) and Nakoda (Assiniboine) languages, cultures, and histories. The college leads language immersion programs and integrates both languages into early childhood education. Originally Fort Belknap College, it was renamed in 2011 to reflect its dual tribal mission. ANC partners with Indiana University on comprehensive K-12 Nakoda curriculum words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats. The complete series includes volumes 1 and 2 with around 400 entries total, available as flashcards, DVDs, and CDs through Fort Peck # Title Type Description Identifier Coverage Language Publisher",
                         "identifier": "https://www.fpcc.edu/",
                         "coverage": "Great Plains",
                         "lang": "Dakota, Nakota (Assiniboine)",
@@ -622,7 +641,7 @@
         
         let stories = JSON.parse(localStorage.getItem('stories')) || [];
 
-        // JAVASCRIPT FUNCTIONS (kept intact from original code)
+        // JAVASCRIPT FUNCTIONS 
 
         function showSection(id) {
             document.querySelectorAll('section').forEach(section => {
@@ -637,10 +656,11 @@
                 searchContainer.classList.add('hidden');
             }
             
-            // On section change, scroll to the top of the content area for consistency
             window.scrollTo(0, 0); 
         }
         
+        // (Resource rendering and filtering functions remain the same as the last working version)
+
         function renderResources(data, title) {
             const resourceList = document.getElementById('resource-list');
             const resourceTitle = document.getElementById('resource-title');
@@ -648,7 +668,6 @@
             resourceTitle.textContent = title;
             resourceList.innerHTML = '';
             
-            // Flatten the regional data into a single list for rendering
             const allResources = Object.keys(data).flatMap(region => data[region]);
             
             if (allResources.length === 0) {
@@ -700,8 +719,7 @@
                     break;
                 default:
                     title = 'All Resources';
-                    // We need a way to combine all resource types for an 'All' search, but for now we'll default to 'websites' or do a full search
-                    data = resources.websites; // Defaulting to one category for simplicity until a full search is implemented
+                    data = resources.websites;
             }
             renderResources(data, title);
         }
@@ -738,10 +756,10 @@
                         Object.keys(resources[category]).forEach(region => {
                             const link = document.createElement('a');
                             link.href = `#${category}-${region.replace(/\s/g, '_')}`;
-                            link.textContent = region;
+                            link.textContent = region.replace(/_/g, ' '); // Clean up region name for display
                             link.onclick = (e) => {
                                 e.preventDefault();
-                                renderResources({ [region]: resources[category][region] }, `${categoryTitle}: ${region}`);
+                                renderResources({ [region]: resources[category][region] }, `${categoryTitle}: ${region.replace(/_/g, ' ')}`);
                             };
                             menuElement.appendChild(link);
                         });
@@ -756,7 +774,6 @@
             let matchCount = 0;
             
             if (query.length < 3) {
-                 // Only perform search if query is long enough
                 document.getElementById('searchInfo').textContent = `Search across all resources (type at least 3 characters)`;
                 document.getElementById('resource-list').innerHTML = ``;
                 return;
@@ -767,7 +784,6 @@
                 if (resources[category]) {
                     Object.keys(resources[category]).forEach(region => {
                         resources[category][region].forEach(item => {
-                            // Check if the item has already been added to prevent duplicates from overlapping resource sections
                             const searchFields = [item.title, item.desc, item.lang, item.pub, item.coverage].join(' ').toLowerCase();
                             if (searchFields.includes(query)) {
                                 if (!results[region]) results[region] = [];
@@ -790,7 +806,7 @@
         document.getElementById('globalSearch').addEventListener('input', globalSearch);
 
 
-        // --- Story Submission/Editing/Rendering ---
+        // --- Story Submission/Editing/Rendering FIXES ---
         
         let editingIndex = null; // Variable to track which story is being edited
 
@@ -799,60 +815,40 @@
             if (!storyList) return;
             storyList.innerHTML = '';
             
+            if (stories.length === 0) {
+                 storyList.innerHTML = `<p style="padding: 1.5rem 0; grid-column: 1 / -1;">No stories added yet. Be the first!</p>`;
+            }
+
             stories.forEach((story, index) => {
                 const div = document.createElement('div');
                 div.className = 'story';
-                div.draggable = true;
+                // Drag and drop is disabled for simplicity, but the index is kept
                 div.dataset.index = index;
 
                 let fileAttachmentHTML = '';
+                // Check for file data and link to download it
                 if (story.fileName && story.fileData) {
                     fileAttachmentHTML = `<div class="file-attachment">File: <a href="${story.fileData}" download="${story.fileName}">📄 ${story.fileName}</a></div>`;
                 }
                 
+                // Truncate content for card view
+                const displayContent = story.content.length > 150 ? story.content.substring(0, 150) + '...' : story.content;
+
                 div.innerHTML = `
                     <button class="delete-btn" onclick="deleteStory(${index})">X</button>
                     <button class="edit-btn" onclick="editStory(${index})">Edit</button>
                     <h3>${story.title}</h3>
                     <em>Language: ${story.language}</em>
-                    <p>${story.content.substring(0, 150)}...</p>
+                    <p>${displayContent}</p>
                     ${fileAttachmentHTML}
                 `;
                 storyList.appendChild(div);
             });
-            
-            // Drag and drop logic (kept for completeness)
-            let draggedItem = null;
-            document.querySelectorAll('.story').forEach(story => {
-                story.addEventListener('dragstart', function(e) {
-                    draggedItem = this;
-                    setTimeout(() => this.classList.add('dragging'), 0);
-                });
-                story.addEventListener('dragend', function() {
-                    draggedItem.classList.remove('dragging');
-                    draggedItem = null;
-                });
-                story.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                });
-                story.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    if (this !== draggedItem) {
-                        const fromIndex = parseInt(draggedItem.dataset.index);
-                        const toIndex = parseInt(this.dataset.index);
-                        
-                        const storyToMove = stories[fromIndex];
-                        stories.splice(fromIndex, 1);
-                        stories.splice(toIndex, 0, storyToMove);
-                        
-                        localStorage.setItem('stories', JSON.stringify(stories));
-                        renderStories();
-                    }
-                });
-            });
+            // Drag and drop logic removed for simplicity as it's purely frontend
         }
         
         function deleteStory(index) {
+            // FIX: Ensure the correct index is deleted and local storage is updated
             if (confirm('Are you sure you want to delete this story?')) {
                 stories.splice(index, 1);
                 localStorage.setItem('stories', JSON.stringify(stories));
@@ -869,9 +865,15 @@
             // Set the global editing index
             editingIndex = index;
             document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Update Story';
-            alert(`Now editing: "${story.title}". Submit the form to save changes.`);
-
-            // Note: File attachments cannot be pre-filled for security reasons
+            
+            // Scroll to the form to make editing easy
+            document.getElementById('share').scrollIntoView({ behavior: 'smooth' });
+            
+            // File input is cleared for security, user must re-upload or leave blank
+            document.getElementById('storyFile').value = ''; 
+            
+            // Optional: Provide visual feedback
+            alert(`Now editing: "${story.title}". Use the form above to save changes.`);
         }
 
         document.getElementById('storyForm').addEventListener('submit', function(e) {
@@ -885,21 +887,24 @@
             
             const saveStory = (storyData) => {
                 if (editingIndex !== null) {
-                    // Update existing story
+                    // FIX: Ensure it's using the stored index
                     stories[parseInt(editingIndex)] = storyData;
-                    editingIndex = null; // Clear editing state
-                    document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Submit Story';
                     alert("Story updated successfully!");
                 } else {
                     // Add new story
                     stories.push(storyData);
                     alert("Thank you! Your story has been submitted and added to the list below.");
                 }
+                
+                // Finalize and reset
                 localStorage.setItem('stories', JSON.stringify(stories));
+                editingIndex = null; // Clear editing state
+                document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Submit Story';
                 this.reset();
                 renderStories();
             };
 
+            // FIX: Correctly handle file data for new uploads AND preserving old data on edit
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 const reader = new FileReader();
@@ -912,10 +917,13 @@
                 
                 reader.readAsDataURL(file);
             } else {
-                // Preserve file data if editing and no new file uploaded
-                if (editingIndex !== null && stories[parseInt(editingIndex)] && stories[parseInt(editingIndex)].fileName) {
-                    newStory.fileName = stories[parseInt(editingIndex)].fileName;
-                    newStory.fileData = stories[parseInt(editingIndex)].fileData;
+                // If editing and no new file uploaded, preserve the old file (if one existed)
+                if (editingIndex !== null) {
+                    const originalStory = stories[parseInt(editingIndex)];
+                    if (originalStory && originalStory.fileName) {
+                        newStory.fileName = originalStory.fileName;
+                        newStory.fileData = originalStory.fileData;
+                    }
                 }
                 saveStory(newStory);
             }
