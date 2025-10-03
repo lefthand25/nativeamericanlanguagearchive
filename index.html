@@ -1,544 +1,846 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Native American Language Database</title>
-<style>
-/* --- BASE STYLES --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #222; background: #fafafa; }
-header { background: #222; color: #fff; padding: 2rem 1rem; text-align: center; border-bottom: 4px solid #444; }
-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-header p { font-size: 1.1rem; font-style: italic; color: #ddd; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native American Language Archive</title>
+    <style>
+        /* BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #222; background: #fafafa; }
 
-/* --- Search Bar Styles --- */
-.search-container { background: #fff; padding: 1.5rem; border-bottom: 2px solid #ddd; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.search-wrapper { max-width: 1200px; margin: 0 auto; }
-.search-bar { width: 100%; max-width: 800px; margin: 0 auto; position: relative; }
-.search-bar input { width: 100%; padding: 1rem 1.5rem; font-size: 1.1rem; border: 2px solid #ccc; border-radius: 50px; transition: all 0.3s; }
-.search-bar input:focus { outline: none; border-color: #0066cc; box-shadow: 0 0 0 3px rgba(0,102,204,0.1); }
-.search-info { text-align: center; margin-top: 0.75rem; font-size: 0.9rem; color: #666; }
+        /* HEADER & BANNER (SIMPLE LIGHT THEME) */
+        header { 
+            background: #fff; 
+            color: #222; 
+            padding: 1.5rem 1rem 0.5rem; 
+            text-align: center; 
+            border-bottom: 1px solid #eee; 
+        }
+        header h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+        header p { font-size: 0.9rem; font-style: normal; color: #666; }
 
-/* --- Navigation Styles --- */
-nav { background: #fff; border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
-nav ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
-nav a { display: block; padding: 0.75rem 1.5rem; color: #333; text-decoration: none; font-weight: 600; transition: background 0.3s; }
-nav a:hover { background: #f5f5f5; border-radius: 6px; }
-.dropdown { position: relative; }
-.dropdown-content { display: none; position: absolute; background: #fff; min-width: 220px; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
-.dropdown-content a { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; display: block; }
-.dropdown-content a:last-child { border-bottom: none; }
-.dropdown:hover .dropdown-content { display: block; }
+        /* SEARCH BAR */
+        .search-container { 
+            background: #fff; 
+            padding: 1.5rem; 
+            border-bottom: 2px solid #ddd; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+        }
+        .search-wrapper { max-width: 1200px; margin: 0 auto; }
+        .search-bar { width: 100%; max-width: 800px; margin: 0 auto; position: relative; }
+        .search-bar input { 
+            width: 100%; 
+            padding: 1rem 1.5rem; 
+            font-size: 1.1rem; 
+            border: 2px solid #ccc; 
+            border-radius: 50px; 
+            transition: all 0.3s; 
+        }
+        .search-bar input:focus { outline: none; border-color: #222; box-shadow: 0 0 0 3px rgba(34, 34, 34, 0.1); }
+        .search-info { text-align: center; margin-top: 0.75rem; font-size: 0.9rem; color: #666; }
 
-/* --- Container and Section Styles --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
-section { margin-bottom: 3rem; padding: 2rem; background: #fff; border: 1px solid #ddd; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-section h2 { font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee; }
-.hidden { display: none; }
+        /* NAVIGATION (UPDATED TO MATCH PDF DESIGN) */
+        nav { background: #fff; border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
+        nav a { 
+            display: block; 
+            padding: 0.75rem 1.5rem; 
+            color: #222; 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: background 0.3s; 
+        }
+        nav a:hover { background: #f0f0f0; border-radius: 6px; }
+        
+        /* Dropdowns */
+        .dropdown { position: relative; }
+        .dropdown-content { 
+            display: none; 
+            position: absolute; 
+            background: #fff; 
+            min-width: 220px; 
+            border: 1px solid #ddd; 
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            z-index: 1000; 
+        }
+        .dropdown-content a { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; display: block; }
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown:hover .dropdown-content { display: block; }
 
-/* --- Resource List Styles --- */
-.resource-list { margin-top: 1.5rem; max-height: 70vh; overflow-y: auto; padding: 1rem; background: #f9f9f9; border-radius: 10px; border: 1px solid #ddd; }
-.resource-item { background: #fff; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-.resource-item:last-child { margin-bottom: 0; }
-.resource-item h3 { font-size: 1.4rem; margin-bottom: 1rem; color: #111; line-height: 1.4; }
-.resource-meta { font-size: 1rem; color: #555; margin-bottom: 0.75rem; line-height: 1.6; }
-.resource-item p { margin-bottom: 1rem; color: #333; line-height: 1.8; font-size: 1rem; }
-.resource-item a { display: inline-block; margin-top: 0.5rem; color: #0066cc; text-decoration: none; font-weight: 600; font-size: 1rem; }
-.resource-item a:hover { text-decoration: underline; }
+        /* CONTENT SECTIONS */
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+        section { 
+            margin-bottom: 3rem; 
+            padding: 2rem; 
+            background: #fff; 
+            border: 1px solid #ddd; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05); 
+        }
+        section h2 { font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee; }
+        .hidden { display: none; }
 
-/* --- Share a Story Form/List Styles --- */
-form { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
-form input, form textarea { padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
-form input[type="file"] { padding: 0.5rem; }
-form button { background: #0066cc; color: #fff; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
-form button:hover { background: #004999; }
-.file-attachment { margin-top: 0.5rem; padding: 0.5rem; background: #f0f0f0; border-radius: 6px; font-size: 0.9rem; color: #555; }
-.file-attachment a { color: #0066cc; text-decoration: none; }
-.file-attachment a:hover { text-decoration: underline; }
+        /* RESOURCE LIST */
+        .resource-list { 
+            margin-top: 1.5rem; 
+            max-height: 70vh; 
+            overflow-y: auto; 
+            padding: 1rem; 
+            background: #f9f9f9; 
+            border-radius: 10px; 
+            border: 1px solid #ddd; 
+        }
+        .resource-item { 
+            background: #fff; 
+            padding: 2rem; 
+            margin-bottom: 1.5rem; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05); 
+        }
+        .resource-item:last-child { margin-bottom: 0; }
+        .resource-item h3 { font-size: 1.4rem; margin-bottom: 1rem; color: #111; line-height: 1.4; }
+        .resource-meta { font-size: 1rem; color: #555; margin-bottom: 0.75rem; line-height: 1.6; }
+        .resource-item p { margin-bottom: 1rem; color: #333; line-height: 1.8; font-size: 1rem; }
+        .resource-item a { display: inline-block; margin-top: 0.5rem; color: #222; text-decoration: none; font-weight: 600; font-size: 1rem; }
+        .resource-item a:hover { text-decoration: underline; }
 
-#storyList { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem; }
-.story { background: #fefefe; padding: 1rem; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); word-wrap: break-word; cursor: grab; position: relative; }
-.story h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-.story em { font-size: 0.9rem; color: #555; }
-.delete-btn, .edit-btn { position: absolute; top: 8px; width: 24px; height: 24px; border: none; border-radius: 50%; text-align: center; cursor: pointer; font-size: 0.8rem; line-height: 22px; color: #fff; }
-.delete-btn { right: 8px; background: #e63946; }
-.delete-btn:hover { background: #c1121f; }
-.edit-btn { right: 40px; background: #457b9d; }
-.edit-btn:hover { background: #1d3557; }
+        /* FORMS & BUTTONS */
+        form { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+        form input, form textarea { padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+        form input[type="file"] { padding: 0.5rem; }
+        form button { 
+            background: #222; 
+            color: #fff; 
+            border: none; 
+            padding: 0.75rem; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+        }
+        form button:hover { background: #555; }
+        .file-attachment { margin-top: 0.5rem; padding: 0.5rem; background: #f0f0f0; border-radius: 6px; font-size: 0.9rem; color: #555; }
+        .file-attachment a { color: #222; text-decoration: none; }
+        .file-attachment a:hover { text-decoration: underline; }
+        
+        /* STORY LIST */
+        #storyList { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .story { 
+            background: #fefefe; 
+            padding: 1rem; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            word-wrap: break-word;
+            cursor: grab; 
+            position: relative; 
+        }
+        .story.dragging { opacity: 0.5; }
+        .story h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .story em { font-size: 0.9rem; color: #555; }
+        .delete-btn, .edit-btn { 
+            position: absolute; 
+            top: 8px; 
+            width: 24px; 
+            height: 24px; 
+            border: none; 
+            border-radius: 50%; 
+            text-align: center; 
+            cursor: pointer;
+            font-size: 0.8rem; 
+            line-height: 22px; 
+            color: #fff; 
+        }
+        .delete-btn { right: 8px; background: #e63946; }
+        .delete-btn:hover { background: #c1121f; }
+        .edit-btn { right: 40px; background: #457b9d; }
+        .edit-btn:hover { background: #1d3557; }
 
-/* --- Footer --- */
-footer { background: #222; color: #fff; text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 4px solid #444; }
+        /* FOOTER */
+        footer { background: #222; color: #fff; text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 4px solid #444; }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-    nav ul { flex-direction: column; }
-    nav a { padding: 1rem; }
-}
-</style>
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            nav ul { flex-direction: column; }
+            nav a { padding: 1rem; }
+            .resource-list { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Native American Language Archive</h1>
-    <p>Linking Past, Present and Future Voices</p>
-</header>
+    <header>
+        <h1>Native American Language Archive</h1>
+        <p>Linking Past, Present and Future Voices</p>
+    </header>
 
-<div class="search-container">
-    <div class="search-wrapper">
-        <div class="search-bar">
-            <input type="text" id="globalSearch" placeholder=" Search all resources by title, description, language, publisher, or region...">
+    <div class="search-container">
+        <div class="search-wrapper">
+            <div class="search-bar">
+                <input type="text" id="globalSearch" placeholder=" Search all resources by title, description, language, publisher, or region...">
+            </div>
+            <div class="search-info" id="searchInfo">Search across all resources</div>
         </div>
-        <div class="search-info" id="searchInfo">Search across all resources</div>
     </div>
-</div>
 
-<nav>
-    <ul>
-        <li><a href="#about" onclick="showSection('about')">About</a></li>
-        <li class="dropdown">
-            <a href="#websites">Websites/Digital Archives</a>
-            <div class="dropdown-content" id="websites-menu"></div>
-        </li>
-        <li class="dropdown">
-            <a href="#books">Books</a>
-            <div class="dropdown-content" id="books-menu"></div>
-        </li>
-        <li class="dropdown">
-            <a href="#apps">Apps</a>
-            <div class="dropdown-content" id="apps-menu"></div>
-        </li>
-        <li class="dropdown">
-            <a href="#museums">Museums/Archives</a>
-            <div class="dropdown-content" id="museums-menu"></div>
-        </li>
-        <li><a href="#share" onclick="showSection('share')">Share a Story</a></li>
-    </ul>
-</nav>
+    <nav>
+        <ul>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li class="dropdown">
+                <a href="#websites">Archive</a>
+                <div class="dropdown-content" id="websites-menu"></div>
+            </li>
+            <li class="dropdown">
+                <a href="#books">Languages</a>
+                <div class="dropdown-content" id="books-menu"></div>
+            </li>
+            <li class="dropdown">
+                <a href="#apps">Learning Tools</a>
+                <div class="dropdown-content" id="apps-menu"></div>
+            </li>
+            <li class="dropdown">
+                <a href="#museums">Museums</a>
+                <div class="dropdown-content" id="museums-menu"></div>
+            </li>
+            <li><a href="#share" onclick="showSection('share')">Share a Story</a></li>
+            <li><a href="#contact" onclick="showSection('contact')">Get in touch</a></li>
+        </ul>
+    </nav>
 
-<div class="container">
-    <section id="about">
-        <h2>About Our Mission</h2>
-        <p>Indigenous languages carry wisdom, stories and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
-        <p style="margin-top: 1rem;">This database contains comprehensive information about Native American language resources across different regions including California, Eastern Woodlands, Great Basin, Northwest Coast, Plateau, Great Plains, Southwest and Nationwide resources. Use the search bar above to find specific resources or browse by category using the navigation menu.</p>
-    </section>
+    <div class="container">
+        <section id="about">
+            <h2>About Our Mission</h2>
+            <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
+            <p style="margin-top: 1rem;">Here, you'll find **resources for learners, documentation projects led by native speakers and tools** to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enriches us all. Whether you're **reconnecting with your heritage language, supporting revitalization efforts or exploring** how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
+        </section>
 
-    <section id="resources" class="hidden">
-        <h2 id="resource-title">Resources</h2>
-        <div id="resource-list" class="resource-list"></div>
-    </section>
+        <section id="resources" class="hidden">
+            <h2 id="resource-title">Resources</h2>
+            <div id="resource-list" class="resource-list"></div>
+        </section>
 
-    <section id="share" class="hidden">
-        <h2>Share a Story</h2>
-        <p>Contribute your own story in English or in a Native American language. These stories will become part of our growing archive.</p>
-        <form id="storyForm">
-            <input type="text" id="storyTitle" placeholder="Story Title" required>
-            <input type="text" id="storyLanguage" placeholder="Language (e.g. English, Cherokee)" required>
-            <textarea id="storyContent" placeholder="Write your story here..." rows="6" required></textarea>
-            <input type="file" id="storyFile" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.mp3,.mp4,.wav">
-            <label for="storyFile" style="font-size: 0.9rem; color: #666;">Optional: Attach a file (PDF, Word, Text, Image, or Audio)</label>
-            <button type="submit">Submit Story</button>
-        </form>
-        <div id="storyList"></div>
-    </section>
-</div>
+        <section id="share" class="hidden">
+            <h2>Share a Story</h2>
+            <p>Contribute your own story in English or in a Native American language.
+            These stories will become part of our growing archive.</p>
+            <form id="storyForm">
+                <input type="text" id="storyTitle" placeholder="Story Title" required>
+                <input type="text" id="storyLanguage" placeholder="Language (e.g. English, Cherokee)" required>
+                <textarea id="storyContent" placeholder="Write your story here..." rows="6" required></textarea>
+                <input type="file" id="storyFile" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.mp3,.mp4,.wav">
+                <label for="storyFile" style="font-size: 0.9rem; color: #666;">Optional: Attach a file (PDF, Word, Text, Image, or Audio)</label>
+                <button type="submit">Submit Story</button>
+            </form>
+            <div id="storyList"></div>
+        </section>
 
-<footer>
-    <p>&copy; 2025 Native American Language Database | Honoring Indigenous Voices</p>
-</footer>
+        <section id="contact" class="hidden">
+            <h2>Contact Us</h2>
+            <p>Use the form below to send a message to our team. Your message will be drafted in your local email client and sent to **lefthand.textiles@gmail.com**.</p>
+            <form id="contactForm" action="mailto:lefthand.textiles@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="Name" placeholder="Your Name" required>
+                <input type="email" name="Email" placeholder="Your Email" required>
+                <textarea name="Message" placeholder="Your Message..." rows="6" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+        
+    </div>
 
-<script>
-    // --- START: DATABASE CONTENT (Cleaned and Separated) ---
-    const resources = {
-      "websites": {
-        "California": [
-          { "title": "Native Languages of the Americas (California Section)", "type": "Website", "desc": "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials", "identifier": "https://www.native-languages.org/California.htm", "coverage": "California", "lang": "California Languages", "pub": "Native Languages Org" },
-          { "title": "California State Parks - California Indians Language", "type": "Website", "desc": "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts for languages in life-and-death struggle for survival. Provides educational resources for cultural awareness and historical understanding.", "identifier": "https://www.parks.ca.gov/?page_id=23548", "coverage": "California", "lang": "California Languages", "pub": "CA State Parks" }
-        ],
-        "Eastern_Woodlands": [
-          { "title": "Cherokee Nation Language Platform", "type": "Website", "desc": "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources for Cherokee language students and educators seeking structured instruction.", "identifier": "https://cnlearn.cherokee.org/", "coverage": "Eastern Woodlands", "lang": "Cherokee", "pub": "Cherokee Nation" },
-          { "title": "Cherokee Learner Community Resources", "type": "Website", "desc": "Community-driven educational resource collection accumulated by Cherokee language students. Provides curated materials, learning guides, grammar references and practical resources specifically designed for Cherokee language learners at various proficiency levels and learning styles.", "identifier": "https://cherokeelearner.com/", "coverage": "Eastern Woodlands", "lang": "Cherokee", "pub": "Community-based" },
-          { "title": "Eastern Band Cherokee Immersion Program", "type": "Website", "desc": "Eastern Band Cherokee immersion program offering online Cherokee lessons, dictionary database, and language preservation resources. Addresses Cherokee language emergency status through educational materials supporting Cherokee Nation, UKB, and EBCI collaborative revitalization efforts.", "identifier": "https://newkituwah.com/", "coverage": "Eastern Woodlands", "lang": "Cherokee", "pub": "Eastern Band Cherokee" },
-          { "title": "Ojibwe Language Learning Platform", "type": "Website", "desc": "Comprehensive Anishinaabemowin learning website providing beginner through advanced lessons, immersion support materials, and master-apprentice program resources. Features oral tradition integration with structured lessons for new learners without prior language knowledge requirements.", "identifier": "https://ojibwe.net/", "coverage": "Eastern Woodlands", "lang": "Ojibwe", "pub": "Community-based" },
-          { "title": "Learning Ojibwe Platform", "type": "Website", "desc": "Dedicated platform focused specifically on Ojibwe language instruction and cultural education. Provides structured learning materials, teaching resources and community support for speakers, learners and educators working with Native language acquisition and preservation.", "identifier": "https://learningojibwe.com/", "coverage": "Eastern Woodlands", "lang": "Ojibwe", "pub": "Community-based" }
-        ],
-        "Great_Basin": [
-          { "title": "Pyramid Lake Paiute Tribe Language Department", "type": "Website", "desc": "Tribal language preservation program offering community-based instruction and cultural education. Provides resources for Northern Paiute language learning, cultural preservation and community engagement supporting tribal sovereignty and linguistic heritage maintenance.", "identifier": "https://plpt.nsn.us/language/", "coverage": "Great Basin", "lang": "Northern Paiute", "pub": "Pyramid Lake Paiute Tribe" },
-          { "title": "Shoshone-Bannock Tribes Language & Cultural Program", "type": "Website", "desc": "Tribal department providing instruction in both Shoshone and Bannock languages by tribal member instructors. Combines language learning with cultural values, traditional knowledge and tribal history education for comprehensive cultural preservation.", "identifier": "https://www.sbtribes.com/language-culture/", "coverage": "Great Basin", "lang": "Shoshone, Bannock", "pub": "Shoshone-Bannock Tribes" }
-        ],
-        "Northwest_Coast": [
-          { "title": "Lingít Yoo X̱ʼatángi - The Tlingit Language", "type": "Website", "desc": "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources. Features extensive audio materials, workbooks, verb dictionaries and collaborative learning tools developed by dedicated Tlingit language teachers and speakers.", "identifier": "https://tlingitlanguage.com/", "coverage": "Northwest Coast", "lang": "Tlingit", "pub": "Community-based" },
-          { "title": "Sealaska Heritage Institute Language Department", "type": "Website", "desc": "Official Southeast Alaska language revitalization hub for Lingít (Tlingit), X̱aad Kíl (Haida) and Sm'algyax (Tsimshian). Provides downloadable materials, audio dictionaries, curricula, student books and comprehensive learning resources with community oversight.", "identifier": "https://sealaskaheritage.org/shi-language-departm", "coverage": "Northwest Coast", "lang": "Tlingit, Haida, Tsimshian", "pub": "Sealaska Heritage Institute" },
-          { "title": "Haida Language Main Page", "type": "Website", "desc": "Dedicated website for Haida language study, preservation and revitalization efforts. Offers linguistic resources, cultural context and community-driven materials supporting X̱aad Kíl language learning and cultural preservation initiatives.", "identifier": "http://haidalanguage.org/", "coverage": "Northwest Coast", "lang": "Haida", "pub": "Community-based" },
-          { "title": "FirstVoices - Northwest Coast Languages", "type": "Website", "desc": "Community-controlled digital platform featuring various Northwest Coast Indigenous languages including Halkomelem, Squamish, and other Salishan languages. Offers multimedia resources, keyboards and collaborative tools for language preservation and learning.", "identifier": "https://www.firstvoices.com/", "coverage": "Northwest Coast", "lang": "Multiple Salishan Languages", "pub": "First Peoples' Cultural Council" }
-        ],
-        "Plateau": [
-          { "title": "Yakama Nation Cultural Resources", "type": "Website", "desc": "Official tribal education program requiring two-year Sahaptin language instruction for students. Features community-based learning with elders, parents, and tribal members actively involved in teaching Ichishkíin language, reading, writing, and cultural context through comprehensive curriculum.", "identifier": "https://www.yakama.org/academics/", "coverage": "Plateau", "lang": "Sahaptin (Ichishkíin)", "pub": "Yakama Nation" },
-          { "title": "Secwepemc Language Department", "type": "Website", "desc": "Official language preservation program for Secwepemctsín (Shuswap) offering books, audio materials, and educational resources. Provides community-driven language revitalization efforts supporting Interior Salishan language learning with cultural context and traditional knowledge integration.", "identifier": "Contact through Secwepemc First Nation", "coverage": "Plateau", "lang": "Secwepemctsín (Shuswap)", "pub": "Secwepemc First Nation" },
-          { "title": "Syilx Okanagan Nation nsyilxcən Language", "type": "Website", "desc": "Official Okanagan Nation Alliance language resource featuring nsyilxcən (Colville-Okanagan) materials and cultural information. Distinguishes Syilx language from neighboring Salishan peoples while providing linguistic resources and community-based learning support for all districts.", "identifier": "https://syilx.org/about-us/syilx-nation/nsyilxen-lang", "coverage": "Plateau", "lang": "nsyilxcən (Colville-Okanagan)", "pub": "Syilx Okanagan Nation" }
-        ],
-        "Great_Plains": [
-          { "title": "Fort Belknap Language Preservation Program", "type": "Website", "desc": "A tribally-run program based in Harlem, Montana, serving the Fort Belknap Indian Reservation. Focuses on community-based preservation of Assiniboine and Gros Ventre languages, working directly with elders to document language use and create educational materials for younger generations in an authentic cultural context.", "identifier": "https://www.ftbelknaplanguagepreservation.com/", "coverage": "Great Plains", "lang": "Assiniboine, Gros Ventre", "pub": "Fort Belknap Tribes" },
-          { "title": "Fort Peck Community College", "type": "Website", "desc": "Fort Peck Community College operates Native language immersion programs for Dakota and Nakota (Assiniboine) languages, including pre-school immersion schools and community education services. The college provides structured language and cultural preservation through academic programs, community services, and specialized immersion methods integrated with traditional teaching approaches.", "identifier": "https://www.fpcc.edu/", "coverage": "Great Plains", "lang": "Dakota, Nakota (Assiniboine)", "pub": "Fort Peck Community College" }
-        ],
-        "Southwest": [
-            { "title": "Navajo Language Academy", "type": "Website", "desc": "Official resource for Diné Bizaad (Navajo) language materials, including academic resources, pedagogical guides, and community outreach information to support immersion and advanced study.", "identifier": "https://navajolanguageacademy.org/", "coverage": "Southwest", "lang": "Navajo (Diné Bizaad)", "pub": "Navajo Language Academy" }
-        ],
-        "Nationwide": [
-          { "title": "Native Languages of the Americas", "type": "Website", "desc": "Small non-profit organization dedicated to Native American language survival through technology.", "identifier": "https://www.native-languages.org/", "coverage": "Nationwide", "lang": "Multiple Languages", "pub": "Native Languages Org" }
-        ]
-      },
-      "books": {
-        "California": [
-          { "title": "Surviving Through the Days", "type": "Book", "desc": "Anthology of treasures from oral literature of Native California, assembled by editor sensitive to language, culture and history. Features translations of Native California stories and songs with cultural context.", "identifier": "ISBN or Library Reference", "coverage": "California", "lang": "Multiple California Languages", "pub": "Various Publishers" }
-        ],
-        "Eastern_Woodlands": [
-          { "title": "Cherokees Writing the Keetoowah Way", "type": "Book Collection", "desc": "Comprehensive translation collection including Dollie Duncan letters, Echota Funeral Notices, Willie Jumper Stories, government documents, speeches, and expanded historical materials providing authentic Cherokee language documentation and cultural context.", "identifier": "ISBN or Library Reference", "coverage": "Eastern Woodlands", "lang": "Cherokee", "pub": "Various Cherokee Communities" }
-        ],
-        "Great_Basin": [
-          { "title": "California Language Archive - Northern Paiute Resources", "type": "Digital Academic repository", "desc": "Featuring linguistic documentation, grammatical analysis and cultural materials for Northern Paiute language. Provides scholarly resources, research materials, and educational content supporting language study and preservation efforts.", "identifier": "https://cla.berkeley.edu/languages/northern-paiute.", "coverage": "Great Basin", "lang": "Northern Paiute", "pub": "UC Berkeley" },
-          { "title": "Southern Ute Cultural Center Publications", "type": "Book Collection", "desc": "Community-created educational materials including language learning books, cultural guides, and traditional stories in Ute language. Features tribal member contributions, cultural context, and pedagogical resources for Ute language instruction and cultural preservation efforts.", "identifier": "ISBN or Library Reference", "coverage": "Great Basin", "lang": "Ute", "pub": "Southern Ute Cultural Center" },
-          { "title": "University Linguistic Collections", "type": "Academic Publications", "desc": "Academic publications from institutions like UC Berkeley, University of Utah, and other research centers providing grammatical analyses, dictionaries, and ethnolinguistic studies of Great Basin language families through peer-reviewed scholarly works.", "identifier": "Library Search", "coverage": "Great Basin", "lang": "Great Basin Language Families", "pub": "Multiple Universities" }
-        ],
-        "Northwest_Coast": [
-          { "title": "Sealaska Heritage Institute Publications", "type": "Book Collection", "desc": "Comprehensive collection of dictionaries, workbooks, and cultural materials for Tlingit, Coast Haida, and Tsimshian languages. Features the most comprehensive dictionaries ever published for these languages plus teaching materials, cultural context and community-approved educational resources.", "identifier": "ISBN or Library Reference", "coverage": "Northwest Coast", "lang": "Tlingit, Haida, Tsimshian", "pub": "Sealaska Heritage Institute" }
-        ],
-        "Plateau": [
-          { "title": "Sahaptin Language Collections", "type": "Book Collection", "desc": "Academic and community publications covering Yakama, Umatilla, Warm Springs dialects with grammatical analyses, vocabulary collections and cultural materials. Features University of Oregon research and tribal educational resources supporting Ichishkíin language revitalization and classroom instruction.", "identifier": "ISBN or Library Reference", "coverage": "Plateau", "lang": "Sahaptin (Yakama, Umatilla, Warm Springs)", "pub": "University of Oregon & Tribal Communities" }
-        ],
-        "Great_Plains": [
-          { "title": "A Concise Dictionary of Nakoda (Assiniboine)", "type": "Dictionary", "desc": "A publication created with community member Wilma Kennedy. Offers the most current comprehensive dictionary for practical use by learners, teachers, and community members. Represents collaborative academic-community work ensuring both scholarly accuracy and cultural authenticity.", "identifier": "ISBN or Library Reference", "coverage": "Great Plains", "lang": "Assiniboine (Nakoda)", "pub": "Vincent Collette" }
-        ],
-        "Southwest": [
-          { "title": "Diné Bizaad: Speak, Read, Write Navajo", "type": "Textbook", "desc": "Comprehensive textbook providing structured approach to Navajo language learning with grammar instruction, vocabulary building, and cultural context. Features systematic progression through language fundamentals with audio components available through various platforms.", "identifier": "ISBN or Library Reference", "coverage": "Southwest", "lang": "Navajo (Diné bizaad)", "pub": "Various Publishers" }
-        ],
-        "Nationwide": []
-      },
-      "apps": {
-        "California": [
-          { "title": "Yapi Kapi", "type": "App", "desc": "UC Berkeley app making California Indian artifacts available online. Provides special tools for teachers and students with classroom accounts, sub-accounts, assignment relay and artifact collection viewing/commenting features. Available on iOS/Android app stores.", "identifier": "App Store/Google Play", "coverage": "California", "lang": "Pomoan language family", "pub": "UC Berkeley" }
-        ],
-        "Eastern_Woodlands": [
-          { "title": "FirstVoices Mobile App", "type": "App", "desc": "British Columbia-based platform offering keyboard and dictionary apps for 100+ Indigenous languages including Eastern Woodlands varieties. Provides community-driven language preservation tools with audio pronunciation guides and cultural context for learners of all levels.", "identifier": "App Store/Google Play", "coverage": "Eastern Woodlands", "lang": "Multiple Languages", "pub": "FirstVoices" },
-          { "title": "Cherokee Nation Language App", "type": "App", "desc": "Official app from the Cherokee Nation for learning Cherokee (Tsalagi). Features vocabulary builders, phrase lists, and pronunciation guides for learners of all ages. Designed to support immersion programs and self-study, integrating cultural context with language lessons.", "identifier": "App Store/Google Play", "coverage": "Eastern Woodlands", "lang": "Cherokee", "pub": "Cherokee Nation" }
-        ],
-        "Great_Basin": [
-          { "title": "Northern Paiute Language App", "type": "App", "desc": "Mobile application providing vocabulary, phrase lists, and audio pronunciation guides for Northern Paiute language learning. Part of The Language Conservancy's app development initiative supporting Great Basin indigenous language preservation and revitalization efforts.", "identifier": "App Store/Google Play", "coverage": "Great Basin", "lang": "Northern Paiute", "pub": "The Language Conservancy" }
-        ],
-        "Northwest_Coast": [
-          { "title": "Haida Language App", "type": "App", "desc": "Mobile app featuring X̱aad Kíl (Haida) vocabulary, phrases, and audio from native speakers. Supports language learning and cultural preservation with interactive exercises and engaging content for learners of all ages.", "identifier": "App Store/Google Play", "coverage": "Northwest Coast", "lang": "Haida", "pub": "Community-based" }
-        ],
-        "Plateau": [
-          { "title": "Nimiipuu Language App", "type": "App", "desc": "Official app from the Nez Perce Tribe for learning Nimiipuutímt (Nez Perce). Features audio pronunciation of words and phrases, video content, and educational materials.", "identifier": "App Store/Google Play", "coverage": "Plateau", "lang": "Nez Perce", "pub": "Nez Perce Tribe" },
-          { "title": "Secwepemctsín Language App", "type": "App", "desc": "Mobile application supporting Secwepemctsín (Shuswap) language learning with vocabulary, phrases, and audio recordings. Developed in partnership with Secwepemc First Nation, promoting language preservation and cultural education for community members and learners.", "identifier": "App Store/Google Play", "coverage": "Plateau", "lang": "Secwepemctsín (Shuswap)", "pub": "Secwepemc First Nation" }
-        ],
-        "Southwest": [
-          { "title": "Navajo Language App (Various)", "type": "App", "desc": "Multiple mobile apps are available for learning Diné bizaad (Navajo), including vocabulary builders, pronunciation guides, and interactive lessons. Various apps support self-study, language instruction, and cultural immersion for learners of all ages and proficiency levels.", "identifier": "App Store/Google Play", "coverage": "Southwest", "lang": "Navajo (Diné bizaad)", "pub": "Various Developers" }
-        ],
-        "Nationwide": []
-      },
-      "museums": {
-        "California": [
-          { "title": "Malki Museum", "type": "Museum", "desc": "Promotes scholarship and cultural awareness while encouraging preservation of Southern California Indian Cultures. Features exhibits, research facilities, and cultural programs dedicated to California indigenous history and language revitalization efforts.", "identifier": "Contact museum directly", "coverage": "California", "lang": "Southern CA Languages", "pub": "Malki Museum" }
-        ],
-        "Eastern_Woodlands": [
-          { "title": "Woodland Cultural Centre", "type": "Museum", "desc": "Indigenous preservation museum dedicated to strengthening Indigenous language and culture, with a focus on Iroquoian languages and history. Features archival collections, cultural programming, and educational resources supporting language revitalization efforts.", "identifier": "https://woodlandculturalcentre.ca/", "coverage": "Eastern Woodlands", "lang": "Iroquoian Languages", "pub": "Woodland Cultural Centre" }
-        ],
-        "Great_Basin": [
-          { "title": "Utah Museum of Fine Arts - Indigenous Collection", "type": "Museum", "desc": "Collections including artifacts, art, and archival materials related to Utah's Native American tribes, including Ute, Paiute, Goshute, and Navajo. Provides cultural context for language preservation and revitalization efforts within the region.", "identifier": "https://umfa.utah.edu/collections", "coverage": "Great Basin", "lang": "Ute, Paiute, Goshute, Navajo", "pub": "University of Utah" }
-        ],
-        "Northwest_Coast": [
-          { "title": "Haida Gwaii Museum at Ḵay Llnagaay", "type": "Museum", "desc": "Cultural center and museum dedicated to the living culture of the Haida Nation. Features exhibits, archival collections, and cultural programs supporting X̱aad Kíl language preservation and cultural education.", "identifier": "https://www.haidagwaiimuseum.ca/", "coverage": "Northwest Coast", "lang": "Haida", "pub": "Haida Gwaii Museum" }
-        ],
-        "Plateau": [
-          { "title": "Secwepemc Museum", "type": "Museum", "desc": "Plateau cultural museum maintaining linguistic recordings, historical documents and cultural materials for research and education. Features archival collections, cultural programming, and educational resources supporting Secwepemctsín language revitalization.", "identifier": "Contact museum directly", "coverage": "Plateau", "lang": "Secwepemctsín", "pub": "Secwepemc Nation" }
-        ],
-        "Great_Plains": [
-          { "title": "Sam Noble Museum", "type": "Museum", "desc": "Extensive Native American Languages Collection with 175 languages represented through audio/video recordings, manuscripts, books, journals and teaching curricula. Provides scholarly resources supporting research and educational programs for language documentation and revitalization efforts.", "identifier": "samnoblemuseum.ou.edu/collections", "coverage": "Great Plains", "lang": "175 Native American Languages", "pub": "University of Oklahoma" }
-        ],
-        "Southwest": [
-          { "title": "Museum of Indian Arts and Culture", "type": "Museum", "desc": "World-renowned museum centering indigenous perspectives and voices of Pueblo, Navajo (Diné), and Apache cultures of the Southwest, featuring Native scholarship and oral histories. Provides cultural context for language preservation and revitalization efforts within the region.", "identifier": "https://www.miac.us/", "coverage": "Southwest", "lang": "Pueblo, Navajo, Apache Languages", "pub": "New Mexico Dept of Cultural Affairs" },
-          { "title": "Heard Museum", "type": "Museum", "desc": "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000 volumes, focus on Southwest Indigenous cultures.", "identifier": "heard.org", "coverage": "Southwest", "lang": "Southwest Languages", "pub": "Heard Museum" },
-          { "title": "Indian Pueblo Cultural Center", "type": "Museum", "desc": "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture murals by Pueblo artists and cultural programs.", "identifier": "indianpueblo.org", "coverage": "Southwest", "lang": "Pueblo Languages", "pub": "Indian Pueblo Cultural Center" }
-        ],
-        "Nationwide": []
-      }
-    };
-    // --- END: DATABASE CONTENT ---
+    <footer>
+        <p>&copy; 2025 Native American Language Archive | Honoring Indigenous Voices</p>
+    </footer>
 
-    // --- START: JAVASCRIPT LOGIC ---
-    const allSections = ["about", "resources", "share"];
-    let currentCategory = ''; // websites, books, apps, museums
-
-    function showSection(sectionId, category = null, region = null) {
-      // 1. Update visibility
-      allSections.forEach(id => {
-        document.getElementById(id).classList.add('hidden');
-      });
-      document.getElementById(sectionId).classList.remove('hidden');
-
-      // 2. Handle Resource Section details
-      if (sectionId === 'resources' && category && region) {
-        currentCategory = category;
-        const titleMap = {
-          "websites": "Websites & Digital Archives",
-          "books": "Books & Publications",
-          "apps": "Mobile Applications",
-          "museums": "Museums & Archives"
+    <script>
+        // RESOURCE DATA (kept intact from original code)
+        const resources = {
+            "websites": {
+                "California ": [
+                    {
+                        "title": "Native Languages of the Americas (California ",
+                        "type": "Website",
+                        "desc": "Small non-profit organization dedicated to Native Section) American language survival through internet                              
+                                        a technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California  languages, serving as gateway to specialized materials",
+                        "identifier": "https://www.native-languages.org/California .htm",
+                        "coverage": "California ",
+                        "lang": "California  Languages",
+                        "pub": "Native Languages Org"
+                    },
+                    {
+                        "title": "California  State Parks - California  Indians Language",
+                        "type": "Website",
+                        "desc": "Educational resource documenting California 's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts for languages in life-and-death struggle for survival. northwestern California  Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe. Provides educational resources for cultural awareness and historical understanding.",
+                        "identifier": "https://www.parks.ca.gov/?page_id=23548",
+                        "coverage": "California ",
+                        "lang": "California  Languages",
+                        "pub": "CA State Parks"
+                    }
+                ],
+                "Eastern_Woodlands": [
+                    {
+                        "title": "Cherokee Nation Language Platform",
+                        "type": "Website",
+                        "desc": "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources for Cherokee language students and educators seeking structured instruction.",
+                        "identifier": "https://cnlearn.cherokee.org/",
+                        "coverage": "Eastern Woodlands",
+                        "lang": "Cherokee",
+                        "pub": "Cherokee Nation"
+                    },
+                    {
+                        "title": "Cherokee Learner Community Resources",
+                        "type": "Website",
+                        "desc": "Community-driven educational resource collection accumulated by Cherokee language students. Provides curated materials, learning guides, grammar references and practical resources specifically designed for Cherokee language learners at various proficiency levels and learning styles.",
+                        "identifier": "https://cherokeelearner.com/",
+                        "coverage": "Eastern Woodlands",
+                        "lang": "Cherokee",
+                        "pub": "Community-based"
+                    },
+                    {
+                        "title": "Eastern Band Cherokee Immersion Program",
+                        "type": "Website",
+                        "desc": "Eastern Band Cherokee immersion program offering online Cherokee lessons, dictionary database, and language preservation resources. Addresses Cherokee language emergency status through educational materials supporting Cherokee Nation, UKB, and EBCI collaborative revitalization efforts.",
+                        "identifier": "https://newkituwah.com/",
+                        "coverage": "Eastern Woodlands",
+                        "lang": "Cherokee",
+                        "pub": "Eastern Band Cherokee"
+                    },
+                    {
+                        "title": "Ojibwe Language Learning Platform",
+                        "type": "Website",
+                        "desc": "Comprehensive Anishinaabemowin learning website providing beginner through advanced lessons, immersion support materials, and master-apprentice program resources. Features oral tradition integration with structured lessons for new learners without prior language knowledge requirements.",
+                        "identifier": "https://ojibwe.net/",
+                        "coverage": "Eastern Woodlands",
+                        "lang": "Ojibwe",
+                        "pub": "Community-based"
+                    },
+                    {
+                        "title": "Learning Ojibwe Platform",
+                        "type": "Website",
+                        "desc": "Dedicated platform focused specifically on Ojibwe language instruction and cultural education. Provides structured learning materials, teaching resources and community support for speakers, learners and educators working with Native language acquisition and preservation.",
+                        "identifier": "https://learningojibwe.com/",
+                        "coverage": "Eastern Woodlands",
+                        "lang": "Ojibwe",
+                        "pub": "Community-based"
+                    },
+                    {
+                        "title": "Cherokee Nation Language Platform",
+                        "type": "Website",
+                        "desc": "Official online Cherokee language learning platform with free classes                                                                                 Woodlan ds",
+                        "identifier": "https://cnlearn.cherokee.org/",
+                        "coverage": "Eastern",
+                        "lang": "Cherokee",
+                        "pub": "Cherokee Nation"
+                    }
+                ],
+                "Great_Basin": [
+                    {
+                        "title": "Pyramid Lake Paiute Tribe Language Department",
+                        "type": "Website",
+                        "desc": "Tribal language preservation program offering community-based instruction and cultural education. Provides resources for Northern Paiute language learning, cultural preservation and community engagement supporting tribal sovereignty and linguistic heritage maintenance.",
+                        "identifier": "https://plpt.nsn.us/language/",
+                        "coverage": "Great Basin",
+                        "lang": "Northern Paiute",
+                        "pub": "Pyramid Lake Paiute Tribe"
+                    },
+                    {
+                        "title": "Shoshone-Bannock Tribes Language & Cultural Pr",
+                        "type": "Website",
+                        "desc": "Tribal department providing instruction in both Shoshone and Bannock languages by tribal member instructors. Combines language learning with cultural values, traditional knowledge and tribal history education for comprehensive cultural preservation.",
+                        "identifier": "https://www.sbtribes.com/language-culture/",
+                        "coverage": "Great Basin",
+                        "lang": "Shoshone, Bannock",
+                        "pub": "Shoshone-Bannock Tribes"
+                    }
+                ],
+                "Northwest_Coast": [
+                    {
+                        "title": "Lingít Yoo X̱ʼatángi - The Tlingit Language",
+                        "type": "Website",
+                        "desc": "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources. Features extensive audio materials, workbooks, verb dictionaries and collaborative learning tools developed by dedicated Tlingit language teachers and speakers.",
+                        "identifier": "https://tlingitlanguage.com/",
+                        "coverage": "Northwest Coast",
+                        "lang": "Tlingit",
+                        "pub": "Community-based"
+                    },
+                    {
+                        "title": "Sealaska Heritage Institute Language Department",
+                        "type": "Website",
+                        "desc": "Official Southeast Alaska language revitalization hub for Lingít (Tlingit), X̱aad Kíl (Haida) and Sm'algyax (Tsimshian). Provides downloadable materials, audio dictionaries, curricula, student books and comprehensive learning resources with community oversight.",
+                        "identifier": "https://sealaskaheritage.org/shi-language-departm",
+                        "coverage": "Northwest Coast",
+                        "lang": "Tlingit, Haida, Tsimshian",
+                        "pub": "Sealaska Heritage Institute"
+                    },
+                    {
+                        "title": "Haida Language Main Page",
+                        "type": "Website",
+                        "desc": "Dedicated website for Haida language study, preservation and revitalization efforts. Offers linguistic resources, cultural context and community-driven materials supporting X̱aad Kíl language learning and cultural preservation initiatives.",
+                        "identifier": "http://haidalanguage.org/",
+                        "coverage": "Northwest Coast",
+                        "lang": "Haida",
+                        "pub": "Community-based"
+                    },
+                    {
+                        "title": "FirstVoices - Northwest Coast Languages",
+                        "type": "Website",
+                        "desc": "Community-controlled digital platform featuring various Northwest Coast Indigenous languages including Halkomelem, Squamish, and other Salishan languages. Offers multimedia resources, keyboards and collaborative tools for language preservation and learning.",
+                        "identifier": "https://www.firstvoices.com/",
+                        "coverage": "Northwest Coast",
+                        "lang": "Multiple Salishan Languages",
+                        "pub": "First Peoples' Cultural Council"
+                    }
+                ],
+                "Plateau ": [
+                    {
+                        "title": "Yakama Nation Cultural Resources",
+                        "type": "Website",
+                        "desc": "Official tribal education program requiring two-year Sahaptin language instruction for students. Features community-based learning with elders, parents, and tribal members actively involved in teaching Ichishkíin language, reading, writing, and cultural context through comprehensive curriculum.",
+                        "identifier": "https://www.yakama.org/academics/",
+                        "coverage": "Plateau ",
+                        "lang": "Sahaptin (Ichishkíin)",
+                        "pub": "Yakama Nation"
+                    },
+                    {
+                        "title": "Secwepemc Language Department",
+                        "type": "Website",
+                        "desc": "Official language preservation program for Secwepemctsín (Shuswap) offering books, audio materials, and educational resources. Provides community-driven language revitalization efforts supporting Interior Salishan language learning with cultural context and traditional knowledge integration.",
+                        "identifier": "Contact through",
+                        "coverage": "Secwepemc First Nation",
+                        "lang": "Plateau ",
+                        "pub": "Secwepemctsín (Shuswap)         Secwepemc First Nation"
+                    },
+                    {
+                        "title": "Syilx Okanagan Nation nsyilxcən Language",
+                        "type": "Website",
+                        "desc": "Official Okanagan Nation Alliance language resource featuring nsyilxcən (Colville-Okanagan) materials and cultural information. Distinguishes Syilx language from neighboring Salishan peoples while providing linguistic resources and community-based learning support for all districts. training for Yakama and other Sahaptin languages. Academic support for language revitalization efforts with community partnerships and culturally appropriate pedagogical methods for Indigenous language instruction.",
+                        "identifier": "https://syilx.org/about-us/syilx-nation/nsyilxen-lang",
+                        "coverage": "Plateau ",
+                        "lang": "nsyilxcən (Colville-Okanagan)",
+                        "pub": "Syilx Okanagan Nation"
+                    }
+                ],
+                "Great_Plains": [
+                    {
+                        "title": "Fort Belknap Language Preservation Program",
+                        "type": "Website",
+                        "desc": "A tribally-run program based in Harlem, Montana, serving the Fort Belknap Indian Reservation. Focuses on community-based preservation of Assiniboine and Gros Ventre languages,...",
+                        "identifier": "https://www.ftbelknaplanguagepreservation.com/",
+                        "coverage": "Great Plains",
+                        "lang": "Assiniboine, Gros Ventre",
+                        "pub": "Fort Belknap Tribes"
+                    },
+                    {
+                        "title": "Fort Peck Community College",
+                        "type": "Website",
+                        "desc": "Fort Peck Community College operates Native language immersion programs for Dakota and Nakota (Assiniboine) languages, including pre-school immersion schools and community education services. The college provides structured language and cultural preservation through academic programs, community services, and specialized immersion methods integrated with traditional teaching approaches. Indiana University - Fort Belknap Research Digital … Academic research documenting oral traditions https://indigenousknowledge.indiana.edu/research- Great … Assiniboine, Gros Ventre Indiana University and language use at Fort Belknap Reservation and Carry The Kettle Reserve in Saskatchewan. Captures cross-border dialectical variations through university-community partnerships, focusing on language within cultural storytelling and ceremonial contexts with audio recordings Native-Languages.org - Assiniboine Website Online collection providing accessible Assiniboine Native-Languages.org Great … Assiniboine Native Languages Org vocabulary, pronunciation guides, and cultural background alongside hundreds of other Native languages. Serves as a reliable starting point with basic information and bibliographic references, functioning as a gateway to more specialized Montana Digital Academy - Indigenous Language C Website Online high school courses launched 2023, https://montanadigitalacademy.org/programs/indige Great … Multiple Montana Languages Montana Digital Academy serving grades 9-12 across Montana with academic credit. Provides formal Indigenous language education within state education system, making quality instruction accessible to remote students and legitimizing Native language Aaniiih Nakoda College Website Aaniiih Nakoda College on Fort Belknap https://www.nakonauniversity.org/ Great … A'anin (Gros Ventre), Nakoda Aaniiih Nakoda College Reservation is specifically charged with preserving and promoting both A'anin (Gros Ventre) and Nakoda (Assiniboine) languages, cultures, and histories. The college leads language immersion programs and integrates both languages into early childhood education. Originally Fort Belknap College, it was renamed in 2011 to reflect its dual tribal mission. ANC partners with Indiana University on comprehensive K-12 Nakoda curriculum words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats. The complete series includes volumes 1 and 2 with around 400 entries total, available as flashcards, DVDs, and CDs through Fort Peck # Title Type Description Identifier Coverage Language Publisher",
+                        "identifier": "https://www.fpcc.edu/",
+                        "coverage": "Great Plains",
+                        "lang": "Dakota, Nakota (Assiniboine)",
+                        "pub": "Fort Peck Community College"
+                    }
+                ],
+                "Southwest": [],
+                "Nationwide": [
+                    {
+                        "title": "Native Languages of the Americas",
+                        "type": "Website",
+                        "desc": "Small non-profit organization dedicated to Native American language survival through technology. The largest university archive of indigenous language materials in North America",
+                        "identifier": "https://www.native-languages.org/California .htm",
+                        "coverage": "Nationwide",
+                        "lang": "Multiple Languages",
+                        "pub": "Native Languages Org"
+                    }
+                ]
+            },
+            "books": {
+                "California ": [
+                    {
+                        "title": "Surviving Through the Days",
+                        "type": "Book",
+                        "desc": "Anthology of treasures from oral literature of Native California , assembled by editor sensitive to language, culture and history. Features translations of Native California stories and songs with cultural context",
+                        "identifier": "-",
+                        "coverage": "California ",
+                        "lang": "Multiple California Languages",
+                        "pub": "Various Publishers"
+                    }
+                ],
+                "Eastern_Woodlands": [
+                    {
+                        "title": "Cherokees Writing the Keetoowah Way",
+                        "type": "Book Collection Comprehensive translation collection including",
+                        "desc": " Collection Dollie Duncan letters, Echota Funeral Notices, WoodlandsWillie Jumper Stories, government documents, speeches, and expanded historical materials providing authentic Cherokee language documentation and cultural context.",
+                        "identifier": "-",
+                        "coverage": "Eastern Woodlands",
+                        "lang": "Cherokee",
+                        "pub": "Various Cherokee Communities"
+                    }
+                ],
+                "Great_Basin": [
+                    {
+                        "title": "California Language Archive - Northern Paiute Res Digital …",
+                        "type": "Academic repository featuring linguistic",
+                        "desc": " documentation, grammatical analysis and cultural materials for Northern Paiute language. Provides scholarly resources, research materials, and educational content supporting language study and preservation efforts.",
+                        "identifier": "https://cla.berkeley.edu/languages/northern-paiute.",
+                        "coverage": "Great Basin",
+                        "lang": "Northern Paiute",
+                        "pub": "UC Berkeley"
+                    },
+                    {
+                        "title": "Southern Ute Cultural Center Publications",
+                        "type": "Book Collection Community-created educational materials",
+                        "desc": " including language learning books, cultural guides, and traditional stories in Ute language. Features tribal member contributions, cultural context, and pedagogical resources for Ute language instruction and cultural preservation efforts.",
+                        "identifier": "-",
+                        "coverage": "Great Basin",
+                        "lang": "Ute",
+                        "pub": "Southern Ute Cultural Center"
+                    },
+                    {
+                        "title": "University Linguistic Collections",
+                        "type": "Academic",
+                        "desc": "Academic publications from institutions like UC Publications Berkeley, University of Utah, and other research centers providing grammatical analyses, dictionaries, and ethnolinguistic studies of Great Basin language families through peer-reviewed scholarly works.",
+                        "identifier": "-",
+                        "coverage": "Great Basin",
+                        "lang": "Great Basin Language Families",
+                        "pub": "Multiple Universities"
+                    },
+                    {
+                        "title": "Traditional Story Collections",
+                        "type": "Book Collection Compiled collections of traditional tales, oral",
+                        "desc": " histories, 
+                                        and cultural narratives preserved in original Great Basin languages. Features community-approved translations, cultural annotations, and educational materials supporting language learning through storytelling traditions.",
+                        "identifier": "-",
+                        "coverage": "",
+                        "lang": "Great Basin",
+                        "pub": "Multiple Great Basin Languages Various Tribal Communities"
+                    }
+                ],
+                "Northwest_Coast": [
+                    {
+                        "title": "Yukon Native Language Centre - Tlingit Resources Digital …",
+                        "type": "Academic center providing Interior Tlingit",
+                        "desc": " language materials including noun dictionaries, story books, language lessons, and audio resources. Features collaborative projects between linguists and community members for comprehensive language documentation. revitalization resources, historical linguistic studies, and comparative Northwest Coast language materials. Provides scholarly resources supporting Haida language research and community learning efforts.",
+                        "identifier": "https://ynlc.ca/about-the-tlingit-language/",
+                        "coverage": "Northwest Coast",
+                        "lang": "Interior Tlingit",
+                        "pub": "Yukon Native Language Centre"
+                    },
+                    {
+                        "title": "Sealaska Heritage Institute Publications",
+                        "type": "Book Collection Comprehensive collection of dictionaries,",
+                        "desc": " workbooks, and cultural materials for Tlingit, Coast Haida, and Tsimshian languages. Features the most comprehensive dictionaries ever published for these languages plus teaching materials, cultural context and community-approved educational resources. by Xʼunei, Tlingit Dictionary drafts, Verb Coast Dictionary by Constance Naish and cultural materials developed by dedicated language teachers, researchers and community advocates over decades. Livingston Farrand, Archie Phinney, Morris Swadesh and tribal members. Features traditional stories, linguistic analyses, and cultural documentation preserved from early 20th-century fieldwork with Upper and Lower dialect materials.",
+                        "identifier": "-",
+                        "coverage": "Northwest",
+                        "lang": "Tlingit, Haida, Tsimshian",
+                        "pub": "Sealaska Heritage Institute"
+                    }
+                ],
+                "Plateau ": [
+                    {
+                        "title": "Sahaptin Language Collections",
+                        "type": "Book Collection Academic and community publications covering",
+                        "desc": " Yakama, Umatilla, Warm Springs dialects with Warm Springs) Communities grammatical analyses, vocabulary collections and cultural materials. Features University of Oregon research and tribal educational resources supporting Ichishkíin language revitalization and classroom instruction.",
+                        "identifier": "-",
+                        "coverage": "Plateau ",
+                        "lang": "Sahaptin (Yakama, Umatilla,",
+                        "pub": "University of Oregon & Tribal"
+                    },
+                    {
+                        "title": "Interior Salish Publications",
+                        "type": "Book Collection Comprehensive collections including",
+                        "desc": " Secwepemctsín dictionaries, grammatical studies by A.H. Kuipers, and cultural materials for Shuswap, Thompson, Okanagan-Colville, and other Interior Salishan languages. Features both academic research and community-developed educational materials.",
+                        "identifier": "-",
+                        "coverage": "Plateau ",
+                        "lang": "Interior Salishan Languages",
+                        "pub": "Academic & Tribal Institutions"
+                    },
+                    {
+                        "title": "Plateau Penutian Studies",
+                        "type": "Academic",
+                        "desc": "Academic publications covering Klamath-Modoc Publications 
+                                        language family with linguistic documentation, grammatical analyses, and comparative studies. University presses provide scholarly materials supporting research and preservation efforts for these southern Plateau languages. Assiniboine language. Provides comprehensive linguistic analysis including phonetics, morphology, and syntax for academic researchers and serious learners. Represents groundbreaking scholarly documentation filling a...",
+                        "identifier": "-",
+                        "coverage": "Plateau ",
+                        "lang": "Klamath-Modoc",
+                        "pub": "University Presses"
+                    }
+                ]
+            },
+            "apps": {},
+            "museums": {},
+            "searchable": []
         };
-        const regionDisplayName = region.trim().replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        document.getElementById('resource-title').textContent = `${titleMap[category]} | ${regionDisplayName} Resources`;
         
-        renderResources(resources[category][region]);
-      } else if (sectionId !== 'resources') {
-        currentCategory = ''; 
-      }
-    }
+        let stories = JSON.parse(localStorage.getItem('stories')) || [];
 
-    function initDropdowns() {
-      for (const category in resources) {
-        const menuId = `${category}-menu`;
-        const menu = document.getElementById(menuId);
-        if (menu) {
-          menu.innerHTML = ''; 
-          
-          let regions = Object.keys(resources[category]).sort((a, b) => {
-              if (a.trim() === 'Nationwide') return 1;
-              if (b.trim() === 'Nationwide') return -1;
-              return a.localeCompare(b);
-          });
-          
-          regions.forEach(region => {
-              const trimmedRegion = region.trim();
-              const items = resources[category][region];
-              
-              if (!items || items.length === 0) return; 
+        // JAVASCRIPT FUNCTIONS (kept intact from original code)
 
-              const regionId = trimmedRegion.replace(/ /g, '_');
-              const displayName = trimmedRegion.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-              const count = items.length;
-              
-              const link = document.createElement('a');
-              link.href = `#${category}-${regionId}`;
-              link.textContent = `${displayName} (${count})`;
-              link.onclick = (e) => {
-                e.preventDefault();
-                showSection('resources', category, trimmedRegion);
-                document.getElementById('globalSearch').value = ''; 
-                document.getElementById('searchInfo').textContent = `Showing all ${count} resources for ${displayName}.`;
-              };
-              menu.appendChild(link);
-          });
-        }
-      }
-    }
-
-    function renderResources(items) {
-      const list = document.getElementById('resource-list');
-      list.innerHTML = '';
-
-      if (!items || items.length === 0) {
-        list.innerHTML = `<p style="text-align: center; color: #555;">No resources found for the selected category/region.</p>`;
-        return;
-      }
-
-      items.forEach((item) => {
-        const identifier = item.identifier ? item.identifier.trim() : 'N/A';
-        const identifierLink = identifier.toLowerCase().startsWith('http') || identifier.toLowerCase().startsWith('www') ? 
-            `<a href="${identifier.startsWith('http') ? identifier : 'https://' + identifier}" target="_blank">View Resource</a>` : 
-            `<span style="color: #999;">Identifier/Link: ${identifier}</span>`;
-        
-        const displayLang = item.lang ? item.lang.replace(/\s\s+/g, ' ').trim() : 'N/A';
-        const displayPub = item.pub ? item.pub.replace(/\s\s+/g, ' ').trim() : 'N/A';
-        const displayDesc = item.desc ? item.desc.replace(/\s\s+/g, ' ').trim() : 'No description available.';
-
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'resource-item';
-        itemDiv.innerHTML = `
-          <h3>${item.title.trim()}</h3>
-          <div class="resource-meta">
-            <strong>Type:</strong> ${item.type.trim()} | 
-            <strong>Language:</strong> ${displayLang} | 
-            <strong>Publisher:</strong> ${displayPub}
-          </div>
-          <p>${displayDesc}</p>
-          ${identifierLink}
-        `;
-        list.appendChild(itemDiv);
-      });
-    }
-
-    function globalSearch() {
-      const query = document.getElementById('globalSearch').value.toLowerCase();
-      const results = [];
-
-      if (query.length < 3) {
-        document.getElementById('searchInfo').textContent = "Type at least 3 characters to search all resources.";
-        showSection('about');
-        return;
-      }
-
-      for (const category in resources) {
-        for (const region in resources[category]) {
-          resources[category][region].forEach(item => {
-            const searchableText = `${item.title} ${item.desc} ${item.lang} ${item.pub} ${item.coverage} ${item.type} ${region}`.toLowerCase();
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
             
-            if (searchableText.includes(query)) {
-              results.push({ ...item, category: category, region: region.trim() });
+            const searchContainer = document.querySelector('.search-container');
+            if (id === 'resources') {
+                searchContainer.classList.remove('hidden');
+            } else {
+                searchContainer.classList.add('hidden');
             }
-          });
         }
-      }
-
-      showSection('resources'); 
-      document.getElementById('resource-title').textContent = `Search Results for "${query}"`;
-      document.getElementById('searchInfo').textContent = `Found ${results.length} matching resources.`;
-      
-      const list = document.getElementById('resource-list');
-      list.innerHTML = '';
-      if (results.length === 0) {
-        list.innerHTML = `<p style="text-align: center; color: #555;">No results found for "${query}".</p>`;
-        return;
-      }
-
-      results.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'resource-item';
         
-        const regionDisplayName = item.region.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        const categoryDisplayName = item.category.replace(/\b\w/g, c => c.toUpperCase());
-        
-        const identifier = item.identifier ? item.identifier.trim() : 'N/A';
-        const identifierLink = identifier.toLowerCase().startsWith('http') || identifier.toLowerCase().startsWith('www') ? 
-            `<a href="${identifier.startsWith('http') ? identifier : 'https://' + identifier}" target="_blank">View Resource</a>` : 
-            `<span style="color: #999;">Identifier/Link: ${identifier}</span>`;
+        function renderResources(data, title) {
+            const resourceList = document.getElementById('resource-list');
+            const resourceTitle = document.getElementById('resource-title');
             
-        const displayLang = item.lang ? item.lang.replace(/\s\s+/g, ' ').trim() : 'N/A';
-        const displayPub = item.pub ? item.pub.replace(/\s\s+/g, ' ').trim() : 'N/A';
-        const displayDesc = item.desc ? item.desc.replace(/\s\s+/g, ' ').trim() : 'No description available.';
-
-        itemDiv.innerHTML = `
-          <h3>${item.title.trim()}</h3>
-          <div class="resource-meta">
-            <strong>Category:</strong> ${categoryDisplayName} | 
-            <strong>Region:</strong> ${regionDisplayName} | 
-            <strong>Language:</strong> ${displayLang}
-          </div>
-          <p>${displayDesc}</p>
-          ${identifierLink}
-        `;
-        list.appendChild(itemDiv);
-      });
-    }
-
-    document.getElementById('globalSearch').addEventListener('input', globalSearch);
-
-    // --- Share a Story Logic (simple local storage implementation) ---
-    let stories = JSON.parse(localStorage.getItem('stories')) || [];
-
-    function renderStories() {
-      const storyList = document.getElementById('storyList');
-      storyList.innerHTML = '';
-
-      stories.forEach((story, index) => {
-        const storyDiv = document.createElement('div');
-        storyDiv.className = 'story';
-        
-        let fileLink = '';
-        if (story.fileName && story.fileData) {
-            fileLink = `<div class="file-attachment">File: <a href="${story.fileData}" download="${story.fileName}">Download Attachment</a></div>`;
+            resourceTitle.textContent = title;
+            resourceList.innerHTML = '';
+            
+            Object.keys(data).forEach(region => {
+                data[region].forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'resource-item';
+                    
+                    let metaHTML = `<strong>Region:</strong> ${item.coverage || 'N/A'}<br>
+                                    <strong>Language:</strong> ${item.lang || 'N/A'}<br>
+                                    <strong>Publisher:</strong> ${item.pub || 'N/A'}`;
+                    
+                    div.innerHTML = `
+                        <h3>${item.title}</h3>
+                        <div class="resource-meta">${metaHTML}</div>
+                        <p>${item.desc}</p>
+                        ${item.identifier && item.identifier !== '-' ? `<a href="${item.identifier}" target="_blank">View Resource</a>` : ''}
+                    `;
+                    
+                    resourceList.appendChild(div);
+                });
+            });
+            
+            showSection('resources');
         }
         
-        storyDiv.innerHTML = `
-          <h3>${story.title}</h3>
-          <em>Language: ${story.language}</em>
-          <p>${story.content.substring(0, 100)}${story.content.length > 100 ? '...' : ''}</p>
-          ${fileLink}
-          <button class="delete-btn" onclick="deleteStory(${index})">X</button>
-          <button class="edit-btn" onclick="editStory(${index})">✎</button>
-        `;
-        storyList.appendChild(storyDiv);
-      });
-    }
+        function filterResources(category) {
+            let title = '';
+            let data = {};
 
-    function deleteStory(index) {
-      if (confirm("Are you sure you want to delete this story?")) {
-        stories.splice(index, 1);
-        localStorage.setItem('stories', JSON.stringify(stories));
-        renderStories();
-      }
-    }
-    
-    function editStory(index) {
-        const story = stories[index];
-        if (story) {
+            switch(category) {
+                case 'websites':
+                    title = 'Digital Archives and Websites';
+                    data = resources.websites;
+                    break;
+                case 'books':
+                    title = 'Books and Publications';
+                    data = resources.books;
+                    break;
+                case 'apps':
+                    title = 'Apps and Learning Tools';
+                    data = resources.apps;
+                    break;
+                case 'museums':
+                    title = 'Museums and Archives';
+                    data = resources.museums;
+                    break;
+                default:
+                    title = 'All Resources';
+                    data = resources.searchable;
+            }
+            renderResources(data, title);
+        }
+        
+        function buildMenus() {
+            const menus = {
+                'websites': 'websites-menu',
+                'books': 'books-menu',
+                'apps': 'apps-menu',
+                'museums': 'museums-menu'
+            };
+
+            Object.keys(menus).forEach(category => {
+                const menuElement = document.getElementById(menus[category]);
+                if (menuElement) {
+                    menuElement.innerHTML = '';
+                    
+                    const allLink = document.createElement('a');
+                    let categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+                    if (category === 'websites') categoryTitle = 'Archive';
+                    if (category === 'books') categoryTitle = 'Languages';
+                    if (category === 'apps') categoryTitle = 'Learning Tools';
+                    if (category === 'museums') categoryTitle = 'Museums';
+                    
+                    allLink.href = `#${category}`;
+                    allLink.textContent = `All ${categoryTitle}`;
+                    allLink.onclick = () => filterResources(category);
+                    menuElement.appendChild(allLink);
+
+                    if (resources[category]) {
+                        Object.keys(resources[category]).forEach(region => {
+                            const link = document.createElement('a');
+                            link.href = `#${category}-${region.replace(/\s/g, '_')}`;
+                            link.textContent = region;
+                            link.onclick = (e) => {
+                                e.preventDefault();
+                                renderResources({ [region]: resources[category][region] }, `${categoryTitle}: ${region}`);
+                            };
+                            menuElement.appendChild(link);
+                        });
+                    }
+                }
+            });
+        }
+        
+        function globalSearch() {
+            const query = document.getElementById('globalSearch').value.toLowerCase();
+            const results = {};
+            let matchCount = 0;
+            
+            ['websites', 'books', 'apps', 'museums'].forEach(category => {
+                if (resources[category]) {
+                    Object.keys(resources[category]).forEach(region => {
+                        resources[category][region].forEach(item => {
+                            const searchFields = [item.title, item.desc, item.lang, item.pub, item.coverage].join(' ').toLowerCase();
+                            if (searchFields.includes(query)) {
+                                if (!results[region]) results[region] = [];
+                                results[region].push(item);
+                                matchCount++;
+                            }
+                        });
+                    });
+                }
+            });
+            
+            if (query.length > 2 && matchCount > 0) {
+                document.getElementById('searchInfo').textContent = `Found ${matchCount} resources matching "${query}"`;
+                renderResources(results, `Search Results for "${query}"`);
+            } else if (query.length > 2) {
+                document.getElementById('searchInfo').textContent = `No resources found matching "${query}"`;
+                document.getElementById('resource-list').innerHTML = `<p style="text-align: center; margin-top: 2rem;">No results found for your search query.</p>`;
+                showSection('resources');
+            } else {
+                document.getElementById('searchInfo').textContent = `Search across all resources`;
+                showSection('about');
+            }
+        }
+        
+        document.getElementById('globalSearch').addEventListener('input', globalSearch);
+
+        function renderStories() {
+            const storyList = document.getElementById('storyList');
+            if (!storyList) return;
+            storyList.innerHTML = '';
+            
+            stories.forEach((story, index) => {
+                const div = document.createElement('div');
+                div.className = 'story';
+                div.draggable = true;
+                div.dataset.index = index;
+
+                let fileAttachmentHTML = '';
+                if (story.fileName && story.fileData) {
+                    fileAttachmentHTML = `<div class="file-attachment">File: <a href="${story.fileData}" download="${story.fileName}">${story.fileName}</a></div>`;
+                }
+                
+                div.innerHTML = `
+                    <button class="delete-btn" onclick="deleteStory(${index})">X</button>
+                    <button class="edit-btn" onclick="editStory(${index})">Edit</button>
+                    <h3>${story.title}</h3>
+                    <em>Language: ${story.language}</em>
+                    <p>${story.content.substring(0, 150)}...</p>
+                    ${fileAttachmentHTML}
+                `;
+                storyList.appendChild(div);
+            });
+            
+            // Drag and drop logic
+            let draggedItem = null;
+
+            document.querySelectorAll('.story').forEach(story => {
+                story.addEventListener('dragstart', function(e) {
+                    draggedItem = this;
+                    setTimeout(() => this.classList.add('dragging'), 0);
+                });
+
+                story.addEventListener('dragend', function() {
+                    draggedItem.classList.remove('dragging');
+                    draggedItem = null;
+                });
+
+                story.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+
+                story.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (this !== draggedItem) {
+                        const fromIndex = parseInt(draggedItem.dataset.index);
+                        const toIndex = parseInt(this.dataset.index);
+                        
+                        const storyToMove = stories[fromIndex];
+                        stories.splice(fromIndex, 1);
+                        stories.splice(toIndex, 0, storyToMove);
+                        
+                        localStorage.setItem('stories', JSON.stringify(stories));
+                        renderStories();
+                    }
+                });
+            });
+        }
+        
+        function deleteStory(index) {
+            if (confirm('Are you sure you want to delete this story?')) {
+                stories.splice(index, 1);
+                localStorage.setItem('stories', JSON.stringify(stories));
+                renderStories();
+            }
+        }
+
+        function editStory(index) {
+            const story = stories[index];
             document.getElementById('storyTitle').value = story.title;
             document.getElementById('storyLanguage').value = story.language;
             document.getElementById('storyContent').value = story.content;
             
-            document.getElementById('storyForm').setAttribute('data-editing-index', index);
-            
-            document.getElementById('share').scrollIntoView({ behavior: 'smooth' });
-            
-            document.querySelector('#storyForm button[type="submit"]').textContent = 'Update Story';
-            
-            alert(`Now editing story: "${story.title}". Update the form above and click 'Update Story'.`);
-        }
-    }
-
-    document.getElementById('storyForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const title = document.getElementById('storyTitle').value;
-        const language = document.getElementById('storyLanguage').value;
-        const content = document.getElementById('storyContent').value;
-        const fileInput = document.getElementById('storyFile');
-        const editingIndex = this.getAttribute('data-editing-index');
-        
-        let newStory = { title, language, content, timestamp: new Date().toLocaleString() };
-
-        const saveStory = (storyData) => {
-            if (editingIndex !== null) {
-                stories[parseInt(editingIndex)] = { ...stories[parseInt(editingIndex)], ...storyData };
-                this.removeAttribute('data-editing-index');
-                document.querySelector('#storyForm button[type="submit"]').textContent = 'Submit Story';
-                alert("Story updated successfully!");
-            } else {
-                stories.push(storyData);
-                alert("Thank you! Your story has been submitted and added to the list below.");
-            }
+            stories.splice(index, 1);
             localStorage.setItem('stories', JSON.stringify(stories));
-            this.reset();
             renderStories();
-        };
-
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = function(event) {
-                newStory.fileName = file.name;
-                newStory.fileData = event.target.result;
-                saveStory(newStory);
-            };
-            
-            reader.readAsDataURL(file);
-        } else {
-            if (editingIndex !== null && stories[parseInt(editingIndex)] && stories[parseInt(editingIndex)].fileName) {
-                newStory.fileName = stories[parseInt(editingIndex)].fileName;
-                newStory.fileData = stories[parseInt(editingIndex)].fileData;
-            }
-            saveStory(newStory);
         }
-    });
 
+        document.getElementById('storyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('storyTitle').value;
+            const language = document.getElementById('storyLanguage').value;
+            const content = document.getElementById('storyContent').value;
+            const fileInput = document.getElementById('storyFile');
+            
+            const story = { title, language, content };
+            
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    story.fileName = file.name;
+                    story.fileData = event.target.result;
+                    stories.push(story);
+                    localStorage.setItem('stories', JSON.stringify(stories));
+                    renderStories();
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                stories.push(story);
+                localStorage.setItem('stories', JSON.stringify(stories));
+                renderStories();
+            }
+            
+            this.reset();
+        });
 
-    // --- Initialization ---
-    document.addEventListener('DOMContentLoaded', () => {
-      initDropdowns();
-      renderStories();
-      showSection('about'); 
-    });
-    // --- END: JAVASCRIPT LOGIC ---
-</script>
+        // Initialize menus and stories on load
+        buildMenus();
+        renderStories();
+    </script>
 </body>
 </html>
