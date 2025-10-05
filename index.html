@@ -115,7 +115,7 @@
         /* CONTENT SECTIONS */
         .container { 
             max-width: 1000px; 
-            margin: 0 auto; /* FIX: This is the correct property to center the block element on the page */
+            margin: 0 auto; /* FIX: This centers the main content block */
             padding: 2.5rem 2rem; 
         }
         section { 
@@ -124,7 +124,6 @@
             background: #fff; 
             border-bottom: 1px solid #eee;
             padding-bottom: 2rem;
-            /* Ensure block elements like H2 and P align left within the centered container */
             text-align: left; 
         }
         .container section:last-of-type {
@@ -155,7 +154,6 @@
             color: #444;
         }
         .region-scroll-container {
-            /* Now that we filter by region, we only need to scroll if content is long */
             max-height: 400px; 
             overflow-y: auto;
             padding-right: 15px; 
@@ -168,7 +166,6 @@
             margin-bottom: 1rem;
             border-radius: 4px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            /* Reset text alignment for cards */
             text-align: left; 
         }
         .resource-card h4 {
@@ -197,7 +194,6 @@
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
             gap: 1.5rem; 
             margin-top: 1.5rem; 
-            /* Reset text alignment for the grid */
             text-align: left; 
         }
         /* New styles for story cards */
@@ -252,7 +248,6 @@
             border-radius: 4px;
             box-sizing: border-box;
             font-size: 1rem;
-            /* Ensure forms are aligned left */
             text-align: left; 
         }
         #storyForm button, #contactForm button {
@@ -271,6 +266,20 @@
             display: block; 
             margin-bottom: 0.5rem;
             text-align: left; 
+        }
+        
+        /* --- FOOTER STYLES FIX --- */
+        footer {
+            /* FIX: This centers the text inside the footer block */
+            text-align: center; 
+            padding: 1.5rem 1rem;
+            background: #fcfcfc; 
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid #eee;
+        }
+        footer p {
+            margin: 0;
         }
 
 
@@ -341,7 +350,7 @@
         <section id="about">
             <h2>About Our Mission</h2>
             <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
-            <p style="margin-top: 1rem;">Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
+            <p style="margin-top: 1rem;">Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enhances us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
         </section>
 
         <section id="digital-archive-section" class="hidden">
@@ -489,7 +498,7 @@
 
         let editingIndex = null; 
         
-        // --- UTILITY FUNCTIONS ---
+        // --- UTILITY FUNCTIONS (unchanged from last successful version) ---
 
         /** Extracts unique regions for a given resource type. */
         function getUniqueRegions(type) {
@@ -508,7 +517,7 @@
                         matchesType = true;
                     }
                 } 
-                // Book includes Academic Book, Dictionary, Educational Books, Textbook, Grammar/Dictionary, Educational Materials, Phrasebook/Vocabulary
+                // Book includes all book-related categories
                 else if (type === 'Academic Book') {
                     if (resource.type === 'Academic Book' || resource.type === 'Dictionary' || resource.type === 'Educational Books' || resource.type === 'Textbook' || resource.type === 'Grammar/Dictionary' || resource.type === 'Educational Materials' || resource.type === 'Phrasebook/Vocabulary') {
                         matchesType = true;
@@ -523,7 +532,7 @@
             return Array.from(uniqueRegions).sort();
         }
 
-        /** Filters resources by type and region, then renders the dedicated card section. */
+        /** Filters resources by type. */
         function filterResources(typeFilter) {
             return allResources.filter(resource => {
                 // Museum and App types match exactly
@@ -895,9 +904,6 @@
             document.getElementById('globalSearch').addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
                 
-                // Collect all resources except Museums for the global search
-                const resourcesForSearch = allResources.filter(r => r.type !== 'Museum');
-
                 const filtered = allResources.filter(resource => {
                     const searchFields = [
                         resource.title,
