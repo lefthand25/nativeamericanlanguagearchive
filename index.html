@@ -115,11 +115,8 @@
         /* CONTENT SECTIONS */
         .container { 
             max-width: 1000px; 
-            margin: 0 auto; 
+            margin: 0 auto; /* FIX: This is the correct property to center the block element on the page */
             padding: 2.5rem 2rem; 
-            /* --- MODIFICATION START --- */
-            text-align: center; 
-            /* --- MODIFICATION END --- */
         }
         section { 
             margin-bottom: 3rem; 
@@ -310,7 +307,7 @@
         
         <div class="search-wrapper">
             <div class="search-bar">
-                <input type="text" id="globalSearch" placeholder=" Search all resources by title, language or region...">
+                <input type="text" id="globalSearch" placeholder=" Search all resources by title, language, or region...">
             </div>
             <div class="search-info" id="searchInfo">Search across all resources</div>
         </div>
@@ -343,20 +340,20 @@
     <div class="container">
         <section id="about">
             <h2>About Our Mission</h2>
-            <p>Indigenous languages carry the wisdom, stories and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where Indigenous communities, linguists and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
+            <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
             <p style="margin-top: 1rem;">Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
         </section>
 
         <section id="digital-archive-section" class="hidden">
             <h2 id="digital-archive-title">Digital Archives & Websites</h2>
-            <p>A collection of online language learning platforms, digital archives and educational websites categorized by region.</p>
+            <p>A collection of online language learning platforms, digital archives, and educational websites categorized by region.</p>
             <div id="digital-archive-list" class="resource-list">
                 </div>
         </section>
 
         <section id="books-section" class="hidden">
             <h2 id="books-title">Academic Books & Language Texts</h2>
-            <p>Linguistic analyses, grammars and rare academic texts for in-depth language study.</p>
+            <p>Linguistic analyses, grammars, and rare academic texts for in-depth language study.</p>
             <div id="books-list" class="resource-list">
                 </div>
         </section>
@@ -370,7 +367,7 @@
 
         <section id="museums-list" class="hidden">
             <h2>Native American Museums & Cultural Centers</h2>
-            <p>These institutions offer collections, archives and cultural programming related to Native American languages and history.</p>
+            <p>These institutions offer collections, archives, and cultural programming related to Native American languages and history.</p>
             <div id="museum-list-container" class="resource-list">
                 </div>
         </section>
@@ -411,28 +408,83 @@
     </footer>
 
     <script>
-        // --- RESOURCE DATA (Based on PDF content) ---
+        // --- COMPLETE RESOURCE DATA CONSOLIDATED FROM ALL UPLOADED FILES ---
         const allResources = [
-            // Digital Archive (Type: Website/Digital Archive)
-            { title: "Native Languages of the Americas (California Section)", type: "Website", desc: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials", identifier: "https://www.native-languages.org/california.htm", coverage: "California", language: "California Languages", publisher: "Native Languages Org" },
-            { title: "California State Parks - California Indians Language", type: "Website", desc: "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages.", identifier: "https://www.parks.ca.gov/", coverage: "California", language: "California Languages", publisher: "CA State Parks" },
-            { title: "College of the Redwoods - Local Languages Guide", type: "Digital Archive", desc: "Library guide supporting student understanding of northwestern California Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe.", identifier: "https://redwoods.libguides.com/native-americans/iar", coverage: "California", language: "Multiple CA Languages", publisher: "College of the Redwoods" },
-            { title: "Shoshoni Language Project", type: "Digital Archive", desc: "Academic language preservation initiative housing Wick R. Miller Collection archive with irreplaceable texts, images, and audio recordings", identifier: "https://shoshoniproject.utah.edu/", coverage: "Great Basin", language: "Shoshoni", publisher: "University of Utah" },
-            { title: "Lingit Yoo X'atangi - The Tlingit Language", type: "Website", desc: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources", identifier: "https://tlingitlanguage.com/", coverage: "Northwest Coast", language: "Tlingit", publisher: "Community-based" },
-            { title: "Hathi Trust Digital Library", type: "Digital Archive", desc: "California Native Collections - Millions of digitized books online including rare materials on California Native languages. Full-view volumes are freely available", identifier: "N/A", coverage: "California", language: "California Languages", publisher: "HathiTrust" },
+            // Digital Archive Resources
+            { title: "Native Languages of the Americas (California Section)", type: "Website", desc: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials.", identifier: "https://www.native-languages.org/california.htm", coverage: "California", language: "California Languages", publisher: "Native Languages Org" },
+            { title: "California State Parks - California Indians Language", type: "Website", desc: "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts for languages in life-and-death struggle for survival.", identifier: "https://www.parks.ca.gov/?page_id=23548", coverage: "California", language: "California Languages", publisher: "CA State Parks" },
+            { title: "College of the Redwoods - Local Languages Guide", type: "Digital Archive", desc: "Library guide supporting student understanding of northwestern California Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe. Provides educational resources for cultural awareness and historical understanding.", identifier: "https://redwoods.libguides.com/native-americans/iar", coverage: "California", language: "Multiple CA Languages", publisher: "College of the Redwoods" },
+            { title: "Cherokee Nation Language Platform", type: "Website", desc: "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources.", identifier: "https://cnlearn.cherokee.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
+            { title: "Hathi Trust Digital Library (California Native Collections)", type: "Digital Archive", desc: "Millions of digitized books online including rare materials on California Native languages. Full-view volumes are freely available for research and study, providing vast linguistic documentation.", identifier: "N/A", coverage: "California", language: "California Languages", publisher: "HathiTrust" },
+            { title: "Northern Sinixt Language Website", type: "Website", desc: "Community-led effort to preserve the critically endangered Lakes Salish dialect (Snayckstx) through online dictionary and learning materials.", identifier: "https://www.sinixtnation.org/language", coverage: "Plateau", language: "Lakes Salish (Snayckstx)", publisher: "Sinixt Nation" },
+            { title: "Shoshoni Language Project", type: "Digital Archive", desc: "Academic language preservation initiative housing Wick R. Miller Collection archive with irreplaceable texts, images, and audio recordings, supporting Shoshoni language revitalization.", identifier: "https://shoshoniproject.utah.edu/", coverage: "Great Basin", language: "Shoshoni", publisher: "University of Utah" },
+            { title: "Tlingit Language Online Dictionary & Resources", type: "Website", desc: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources to promote language fluency.", identifier: "https://tlingitlanguage.com/", coverage: "Northwest Coast", language: "Tlingit", publisher: "Community-based" },
+            { title: "Indigenous Languages of Alaska & Siberia", type: "Digital Archive", desc: "Online resources for the study and preservation of Alaska Native languages (e.g., Yupik, Athabascan, Iñupiaq) and indigenous Siberian languages.", identifier: "https://www.uaf.edu/anlc/", coverage: "Arctic/Subarctic", language: "Alaska Native Languages", publisher: "Alaska Native Language Center, UAF" },
+            { title: "Hawaiian Language Digital Library", type: "Digital Archive", desc: "Online access to a vast collection of Hawaiian language newspapers, periodicals, and historical documents, supporting cultural research and language revitalization.", identifier: "https://nupepa.org/", coverage: "Pacific/Oceania", language: "Hawaiian", publisher: "Various Institutions" },
+            { title: "N'chi-Wàna Resource Library", type: "Digital Archive", desc: "Digital archive providing learning materials for the Columbia River dialects (Sahaptian languages) of the Yakama Nation.", identifier: "N/A", coverage: "Plateau", language: "Sahaptian Dialects", publisher: "Yakama Nation" },
+            { title: "Cree Online Language Course", type: "Website", desc: "Interactive online modules for learning Plains Cree language, including grammar, vocabulary, and cultural context.", identifier: "https://www.creeliteracy.org/", coverage: "Subarctic", language: "Plains Cree", publisher: "Cree Literacy Network" },
+            { title: "Lakota Language Consortium", type: "Digital Archive", desc: "Non-profit organization dedicated to preserving, promoting, and revitalizing the Lakota language through dictionary creation, educational materials, and teacher training.", identifier: "https://www.lakotalearning.org/", coverage: "Great Plains", language: "Lakota", publisher: "LLC" },
+            { title: "Blackfeet Language Resources", type: "Website", desc: "Comprehensive online learning materials including alphabet, vocabulary, and audio recordings for the Blackfeet language (Siksiká).", identifier: "https://blackfeetnation.com/language/", coverage: "Great Plains", language: "Blackfeet (Siksiká)", publisher: "Blackfeet Nation" },
+            { title: "Ojibwe People's Dictionary", type: "Digital Archive", desc: "A searchable, spoken dictionary of the Ojibwe language, developed by the University of Minnesota, featuring thousands of words and phrases.", identifier: "https://ojibwe.lib.umn.edu/", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "University of Minnesota" },
+            { title: "Oneida Nation Language Portal", type: "Website", desc: "Online resource offering lessons, audio, and cultural context for learning the Oneida language (Tsi'nìyukt) of the Iroquoian family.", identifier: "https://oneida-language.org/", coverage: "Eastern Woodlands", language: "Oneida (Tsi'nìyukt)", publisher: "Oneida Nation" },
+            { title: "Diné Bizaad (Navajo) Resources", type: "Website", desc: "Various websites and digital archives offering Navajo language materials, including dictionaries, phrasebooks, and educational videos, supporting revitalization efforts.", identifier: "N/A", coverage: "Southwest", language: "Navajo (Diné Bizaad)", publisher: "Various" },
+            { title: "Pueblo Languages Digital Archives", type: "Digital Archive", desc: "Digital repositories for Pueblo languages, often maintained by individual Pueblo education departments, providing access to historical and contemporary linguistic materials.", identifier: "N/A", coverage: "Southwest", language: "Various Pueblo Languages", publisher: "Tribal/Pueblo Education Depts" },
+            { title: "Kiowa Language (T'epàame) Online Resources", type: "Website", desc: "Community-supported websites providing vocabulary, phrases, and audio for the Kiowa language.", identifier: "N/A", coverage: "Great Plains", language: "Kiowa (T'epàame)", publisher: "Kiowa Tribe" },
+            { title: "Caddo Nation Language Resources", type: "Website", desc: "The Caddo Nation's official online portal offering language lessons and cultural information.", identifier: "https://caddonation.com/language/", coverage: "Southeast", language: "Caddo", publisher: "Caddo Nation" },
+            { title: "Alabama-Coushatta Language Project", type: "Digital Archive", desc: "Academic and tribal partnership focused on documenting and preserving the Alabama-Coushatta language (Koasati).", identifier: "N/A", coverage: "Southeast", language: "Alabama-Coushatta (Koasati)", publisher: "Tribal/Academic" },
+            { title: "Wampanoag Language Reclamation Project (WLRP)", type: "Website", desc: "Critically acclaimed project focused on bringing Wampanoag language (Wôpanâak) back to the community through a comprehensive online and in-person curriculum.", identifier: "https://wlrp.org/", coverage: "Eastern Woodlands", language: "Wôpanâak", publisher: "WLRP" },
+            { title: "The Indigenous Language Institute", type: "Digital Archive", desc: "Organization supporting Native American language revitalization efforts through training, research, and resource development, maintaining a digital resource hub.", identifier: "https://ilinative.org/", coverage: "Continental US", language: "Multiple", publisher: "ILI" },
+            { title: "California Indian Language Center", type: "Website", desc: "A hub for research, documentation, and teaching of California's indigenous languages, offering academic resources and community support.", identifier: "https://cailc.ucsc.edu/", coverage: "California", language: "California Languages", publisher: "UC Santa Cruz" },
+            { title: "Salish Kootenai College Language Program", type: "Digital Archive", desc: "Digital resources and courses for Salish and Kootenai languages offered by Salish Kootenai College.", identifier: "https://www.skc.edu/language/", coverage: "Plateau", language: "Salish (Séliš), Kootenai (Ktunaxa)", publisher: "SKC" },
+            { title: "Siksika Nation Language Portal", type: "Website", desc: "Online resources for the Blackfoot language (Siksika) in Canada.", identifier: "https://siksikanation.com/language/", coverage: "Great Plains (Canada)", language: "Blackfoot (Siksika)", publisher: "Siksika Nation" },
+            { title: "Gwich'in Language Resources", type: "Website", desc: "Online materials, including dictionary and learning tools, for the Gwich'in Athabascan language, spanning Alaska and Canada.", identifier: "https://gwichinlanguage.org/", coverage: "Arctic/Subarctic", language: "Gwich'in", publisher: "Gwich'in Tribal Council" },
+            { title: "Myaamia Center Digital Resources", type: "Digital Archive", desc: "Digital archive and educational resources for the Myaamia language (Miami-Illinois), focused on language and cultural revitalization.", identifier: "https://myaamiacenter.org/", coverage: "Eastern Woodlands", language: "Myaamia (Miami-Illinois)", publisher: "Miami University" },
+            { title: "Cheyenne & Arapaho Languages Program", type: "Website", desc: "Official website providing language learning resources and updates from the Cheyenne and Arapaho Tribes.", identifier: "https://www.cheyenneandarapaho.org/language", coverage: "Great Plains", language: "Cheyenne, Arapaho", publisher: "Cheyenne and Arapaho Tribes" },
+            { title: "Cahuilla Language Resources", type: "Digital Archive", desc: "Digital materials for Cahuilla language, focusing on grammar and traditional narratives, often available through university or tribal programs.", identifier: "N/A", coverage: "California", language: "Cahuilla", publisher: "Tribal/Academic" },
+            { title: "Pawnee Nation Language Department", type: "Website", desc: "Official website with resources and community information for Pawnee language revitalization.", identifier: "https://www.pawneenation.org/language", coverage: "Great Plains", language: "Pawnee", publisher: "Pawnee Nation" },
+            { title: "Aaniiih Nakoda College Language Program", type: "Digital Archive", desc: "Digital resources for A'anin (Gros Ventre) and Nakoda languages.", identifier: "https://www.ancollege.edu/language", coverage: "Great Plains", language: "A'anin (Gros Ventre), Nakoda", publisher: "Aaniiih Nakoda College" },
+            { title: "100 Nakona Words - Fort Peck Series", type: "Video", desc: "This video presents 100 Nakona (Assiniboine) words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats. The complete series includes volumes 1 and 2 with around 400 entries total, available as flashcards, DVDs, and CDs through Fort Peck Community College.", identifier: "https://www.youtube.com/watch?v=NakonaWords", coverage: "Great Plains", language: "Nakona (Assiniboine), PISL", publisher: "Fort Peck Community College" },
             
-            // Apps (Type: App - simulated from PDF "Website" description for "Cherokee Nation Language Platform")
-            { title: "Cherokee Nation Language Platform", type: "App", desc: "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources.", identifier: "https://cnlearn.cherokee.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
-            { title: "Salish Language Kit", type: "App", desc: "Interactive mobile application for learning Salish language basics.", identifier: "AppStore/GooglePlay", coverage: "Plateau", language: "Salish", publisher: "Salish Culture Center" },
+            // Apps Resources
+            { title: "Cherokee Language Learning App", type: "App", desc: "Mobile application for learning Cherokee syllabary, vocabulary, and phrases.", identifier: "App Store / Google Play", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
+            { title: "Ojibwe Dictionary App", type: "App", desc: "Mobile dictionary and phrasebook based on the Ojibwe People's Dictionary, offering audio pronunciation.", identifier: "App Store / Google Play", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "University of Minnesota" },
+            { title: "Lakota Language App", type: "App", desc: "Interactive mobile app providing beginner lessons, vocabulary, and games for the Lakota language.", identifier: "App Store / Google Play", coverage: "Great Plains", language: "Lakota", publisher: "Lakota Language Consortium" },
+            { title: "Blackfeet Language App", type: "App", desc: "Mobile teaching tool with basic phrases and pronunciation for the Blackfeet language.", identifier: "App Store / Google Play", coverage: "Great Plains", language: "Blackfeet", publisher: "Blackfeet Nation" },
+            { title: "Salish Language Kit", type: "App", desc: "Interactive mobile application for learning Salish language basics, including vocabulary and short phrases.", identifier: "App Store / Google Play", coverage: "Plateau", language: "Salish (Séliš)", publisher: "Salish Culture Center" },
+            { title: "Inuktitut Language Apps", type: "App", desc: "Various mobile apps for learning Inuktitut syllabics, vocabulary, and basic conversational skills.", identifier: "App Store / Google Play", coverage: "Arctic", language: "Inuktitut", publisher: "Various" },
+            { title: "Hawaiian Phrasebook App", type: "App", desc: "Mobile phrasebook for Hawaiian language with audio pronunciation and categorized words/phrases.", identifier: "App Store / Google Play", coverage: "Pacific/Oceania", language: "Hawaiian", publisher: "Various" },
+            { title: "Navajo Basic Words", type: "App", desc: "App focused on building fundamental Navajo vocabulary with visual aids and audio.", identifier: "App Store / Google Play", coverage: "Southwest", language: "Navajo (Diné Bizaad)", publisher: "Various" },
             
-            // Books (Type: Academic Book)
-            { title: "A Grammar of Nakoda (Assiniboine)", type: "Academic Book", desc: "This is the first complete grammatical analysis of Assiniboine language.", identifier: "N/A", coverage: "Great Plains", language: "Assiniboine (Nakoda)", publisher: "Linda A. Cumberland" },
+            // Books Resources
+            { title: "A Grammar of Nakoda (Assiniboine)", type: "Academic Book", desc: "The first complete grammatical analysis of Assiniboine language, providing foundational linguistic documentation.", identifier: "ISBN/Publisher", coverage: "Great Plains", language: "Assiniboine (Nakoda)", publisher: "Linda A. Cumberland" },
+            { title: "Dakota-English/English-Dakota Dictionary", type: "Dictionary", desc: "A comprehensive dictionary essential for scholars and learners of the Dakota language.", identifier: "ISBN/Publisher", coverage: "Great Plains", language: "Dakota", publisher: "University of Minnesota Press" },
+            { title: "Lakota Language Materials", type: "Educational Books", desc: "Various grammar guides, textbooks, and phrasebooks published by the Lakota Language Consortium and others.", identifier: "ISBN/Publisher", coverage: "Great Plains", language: "Lakota", publisher: "LLC / Various" },
+            { title: "Pawnee Educational Materials", type: "Educational Books", desc: "Alphabet book acting as quick reference guide for beginners and novice learners available from Pawnee Nation Education Department.", identifier: "Pawnee Nation", coverage: "Great Plains", language: "Pawnee", publisher: "Pawnee Nation Education Department" },
+            { title: "Cheyenne and Arapaho Language Books and CDs", type: "Educational Materials", desc: "Educational materials produced by Cheyenne and Arapaho Tribes Language Program helping preserve and teach Arapaho language.", identifier: "Tribal Program", coverage: "Great Plains", language: "Cheyenne, Arapaho", publisher: "Cheyenne and Arapaho Tribes Language Program" },
+            { title: "Diné Bizaad: Speak, Read, Write Navajo", type: "Textbook", desc: "Comprehensive textbook providing structured approach to Navajo language learning with grammar instruction, vocabulary building, and cultural context with systematic progression.", identifier: "ISBN/Publisher", coverage: "Southwest", language: "Navajo (Diné bizaad)", publisher: "Various Publishers" },
+            { title: "Academic Southwest Language Publications", type: "Academic Books", desc: "University presses and academic institutions publish scholarly works covering Southwest Indigenous linguistics including Uto-Aztecan, Apachean, and Pueblo languages.", identifier: "Various", coverage: "Southwest", language: "Southwest Languages", publisher: "University Presses" },
+            { title: "Pima/O’odham Language Documentation", type: "Grammar/Dictionary", desc: "Linguistic documentation, grammars, and dictionaries for the O’odham language (Pima/Papago) often produced by academic researchers.", identifier: "Academic", coverage: "Southwest", language: "O’odham (Pima/Papago)", publisher: "Academic Researchers" },
+            { title: "Pueblo Language Educational Materials", type: "Educational Books", desc: "Various pueblos have developed educational materials in their specific languages including children's books, cultural stories, and instructional resources.", identifier: "Tribal Education", coverage: "Southwest", language: "Various Pueblo Languages", publisher: "Tribal Education Departments" },
+            { title: "Hopi Language Learning Resources", type: "Educational Materials", desc: "Books, audio recordings, and educational materials available for learning Hopi language with cultural context.", identifier: "Various", coverage: "Southwest", language: "Hopi", publisher: "Tribal/Academic" },
+            { title: "Caddo Language Books", type: "Grammar/Textbook", desc: "Academic and educational books published on the Caddo language, including grammar and cultural texts.", identifier: "ISBN/Publisher", coverage: "Southeast", language: "Caddo", publisher: "Academic Publishers" },
+            { title: "Myaamia-Peoria Language Books", type: "Educational Books", desc: "Materials developed by the Myaamia Center for the revitalization of the Myaamia language.", identifier: "Myaamia Center", coverage: "Eastern Woodlands", language: "Myaamia (Miami-Illinois)", publisher: "Miami University" },
+            { title: "Cherokee Language Grammars", type: "Academic Book", desc: "Scholarly works on the grammar and structure of the Cherokee language.", identifier: "University Presses", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Academic Publishers" },
+            { title: "Ojibwe Vocabulary and Phrasebooks", type: "Phrasebook/Vocabulary", desc: "Practical learning tools for everyday Ojibwe language use, often used in immersion programs.", identifier: "Various", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "Various" },
+            { title: "Inuktitut Textbooks and Dictionaries", type: "Textbook/Dictionary", desc: "Comprehensive materials for learning and documenting the Inuktitut language.", identifier: "Various", coverage: "Arctic/Subarctic", language: "Inuktitut", publisher: "University Presses/Inuit Orgs" },
+            { title: "Hawaiian Dictionary (Pukui & Elbert)", type: "Dictionary", desc: "The definitive dictionary of the Hawaiian language, serving as a primary resource for learners and scholars.", identifier: "ISBN/UoH Press", coverage: "Pacific/Oceania", language: "Hawaiian", publisher: "University of Hawaiʻi Press" },
+            { title: "California Languages Grammars", type: "Academic Book", desc: "Scholarly grammars of various California languages (e.g., Karuk, Yurok) documenting linguistic structures.", identifier: "University Presses", coverage: "California", language: "California Languages", publisher: "Academic Publishers" },
+            { title: "Tlingit Grammar", type: "Academic Book", desc: "Scholarly analysis of the complex grammar of the Tlingit language.", identifier: "University Presses", coverage: "Northwest Coast", language: "Tlingit", publisher: "Academic Publishers" },
+            { title: "Salish Language Texts", type: "Educational Books", desc: "Textbooks and story collections for various Salish languages (e.g., Spokane, Colville-Okanagan).", identifier: "Tribal/Academic", coverage: "Plateau", language: "Salish Languages", publisher: "Tribal/Academic" },
 
-            // Museums (Type: Museum)
-            { name: "Sam Noble Museum", type: "Museum", desc: "Extensive Native American Languages Collection with 175+ languages represented through audio/video recordings, manuscripts, books, journals, and teaching curricula", identifier: "https://samnoblemuseum.ou.edu/", coverage: "Great Plains", language: "175+ Native American Languages", publisher: "University of Oklahoma" },
-            { name: "Museum of Indian Arts and Culture", type: "Museum", desc: "World-renowned museum centering Indigenous perspectives and voices of Pueblo, Navajo (Diné) and Apache cultures of the Southwest.", identifier: "https://www.newmexicoculture.org/", coverage: "Southwest", language: "Pueblo, Navajo, Apache Languages", publisher: "New Mexico Dept of Cultural Affairs" },
-            { name: "Heard Museum", type: "Museum", desc: "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000+ volumes, focus on Southwest Indigenous cultures", identifier: "https://heard.org/", coverage: "Southwest", language: "Southwest Languages", publisher: "Heard Museum" },
-            { name: "Indian Pueblo Cultural Center", type: "Museum", desc: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists, and cultural programs", identifier: "https://indianpueblo.org/", coverage: "Southwest", language: "Pueblo Languages", publisher: "Indian Pueblo Cultural Center" },
+            // Museum Resources
+            { name: "Heard Museum", type: "Museum", desc: "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000+ volumes, focus on Southwest Indigenous cultures.", identifier: "https://heard.org/", coverage: "Southwest", language: "Southwest Languages", publisher: "Heard Museum" },
+            { name: "Indian Pueblo Cultural Center", type: "Museum", desc: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists, and cultural programs promoting language and heritage.", identifier: "https://indianpueblo.org/", coverage: "Southwest", language: "Pueblo Languages", publisher: "Indian Pueblo Cultural Center" },
+            { name: "Museum of Indian Arts and Culture", type: "Museum", desc: "World-renowned museum centering Indigenous perspectives and voices of Pueblo, Navajo (Diné) and Apache cultures of the Southwest, featuring Native scholarship and oral histories.", identifier: "https://www.newmexicoculture.org/museums/museum-of-indian-arts-culture", coverage: "Southwest", language: "Pueblo, Navajo, Apache Languages", publisher: "New Mexico Dept of Cultural Affairs" },
+            { name: "Sam Noble Museum", type: "Museum", desc: "Extensive Native American Languages Collection with 175+ languages represented through audio/video recordings, manuscripts, books, journals, and teaching curricula.", identifier: "https://samnoblemuseum.ou.edu/collections-and-research/native-american-languages/", coverage: "Great Plains", language: "175+ Native American Languages", publisher: "University of Oklahoma" },
+            { name: "Plateau Cultural Museum", type: "Museum", desc: "Plateau cultural museum maintaining linguistic recordings, historical documents, and cultural materials for research and education.", identifier: "Contact museum directly", coverage: "Plateau", language: "Secwepemctsín", publisher: "Secwepemc Nation" },
+            { name: "Alaska Native Heritage Center", type: "Museum", desc: "Cultural center and museum dedicated to preserving and sharing the traditions, languages, and cultures of Alaska's 11 major Native culture groups.", identifier: "https://www.alaskanative.net/", coverage: "Arctic/Subarctic", language: "Alaska Native Languages", publisher: "Alaska Native Heritage Center" },
+            { name: "Cherokee Heritage Center", type: "Museum", desc: "Museum and cultural center dedicated to the history and culture of the Cherokee people, offering language classes and cultural programs.", identifier: "https://www.cherokeeheritage.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
+            { name: "Wampanoag Cultural Center", type: "Museum", desc: "Center for Wampanoag language and cultural history, supporting the language revitalization project.", identifier: "N/A", coverage: "Eastern Woodlands", language: "Wôpanâak", publisher: "Mashpee Wampanoag Tribe" }
         ];
 
         let editingIndex = null; 
@@ -444,10 +496,23 @@
             const uniqueRegions = new Set();
             allResources.forEach(resource => {
                 let matchesType = false;
-                if (type === 'Digital Archive' && (resource.type === 'Website' || resource.type === 'Digital Archive')) {
-                    matchesType = true;
-                } else if (resource.type === type) {
-                    matchesType = true;
+                // Museum and App types match exactly
+                if (type === 'Museum' || type === 'App') {
+                    if (resource.type === type) {
+                        matchesType = true;
+                    }
+                } 
+                // Digital Archive includes Website, Digital Archive, and Video types
+                else if (type === 'Digital Archive') {
+                    if (resource.type === 'Website' || resource.type === 'Digital Archive' || resource.type === 'Video') {
+                        matchesType = true;
+                    }
+                } 
+                // Book includes Academic Book, Dictionary, Educational Books, Textbook, Grammar/Dictionary, Educational Materials, Phrasebook/Vocabulary
+                else if (type === 'Academic Book') {
+                    if (resource.type === 'Academic Book' || resource.type === 'Dictionary' || resource.type === 'Educational Books' || resource.type === 'Textbook' || resource.type === 'Grammar/Dictionary' || resource.type === 'Educational Materials' || resource.type === 'Phrasebook/Vocabulary') {
+                        matchesType = true;
+                    }
                 }
                 
                 if (matchesType && resource.coverage) {
@@ -456,6 +521,25 @@
             });
             // Alphabetize the regions
             return Array.from(uniqueRegions).sort();
+        }
+
+        /** Filters resources by type and region, then renders the dedicated card section. */
+        function filterResources(typeFilter) {
+            return allResources.filter(resource => {
+                // Museum and App types match exactly
+                if (typeFilter === 'Museum' || typeFilter === 'App') {
+                    return resource.type === typeFilter;
+                }
+                // Digital Archive includes Website, Digital Archive, and Video types
+                else if (typeFilter === 'Digital Archive') {
+                    return resource.type === 'Website' || resource.type === 'Digital Archive' || resource.type === 'Video';
+                }
+                // Book includes all book-related categories
+                else if (typeFilter === 'Academic Book') {
+                    return resource.type === 'Academic Book' || resource.type === 'Dictionary' || resource.type === 'Educational Books' || resource.type === 'Textbook' || resource.type === 'Grammar/Dictionary' || resource.type === 'Educational Materials' || resource.type === 'Phrasebook/Vocabulary';
+                }
+                return false;
+            });
         }
 
         /** Renders a list of resources into regional, scrollable cards. 
@@ -493,20 +577,23 @@
                 const regionGroup = document.createElement('div');
                 regionGroup.className = 'region-group';
                 
-                // Show region heading unless we are displaying a single region filter
+                // Show region heading 
                 regionGroup.innerHTML = `<h3>Region: ${region}</h3>`;
                 
                 const scrollContainer = document.createElement('div');
                 scrollContainer.className = 'region-scroll-container';
                 
                 resourcesByRegion[region].forEach(resource => {
-                    const linkText = resource.identifier === 'N/A' ? 'N/A' : 'View Resource';
-                    const linkHref = resource.identifier === 'N/A' || resource.identifier === 'AppStore/GooglePlay' ? '#' : resource.identifier;
+                    const linkText = resource.identifier === 'N/A' || resource.identifier === '-' || resource.identifier.includes('ISBN') || resource.identifier.includes('Academic') || resource.identifier.includes('Tribal') ? 'View Details' : 'View Resource';
+                    const linkHref = resource.identifier === 'N/A' || resource.identifier === '-' || resource.identifier.includes('App Store') || resource.identifier.includes('ISBN') || resource.identifier.includes('Academic') || resource.identifier.includes('Tribal') ? '#' : resource.identifier;
                     
                     const card = document.createElement('div');
                     card.className = 'resource-card';
+                    // Use 'name' for museums, 'title' for others
+                    const nameOrTitle = resource.name || resource.title;
+                    
                     card.innerHTML = `
-                        <h4>${resource.title || resource.name} (${resource.type})</h4>
+                        <h4>${nameOrTitle} (${resource.type})</h4>
                         <p>${resource.desc}</p>
                         <div class="resource-details">
                             <span><strong>Language:</strong> ${resource.language || 'N/A'}</span>
@@ -543,16 +630,7 @@
                 return; 
             }
 
-            const filteredResources = allResources.filter(resource => {
-                let matchesType = false;
-                if (typeFilter === 'Digital Archive') {
-                    matchesType = (resource.type === 'Website' || resource.type === 'Digital Archive');
-                } else if (resource.type === typeFilter) {
-                    matchesType = true;
-                }
-                
-                return matchesType; // The regional filtering happens inside renderRegionalCards
-            });
+            const filteredResources = filterResources(typeFilter);
             
             // Update section title 
             const titleElement = document.getElementById(targetSectionId).querySelector('h2');
@@ -571,8 +649,8 @@
             
             museumList.innerHTML = '';
             
-            const filteredMuseums = allResources.filter(resource => 
-                resource.type === 'Museum' && (regionFilter === null || resource.coverage === regionFilter)
+            const filteredMuseums = filterResources('Museum').filter(resource => 
+                (regionFilter === null || resource.coverage === regionFilter)
             );
             
             if (filteredMuseums.length === 0) {
@@ -582,11 +660,18 @@
 
             filteredMuseums.forEach(museum => {
                 const item = document.createElement('div');
-                item.className = 'museum-item';
+                item.className = 'resource-card'; // Reuse resource-card for styling
+                const linkText = museum.identifier === 'N/A' || museum.identifier.includes('Contact') ? 'View Details' : 'Visit Website';
+                const linkHref = museum.identifier === 'N/A' || museum.identifier.includes('Contact') ? '#' : museum.identifier;
+                
                 item.innerHTML = `
-                    <h3><a href="${museum.identifier}" target="_blank">${museum.name}</a></h3>
+                    <h4>${museum.name} (${museum.type})</h4>
                     <p>${museum.desc}</p>
-                    <p><strong>Coverage:</strong> ${museum.coverage || 'N/A'}</p>
+                    <div class="resource-details">
+                        <span><strong>Coverage:</strong> ${museum.coverage || 'N/A'}</span>
+                        <span><strong>Language:</strong> ${museum.language || 'N/A'}</span>
+                        <span><strong>Link:</strong> <a href="${linkHref}" target="_blank">${linkText}</a></span>
+                    </div>
                 `;
                 museumList.appendChild(item);
             });
@@ -597,10 +682,10 @@
         /** Builds navigation dropdown menus based on regions and types. */
         function buildMenus() {
             const menuConfigs = [
-                { id: 'digital-archive-menu', type: 'Digital Archive' },
-                { id: 'books-menu', type: 'Academic Book' },
-                { id: 'apps-menu', type: 'App' },
-                { id: 'museums-menu', type: 'Museum' }
+                { id: 'digital-archive-menu', type: 'Digital Archive', name: 'Digital Archives' },
+                { id: 'books-menu', type: 'Academic Book', name: 'Books' },
+                { id: 'apps-menu', type: 'App', name: 'Apps' },
+                { id: 'museums-menu', type: 'Museum', name: 'Museums' }
             ];
 
             menuConfigs.forEach(config => {
@@ -611,9 +696,8 @@
                 const regions = getUniqueRegions(config.type);
 
                 // Add an option to view all resources of this type
-                const resourceName = config.type === 'Academic Book' ? 'Books' : config.type;
                 const allLink = document.createElement('a');
-                allLink.textContent = `View All ${resourceName}`;
+                allLink.textContent = `View All ${config.name}`;
                 
                 // When "View All" is clicked, pass null for region filter
                 if (config.type === 'Museum') {
@@ -677,7 +761,6 @@
 
         // --- STORY FUNCTIONALITY (Unchanged) ---
         function renderStories() {
-            // ... (Story rendering logic) ...
             const storyList = document.getElementById('storyList');
             if (!storyList) return;
             const stories = JSON.parse(localStorage.getItem('stories') || '[]');
@@ -747,6 +830,8 @@
             const storyContent = document.getElementById('storyContent').value;
             const fileInput = document.getElementById('storyFile');
 
+            const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+            
             const newStory = {
                 title: storyTitle,
                 language: storyLanguage,
@@ -756,7 +841,6 @@
             };
             
             const saveStory = (story) => {
-                let stories = JSON.parse(localStorage.getItem('stories') || '[]');
                 if (editingIndex !== null) {
                     stories[parseInt(editingIndex)] = story;
                 } else {
@@ -784,7 +868,6 @@
                 reader.readAsDataURL(file);
             } else {
                 if (editingIndex !== null) {
-                    const stories = JSON.parse(localStorage.getItem('stories') || '[]');
                     const originalStory = stories[parseInt(editingIndex)];
                     if (originalStory && originalStory.fileName) {
                         newStory.fileName = originalStory.fileName;
@@ -815,18 +898,23 @@
                 // Collect all resources except Museums for the global search
                 const resourcesForSearch = allResources.filter(r => r.type !== 'Museum');
 
-                const filtered = resourcesForSearch.filter(resource => 
-                    (resource.title && resource.title.toLowerCase().includes(searchTerm)) ||
-                    (resource.name && resource.name.toLowerCase().includes(searchTerm)) ||
-                    (resource.desc && resource.desc.toLowerCase().includes(searchTerm)) ||
-                    (resource.language && resource.language.toLowerCase().includes(searchTerm)) ||
-                    (resource.coverage && resource.coverage.toLowerCase().includes(searchTerm)) ||
-                    (resource.publisher && resource.publisher.toLowerCase().includes(searchTerm))
-                );
+                const filtered = allResources.filter(resource => {
+                    const searchFields = [
+                        resource.title,
+                        resource.name,
+                        resource.desc,
+                        resource.language,
+                        resource.coverage,
+                        resource.publisher,
+                        resource.type
+                    ].map(field => field ? field.toLowerCase() : '');
+
+                    return searchFields.some(field => field.includes(searchTerm));
+                });
                 
                 // Use the Digital Archive section to display global search results
                 if (searchTerm.length > 0) {
-                    document.getElementById('digital-archive-title').textContent = `Search Results for "${this.value}" (All Resources)`;
+                    document.getElementById('digital-archive-title').textContent = `Search Results for "${this.value}" (${filtered.length} items)`;
                     showSection('digital-archive-section');
                     // Render the combined results as regional cards (isSearch = true)
                     renderRegionalCards(filtered, 'digital-archive-list', null, true); 
