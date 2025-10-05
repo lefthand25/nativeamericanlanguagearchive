@@ -14,12 +14,11 @@
             background: #fff; 
         }
 
-        /* --- HEADER & BANNER (NOW INCLUDES SEARCH BAR) --- */
+        /* --- HEADER & BANNER (RESTORED ORIGINAL HEADING) --- */
         header { 
             background: #fff; 
             color: #222; 
             padding: 1.5rem 2rem 0.5rem; 
-            /* Use Flexbox to align title/search bar */
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -32,22 +31,22 @@
             text-align: left;
         }
         header h1 { 
-            font-size: 2.5rem; /* Slightly larger for emphasis */
-            margin-bottom: 0; /* Remove space under main heading */
-            color: #1A73E8; /* A key color for brand/emphasis */
-            font-weight: 900; /* Extra bold */
-            letter-spacing: 0.1rem; /* Space out the letters */
+            font-size: 2rem; 
+            margin-bottom: 0.25rem; 
+            color: #222; 
+            font-weight: 500;
+            letter-spacing: normal;
         }
         header p { 
             font-size: 0.9rem; 
-            font-style: italic; /* Use italics for the subtitle */
+            font-style: normal; 
             color: #666; 
-            margin-top: 0.25rem;
+            margin-top: 0;
         }
         
         .search-container {
-            flex-basis: 300px; /* Give search bar a fixed width */
-            padding-top: 0.5rem; /* Align it better with the H1/P text */
+            flex-basis: 300px;
+            padding-top: 0.5rem;
         }
         #global-search {
             width: 100%;
@@ -64,20 +63,20 @@
             box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (Kept the clean tabs we created) --- */
         nav { 
             background: #fff; 
             padding: 0 2rem;
             border-bottom: 1px solid #eee;
             position: sticky; 
-            top: 85px; /* Adjust this if header height changes */
+            top: 85px; 
             z-index: 999;
         }
         nav ul { 
             list-style: none; 
             display: flex; 
-            flex-wrap: wrap; /* Allow items to wrap */
-            justify-content: flex-start; /* Align left */
+            flex-wrap: wrap; 
+            justify-content: flex-start; 
         }
         nav ul li a { 
             display: block; 
@@ -86,8 +85,8 @@
             color: #333; 
             font-weight: 500; 
             transition: all 0.2s ease-in-out;
-            white-space: nowrap; /* Prevent links from breaking */
-            border-bottom: 3px solid transparent; /* Placeholder for active state */
+            white-space: nowrap; 
+            border-bottom: 3px solid transparent; 
         }
         nav ul li a:hover { 
             background-color: #f5f5f5; 
@@ -108,7 +107,7 @@
         .section { 
             margin-bottom: 3rem; 
             padding-top: 1rem;
-            display: none; /* Hidden by default, shown by JS */
+            display: none; 
         }
         
         /* --- ABOUT SECTION (2-COLUMN LAYOUT) --- */
@@ -119,24 +118,33 @@
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
-            align-items: flex-start;
+            /* ALIGNING ITEMS TO THE CENTER FOR BALANCE */
+            align-items: center; 
         }
         .about-text {
-            flex: 1 1 55%; /* Text takes up about 55% of the space */
+            /* Text takes up about 55% of the space */
+            flex: 1 1 55%; 
             padding-right: 1rem;
         }
         .about-image {
-            flex: 1 1 35%; /* Image takes up about 35% of the space */
-            min-width: 250px; /* Minimum size for the image container */
+            /* Image takes up about 35% of the space */
+            flex: 1 1 35%; 
+            min-width: 250px; 
+            /* Ensuring image area is also centered vertically */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .about-image img {
             width: 100%;
             height: auto;
+            max-height: 400px; /* Constraint height for balancing */
+            object-fit: contain; /* Ensure the image fits nicely */
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* --- RESOURCE CARD STYLES --- */
+        /* --- RESOURCE CARD STYLES (Kept the nice card styling) --- */
         .resource-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -166,7 +174,7 @@
             font-size: 0.95rem;
             margin-bottom: 0.75rem;
             color: #555;
-            flex-grow: 1; /* Allows description to take up available space */
+            flex-grow: 1; 
         }
         .resource-meta {
             font-size: 0.85rem;
@@ -219,10 +227,6 @@
             nav ul {
                 justify-content: center;
             }
-            nav ul li a {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.9rem;
-            }
         }
         
         @media (max-width: 768px) {
@@ -252,8 +256,8 @@
 
     <header>
         <div class="header-left">
-            <h1>VOICES</h1>
-            <p>Native American Language Archive</p>
+            <h1>Native American Language Archive</h1>
+            <p>Linking Past, Present and Future Voices</p>
         </div>
         <div class="search-container">
             <input type="search" id="global-search" placeholder="Search across all resources...">
@@ -279,12 +283,11 @@
             <h2>About Our Mission</h2>
             <div class="about-content-wrapper">
                 <div class="about-text">
-                    <p>The **VOICES** Archive is a dedicated platform for the preservation, revitalization, and celebration of indigenous languages across North America. We provide access to digitized historical documents, contemporary media, and language documentation projects led by native speakers and communities.</p>
-                    <p>Our goal is to act as a centralized, community-driven hub, offering **resources** to help communities preserve their ancestral languages for future generations. We prioritize ethical archiving practices and the sovereign control of linguistic data by the communities who create it.</p>
-                    <p>Explore the categories above to find books, mobile apps, educational programs, and digital archives from tribal nations and organizations actively involved in language work.</p>
+                    <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
+                    <p style="margin-top: 1rem;">Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enhances us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
                 </div>
                 <div class="about-image">
-                    <img src="boston-public-library-rFl5Fs69_-E-unsplash (1).jpg" alt="A photo of an ornate, historical library or archive room, representing the preservation of knowledge.">
+                    <img src="boston-public-library-rFl5Fs69_-E-unsplash (1).jpg" alt="Historical image of three Native American men standing outside of tipis, representing heritage and culture.">
                 </div>
             </div>
         </section>
@@ -319,7 +322,7 @@
                 </div>
         </section>
 
-        <section id="share-story-section" class="section">
+        <section id="share-story" class="section">
             <h2>Share Your Story or Resources</h2>
             <p>If you are a tribal member, elder, or language professional and would like to share documentation, stories, or resources with the archive, please use the form below. We are committed to ethical archiving practices and community control.</p>
             <div style="padding: 2rem; background: #f9f9f9; border: 1px dashed #ccc; text-align: center;">
@@ -327,7 +330,7 @@
             </div>
         </section>
 
-        <section id="contact-section" class="section">
+        <section id="contact" class="section">
             <h2>Contact Us</h2>
             <p>For general inquiries, technical assistance, or partnership opportunities, please reach out.</p>
             <div style="padding: 2rem; background: #f9f9f9; border: 1px dashed #ccc; text-align: center;">
@@ -338,151 +341,49 @@
     </main>
 
     <footer>
-        &copy; 2025 VOICES: Native American Language Archive. All Rights Reserved. Data sovereignty maintained by contributing tribes and nations.
+        &copy; 2025 Native American Language Archive. All Rights Reserved. Data sovereignty maintained by contributing tribes and nations.
     </footer>
 
     <script>
-        // --- DATA MODEL (The entire list of resources) ---
-        // The 'type' field will be used to automatically sort the cards into the correct section.
+        // --- RESOURCE DATA ---
         const allResources = [
-            // Moved Nakona University and language classes to LEARNING RESOURCES
-            {
-                id: 10,
-                title: "Nakona University Language Classes",
-                name: "Fort Belknap College Nakona/A'aninin",
-                desc: "Offers full credit courses in the Nakona (Assiniboine) language, alongside cultural studies. A key institution for community-led language revitalization.",
-                language: "Nakona (Assiniboine)",
-                coverage: "Fort Belknap Reservation, Montana",
-                publisher: "Fort Belknap College",
-                type: "Learning Resources",
-                url: "#" // Placeholder
-            },
-            // Moved Cherokee Nation project to LEARNING RESOURCES
-            {
-                id: 11,
-                title: "Cherokee Nation Language Department",
-                name: "Cherokee Nation",
-                desc: "A comprehensive initiative offering immersion schools, master-apprentice programs, and online lessons to create new speakers of the Cherokee language.",
-                language: "Cherokee",
-                coverage: "Cherokee Nation, Oklahoma",
-                publisher: "Cherokee Nation",
-                type: "Learning Resources",
-                url: "#" // Placeholder
-            },
-            // Moved Wampanoag project to LEARNING RESOURCES
-            {
-                id: 12,
-                title: "Wôpanâak Language Reclamation Project",
-                name: "Wôpanâak Language Reclamation Project",
-                desc: "The effort to bring the Wampanoag language back to the community after 150 years without native speakers, including summer programs and children's curriculum.",
-                language: "Wampanoag",
-                coverage: "Massachusetts",
-                publisher: "Wampanoag Tribe",
-                type: "Learning Resources",
-                url: "#" // Placeholder
-            },
-            // The following are Digital Archive/Website Examples
-            {
-                id: 1,
-                title: "AILLA: Archive of Indigenous Languages of Latin America",
-                name: "AILLA",
-                desc: "A digital repository of audio and text materials from and about the indigenous languages of Latin America.",
-                language: "Various (Latin American)",
-                coverage: "Latin America",
-                publisher: "University of Texas at Austin",
-                type: "Digital Archive",
-                url: "#" // Placeholder
-            },
-            {
-                id: 2,
-                title: "Dena'ina Ełnena: A Dena'ina Language Archive",
-                name: "Dena'ina Ełnena",
-                desc: "Digital collection of historical and contemporary materials for the Dena'ina language of Alaska.",
-                language: "Dena'ina",
-                coverage: "Alaska, USA",
-                publisher: "Alaska Native Language Archive",
-                type: "Digital Archive",
-                url: "#" // Placeholder
-            },
-            // The following are App Examples
-            {
-                id: 3,
-                title: "Gwich'in Language Resources",
-                name: "Gwich'in Language",
-                desc: "Mobile app providing a dictionary, phrases, and basic **learning materials** for the Gwich'in language.",
-                language: "Gwich'in",
-                coverage: "Alaska/Yukon",
-                publisher: "Gwich'in Tribal Council",
-                type: "Apps",
-                url: "#" // Placeholder
-            },
-            {
-                id: 4,
-                title: "Lakota Language Consortium App",
-                name: "Lakota Language Consortium",
-                desc: "Interactive vocabulary and phrase app, designed for learners of all ages.",
-                language: "Lakota",
-                coverage: "Plains Region",
-                publisher: "Lakota Language Consortium",
-                type: "Apps",
-                url: "#" // Placeholder
-            },
-            // The following are Books/Print Examples
-            {
-                id: 5,
-                title: "Dictionary of the Comanche Language",
-                name: "Comanche Dictionary",
-                desc: "A comprehensive published dictionary, an essential reference for serious students and tribal members.",
-                language: "Comanche",
-                coverage: "Oklahoma",
-                publisher: "University of Oklahoma Press",
-                type: "Books",
-                url: "#" // Placeholder
-            },
-            // The following are Museum Examples
-            {
-                id: 6,
-                title: "National Museum of the American Indian (NMAI) Archives",
-                name: "NMAI",
-                desc: "Collections include linguistic field notes, audio recordings, and visual documentation from various cultures.",
-                language: "Various",
-                coverage: "North America",
-                publisher: "Smithsonian Institution",
-                type: "Museums",
-                url: "#" // Placeholder
-            },
-            {
-                id: 7,
-                title: "Phoebe A. Hearst Museum of Anthropology",
-                name: "Hearst Museum",
-                desc: "Extensive collections of California Indian languages, including the papers of linguist Alfred Kroeber.",
-                language: "California Languages",
-                coverage: "California, USA",
-                publisher: "UC Berkeley",
-                type: "Museums",
-                url: "#" // Placeholder
-            },
+            // LEARNING RESOURCES
+            { id: 10, title: "Nakona University Language Classes", desc: "Offers full credit courses in the Nakona (Assiniboine) language, alongside cultural studies. A key institution for community-led language revitalization.", language: "Nakona (Assiniboine)", coverage: "Great Plains", publisher: "Fort Belknap College", type: "Learning Resources", url: "#" },
+            { id: 11, title: "Wôpanâak Language Reclamation Project", desc: "Project to bring the Wampanoag language back to the community, including curriculum and programs.", language: "Wampanoag", coverage: "Eastern Woodlands", publisher: "Wampanoag Tribe", type: "Learning Resources", url: "#" },
+            { id: 12, title: "Cherokee Nation Language Department", desc: "A comprehensive initiative offering immersion schools, master-apprentice programs, and online lessons.", language: "Cherokee", coverage: "Southeast", publisher: "Cherokee Nation", type: "Learning Resources", url: "#" },
+
+            // APPS
+            { id: 3, title: "Gwich'in Language Resources", desc: "Mobile app providing a dictionary, phrases, and basic learning materials for the Gwich'in language.", language: "Gwich'in", coverage: "Arctic/Subarctic", publisher: "Gwich'in Tribal Council", type: "Apps", url: "#" },
+            { id: 4, title: "Lakota Language Consortium App", desc: "Interactive vocabulary and phrase app, designed for learners of all ages.", language: "Lakota", coverage: "Great Plains", publisher: "Lakota Language Consortium", type: "Apps", url: "#" },
+            
+            // BOOKS
+            { id: 5, title: "Dictionary of the Comanche Language", desc: "A comprehensive published dictionary, an essential reference for serious students and tribal members.", language: "Comanche", coverage: "Great Plains", publisher: "University of Oklahoma Press", type: "Books", url: "#" },
+
+            // MUSEUMS
+            { id: 6, title: "National Museum of the American Indian (NMAI) Archives", desc: "Collections include linguistic field notes, audio recordings, and visual documentation from various cultures.", language: "Various", coverage: "North America", publisher: "Smithsonian Institution", type: "Museums", url: "#" },
+            { id: 7, title: "Phoebe A. Hearst Museum of Anthropology", desc: "Extensive collections of California Indian languages, including the papers of linguist Alfred Kroeber.", language: "California Languages", coverage: "California", publisher: "UC Berkeley", type: "Museums", url: "#" },
+
+            // DIGITAL ARCHIVES
+            { id: 1, title: "AILLA: Archive of Indigenous Languages of Latin America", desc: "A digital repository of audio and text materials from and about the indigenous languages of Latin America.", language: "Various (Latin American)", coverage: "Latin America", publisher: "University of Texas at Austin", type: "Digital Archive", url: "#" },
+            { id: 2, title: "Dena'ina Ełnena: A Dena'ina Language Archive", desc: "Digital collection of historical and contemporary materials for the Dena'ina language of Alaska.", language: "Dena'ina", coverage: "Arctic/Subarctic", publisher: "Alaska Native Language Archive", type: "Digital Archive", url: "#" },
         ];
+
 
         // --- CORE LOGIC ---
 
         /**
          * Renders the resource cards for a specific resource type into its container.
-         * @param {string} resourceType - The type of resource to display (e.g., 'Digital Archive', 'Books').
-         * @param {string} containerId - The ID of the HTML element to insert the cards into.
          */
         function renderTypeSection(resourceType, containerId) {
-            // Determine the container ID based on the resource type if not provided
-            if (!containerId) {
-                containerId = resourceType.toLowerCase().replace(/ /g, '-') + '-list';
-            }
             const container = document.getElementById(containerId);
-            if (!container) return; // Exit if container doesn't exist
+            if (!container) return; 
             
-            // Filter resources by the given type
             const filteredResources = allResources.filter(resource => resource.type === resourceType);
 
-            // Generate HTML for each card
+            if (resourceType === 'Digital Archive') {
+                document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
+            }
+
             const html = filteredResources.map(resource => `
                 <div class="resource-card">
                     <div>
@@ -503,12 +404,15 @@
 
         /**
          * Renders a list of resource cards, typically for search results.
-         * @param {Array<Object>} resources - The array of resource objects to render.
-         * @param {string} containerId - The ID of the HTML element to insert the cards into.
          */
-        function renderGenericCards(resources, containerId) {
+        function renderGenericCards(resources, containerId, searchTerm = null) {
             const container = document.getElementById(containerId);
             if (!container) return; 
+
+            const titleElement = document.getElementById('digital-archive-title');
+            if (searchTerm) {
+                 titleElement.textContent = `Search Results for "${searchTerm}" (${resources.length} items)`;
+            }
 
             if (resources.length === 0) {
                 container.innerHTML = `<p style="padding: 2rem; text-align: center; color: #555;">No resources found matching your search term.</p>`;
@@ -534,31 +438,24 @@
             container.innerHTML = html;
         }
 
-
         /**
          * Shows a specific content section and updates the navigation bar.
-         * @param {string} sectionId - The ID of the section to display (e.g., 'about', 'digital-archive-section').
-         * @param {string} navAnchorId - The section name used in the nav anchor (e.g., 'digital-archive').
          */
-        function showSection(sectionId, navAnchorId) {
-            // 1. Hide all sections
+        function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
                 section.style.display = 'none';
             });
 
-            // 2. Show the requested section
             const sectionToShow = document.getElementById(sectionId);
             if (sectionToShow) {
                 sectionToShow.style.display = 'block';
             }
 
-            // 3. Update the active state in the navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
 
-            // Find the correct nav link to activate. It's usually based on the data-section attribute.
-            const targetNavId = navAnchorId || sectionId.replace('-section', '');
+            const targetNavId = sectionId.replace('-section', '');
             const activeLink = document.querySelector(`.nav-link[data-section="${targetNavId}"]`);
             if (activeLink) {
                 activeLink.classList.add('active');
@@ -570,17 +467,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // 1. INITIAL RENDERING OF ALL SECTIONS
-            // Render the content for all sections once at the start
             renderTypeSection('Digital Archive', 'digital-archive-list');
             renderTypeSection('Books', 'books-list');
             renderTypeSection('Apps', 'apps-list');
-            renderTypeSection('Learning Resources', 'learning-resources-list');
+            renderTypeSection('Learning Resources', 'learning-resources-list'); 
             renderTypeSection('Museums', 'museums-list');
             
             // 2. INITIAL VIEW
-            // Show the 'About' section by default and ensure its nav link is active
-            showSection('about', 'about');
-
+            showSection('about');
 
             // 3. NAVIGATION CLICKS
             document.querySelectorAll('.nav-link').forEach(link => {
@@ -590,16 +484,20 @@
                     const sectionName = this.getAttribute('data-section');
                     let sectionId = sectionName + '-section';
                     
-                    // Handle special cases for placeholder sections without a list
                     if (sectionName === 'about' || sectionName === 'share-story' || sectionName === 'contact') {
-                        sectionId = sectionName; // Use the simple ID for these sections
+                        sectionId = sectionName; 
                     }
                     
-                    // Reset search display when navigating away from search results
-                    document.getElementById('global-search').value = '';
+                    const searchInput = document.getElementById('global-search');
+                    searchInput.value = '';
+                    
                     document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
 
-                    showSection(sectionId, sectionName);
+                    if (sectionName !== 'digital-archive') {
+                         renderTypeSection('Digital Archive', 'digital-archive-list');
+                    }
+                    
+                    showSection(sectionId);
                 });
             });
 
@@ -609,34 +507,24 @@
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.trim().toLowerCase();
                 
-                // Filter the entire list of resources
                 const filtered = allResources.filter(resource => {
-                    // Create a list of fields to search in, converting them to lowercase
                     const searchFields = [
                         resource.title,
-                        resource.name,
                         resource.desc,
                         resource.language,
                         resource.coverage,
                         resource.publisher,
-                        resource.type // Include resource type in search
+                        resource.type 
                     ].map(field => field ? field.toLowerCase() : '');
 
-                    // Check if any field includes the search term
                     return searchFields.some(field => field.includes(searchTerm));
                 });
                 
-                // Use the Digital Archive section to display global search results
                 if (searchTerm.length > 0) {
-                    document.getElementById('digital-archive-title').textContent = `Search Results for "${this.value}" (${filtered.length} items)`;
-                    showSection('digital-archive-section', 'digital-archive'); // Show Digital Archive section
-                    // Render the combined results 
-                    renderGenericCards(filtered, 'digital-archive-list'); 
+                    showSection('digital-archive-section'); 
+                    renderGenericCards(filtered, 'digital-archive-list', this.value); 
                 } else {
-                    // Revert to default view when search is cleared
-                    document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
-                    showSection('about', 'about'); // Default back to About page
-                    // Re-render the default Digital Archive view so it's ready when clicked next
+                    showSection('about'); 
                     renderTypeSection('Digital Archive', 'digital-archive-list');
                 }
             });
