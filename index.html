@@ -140,7 +140,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* --- RESOURCE CARD STYLES (Updated to bold Coverage) --- */
+        /* --- RESOURCE CARD STYLES --- */
         .resource-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -198,6 +198,68 @@
         .resource-link:hover {
             background-color: #1A73E8;
         }
+
+        /* --- FORM STYLES --- */
+        .form-container {
+            max-width: 600px;
+            margin: 1.5rem 0;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #333;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        .form-group button {
+            padding: 0.75rem 1.5rem;
+            background-color: #28a745; /* Green button for submission */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+
+        /* --- PADLET STYLE BOARD (Placeholder) --- */
+        .padlet-placeholder {
+            min-height: 400px;
+            border: 2px dashed #ccc;
+            background-color: #fff;
+            padding: 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #777;
+            margin-top: 1.5rem;
+        }
+
         
         /* --- FOOTER --- */
         footer {
@@ -303,18 +365,66 @@
         </section>
 
         <section id="share-story" class="section">
-            <h2>Share Your Story or Resources</h2>
-            <p>If you are a tribal member, elder, or language professional and would like to share documentation, stories, or resources with the archive, please use the form below. We are committed to ethical archiving practices and community control.</p>
-            <div style="padding: 2rem; background: #f9f9f9; border: 1px dashed #ccc; text-align: center;">
-                [Placeholder for Submission Form]
+            <h2>Share Your Language Story</h2>
+            <p>We invite community members, learners, and elders to share your experiences, memories, and revitalization efforts in a public, interactive space. Please be mindful of cultural protocols when sharing.</p>
+
+            <div class="form-container">
+                <h3>Submit a New Story/Resource</h3>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="story-title">Title of Story or Resource</label>
+                        <input type="text" id="story-title" name="story-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-language">Language & Nation (e.g., Cherokee, Navajo, Haida)</label>
+                        <input type="text" id="story-language" name="story-language" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-content">Your Story or Description</label>
+                        <textarea id="story-content" name="story-content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-file">Attach File (Audio, Image, PDF)</label>
+                        <input type="file" id="story-file" name="story-file">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit Story for Review</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="padlet-placeholder">
+                <p>--- Interactive Community Board Placeholder ---<br>This area would display user-submitted stories and allow editing/deletion after database and user authentication setup (like Padlet).</p>
             </div>
         </section>
 
         <section id="contact" class="section">
             <h2>Contact Us</h2>
-            <p>For general inquiries, technical assistance, or partnership opportunities, please reach out.</p>
-            <div style="padding: 2rem; background: #f9f9f9; border: 1px dashed #ccc; text-align: center;">
-                [Placeholder for Contact Information / Contact Form]
+            <p>For private inquiries, technical assistance, or partnership opportunities, please fill out the form below. Your message will be sent privately and will **not** be displayed on the website.</p>
+            
+            <div class="form-container">
+                <form action="#" method="POST"> 
+                    <div class="form-group">
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" name="contact-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Your Email Address</label>
+                        <input type="email" id="contact-email" name="contact-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="contact-subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="contact-message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Send Message</button>
+                    </div>
+                </form>
+                <p style="font-size: 0.85rem; color: #888; margin-top: 1rem;">Messages submitted here will be forwarded to: `lefthand.textiles@gmail.com` (via a form processing service).</p>
             </div>
         </section>
 
@@ -339,7 +449,7 @@
 
 
             // --- DIGITAL ARCHIVE (Repositories, Research Centers, Digital Collections) ---
-            { id: 201, title: "Indigenous Languages of the Americas (AILLA)", desc: "A digital repository of audio and text materials from and about the indigenous languages of Latin America.", language: "Various (Latin American)", coverage: "Latin America", publisher: "University of Texas at Austin", type: "Digital Archive", url: "#" },
+            { id: 201, title: "AILLA: Archive of Indigenous Languages of Latin America", desc: "A digital repository of audio and text materials from and about the indigenous languages of Latin America.", language: "Various (Latin American)", coverage: "Latin America", publisher: "University of Texas at Austin", type: "Digital Archive", url: "#" },
             { id: 202, title: "Dena'ina Ełnena: A Dena'ina Language Archive", desc: "Digital collection of historical and contemporary materials for the Dena'ina language of Alaska.", language: "Dena'ina", coverage: "Arctic/Subarctic", publisher: "Alaska Native Language Archive", type: "Digital Archive", url: "#" },
             { id: 203, title: "Shoshoni Talking Dictionary", desc: "Searchable online language resource supporting Newe Takwa (Shoshoni) language use with audio pronunciation.", language: "Shoshoni", coverage: "Great Basin", publisher: "University of Utah", type: "Digital Archive", url: "#" },
             { id: 204, title: "DAILP: Digital Archive of Indigenous Language Persistence", desc: "Community-based digital archive supporting Indigenous peoples' knowledge and interpretations.", language: "Multiple Languages", coverage: "Nationwide", publisher: "Northeastern University", type: "Digital Archive", url: "#" },
@@ -358,4 +468,197 @@
             { id: 401, title: "FirstVoices Mobile App", desc: "Provides keyboard and dictionary apps for 100 Indigenous languages, including Eastern Woodlands varieties.", language: "Multiple Languages", coverage: "Eastern Woodlands / Nationwide", publisher: "FirstVoices", type: "Apps", url: "#" },
             { id: 402, title: "SHI Haida Language App (Xaad Kíl)", desc: "Official Haida language learning application from the Sealaska Heritage Institute with audio and video content.", language: "Haida", coverage: "Northwest Coast", publisher: "Sealaska Heritage Institute", type: "Apps", url: "#" },
             { id: 403, title: "Newe Daygwap Eastern Shoshone App", desc: "Official Eastern Shoshone language learning application from the Fremont County School District #21.", language: "Eastern Shoshone", coverage: "Great Basin", publisher: "Fremont County School District #21", type: "Apps", url: "#" },
-            { id: 404, title: "The Arapaho Language App", desc: "Developed by fluent elders of the Northern Arapaho tribe and Arapahoe Schools. Free on the Apple Store.", language: "Arapaho", coverage: "Great Plains", publisher: "Northern Arapaho Tribe", type: "Apps",
+            { id: 404, title: "The Arapaho Language App", desc: "Developed by fluent elders of the Northern Arapaho tribe and Arapahoe Schools. Free on the Apple Store.", language: "Arapaho", coverage: "Great Plains", publisher: "Northern Arapaho Tribe", type: "Apps", url: "#" },
+            { id: 405, title: "Navajo MAIL 4+ App", desc: "Learn Navajo Language (Diné bizaad) app designed to challenge abilities and help users learn at their own pace.", language: "Navajo", coverage: "Southwest", publisher: "Independent Developer", type: "Apps", url: "#" },
+
+
+            // --- MUSEUMS & CULTURAL CENTERS ---
+            { id: 501, title: "Sam Noble Museum", desc: "Extensive Native American Languages Collection with 175 languages represented through audio, video, and curricula.", language: "175 Native American Languages", coverage: "Great Plains", publisher: "University of Oklahoma", type: "Museums", url: "#" },
+            { id: 502, title: "California Indian Museum and Cultural Center", desc: "Dedicated to educating the public about California Indian history, culture, and contemporary life.", language: "California Languages", coverage: "California", publisher: "California Indian Museum", type: "Museums", url: "#" },
+            { id: 503, title: "Woodland Cultural Centre", desc: "Indigenous preservation museum dedicated to strengthening Iroquoian language and culture.", language: "Iroquoian Languages", coverage: "Eastern Woodlands", publisher: "Woodland Cultural Centre", type: "Museums", url: "#" },
+            { id: 504, title: "Indian Pueblo Cultural Center", desc: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture and cultural programs.", language: "Pueblo Languages", coverage: "Southwest", publisher: "Indian Pueblo Cultural Center", type: "Museums", url: "#" },
+            { id: 505, title: "Heard Museum", desc: "Major museum focusing on Southwest Indigenous cultures, including a library and archives with 34,000 volumes.", language: "Southwest Languages", coverage: "Southwest", publisher: "Heard Museum", type: "Museums", url: "#" },
+        ];
+
+
+        // --- CORE LOGIC ---
+
+        /**
+         * Renders the resource cards for a specific resource type into its container.
+         */
+        function renderTypeSection(resourceType, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return; 
+            
+            const filteredResources = allResources.filter(resource => resource.type === resourceType);
+
+            // Update section headings with count
+            const sectionMap = {
+                'Digital Archive': { id: 'digital-archive-title', title: 'Digital Archives & Websites' },
+                'Books': { id: '#books-section h2', title: 'Books & Print Materials' },
+                'Apps': { id: '#apps-section h2', title: 'Mobile Apps & Interactive Resources' },
+                'Learning Resources': { id: '#learning-resources-section h2', title: 'Learning Resources & Classes' },
+                'Museums': { id: '#museums-section h2', title: 'Museums & Cultural Centers' }
+            };
+            
+            const mapEntry = sectionMap[resourceType];
+            if (mapEntry) {
+                const element = document.querySelector(mapEntry.id) || document.getElementById(mapEntry.id);
+                if (element) {
+                    element.textContent = `${mapEntry.title} (${filteredResources.length} items)`;
+                }
+            }
+
+
+            const html = filteredResources.map(resource => `
+                <div class="resource-card">
+                    <div>
+                        <h3>${resource.title}</h3>
+                        <p>${resource.desc}</p>
+                    </div>
+                    <div class="resource-meta">
+                        <span>**Region:** <strong>${resource.coverage}</strong></span>
+                        <span>Language: ${resource.language}</span>
+                        <span>Publisher: ${resource.publisher}</span>
+                        <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+        }
+
+        /**
+         * Renders a list of resource cards, typically for search results.
+         */
+        function renderGenericCards(resources, containerId, searchTerm = null) {
+            const container = document.getElementById(containerId);
+            if (!container) return; 
+
+            const titleElement = document.getElementById('digital-archive-title');
+            if (searchTerm) {
+                 titleElement.textContent = `Search Results for "${searchTerm}" (${resources.length} items)`;
+            }
+
+            if (resources.length === 0) {
+                container.innerHTML = `<p style="padding: 2rem; text-align: center; color: #555;">No resources found matching your search term. Try searching by language, region, or keyword.</p>`;
+                return;
+            }
+
+            const html = resources.map(resource => `
+                <div class="resource-card">
+                    <div>
+                        <h3>${resource.title}</h3>
+                        <p>${resource.desc}</p>
+                    </div>
+                    <div class="resource-meta">
+                        <span>Type: <strong>${resource.type}</strong></span>
+                        <span>**Region:** <strong>${resource.coverage}</strong></span>
+                        <span>Language: ${resource.language}</span>
+                        <span>Publisher: ${resource.publisher}</span>
+                        <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+        }
+
+        /**
+         * Shows a specific content section and updates the navigation bar.
+         */
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block';
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const targetNavId = sectionId.replace('-section', '');
+            const activeLink = document.querySelector(`.nav-link[data-section="${targetNavId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+
+        // --- EVENT LISTENERS & INITIAL SETUP ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. INITIAL RENDERING OF ALL SECTIONS
+            renderTypeSection('Digital Archive', 'digital-archive-list');
+            renderTypeSection('Books', 'books-list');
+            renderTypeSection('Apps', 'apps-list');
+            renderTypeSection('Learning Resources', 'learning-resources-list'); 
+            renderTypeSection('Museums', 'museums-list');
+            
+            // 2. INITIAL VIEW
+            showSection('about');
+
+            // 3. NAVIGATION CLICKS
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const sectionName = this.getAttribute('data-section');
+                    let sectionId = sectionName + '-section';
+                    
+                    if (sectionName === 'about' || sectionName === 'share-story' || sectionName === 'contact') {
+                        sectionId = sectionName; 
+                    }
+                    
+                    const searchInput = document.getElementById('global-search');
+                    searchInput.value = '';
+                    
+                    // Reset all resource sections to their default views (in case a search was active)
+                    renderTypeSection('Digital Archive', 'digital-archive-list');
+                    renderTypeSection('Books', 'books-list');
+                    renderTypeSection('Apps', 'apps-list');
+                    renderTypeSection('Learning Resources', 'learning-resources-list'); 
+                    renderTypeSection('Museums', 'museums-list');
+
+                    showSection(sectionId);
+                });
+            });
+
+
+            // 4. GLOBAL SEARCH FUNCTIONALITY
+            const searchInput = document.getElementById('global-search');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                const filtered = allResources.filter(resource => {
+                    const searchFields = [
+                        resource.title,
+                        resource.desc,
+                        resource.language,
+                        resource.coverage,
+                        resource.publisher,
+                        resource.type 
+                    ].map(field => field ? field.toLowerCase() : '');
+
+                    return searchFields.some(field => field.includes(searchTerm));
+                });
+                
+                if (searchTerm.length > 0) {
+                    // When searching, show the Digital Archive tab to display generic results
+                    showSection('digital-archive-section'); 
+                    renderGenericCards(filtered, 'digital-archive-list', this.value); 
+                } else {
+                    // When search box is empty, return to the default view (About tab)
+                    showSection('about'); 
+                    // Reset the Digital Archive list title
+                    document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites (${allResources.filter(r => r.type === 'Digital Archive').length} items)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
