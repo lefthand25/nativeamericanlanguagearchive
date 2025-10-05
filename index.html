@@ -283,8 +283,9 @@
         }
 
 
-        /* RESPONSIVE DESIGN */
+        /* RESPONSIVE DESIGN (UPDATED FOR TEXT ADJUSTABILITY) */
         @media (max-width: 768px) {
+            /* 1. LAYOUT ADJUSTMENTS */
             header {
                 flex-direction: column;
                 align-items: center;
@@ -299,10 +300,44 @@
                 padding-top: 1rem;
             }
             nav {
-                top: 170px; /* Adjusted sticky position */
+                /* Reduced sticky position since the header is now shorter */
+                top: 140px; 
+            }
+            nav ul {
+                justify-content: space-around; /* Distribute links evenly */
+            }
+            nav a {
+                padding: 0.5rem 0.75rem; /* Reduced padding for smaller buttons */
+                font-size: 0.9rem;
             }
             .container {
                 padding: 1rem;
+            }
+
+            /* 2. FONT SIZE ADJUSTMENTS */
+            header h1 { 
+                font-size: 1.75rem; /* Smaller main title */
+            }
+            header p {
+                font-size: 0.8rem; /* Smaller subtitle */
+            }
+            section h2 { 
+                font-size: 1.5rem; /* Smaller section headers */
+            }
+            .region-group h3 {
+                font-size: 1.2rem; /* Smaller sub-headers */
+            }
+            .resource-card h4, #storyList h3 {
+                font-size: 1rem; /* Smaller card titles */
+            }
+            .resource-card p, #storyList p {
+                font-size: 0.9rem; /* Smaller paragraph text for cards/stories */
+            }
+            .resource-details span, #storyList em {
+                font-size: 0.75rem; /* Smallest details text */
+            }
+            footer {
+                font-size: 0.75rem; /* Smaller footer text */
             }
         }
     </style>
@@ -338,6 +373,10 @@
                 <div class="dropdown-content" id="apps-menu"></div>
             </li>
             <li class="dropdown">
+                <a onclick="toggleDropdown(this)">Tools & Aids</a>
+                <div class="dropdown-content" id="tools-aids-menu"></div>
+            </li>
+            <li class="dropdown">
                 <a onclick="toggleDropdown(this)">Museums</a>
                 <div class="dropdown-content" id="museums-menu"></div>
             </li>
@@ -355,7 +394,7 @@
 
         <section id="digital-archive-section" class="hidden">
             <h2 id="digital-archive-title">Digital Archives & Websites</h2>
-            <p>A collection of online language learning platforms, digital archives, and educational websites categorized by region.</p>
+            <p>A collection of online language learning platforms, digital archives, and educational websites categorized by region. This section includes **video resources**.</p>
             <div id="digital-archive-list" class="resource-list">
                 </div>
         </section>
@@ -371,6 +410,13 @@
             <h2 id="apps-title">Mobile Apps & Interactive Tools</h2>
             <p>Interactive mobile applications and software designed for language learning and immersion.</p>
             <div id="apps-list" class="resource-list">
+                </div>
+        </section>
+        
+        <section id="tools-aids-section" class="hidden">
+            <h2 id="tools-aids-title">Tools & Learning Aids</h2>
+            <p>Specialized resources like keyboard bundles, fonts, e-learning portals, and media players designed to support literacy and communication in Native American languages.</p>
+            <div id="tools-aids-list" class="resource-list">
                 </div>
         </section>
 
@@ -419,7 +465,16 @@
     <script>
         // --- COMPLETE RESOURCE DATA CONSOLIDATED FROM ALL UPLOADED FILES ---
         const allResources = [
-            // Digital Archive Resources
+            // --- NEW: User-Requested Video ---
+            { title: "Indigenous Language Lesson/Documentation", type: "Video", desc: "User-suggested video resource for Indigenous language learning and documentation.", identifier: "https://m.youtube.com/watch?v=xbvf7BzeMMQ", coverage: "Unspecified Region", language: "Unspecified Language", publisher: "Community/Independent" },
+            { title: "100 Nakona Words - Fort Peck Series", type: "Video", desc: "This video presents 100 Nakona (Assiniboine) words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats.", identifier: "https://www.youtube.com/watch?v=NakonaWords", coverage: "Great Plains", language: "Nakona (Assiniboine), PISL", publisher: "Fort Peck Community College" },
+            
+            // --- NEW: Nakona University (Online Course/Website) ---
+            { title: "Nakona University Online Language Courses", type: "Website", desc: "Online non-profit educational organization offering 15-week Nakoda (Assiniboine) language courses, culture courses (e.g., starquilt making), and teacher training, focused on promoting Indigenous ways of knowing.", identifier: "https://www.nakonauniversity.org/", coverage: "Great Plains", language: "Nakoda (Assiniboine)", publisher: "Nakona University" },
+            
+            // --- Digital Archive Resources (Existing) ---
+            { title: "FirstVoices - Collaborative Indigenous Language Platform", type: "Digital Archive", desc: "Internationally recognized online platform for Indigenous communities to manage, curate, and share their languages. Provides state-of-the-art technologies and mobile apps.", identifier: "https://www.firstvoices.com/", coverage: "North America (Multiple)", language: "Multiple Indigenous Languages", publisher: "First Peoples' Cultural Council" },
+            { title: "Digital Archive of Indigenous Language Persistence (DAILP)", type: "Digital Archive", desc: "Community-based archive supporting Indigenous knowledge, interpretations, and representations, specializing in Cherokee written materials using Sequoyah's syllabary.", identifier: "https://www.archives.gov/nhprc/projects/catalog/dailp", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "NHPRC/Community-based" },
             { title: "Native Languages of the Americas (California Section)", type: "Website", desc: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials.", identifier: "https://www.native-languages.org/california.htm", coverage: "California", language: "California Languages", publisher: "Native Languages Org" },
             { title: "California State Parks - California Indians Language", type: "Website", desc: "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts for languages in life-and-death struggle for survival.", identifier: "https://www.parks.ca.gov/?page_id=23548", coverage: "California", language: "California Languages", publisher: "CA State Parks" },
             { title: "College of the Redwoods - Local Languages Guide", type: "Digital Archive", desc: "Library guide supporting student understanding of northwestern California Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe. Provides educational resources for cultural awareness and historical understanding.", identifier: "https://redwoods.libguides.com/native-americans/iar", coverage: "California", language: "Multiple CA Languages", publisher: "College of the Redwoods" },
@@ -452,9 +507,9 @@
             { title: "Cahuilla Language Resources", type: "Digital Archive", desc: "Digital materials for Cahuilla language, focusing on grammar and traditional narratives, often available through university or tribal programs.", identifier: "N/A", coverage: "California", language: "Cahuilla", publisher: "Tribal/Academic" },
             { title: "Pawnee Nation Language Department", type: "Website", desc: "Official website with resources and community information for Pawnee language revitalization.", identifier: "https://www.pawneenation.org/language", coverage: "Great Plains", language: "Pawnee", publisher: "Pawnee Nation" },
             { title: "Aaniiih Nakoda College Language Program", type: "Digital Archive", desc: "Digital resources for A'anin (Gros Ventre) and Nakoda languages.", identifier: "https://www.ancollege.edu/language", coverage: "Great Plains", language: "A'anin (Gros Ventre), Nakoda", publisher: "Aaniiih Nakoda College" },
-            { title: "100 Nakona Words - Fort Peck Series", type: "Video", desc: "This video presents 100 Nakona (Assiniboine) words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats. The complete series includes volumes 1 and 2 with around 400 entries total, available as flashcards, DVDs, and CDs through Fort Peck Community College.", identifier: "https://www.youtube.com/watch?v=NakonaWords", coverage: "Great Plains", language: "Nakona (Assiniboine), PISL", publisher: "Fort Peck Community College" },
             
             // Apps Resources
+            { title: "Ogoki Learning Inc. Mobile Apps (140+ Titles)", type: "App", desc: "Developer of over 140 mobile applications, with 30 focused on Native American languages including Ojibway, aimed at increasing language use in a modern context.", identifier: "App Store / Google Play (Search Ogoki)", coverage: "Continental US/Canada", language: "Ojibway, Multiple Languages", publisher: "Ogoki Learning Inc." },
             { title: "Cherokee Language Learning App", type: "App", desc: "Mobile application for learning Cherokee syllabary, vocabulary, and phrases.", identifier: "App Store / Google Play", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
             { title: "Ojibwe Dictionary App", type: "App", desc: "Mobile dictionary and phrasebook based on the Ojibwe People's Dictionary, offering audio pronunciation.", identifier: "App Store / Google Play", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "University of Minnesota" },
             { title: "Lakota Language App", type: "App", desc: "Interactive mobile app providing beginner lessons, vocabulary, and games for the Lakota language.", identifier: "App Store / Google Play", coverage: "Great Plains", language: "Lakota", publisher: "Lakota Language Consortium" },
@@ -485,6 +540,11 @@
             { title: "Tlingit Grammar", type: "Academic Book", desc: "Scholarly analysis of the complex grammar of the Tlingit language.", identifier: "University Presses", coverage: "Northwest Coast", language: "Tlingit", publisher: "Academic Publishers" },
             { title: "Salish Language Texts", type: "Educational Books", desc: "Textbooks and story collections for various Salish languages (e.g., Spokane, Colville-Okanagan).", identifier: "Tribal/Academic", coverage: "Plateau", language: "Salish Languages", publisher: "Tribal/Academic" },
 
+            // --- NEW: Tools & Aids Resources ---
+            { title: "Nakota (Assiniboine) Keyboard and Font Bundle", type: "Tool/Aid", desc: "Software package providing a custom keyboard layout and fonts that enable users to correctly type the complex characters and diacritics of the Nakota/Assiniboine language on mobile and desktop devices.", identifier: "https://languageconservancy.org/learning-resources/", coverage: "Great Plains", language: "Nakota (Assiniboine)", publisher: "The Language Conservancy" },
+            { title: "Ho-Chunk E-Learning (Hoit'e Woiperes)", type: "Tool/Aid", desc: "Online and mobile e-learning platform providing structured lessons for the Ho-Chunk language, focusing on immersive learning.", identifier: "https://languageconservancy.org/learning-resources/", coverage: "Eastern Woodlands", language: "Ho-Chunk", publisher: "The Language Conservancy" },
+            { title: "Lakota E-Learning (Owóksape)", type: "Tool/Aid", desc: "Comprehensive online and mobile e-learning platform dedicated to self-paced Lakota language acquisition.", identifier: "https://languageconservancy.org/learning-resources/", coverage: "Great Plains", language: "Lakota", publisher: "The Language Conservancy" },
+            
             // Museum Resources
             { name: "Heard Museum", type: "Museum", desc: "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000+ volumes, focus on Southwest Indigenous cultures.", identifier: "https://heard.org/", coverage: "Southwest", language: "Southwest Languages", publisher: "Heard Museum" },
             { name: "Indian Pueblo Cultural Center", type: "Museum", desc: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists, and cultural programs promoting language and heritage.", identifier: "https://indianpueblo.org/", coverage: "Southwest", language: "Pueblo Languages", publisher: "Indian Pueblo Cultural Center" },
@@ -498,7 +558,7 @@
 
         let editingIndex = null; 
         
-        // --- UTILITY FUNCTIONS (unchanged from last successful version) ---
+        // --- UTILITY FUNCTIONS ---
 
         /** Extracts unique regions for a given resource type. */
         function getUniqueRegions(type) {
@@ -511,6 +571,12 @@
                         matchesType = true;
                     }
                 } 
+                // Tools/Aids match exactly
+                else if (type === 'Tool/Aid') {
+                    if (resource.type === 'Tool/Aid') {
+                        matchesType = true;
+                    }
+                }
                 // Digital Archive includes Website, Digital Archive, and Video types
                 else if (type === 'Digital Archive') {
                     if (resource.type === 'Website' || resource.type === 'Digital Archive' || resource.type === 'Video') {
@@ -535,8 +601,8 @@
         /** Filters resources by type. */
         function filterResources(typeFilter) {
             return allResources.filter(resource => {
-                // Museum and App types match exactly
-                if (typeFilter === 'Museum' || typeFilter === 'App') {
+                // Museum, App, and Tool/Aid types match exactly
+                if (typeFilter === 'Museum' || typeFilter === 'App' || typeFilter === 'Tool/Aid') {
                     return resource.type === typeFilter;
                 }
                 // Digital Archive includes Website, Digital Archive, and Video types
@@ -586,8 +652,8 @@
                 const regionGroup = document.createElement('div');
                 regionGroup.className = 'region-group';
                 
-                // Show region heading 
-                regionGroup.innerHTML = `<h3>Region: ${region}</h3>`;
+                // Show region heading - CORRECTED to be less colonial by prioritizing language group over pure geography
+                regionGroup.innerHTML = `<h3>Resources by Language Group in the ${region} Area</h3>`; 
                 
                 const scrollContainer = document.createElement('div');
                 scrollContainer.className = 'region-scroll-container';
@@ -635,6 +701,10 @@
                 targetSectionId = 'apps-section';
                 targetListId = 'apps-list';
                 sectionTitle = 'Mobile Apps & Interactive Tools';
+            } else if (typeFilter === 'Tool/Aid') {
+                targetSectionId = 'tools-aids-section';
+                targetListId = 'tools-aids-list';
+                sectionTitle = 'Tools & Learning Aids';
             } else {
                 return; 
             }
@@ -643,7 +713,7 @@
             
             // Update section title 
             const titleElement = document.getElementById(targetSectionId).querySelector('h2');
-            const typeName = typeFilter.replace('Academic Book', 'Book');
+            const typeName = typeFilter.replace('Academic Book', 'Book').replace('Tool/Aid', 'Tool');
             titleElement.textContent = regionFilter ? `${regionFilter} ${typeName} Resources` : sectionTitle;
 
             showSection(targetSectionId);
@@ -694,6 +764,7 @@
                 { id: 'digital-archive-menu', type: 'Digital Archive', name: 'Digital Archives' },
                 { id: 'books-menu', type: 'Academic Book', name: 'Books' },
                 { id: 'apps-menu', type: 'App', name: 'Apps' },
+                { id: 'tools-aids-menu', type: 'Tool/Aid', name: 'Tools & Aids' },
                 { id: 'museums-menu', type: 'Museum', name: 'Museums' }
             ];
 
@@ -768,7 +839,7 @@
             dropdownContent.classList.toggle('show');
         }
 
-        // --- STORY FUNCTIONALITY (Unchanged) ---
+        // --- STORY FUNCTIONALITY ---
         function renderStories() {
             const storyList = document.getElementById('storyList');
             if (!storyList) return;
@@ -895,6 +966,7 @@
             renderTypeSection('Digital Archive', null);
             renderTypeSection('Academic Book', null);
             renderTypeSection('App', null);
+            renderTypeSection('Tool/Aid', null); // Initialize new section
             renderMuseums(null); 
             
             renderStories(); 
