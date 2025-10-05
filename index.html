@@ -32,951 +32,586 @@
             text-align: left;
         }
         header h1 { 
-            font-size: 2rem; 
-            margin-bottom: 0.25rem; 
+            font-size: 2.5rem; /* Slightly larger for emphasis */
+            margin-bottom: 0; /* Remove space under main heading */
+            color: #1A73E8; /* A key color for brand/emphasis */
+            font-weight: 900; /* Extra bold */
+            letter-spacing: 0.1rem; /* Space out the letters */
         }
         header p { 
             font-size: 0.9rem; 
-            font-style: normal; 
+            font-style: italic; /* Use italics for the subtitle */
             color: #666; 
+            margin-top: 0.25rem;
+        }
+        
+        .search-container {
+            flex-basis: 300px; /* Give search bar a fixed width */
+            padding-top: 0.5rem; /* Align it better with the H1/P text */
+        }
+        #global-search {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s;
+        }
+        #global-search:focus {
+            border-color: #1A73E8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
         }
 
-        /* SEARCH BAR STYLES (NOW IN HEADER) */
-        .search-wrapper { 
-            max-width: 350px; /* Controls the width of the search box */
-            width: 100%; 
-            padding-top: 0.5rem; /* Align vertically with the header title */
-        }
-        .search-bar { width: 100%; position: relative; }
-        .search-bar input { 
-            width: 100%; 
-            padding: 0.5rem 1rem; 
-            font-size: 0.9rem; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            transition: all 0.3s; 
-        }
-        .search-bar input:focus { outline: none; border-color: #222; }
-        .search-info { 
-            text-align: right; 
-            margin-top: 0.25rem; 
-            font-size: 0.75rem; 
-            color: #666; 
-        }
-
-        /* NAVIGATION */
+        /* --- NAVIGATION --- */
         nav { 
             background: #fff; 
-            border-bottom: 1px solid #eee; 
-            padding: 0.25rem 0;
+            padding: 0 2rem;
+            border-bottom: 1px solid #eee;
             position: sticky; 
-            /* Position it right below the header (approx 100px) */
-            top: 100px; 
+            top: 85px; /* Adjust this if header height changes */
             z-index: 999;
         }
-        nav ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
-        nav a { 
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: flex-start; /* Align left */
+        }
+        nav ul li a { 
             display: block; 
-            padding: 0.75rem 1.25rem;
-            color: #222; 
-            text-decoration: none; 
-            font-weight: 500; 
-            transition: background 0.2s; 
-            cursor: pointer; 
-        }
-        nav a:hover { background: #f5f5f5; border-radius: 0; }
-        
-        /* Dropdowns */
-        .dropdown { position: relative; }
-        .dropdown-content { 
-            display: none; 
-            position: absolute; 
-            background: #fff; 
-            min-width: 200px; 
-            border: 1px solid #ddd; 
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-            z-index: 1000; 
-            max-height: 300px; 
-            overflow-y: auto; 
-        }
-        .dropdown:hover .dropdown-content, .dropdown-content.show { 
-            display: block; 
-        }
-
-        .dropdown-content a { 
             padding: 0.75rem 1rem; 
-            border-bottom: 1px solid #eee; 
-            display: block; 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 500; 
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap; /* Prevent links from breaking */
+            border-bottom: 3px solid transparent; /* Placeholder for active state */
         }
-        .dropdown-content a:last-child { border-bottom: none; }
-        .dropdown-content a:hover { background: #f0f0f0; } 
+        nav ul li a:hover { 
+            background-color: #f5f5f5; 
+            color: #1A73E8;
+        }
+        nav ul li a.active {
+            border-bottom: 3px solid #1A73E8;
+            color: #1A73E8;
+            font-weight: 600;
+        }
         
-
-        /* CONTENT SECTIONS */
-        .container { 
-            max-width: 1000px; 
-            margin: 0 auto; /* FIX: This centers the main content block */
-            padding: 2.5rem 2rem; 
+        /* --- MAIN CONTENT & SECTIONS --- */
+        main { 
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
         }
-        section { 
+        .section { 
             margin-bottom: 3rem; 
-            padding: 0; 
-            background: #fff; 
-            border-bottom: 1px solid #eee;
-            padding-bottom: 2rem;
-            text-align: left; 
+            padding-top: 1rem;
+            display: none; /* Hidden by default, shown by JS */
         }
-        .container section:last-of-type {
-            border-bottom: none;
+        
+        /* --- ABOUT SECTION (2-COLUMN LAYOUT) --- */
+        #about {
+            display: block; /* Always visible on load */
+        }
+        .about-content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .about-text {
+            flex: 1 1 55%; /* Text takes up about 55% of the space */
+            padding-right: 1rem;
+        }
+        .about-image {
+            flex: 1 1 35%; /* Image takes up about 35% of the space */
+            min-width: 250px; /* Minimum size for the image container */
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        section h2 { 
-            font-size: 1.8rem; 
-            margin-bottom: 1rem; 
-            padding-bottom: 0.5rem; 
-            border-bottom: 1px solid #ddd; 
-            color: #111;
-        }
-        .hidden { display: none; }
-
-        /* --- STYLES FOR REGIONAL CARD DISPLAY --- */
+        /* --- RESOURCE CARD STYLES --- */
         .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
             margin-top: 1.5rem;
         }
-        .region-group {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 2px solid #ddd;
-        }
-        .region-group h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #444;
-        }
-        .region-scroll-container {
-            max-height: 400px; 
-            overflow-y: auto;
-            padding-right: 15px; 
-            padding-bottom: 5px;
-        }
         .resource-card {
-            background: #fcfcfc;
-            border: 1px solid #eee;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            text-align: left; 
-        }
-        .resource-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-            color: #222;
-        }
-        .resource-details {
-            margin-top: 0.75rem;
-            font-size: 0.8rem;
-            color: #777;
-        }
-        .resource-details span {
-            display: inline-block;
-            margin-right: 15px;
-            font-weight: 500;
-        }
-        .resource-details a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        
-        /* --- Story List (Padlet Style) --- */
-        #storyList { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-            gap: 1.5rem; 
-            margin-top: 1.5rem; 
-            text-align: left; 
-        }
-        /* New styles for story cards */
-        #storyList .story {
-            background: #f9f9f9;
             border: 1px solid #ddd;
-            padding: 1rem;
-            border-radius: 4px;
-            position: relative;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        #storyList h3 {
-            font-size: 1.2rem;
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .resource-card h3 {
+            color: #1A73E8;
+            font-size: 1.25rem;
             margin-bottom: 0.5rem;
         }
-        #storyList em {
-            display: block;
+        .resource-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: #555;
+            flex-grow: 1; /* Allows description to take up available space */
+        }
+        .resource-meta {
             font-size: 0.85rem;
-            color: #777;
-            margin-bottom: 1rem;
+            color: #888;
+            margin-top: 0.5rem;
         }
-        #storyList .delete-btn, #storyList .edit-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ccc;
-            border: none;
-            padding: 3px 6px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            border-radius: 3px;
+        .resource-meta span {
+            display: block;
         }
-        #storyList .edit-btn {
-            right: 55px;
-            background: #b1d4e0;
-        }
-        #storyList .delete-btn:hover { background: #e74c3c; color: white; }
-        #storyList .edit-btn:hover { background: #3498db; color: white; }
-        #storyList .file-attachment {
-            margin-top: 10px;
-            border-top: 1px solid #eee;
-            padding-top: 5px;
-            font-size: 0.8rem;
-        }
-
-        /* Form Styling (in share and contact sections) */
-        #storyForm input[type="text"], #storyForm textarea, 
-        #contactForm input[type="text"], #contactForm input[type="email"], #contactForm textarea {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            text-align: left; 
-        }
-        #storyForm button, #contactForm button {
-            background-color: #3498db;
-            color: white;
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            display: block; 
-            width: 100%; 
+        .resource-link {
+            display: inline-block;
             margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #3C82F7;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s;
         }
-        #storyForm input[type="file"] {
-            display: block; 
-            margin-bottom: 0.5rem;
-            text-align: left; 
+        .resource-link:hover {
+            background-color: #1A73E8;
         }
         
-        /* --- FOOTER STYLES FIX --- */
+        /* --- FOOTER --- */
         footer {
-            /* FIX: This centers the text inside the footer block */
-            text-align: center; 
-            padding: 1.5rem 1rem;
-            background: #fcfcfc; 
-            color: #666;
-            font-size: 0.85rem;
+            text-align: center;
+            padding: 1.5rem 2rem;
+            margin-top: 3rem;
             border-top: 1px solid #eee;
-        }
-        footer p {
-            margin: 0;
+            color: #777;
+            font-size: 0.9rem;
         }
 
-
-        /* RESPONSIVE DESIGN (UPDATED FOR TEXT ADJUSTABILITY) */
-        @media (max-width: 768px) {
-            /* 1. LAYOUT ADJUSTMENTS */
+        /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+        @media (max-width: 900px) {
             header {
                 flex-direction: column;
                 align-items: center;
-                padding: 1rem;
+                padding-bottom: 1rem;
             }
             .header-left {
                 text-align: center;
-                width: 100%;
             }
-            .search-wrapper {
-                max-width: 90%;
+            .search-container {
                 padding-top: 1rem;
-            }
-            nav {
-                /* Reduced sticky position since the header is now shorter */
-                top: 140px; 
+                width: 80%;
+                flex-basis: auto;
             }
             nav ul {
-                justify-content: space-around; /* Distribute links evenly */
+                justify-content: center;
             }
-            nav a {
-                padding: 0.5rem 0.75rem; /* Reduced padding for smaller buttons */
+            nav ul li a {
+                padding: 0.5rem 0.75rem;
                 font-size: 0.9rem;
             }
-            .container {
+        }
+        
+        @media (max-width: 768px) {
+            /* About section: stack text and image */
+            .about-content-wrapper {
+                flex-direction: column;
+            }
+            .about-text {
+                flex: 1 1 100%;
+                padding-right: 0;
+            }
+            .about-image {
+                flex: 1 1 100%;
+                min-width: auto;
+            }
+            /* Resource Grid: simplify on small screens */
+            .resource-list {
+                grid-template-columns: 1fr;
+            }
+            main {
                 padding: 1rem;
-            }
-
-            /* 2. FONT SIZE ADJUSTMENTS */
-            header h1 { 
-                font-size: 1.75rem; /* Smaller main title */
-            }
-            header p {
-                font-size: 0.8rem; /* Smaller subtitle */
-            }
-            section h2 { 
-                font-size: 1.5rem; /* Smaller section headers */
-            }
-            .region-group h3 {
-                font-size: 1.2rem; /* Smaller sub-headers */
-            }
-            .resource-card h4, #storyList h3 {
-                font-size: 1rem; /* Smaller card titles */
-            }
-            .resource-card p, #storyList p {
-                font-size: 0.9rem; /* Smaller paragraph text for cards/stories */
-            }
-            .resource-details span, #storyList em {
-                font-size: 0.75rem; /* Smallest details text */
-            }
-            footer {
-                font-size: 0.75rem; /* Smaller footer text */
             }
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="header-left">
-            <h1>Native American Language Archive</h1>
-            <p>Linking Past, Present and Future Voices</p>
+            <h1>VOICES</h1>
+            <p>Native American Language Archive</p>
         </div>
-        
-        <div class="search-wrapper">
-            <div class="search-bar">
-                <input type="text" id="globalSearch" placeholder=" Search all resources by title, language, or region...">
-            </div>
-            <div class="search-info" id="searchInfo">Search across all resources</div>
+        <div class="search-container">
+            <input type="search" id="global-search" placeholder="Search across all resources...">
         </div>
     </header>
 
     <nav>
         <ul>
-            <li><a onclick="showSection('about')">About</a></li>
-            <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Digital Archive</a>
-                <div class="dropdown-content" id="digital-archive-menu"></div>
-            </li>
-            <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Books</a>
-                <div class="dropdown-content" id="books-menu"></div>
-            </li>
-            <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Apps</a>
-                <div class="dropdown-content" id="apps-menu"></div>
-            </li>
-            <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Tools & Aids</a>
-                <div class="dropdown-content" id="tools-aids-menu"></div>
-            </li>
-            <li class="dropdown">
-                <a onclick="toggleDropdown(this)">Museums</a>
-                <div class="dropdown-content" id="museums-menu"></div>
-            </li>
-            <li><a onclick="showSection('share')">Share a Story</a></li>
-            <li><a onclick="showSection('contact')">Contact</a></li>
+            <li><a href="#about" data-section="about" class="nav-link active">About</a></li>
+            <li><a href="#digital-archive" data-section="digital-archive" class="nav-link">Digital Archive</a></li>
+            <li><a href="#books" data-section="books" class="nav-link">Books</a></li>
+            <li><a href="#apps" data-section="apps" class="nav-link">Apps</a></li>
+            <li><a href="#learning-resources" data-section="learning-resources" class="nav-link">Learning Resources</a></li>
+            <li><a href="#museums" data-section="museums" class="nav-link">Museums</a></li>
+            <li><a href="#share-story" data-section="share-story" class="nav-link">Share a Story</a></li>
+            <li><a href="#contact" data-section="contact" class="nav-link">Contact</a></li>
         </ul>
     </nav>
 
-    <div class="container">
-        <section id="about">
+    <main>
+        
+        <section id="about" class="section">
             <h2>About Our Mission</h2>
-            <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
-            <p style="margin-top: 1rem;">Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world, and preserving linguistic diversity enhances us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
+            <div class="about-content-wrapper">
+                <div class="about-text">
+                    <p>The **VOICES** Archive is a dedicated platform for the preservation, revitalization, and celebration of indigenous languages across North America. We provide access to digitized historical documents, contemporary media, and language documentation projects led by native speakers and communities.</p>
+                    <p>Our goal is to act as a centralized, community-driven hub, offering **resources** to help communities preserve their ancestral languages for future generations. We prioritize ethical archiving practices and the sovereign control of linguistic data by the communities who create it.</p>
+                    <p>Explore the categories above to find books, mobile apps, educational programs, and digital archives from tribal nations and organizations actively involved in language work.</p>
+                </div>
+                <div class="about-image">
+                    <img src="boston-public-library-rFl5Fs69_-E-unsplash (1).jpg" alt="A photo of an ornate, historical library or archive room, representing the preservation of knowledge.">
+                </div>
+            </div>
         </section>
 
-        <section id="digital-archive-section" class="hidden">
+        <section id="digital-archive-section" class="section">
             <h2 id="digital-archive-title">Digital Archives & Websites</h2>
-            <p>A collection of online language learning platforms, digital archives, and educational websites categorized by region. This section includes **video resources**.</p>
             <div id="digital-archive-list" class="resource-list">
                 </div>
         </section>
 
-        <section id="books-section" class="hidden">
-            <h2 id="books-title">Academic Books & Language Texts</h2>
-            <p>Linguistic analyses, grammars, and rare academic texts for in-depth language study.</p>
+        <section id="books-section" class="section">
+            <h2>Books & Print Materials</h2>
             <div id="books-list" class="resource-list">
                 </div>
         </section>
 
-        <section id="apps-section" class="hidden">
-            <h2 id="apps-title">Mobile Apps & Interactive Tools</h2>
-            <p>Interactive mobile applications and software designed for language learning and immersion.</p>
+        <section id="apps-section" class="section">
+            <h2>Mobile Apps & Interactive Resources</h2>
             <div id="apps-list" class="resource-list">
                 </div>
         </section>
         
-        <section id="tools-aids-section" class="hidden">
-            <h2 id="tools-aids-title">Tools & Learning Aids</h2>
-            <p>Specialized resources like keyboard bundles, fonts, e-learning portals, and media players designed to support literacy and communication in Native American languages.</p>
-            <div id="tools-aids-list" class="resource-list">
+        <section id="learning-resources-section" class="section">
+            <h2>Learning Resources & Classes</h2>
+            <div id="learning-resources-list" class="resource-list">
                 </div>
         </section>
 
-        <section id="museums-list" class="hidden">
-            <h2>Native American Museums & Cultural Centers</h2>
-            <p>These institutions offer collections, archives, and cultural programming related to Native American languages and history.</p>
-            <div id="museum-list-container" class="resource-list">
+        <section id="museums-section" class="section">
+            <h2>Museum Collections & Cultural Centers</h2>
+            <div id="museums-list" class="resource-list">
                 </div>
         </section>
-        <section id="share" class="hidden">
-            <h2>Share a Story</h2>
-            <p>Contribute your own story in English or in a Native American language. 
-            These stories will become part of our growing archive and are saved in your browser.</p>
-            <form id="storyForm">
-                <input type="text" id="storyTitle" placeholder="Story Title" required>
-                <input type="text" id="storyLanguage" placeholder="Language (e.g. English, Cherokee)" required>
-                <textarea id="storyContent" placeholder="Write your story here..." rows="6" required></textarea>
-                <input type="file" id="storyFile" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.mp3,.mp4,.wav">
-                <label for="storyFile" style="font-size: 0.9rem; color: #666;">Optional: Attach a file (PDF, Word, Text, Image, or Audio)</label>
-                <button type="submit">Submit Story</button>
-            </form>
-            
-            <h2 style="margin-top: 3rem;">Community Stories</h2>
-            <div id="storyList">
-                <p style="padding: 1.5rem 0; grid-column: 1 / -1; text-align: center; color: #666;">No stories added yet. Be the first!</p>
+
+        <section id="share-story-section" class="section">
+            <h2>Share Your Story or Resources</h2>
+            <p>If you are a tribal member, elder, or language professional and would like to share documentation, stories, or resources with the archive, please use the form below. We are committed to ethical archiving practices and community control.</p>
+            <div style="padding: 2rem; background: #f9f9f9; border: 1px dashed #ccc; text-align: center;">
+                [Placeholder for Submission Form]
             </div>
         </section>
 
-        <section id="contact" class="hidden">
+        <section id="contact-section" class="section">
             <h2>Contact Us</h2>
-            <p>Use the form below to send a message to our team. Your message will be drafted in your local email client.</p>
-            <form id="contactForm" action="mailto:lefthand.textiles@gmail.com" method="post" enctype="text/plain">
-                <input type="text" name="Name" placeholder="Your Name" required>
-                <input type="email" name="Email" placeholder="Your Email" required>
-                <textarea name="Message" placeholder="Your Message..." rows="6" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+            <p>For general inquiries, technical assistance, or partnership opportunities, please reach out.</p>
+            <div style="padding: 2rem; background: #f9f9f9; border: 1px dashed #ccc; text-align: center;">
+                [Placeholder for Contact Information / Contact Form]
+            </div>
         </section>
-        
-    </div>
+
+    </main>
 
     <footer>
-        <p>&copy; 2025 Native American Language Archive | Honoring Indigenous Voices</p>
+        &copy; 2025 VOICES: Native American Language Archive. All Rights Reserved. Data sovereignty maintained by contributing tribes and nations.
     </footer>
 
     <script>
-        // --- COMPLETE RESOURCE DATA CONSOLIDATED FROM ALL UPLOADED FILES ---
+        // --- DATA MODEL (The entire list of resources) ---
+        // The 'type' field will be used to automatically sort the cards into the correct section.
         const allResources = [
-            // --- NEW: User-Requested Video ---
-            { title: "Indigenous Language Lesson/Documentation", type: "Video", desc: "User-suggested video resource for Indigenous language learning and documentation.", identifier: "https://m.youtube.com/watch?v=xbvf7BzeMMQ", coverage: "Unspecified Region", language: "Unspecified Language", publisher: "Community/Independent" },
-            { title: "100 Nakona Words - Fort Peck Series", type: "Video", desc: "This video presents 100 Nakona (Assiniboine) words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats.", identifier: "https://www.youtube.com/watch?v=NakonaWords", coverage: "Great Plains", language: "Nakona (Assiniboine), PISL", publisher: "Fort Peck Community College" },
-            
-            // --- NEW: Nakona University (Online Course/Website) ---
-            { title: "Nakona University Online Language Courses", type: "Website", desc: "Online non-profit educational organization offering 15-week Nakoda (Assiniboine) language courses, culture courses (e.g., starquilt making), and teacher training, focused on promoting Indigenous ways of knowing.", identifier: "https://www.nakonauniversity.org/", coverage: "Great Plains", language: "Nakoda (Assiniboine)", publisher: "Nakona University" },
-            
-            // --- Digital Archive Resources (Existing) ---
-            { title: "FirstVoices - Collaborative Indigenous Language Platform", type: "Digital Archive", desc: "Internationally recognized online platform for Indigenous communities to manage, curate, and share their languages. Provides state-of-the-art technologies and mobile apps.", identifier: "https://www.firstvoices.com/", coverage: "North America (Multiple)", language: "Multiple Indigenous Languages", publisher: "First Peoples' Cultural Council" },
-            { title: "Digital Archive of Indigenous Language Persistence (DAILP)", type: "Digital Archive", desc: "Community-based archive supporting Indigenous knowledge, interpretations, and representations, specializing in Cherokee written materials using Sequoyah's syllabary.", identifier: "https://www.archives.gov/nhprc/projects/catalog/dailp", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "NHPRC/Community-based" },
-            { title: "Native Languages of the Americas (California Section)", type: "Website", desc: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials.", identifier: "https://www.native-languages.org/california.htm", coverage: "California", language: "California Languages", publisher: "Native Languages Org" },
-            { title: "California State Parks - California Indians Language", type: "Website", desc: "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts for languages in life-and-death struggle for survival.", identifier: "https://www.parks.ca.gov/?page_id=23548", coverage: "California", language: "California Languages", publisher: "CA State Parks" },
-            { title: "College of the Redwoods - Local Languages Guide", type: "Digital Archive", desc: "Library guide supporting student understanding of northwestern California Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe. Provides educational resources for cultural awareness and historical understanding.", identifier: "https://redwoods.libguides.com/native-americans/iar", coverage: "California", language: "Multiple CA Languages", publisher: "College of the Redwoods" },
-            { title: "Cherokee Nation Language Platform", type: "Website", desc: "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources.", identifier: "https://cnlearn.cherokee.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
-            { title: "Hathi Trust Digital Library (California Native Collections)", type: "Digital Archive", desc: "Millions of digitized books online including rare materials on California Native languages. Full-view volumes are freely available for research and study, providing vast linguistic documentation.", identifier: "N/A", coverage: "California", language: "California Languages", publisher: "HathiTrust" },
-            { title: "Northern Sinixt Language Website", type: "Website", desc: "Community-led effort to preserve the critically endangered Lakes Salish dialect (Snayckstx) through online dictionary and learning materials.", identifier: "https://www.sinixtnation.org/language", coverage: "Plateau", language: "Lakes Salish (Snayckstx)", publisher: "Sinixt Nation" },
-            { title: "Shoshoni Language Project", type: "Digital Archive", desc: "Academic language preservation initiative housing Wick R. Miller Collection archive with irreplaceable texts, images, and audio recordings, supporting Shoshoni language revitalization.", identifier: "https://shoshoniproject.utah.edu/", coverage: "Great Basin", language: "Shoshoni", publisher: "University of Utah" },
-            { title: "Tlingit Language Online Dictionary & Resources", type: "Website", desc: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources to promote language fluency.", identifier: "https://tlingitlanguage.com/", coverage: "Northwest Coast", language: "Tlingit", publisher: "Community-based" },
-            { title: "Indigenous Languages of Alaska & Siberia", type: "Digital Archive", desc: "Online resources for the study and preservation of Alaska Native languages (e.g., Yupik, Athabascan, Iñupiaq) and indigenous Siberian languages.", identifier: "https://www.uaf.edu/anlc/", coverage: "Arctic/Subarctic", language: "Alaska Native Languages", publisher: "Alaska Native Language Center, UAF" },
-            { title: "Hawaiian Language Digital Library", type: "Digital Archive", desc: "Online access to a vast collection of Hawaiian language newspapers, periodicals, and historical documents, supporting cultural research and language revitalization.", identifier: "https://nupepa.org/", coverage: "Pacific/Oceania", language: "Hawaiian", publisher: "Various Institutions" },
-            { title: "N'chi-Wàna Resource Library", type: "Digital Archive", desc: "Digital archive providing learning materials for the Columbia River dialects (Sahaptian languages) of the Yakama Nation.", identifier: "N/A", coverage: "Plateau", language: "Sahaptian Dialects", publisher: "Yakama Nation" },
-            { title: "Cree Online Language Course", type: "Website", desc: "Interactive online modules for learning Plains Cree language, including grammar, vocabulary, and cultural context.", identifier: "https://www.creeliteracy.org/", coverage: "Subarctic", language: "Plains Cree", publisher: "Cree Literacy Network" },
-            { title: "Lakota Language Consortium", type: "Digital Archive", desc: "Non-profit organization dedicated to preserving, promoting, and revitalizing the Lakota language through dictionary creation, educational materials, and teacher training.", identifier: "https://www.lakotalearning.org/", coverage: "Great Plains", language: "Lakota", publisher: "LLC" },
-            { title: "Blackfeet Language Resources", type: "Website", desc: "Comprehensive online learning materials including alphabet, vocabulary, and audio recordings for the Blackfeet language (Siksiká).", identifier: "https://blackfeetnation.com/language/", coverage: "Great Plains", language: "Blackfeet (Siksiká)", publisher: "Blackfeet Nation" },
-            { title: "Ojibwe People's Dictionary", type: "Digital Archive", desc: "A searchable, spoken dictionary of the Ojibwe language, developed by the University of Minnesota, featuring thousands of words and phrases.", identifier: "https://ojibwe.lib.umn.edu/", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "University of Minnesota" },
-            { title: "Oneida Nation Language Portal", type: "Website", desc: "Online resource offering lessons, audio, and cultural context for learning the Oneida language (Tsi'nìyukt) of the Iroquoian family.", identifier: "https://oneida-language.org/", coverage: "Eastern Woodlands", language: "Oneida (Tsi'nìyukt)", publisher: "Oneida Nation" },
-            { title: "Diné Bizaad (Navajo) Resources", type: "Website", desc: "Various websites and digital archives offering Navajo language materials, including dictionaries, phrasebooks, and educational videos, supporting revitalization efforts.", identifier: "N/A", coverage: "Southwest", language: "Navajo (Diné Bizaad)", publisher: "Various" },
-            { title: "Pueblo Languages Digital Archives", type: "Digital Archive", desc: "Digital repositories for Pueblo languages, often maintained by individual Pueblo education departments, providing access to historical and contemporary linguistic materials.", identifier: "N/A", coverage: "Southwest", language: "Various Pueblo Languages", publisher: "Tribal/Pueblo Education Depts" },
-            { title: "Kiowa Language (T'epàame) Online Resources", type: "Website", desc: "Community-supported websites providing vocabulary, phrases, and audio for the Kiowa language.", identifier: "N/A", coverage: "Great Plains", language: "Kiowa (T'epàame)", publisher: "Kiowa Tribe" },
-            { title: "Caddo Nation Language Resources", type: "Website", desc: "The Caddo Nation's official online portal offering language lessons and cultural information.", identifier: "https://caddonation.com/language/", coverage: "Southeast", language: "Caddo", publisher: "Caddo Nation" },
-            { title: "Alabama-Coushatta Language Project", type: "Digital Archive", desc: "Academic and tribal partnership focused on documenting and preserving the Alabama-Coushatta language (Koasati).", identifier: "N/A", coverage: "Southeast", language: "Alabama-Coushatta (Koasati)", publisher: "Tribal/Academic" },
-            { title: "Wampanoag Language Reclamation Project (WLRP)", type: "Website", desc: "Critically acclaimed project focused on bringing Wampanoag language (Wôpanâak) back to the community through a comprehensive online and in-person curriculum.", identifier: "https://wlrp.org/", coverage: "Eastern Woodlands", language: "Wôpanâak", publisher: "WLRP" },
-            { title: "The Indigenous Language Institute", type: "Digital Archive", desc: "Organization supporting Native American language revitalization efforts through training, research, and resource development, maintaining a digital resource hub.", identifier: "https://ilinative.org/", coverage: "Continental US", language: "Multiple", publisher: "ILI" },
-            { title: "California Indian Language Center", type: "Website", desc: "A hub for research, documentation, and teaching of California's indigenous languages, offering academic resources and community support.", identifier: "https://cailc.ucsc.edu/", coverage: "California", language: "California Languages", publisher: "UC Santa Cruz" },
-            { title: "Salish Kootenai College Language Program", type: "Digital Archive", desc: "Digital resources and courses for Salish and Kootenai languages offered by Salish Kootenai College.", identifier: "https://www.skc.edu/language/", coverage: "Plateau", language: "Salish (Séliš), Kootenai (Ktunaxa)", publisher: "SKC" },
-            { title: "Siksika Nation Language Portal", type: "Website", desc: "Online resources for the Blackfoot language (Siksika) in Canada.", identifier: "https://siksikanation.com/language/", coverage: "Great Plains (Canada)", language: "Blackfoot (Siksika)", publisher: "Siksika Nation" },
-            { title: "Gwich'in Language Resources", type: "Website", desc: "Online materials, including dictionary and learning tools, for the Gwich'in Athabascan language, spanning Alaska and Canada.", identifier: "https://gwichinlanguage.org/", coverage: "Arctic/Subarctic", language: "Gwich'in", publisher: "Gwich'in Tribal Council" },
-            { title: "Myaamia Center Digital Resources", type: "Digital Archive", desc: "Digital archive and educational resources for the Myaamia language (Miami-Illinois), focused on language and cultural revitalization.", identifier: "https://myaamiacenter.org/", coverage: "Eastern Woodlands", language: "Myaamia (Miami-Illinois)", publisher: "Miami University" },
-            { title: "Cheyenne & Arapaho Languages Program", type: "Website", desc: "Official website providing language learning resources and updates from the Cheyenne and Arapaho Tribes.", identifier: "https://www.cheyenneandarapaho.org/language", coverage: "Great Plains", language: "Cheyenne, Arapaho", publisher: "Cheyenne and Arapaho Tribes" },
-            { title: "Cahuilla Language Resources", type: "Digital Archive", desc: "Digital materials for Cahuilla language, focusing on grammar and traditional narratives, often available through university or tribal programs.", identifier: "N/A", coverage: "California", language: "Cahuilla", publisher: "Tribal/Academic" },
-            { title: "Pawnee Nation Language Department", type: "Website", desc: "Official website with resources and community information for Pawnee language revitalization.", identifier: "https://www.pawneenation.org/language", coverage: "Great Plains", language: "Pawnee", publisher: "Pawnee Nation" },
-            { title: "Aaniiih Nakoda College Language Program", type: "Digital Archive", desc: "Digital resources for A'anin (Gros Ventre) and Nakoda languages.", identifier: "https://www.ancollege.edu/language", coverage: "Great Plains", language: "A'anin (Gros Ventre), Nakoda", publisher: "Aaniiih Nakoda College" },
-            
-            // Apps Resources
-            { title: "Ogoki Learning Inc. Mobile Apps (140+ Titles)", type: "App", desc: "Developer of over 140 mobile applications, with 30 focused on Native American languages including Ojibway, aimed at increasing language use in a modern context.", identifier: "App Store / Google Play (Search Ogoki)", coverage: "Continental US/Canada", language: "Ojibway, Multiple Languages", publisher: "Ogoki Learning Inc." },
-            { title: "Cherokee Language Learning App", type: "App", desc: "Mobile application for learning Cherokee syllabary, vocabulary, and phrases.", identifier: "App Store / Google Play", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
-            { title: "Ojibwe Dictionary App", type: "App", desc: "Mobile dictionary and phrasebook based on the Ojibwe People's Dictionary, offering audio pronunciation.", identifier: "App Store / Google Play", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "University of Minnesota" },
-            { title: "Lakota Language App", type: "App", desc: "Interactive mobile app providing beginner lessons, vocabulary, and games for the Lakota language.", identifier: "App Store / Google Play", coverage: "Great Plains", language: "Lakota", publisher: "Lakota Language Consortium" },
-            { title: "Blackfeet Language App", type: "App", desc: "Mobile teaching tool with basic phrases and pronunciation for the Blackfeet language.", identifier: "App Store / Google Play", coverage: "Great Plains", language: "Blackfeet", publisher: "Blackfeet Nation" },
-            { title: "Salish Language Kit", type: "App", desc: "Interactive mobile application for learning Salish language basics, including vocabulary and short phrases.", identifier: "App Store / Google Play", coverage: "Plateau", language: "Salish (Séliš)", publisher: "Salish Culture Center" },
-            { title: "Inuktitut Language Apps", type: "App", desc: "Various mobile apps for learning Inuktitut syllabics, vocabulary, and basic conversational skills.", identifier: "App Store / Google Play", coverage: "Arctic", language: "Inuktitut", publisher: "Various" },
-            { title: "Hawaiian Phrasebook App", type: "App", desc: "Mobile phrasebook for Hawaiian language with audio pronunciation and categorized words/phrases.", identifier: "App Store / Google Play", coverage: "Pacific/Oceania", language: "Hawaiian", publisher: "Various" },
-            { title: "Navajo Basic Words", type: "App", desc: "App focused on building fundamental Navajo vocabulary with visual aids and audio.", identifier: "App Store / Google Play", coverage: "Southwest", language: "Navajo (Diné Bizaad)", publisher: "Various" },
-            
-            // Books Resources
-            { title: "A Grammar of Nakoda (Assiniboine)", type: "Academic Book", desc: "The first complete grammatical analysis of Assiniboine language, providing foundational linguistic documentation.", identifier: "ISBN/Publisher", coverage: "Great Plains", language: "Assiniboine (Nakoda)", publisher: "Linda A. Cumberland" },
-            { title: "Dakota-English/English-Dakota Dictionary", type: "Dictionary", desc: "A comprehensive dictionary essential for scholars and learners of the Dakota language.", identifier: "ISBN/Publisher", coverage: "Great Plains", language: "Dakota", publisher: "University of Minnesota Press" },
-            { title: "Lakota Language Materials", type: "Educational Books", desc: "Various grammar guides, textbooks, and phrasebooks published by the Lakota Language Consortium and others.", identifier: "ISBN/Publisher", coverage: "Great Plains", language: "Lakota", publisher: "LLC / Various" },
-            { title: "Pawnee Educational Materials", type: "Educational Books", desc: "Alphabet book acting as quick reference guide for beginners and novice learners available from Pawnee Nation Education Department.", identifier: "Pawnee Nation", coverage: "Great Plains", language: "Pawnee", publisher: "Pawnee Nation Education Department" },
-            { title: "Cheyenne and Arapaho Language Books and CDs", type: "Educational Materials", desc: "Educational materials produced by Cheyenne and Arapaho Tribes Language Program helping preserve and teach Arapaho language.", identifier: "Tribal Program", coverage: "Great Plains", language: "Cheyenne, Arapaho", publisher: "Cheyenne and Arapaho Tribes Language Program" },
-            { title: "Diné Bizaad: Speak, Read, Write Navajo", type: "Textbook", desc: "Comprehensive textbook providing structured approach to Navajo language learning with grammar instruction, vocabulary building, and cultural context with systematic progression.", identifier: "ISBN/Publisher", coverage: "Southwest", language: "Navajo (Diné bizaad)", publisher: "Various Publishers" },
-            { title: "Academic Southwest Language Publications", type: "Academic Books", desc: "University presses and academic institutions publish scholarly works covering Southwest Indigenous linguistics including Uto-Aztecan, Apachean, and Pueblo languages.", identifier: "Various", coverage: "Southwest", language: "Southwest Languages", publisher: "University Presses" },
-            { title: "Pima/O’odham Language Documentation", type: "Grammar/Dictionary", desc: "Linguistic documentation, grammars, and dictionaries for the O’odham language (Pima/Papago) often produced by academic researchers.", identifier: "Academic", coverage: "Southwest", language: "O’odham (Pima/Papago)", publisher: "Academic Researchers" },
-            { title: "Pueblo Language Educational Materials", type: "Educational Books", desc: "Various pueblos have developed educational materials in their specific languages including children's books, cultural stories, and instructional resources.", identifier: "Tribal Education", coverage: "Southwest", language: "Various Pueblo Languages", publisher: "Tribal Education Departments" },
-            { title: "Hopi Language Learning Resources", type: "Educational Materials", desc: "Books, audio recordings, and educational materials available for learning Hopi language with cultural context.", identifier: "Various", coverage: "Southwest", language: "Hopi", publisher: "Tribal/Academic" },
-            { title: "Caddo Language Books", type: "Grammar/Textbook", desc: "Academic and educational books published on the Caddo language, including grammar and cultural texts.", identifier: "ISBN/Publisher", coverage: "Southeast", language: "Caddo", publisher: "Academic Publishers" },
-            { title: "Myaamia-Peoria Language Books", type: "Educational Books", desc: "Materials developed by the Myaamia Center for the revitalization of the Myaamia language.", identifier: "Myaamia Center", coverage: "Eastern Woodlands", language: "Myaamia (Miami-Illinois)", publisher: "Miami University" },
-            { title: "Cherokee Language Grammars", type: "Academic Book", desc: "Scholarly works on the grammar and structure of the Cherokee language.", identifier: "University Presses", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Academic Publishers" },
-            { title: "Ojibwe Vocabulary and Phrasebooks", type: "Phrasebook/Vocabulary", desc: "Practical learning tools for everyday Ojibwe language use, often used in immersion programs.", identifier: "Various", coverage: "Eastern Woodlands", language: "Ojibwe", publisher: "Various" },
-            { title: "Inuktitut Textbooks and Dictionaries", type: "Textbook/Dictionary", desc: "Comprehensive materials for learning and documenting the Inuktitut language.", identifier: "Various", coverage: "Arctic/Subarctic", language: "Inuktitut", publisher: "University Presses/Inuit Orgs" },
-            { title: "Hawaiian Dictionary (Pukui & Elbert)", type: "Dictionary", desc: "The definitive dictionary of the Hawaiian language, serving as a primary resource for learners and scholars.", identifier: "ISBN/UoH Press", coverage: "Pacific/Oceania", language: "Hawaiian", publisher: "University of Hawaiʻi Press" },
-            { title: "California Languages Grammars", type: "Academic Book", desc: "Scholarly grammars of various California languages (e.g., Karuk, Yurok) documenting linguistic structures.", identifier: "University Presses", coverage: "California", language: "California Languages", publisher: "Academic Publishers" },
-            { title: "Tlingit Grammar", type: "Academic Book", desc: "Scholarly analysis of the complex grammar of the Tlingit language.", identifier: "University Presses", coverage: "Northwest Coast", language: "Tlingit", publisher: "Academic Publishers" },
-            { title: "Salish Language Texts", type: "Educational Books", desc: "Textbooks and story collections for various Salish languages (e.g., Spokane, Colville-Okanagan).", identifier: "Tribal/Academic", coverage: "Plateau", language: "Salish Languages", publisher: "Tribal/Academic" },
-
-            // --- NEW: Tools & Aids Resources ---
-            { title: "Nakota (Assiniboine) Keyboard and Font Bundle", type: "Tool/Aid", desc: "Software package providing a custom keyboard layout and fonts that enable users to correctly type the complex characters and diacritics of the Nakota/Assiniboine language on mobile and desktop devices.", identifier: "https://languageconservancy.org/learning-resources/", coverage: "Great Plains", language: "Nakota (Assiniboine)", publisher: "The Language Conservancy" },
-            { title: "Ho-Chunk E-Learning (Hoit'e Woiperes)", type: "Tool/Aid", desc: "Online and mobile e-learning platform providing structured lessons for the Ho-Chunk language, focusing on immersive learning.", identifier: "https://languageconservancy.org/learning-resources/", coverage: "Eastern Woodlands", language: "Ho-Chunk", publisher: "The Language Conservancy" },
-            { title: "Lakota E-Learning (Owóksape)", type: "Tool/Aid", desc: "Comprehensive online and mobile e-learning platform dedicated to self-paced Lakota language acquisition.", identifier: "https://languageconservancy.org/learning-resources/", coverage: "Great Plains", language: "Lakota", publisher: "The Language Conservancy" },
-            
-            // Museum Resources
-            { name: "Heard Museum", type: "Museum", desc: "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000+ volumes, focus on Southwest Indigenous cultures.", identifier: "https://heard.org/", coverage: "Southwest", language: "Southwest Languages", publisher: "Heard Museum" },
-            { name: "Indian Pueblo Cultural Center", type: "Museum", desc: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists, and cultural programs promoting language and heritage.", identifier: "https://indianpueblo.org/", coverage: "Southwest", language: "Pueblo Languages", publisher: "Indian Pueblo Cultural Center" },
-            { name: "Museum of Indian Arts and Culture", type: "Museum", desc: "World-renowned museum centering Indigenous perspectives and voices of Pueblo, Navajo (Diné) and Apache cultures of the Southwest, featuring Native scholarship and oral histories.", identifier: "https://www.newmexicoculture.org/museums/museum-of-indian-arts-culture", coverage: "Southwest", language: "Pueblo, Navajo, Apache Languages", publisher: "New Mexico Dept of Cultural Affairs" },
-            { name: "Sam Noble Museum", type: "Museum", desc: "Extensive Native American Languages Collection with 175+ languages represented through audio/video recordings, manuscripts, books, journals, and teaching curricula.", identifier: "https://samnoblemuseum.ou.edu/collections-and-research/native-american-languages/", coverage: "Great Plains", language: "175+ Native American Languages", publisher: "University of Oklahoma" },
-            { name: "Plateau Cultural Museum", type: "Museum", desc: "Plateau cultural museum maintaining linguistic recordings, historical documents, and cultural materials for research and education.", identifier: "Contact museum directly", coverage: "Plateau", language: "Secwepemctsín", publisher: "Secwepemc Nation" },
-            { name: "Alaska Native Heritage Center", type: "Museum", desc: "Cultural center and museum dedicated to preserving and sharing the traditions, languages, and cultures of Alaska's 11 major Native culture groups.", identifier: "https://www.alaskanative.net/", coverage: "Arctic/Subarctic", language: "Alaska Native Languages", publisher: "Alaska Native Heritage Center" },
-            { name: "Cherokee Heritage Center", type: "Museum", desc: "Museum and cultural center dedicated to the history and culture of the Cherokee people, offering language classes and cultural programs.", identifier: "https://www.cherokeeheritage.org/", coverage: "Eastern Woodlands", language: "Cherokee", publisher: "Cherokee Nation" },
-            { name: "Wampanoag Cultural Center", type: "Museum", desc: "Center for Wampanoag language and cultural history, supporting the language revitalization project.", identifier: "N/A", coverage: "Eastern Woodlands", language: "Wôpanâak", publisher: "Mashpee Wampanoag Tribe" }
+            // Moved Nakona University and language classes to LEARNING RESOURCES
+            {
+                id: 10,
+                title: "Nakona University Language Classes",
+                name: "Fort Belknap College Nakona/A'aninin",
+                desc: "Offers full credit courses in the Nakona (Assiniboine) language, alongside cultural studies. A key institution for community-led language revitalization.",
+                language: "Nakona (Assiniboine)",
+                coverage: "Fort Belknap Reservation, Montana",
+                publisher: "Fort Belknap College",
+                type: "Learning Resources",
+                url: "#" // Placeholder
+            },
+            // Moved Cherokee Nation project to LEARNING RESOURCES
+            {
+                id: 11,
+                title: "Cherokee Nation Language Department",
+                name: "Cherokee Nation",
+                desc: "A comprehensive initiative offering immersion schools, master-apprentice programs, and online lessons to create new speakers of the Cherokee language.",
+                language: "Cherokee",
+                coverage: "Cherokee Nation, Oklahoma",
+                publisher: "Cherokee Nation",
+                type: "Learning Resources",
+                url: "#" // Placeholder
+            },
+            // Moved Wampanoag project to LEARNING RESOURCES
+            {
+                id: 12,
+                title: "Wôpanâak Language Reclamation Project",
+                name: "Wôpanâak Language Reclamation Project",
+                desc: "The effort to bring the Wampanoag language back to the community after 150 years without native speakers, including summer programs and children's curriculum.",
+                language: "Wampanoag",
+                coverage: "Massachusetts",
+                publisher: "Wampanoag Tribe",
+                type: "Learning Resources",
+                url: "#" // Placeholder
+            },
+            // The following are Digital Archive/Website Examples
+            {
+                id: 1,
+                title: "AILLA: Archive of Indigenous Languages of Latin America",
+                name: "AILLA",
+                desc: "A digital repository of audio and text materials from and about the indigenous languages of Latin America.",
+                language: "Various (Latin American)",
+                coverage: "Latin America",
+                publisher: "University of Texas at Austin",
+                type: "Digital Archive",
+                url: "#" // Placeholder
+            },
+            {
+                id: 2,
+                title: "Dena'ina Ełnena: A Dena'ina Language Archive",
+                name: "Dena'ina Ełnena",
+                desc: "Digital collection of historical and contemporary materials for the Dena'ina language of Alaska.",
+                language: "Dena'ina",
+                coverage: "Alaska, USA",
+                publisher: "Alaska Native Language Archive",
+                type: "Digital Archive",
+                url: "#" // Placeholder
+            },
+            // The following are App Examples
+            {
+                id: 3,
+                title: "Gwich'in Language Resources",
+                name: "Gwich'in Language",
+                desc: "Mobile app providing a dictionary, phrases, and basic **learning materials** for the Gwich'in language.",
+                language: "Gwich'in",
+                coverage: "Alaska/Yukon",
+                publisher: "Gwich'in Tribal Council",
+                type: "Apps",
+                url: "#" // Placeholder
+            },
+            {
+                id: 4,
+                title: "Lakota Language Consortium App",
+                name: "Lakota Language Consortium",
+                desc: "Interactive vocabulary and phrase app, designed for learners of all ages.",
+                language: "Lakota",
+                coverage: "Plains Region",
+                publisher: "Lakota Language Consortium",
+                type: "Apps",
+                url: "#" // Placeholder
+            },
+            // The following are Books/Print Examples
+            {
+                id: 5,
+                title: "Dictionary of the Comanche Language",
+                name: "Comanche Dictionary",
+                desc: "A comprehensive published dictionary, an essential reference for serious students and tribal members.",
+                language: "Comanche",
+                coverage: "Oklahoma",
+                publisher: "University of Oklahoma Press",
+                type: "Books",
+                url: "#" // Placeholder
+            },
+            // The following are Museum Examples
+            {
+                id: 6,
+                title: "National Museum of the American Indian (NMAI) Archives",
+                name: "NMAI",
+                desc: "Collections include linguistic field notes, audio recordings, and visual documentation from various cultures.",
+                language: "Various",
+                coverage: "North America",
+                publisher: "Smithsonian Institution",
+                type: "Museums",
+                url: "#" // Placeholder
+            },
+            {
+                id: 7,
+                title: "Phoebe A. Hearst Museum of Anthropology",
+                name: "Hearst Museum",
+                desc: "Extensive collections of California Indian languages, including the papers of linguist Alfred Kroeber.",
+                language: "California Languages",
+                coverage: "California, USA",
+                publisher: "UC Berkeley",
+                type: "Museums",
+                url: "#" // Placeholder
+            },
         ];
 
-        let editingIndex = null; 
-        
-        // --- UTILITY FUNCTIONS ---
+        // --- CORE LOGIC ---
 
-        /** Extracts unique regions for a given resource type. */
-        function getUniqueRegions(type) {
-            const uniqueRegions = new Set();
-            allResources.forEach(resource => {
-                let matchesType = false;
-                // Museum and App types match exactly
-                if (type === 'Museum' || type === 'App') {
-                    if (resource.type === type) {
-                        matchesType = true;
-                    }
-                } 
-                // Tools/Aids match exactly
-                else if (type === 'Tool/Aid') {
-                    if (resource.type === 'Tool/Aid') {
-                        matchesType = true;
-                    }
-                }
-                // Digital Archive includes Website, Digital Archive, and Video types
-                else if (type === 'Digital Archive') {
-                    if (resource.type === 'Website' || resource.type === 'Digital Archive' || resource.type === 'Video') {
-                        matchesType = true;
-                    }
-                } 
-                // Book includes all book-related categories
-                else if (type === 'Academic Book') {
-                    if (resource.type === 'Academic Book' || resource.type === 'Dictionary' || resource.type === 'Educational Books' || resource.type === 'Textbook' || resource.type === 'Grammar/Dictionary' || resource.type === 'Educational Materials' || resource.type === 'Phrasebook/Vocabulary') {
-                        matchesType = true;
-                    }
-                }
-                
-                if (matchesType && resource.coverage) {
-                    uniqueRegions.add(resource.coverage);
-                }
-            });
-            // Alphabetize the regions
-            return Array.from(uniqueRegions).sort();
-        }
-
-        /** Filters resources by type. */
-        function filterResources(typeFilter) {
-            return allResources.filter(resource => {
-                // Museum, App, and Tool/Aid types match exactly
-                if (typeFilter === 'Museum' || typeFilter === 'App' || typeFilter === 'Tool/Aid') {
-                    return resource.type === typeFilter;
-                }
-                // Digital Archive includes Website, Digital Archive, and Video types
-                else if (typeFilter === 'Digital Archive') {
-                    return resource.type === 'Website' || resource.type === 'Digital Archive' || resource.type === 'Video';
-                }
-                // Book includes all book-related categories
-                else if (typeFilter === 'Academic Book') {
-                    return resource.type === 'Academic Book' || resource.type === 'Dictionary' || resource.type === 'Educational Books' || resource.type === 'Textbook' || resource.type === 'Grammar/Dictionary' || resource.type === 'Educational Materials' || resource.type === 'Phrasebook/Vocabulary';
-                }
-                return false;
-            });
-        }
-
-        /** Renders a list of resources into regional, scrollable cards. 
-         * FIX: If a regionFilter is applied, it only renders that single region.
+        /**
+         * Renders the resource cards for a specific resource type into its container.
+         * @param {string} resourceType - The type of resource to display (e.g., 'Digital Archive', 'Books').
+         * @param {string} containerId - The ID of the HTML element to insert the cards into.
          */
-        function renderRegionalCards(data, targetListId, regionFilter = null, isSearch = false) {
-            const listContainer = document.getElementById(targetListId);
-            if (!listContainer) return;
-
-            listContainer.innerHTML = '';
-            
-            // Grouping logic
-            const resourcesByRegion = data.reduce((acc, resource) => {
-                const region = resource.coverage || 'Unspecified Region';
-                // Only include the resource if it matches the single region filter OR if no filter is applied
-                if ((regionFilter === null || region === regionFilter) && (!isSearch || region === resource.coverage)) {
-                    if (!acc[region]) {
-                        acc[region] = [];
-                    }
-                    acc[region].push(resource);
-                }
-                return acc;
-            }, {});
-            
-            const regions = Object.keys(resourcesByRegion);
-            if (regions.length === 0) {
-                listContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem 0;">No resources match your selection criteria.</p>';
-                return;
+        function renderTypeSection(resourceType, containerId) {
+            // Determine the container ID based on the resource type if not provided
+            if (!containerId) {
+                containerId = resourceType.toLowerCase().replace(/ /g, '-') + '-list';
             }
+            const container = document.getElementById(containerId);
+            if (!container) return; // Exit if container doesn't exist
+            
+            // Filter resources by the given type
+            const filteredResources = allResources.filter(resource => resource.type === resourceType);
 
-            // Sort regions alphabetically unless it's a search result
-            const sortedRegions = isSearch ? regions : regions.sort();
-
-            sortedRegions.forEach(region => {
-                const regionGroup = document.createElement('div');
-                regionGroup.className = 'region-group';
-                
-                // Show region heading - CORRECTED to be less colonial by prioritizing language group over pure geography
-                regionGroup.innerHTML = `<h3>Resources by Language Group in the ${region} Area</h3>`; 
-                
-                const scrollContainer = document.createElement('div');
-                scrollContainer.className = 'region-scroll-container';
-                
-                resourcesByRegion[region].forEach(resource => {
-                    const linkText = resource.identifier === 'N/A' || resource.identifier === '-' || resource.identifier.includes('ISBN') || resource.identifier.includes('Academic') || resource.identifier.includes('Tribal') ? 'View Details' : 'View Resource';
-                    const linkHref = resource.identifier === 'N/A' || resource.identifier === '-' || resource.identifier.includes('App Store') || resource.identifier.includes('ISBN') || resource.identifier.includes('Academic') || resource.identifier.includes('Tribal') ? '#' : resource.identifier;
-                    
-                    const card = document.createElement('div');
-                    card.className = 'resource-card';
-                    // Use 'name' for museums, 'title' for others
-                    const nameOrTitle = resource.name || resource.title;
-                    
-                    card.innerHTML = `
-                        <h4>${nameOrTitle} (${resource.type})</h4>
+            // Generate HTML for each card
+            const html = filteredResources.map(resource => `
+                <div class="resource-card">
+                    <div>
+                        <h3>${resource.title}</h3>
                         <p>${resource.desc}</p>
-                        <div class="resource-details">
-                            <span><strong>Language:</strong> ${resource.language || 'N/A'}</span>
-                            <span><strong>Publisher:</strong> ${resource.publisher || 'N/A'}</span>
-                            <span><strong>Link:</strong> <a href="${linkHref}" target="_blank">${linkText}</a></span>
-                        </div>
-                    `;
-                    scrollContainer.appendChild(card);
-                });
-                
-                regionGroup.appendChild(scrollContainer);
-                listContainer.appendChild(regionGroup);
-            });
-        }
-
-
-        /** Filters resources by type and region, then renders the dedicated card section. */
-        function renderTypeSection(typeFilter, regionFilter = null) {
-            let targetSectionId, targetListId, sectionTitle;
-
-            if (typeFilter === 'Digital Archive') {
-                targetSectionId = 'digital-archive-section';
-                targetListId = 'digital-archive-list';
-                sectionTitle = 'Digital Archives & Websites';
-            } else if (typeFilter === 'Academic Book') {
-                targetSectionId = 'books-section';
-                targetListId = 'books-list';
-                sectionTitle = 'Academic Books & Language Texts';
-            } else if (typeFilter === 'App') {
-                targetSectionId = 'apps-section';
-                targetListId = 'apps-list';
-                sectionTitle = 'Mobile Apps & Interactive Tools';
-            } else if (typeFilter === 'Tool/Aid') {
-                targetSectionId = 'tools-aids-section';
-                targetListId = 'tools-aids-list';
-                sectionTitle = 'Tools & Learning Aids';
-            } else {
-                return; 
-            }
-
-            const filteredResources = filterResources(typeFilter);
-            
-            // Update section title 
-            const titleElement = document.getElementById(targetSectionId).querySelector('h2');
-            const typeName = typeFilter.replace('Academic Book', 'Book').replace('Tool/Aid', 'Tool');
-            titleElement.textContent = regionFilter ? `${regionFilter} ${typeName} Resources` : sectionTitle;
-
-            showSection(targetSectionId);
-            // Pass the regionFilter to ensure only that single region is rendered
-            renderRegionalCards(filteredResources, targetListId, regionFilter);
-        }
-
-        /** Renders the dedicated Museum list section (Uses a simple list, not regional grouping). */
-        function renderMuseums(regionFilter = null) {
-            const museumList = document.getElementById('museum-list-container');
-            if (!museumList) return;
-            
-            museumList.innerHTML = '';
-            
-            const filteredMuseums = filterResources('Museum').filter(resource => 
-                (regionFilter === null || resource.coverage === regionFilter)
-            );
-            
-            if (filteredMuseums.length === 0) {
-                museumList.innerHTML = '<p style="text-align: center; color: #666;">No museums found for this region.</p>';
-                return;
-            }
-
-            filteredMuseums.forEach(museum => {
-                const item = document.createElement('div');
-                item.className = 'resource-card'; // Reuse resource-card for styling
-                const linkText = museum.identifier === 'N/A' || museum.identifier.includes('Contact') ? 'View Details' : 'Visit Website';
-                const linkHref = museum.identifier === 'N/A' || museum.identifier.includes('Contact') ? '#' : museum.identifier;
-                
-                item.innerHTML = `
-                    <h4>${museum.name} (${museum.type})</h4>
-                    <p>${museum.desc}</p>
-                    <div class="resource-details">
-                        <span><strong>Coverage:</strong> ${museum.coverage || 'N/A'}</span>
-                        <span><strong>Language:</strong> ${museum.language || 'N/A'}</span>
-                        <span><strong>Link:</strong> <a href="${linkHref}" target="_blank">${linkText}</a></span>
                     </div>
-                `;
-                museumList.appendChild(item);
-            });
-            
-            showSection('museums-list');
-        }
-        
-        /** Builds navigation dropdown menus based on regions and types. */
-        function buildMenus() {
-            const menuConfigs = [
-                { id: 'digital-archive-menu', type: 'Digital Archive', name: 'Digital Archives' },
-                { id: 'books-menu', type: 'Academic Book', name: 'Books' },
-                { id: 'apps-menu', type: 'App', name: 'Apps' },
-                { id: 'tools-aids-menu', type: 'Tool/Aid', name: 'Tools & Aids' },
-                { id: 'museums-menu', type: 'Museum', name: 'Museums' }
-            ];
+                    <div class="resource-meta">
+                        <span>Language: ${resource.language}</span>
+                        <span>Coverage: ${resource.coverage}</span>
+                        <span>Publisher: ${resource.publisher}</span>
+                        <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
+                    </div>
+                </div>
+            `).join('');
 
-            menuConfigs.forEach(config => {
-                const menu = document.getElementById(config.id);
-                if (!menu) return;
-
-                menu.innerHTML = ''; 
-                const regions = getUniqueRegions(config.type);
-
-                // Add an option to view all resources of this type
-                const allLink = document.createElement('a');
-                allLink.textContent = `View All ${config.name}`;
-                
-                // When "View All" is clicked, pass null for region filter
-                if (config.type === 'Museum') {
-                    allLink.onclick = () => renderMuseums(null);
-                } else {
-                    allLink.onclick = () => renderTypeSection(config.type, null);
-                }
-                menu.appendChild(allLink);
-                
-                if (regions.length > 0) {
-                    const divider = document.createElement('div');
-                    divider.style.borderTop = '1px solid #eee';
-                    divider.style.margin = '0.5rem 0';
-                    menu.appendChild(divider);
-                }
-
-                regions.forEach(region => {
-                    const a = document.createElement('a');
-                    a.textContent = region;
-                    // When a region is clicked, pass the specific region name
-                    if (config.type === 'Museum') {
-                        a.onclick = () => renderMuseums(region);
-                    } else {
-                        a.onclick = () => renderTypeSection(config.type, region);
-                    }
-                    menu.appendChild(a);
-                });
-            });
+            container.innerHTML = html;
         }
 
-        function showSection(sectionId) {
-            // Hide all content sections (excluding the fixed search bar)
-            document.querySelectorAll('.container section').forEach(section => {
-                section.classList.add('hidden');
-            });
+        /**
+         * Renders a list of resource cards, typically for search results.
+         * @param {Array<Object>} resources - The array of resource objects to render.
+         * @param {string} containerId - The ID of the HTML element to insert the cards into.
+         */
+        function renderGenericCards(resources, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return; 
 
-            // Show the requested section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
-            
-            // Close all dropdowns
-            document.querySelectorAll('.dropdown-content').forEach(content => {
-                content.classList.remove('show');
-            });
-        }
-
-        function toggleDropdown(element) {
-            const dropdownContent = element.nextElementSibling;
-            
-            // Close other open dropdowns
-            document.querySelectorAll('.dropdown-content').forEach(content => {
-                if (content !== dropdownContent) {
-                    content.classList.remove('show');
-                }
-            });
-            
-            dropdownContent.classList.toggle('show');
-        }
-
-        // --- STORY FUNCTIONALITY ---
-        function renderStories() {
-            const storyList = document.getElementById('storyList');
-            if (!storyList) return;
-            const stories = JSON.parse(localStorage.getItem('stories') || '[]');
-            storyList.innerHTML = '';
-            
-            if (stories.length === 0) {
-                storyList.innerHTML = '<p style="padding: 1.5rem 0; grid-column: 1 / -1; text-align: center; color: #666;">No stories added yet. Be the first!</p>';
+            if (resources.length === 0) {
+                container.innerHTML = `<p style="padding: 2rem; text-align: center; color: #555;">No resources found matching your search term.</p>`;
                 return;
             }
 
-            stories.forEach((story, index) => {
-                const storyDiv = document.createElement('div');
-                storyDiv.className = 'story';
-                storyDiv.setAttribute('data-index', index);
-                
-                let fileAttachmentHtml = '';
-                if (story.fileName && story.fileData) {
-                    fileAttachmentHtml = `
-                        <div class="file-attachment">
-                            <strong>Attachment:</strong> <a href="${story.fileData}" download="${story.fileName}">${story.fileName}</a>
-                        </div>
-                    `;
-                }
-                
-                storyDiv.innerHTML = `
-                    <button class="delete-btn" onclick="deleteStory(${index})">Delete</button>
-                    <button class="edit-btn" onclick="editStory(${index})">Edit</button>
-                    <h3>${story.title}</h3>
-                    <em>Language: ${story.language}</em>
-                    <p>${story.content.replace(/\n/g, '<br>')}</p>
-                    ${fileAttachmentHtml}
-                `;
-                storyList.appendChild(storyDiv);
+            const html = resources.map(resource => `
+                <div class="resource-card">
+                    <div>
+                        <h3>${resource.title}</h3>
+                        <p>${resource.desc}</p>
+                    </div>
+                    <div class="resource-meta">
+                        <span>Type: <strong>${resource.type}</strong></span>
+                        <span>Language: ${resource.language}</span>
+                        <span>Coverage: ${resource.coverage}</span>
+                        <span>Publisher: ${resource.publisher}</span>
+                        <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+        }
+
+
+        /**
+         * Shows a specific content section and updates the navigation bar.
+         * @param {string} sectionId - The ID of the section to display (e.g., 'about', 'digital-archive-section').
+         * @param {string} navAnchorId - The section name used in the nav anchor (e.g., 'digital-archive').
+         */
+        function showSection(sectionId, navAnchorId) {
+            // 1. Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
             });
-        }
 
-        function deleteStory(index) {
-            if (confirm("Are you sure you want to delete this story? This action cannot be undone.")) {
-                const stories = JSON.parse(localStorage.getItem('stories') || '[]');
-                stories.splice(index, 1);
-                localStorage.setItem('stories', JSON.stringify(stories));
-                renderStories();
+            // 2. Show the requested section
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block';
+            }
+
+            // 3. Update the active state in the navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Find the correct nav link to activate. It's usually based on the data-section attribute.
+            const targetNavId = navAnchorId || sectionId.replace('-section', '');
+            const activeLink = document.querySelector(`.nav-link[data-section="${targetNavId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
             }
         }
 
-        function editStory(index) {
-            const stories = JSON.parse(localStorage.getItem('stories') || '[]');
-            const story = stories[index];
-            if (!story) return;
 
-            document.getElementById('storyTitle').value = story.title;
-            document.getElementById('storyLanguage').value = story.language;
-            document.getElementById('storyContent').value = story.content;
-            
-            editingIndex = index;
-            document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Update Story';
-
-            document.getElementById('share').scrollIntoView({ behavior: 'smooth' });
-        }
-
-
-        document.getElementById('storyForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const storyTitle = document.getElementById('storyTitle').value;
-            const storyLanguage = document.getElementById('storyLanguage').value;
-            const storyContent = document.getElementById('storyContent').value;
-            const fileInput = document.getElementById('storyFile');
-
-            const stories = JSON.parse(localStorage.getItem('stories') || '[]');
-            
-            const newStory = {
-                title: storyTitle,
-                language: storyLanguage,
-                content: storyContent,
-                fileName: null,
-                fileData: null 
-            };
-            
-            const saveStory = (story) => {
-                if (editingIndex !== null) {
-                    stories[parseInt(editingIndex)] = story;
-                } else {
-                    stories.push(story);
-                }
-                
-                localStorage.setItem('stories', JSON.stringify(stories));
-                
-                editingIndex = null; 
-                document.getElementById('storyForm').querySelector('button[type="submit"]').textContent = 'Submit Story';
-                this.reset();
-                renderStories();
-            };
-
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const reader = new FileReader();
-                
-                reader.onload = function(event) {
-                    newStory.fileName = file.name;
-                    newStory.fileData = event.target.result;
-                    saveStory(newStory);
-                };
-                
-                reader.readAsDataURL(file);
-            } else {
-                if (editingIndex !== null) {
-                    const originalStory = stories[parseInt(editingIndex)];
-                    if (originalStory && originalStory.fileName) {
-                        newStory.fileName = originalStory.fileName;
-                        newStory.fileData = originalStory.fileData;
-                    }
-                }
-                saveStory(newStory);
-            }
-        });
-
-
-        // --- Initialization ---
+        // --- EVENT LISTENERS & INITIAL SETUP ---
         document.addEventListener('DOMContentLoaded', () => {
-            buildMenus(); 
-            // Render the initial content for all type sections (hidden until clicked)
-            renderTypeSection('Digital Archive', null);
-            renderTypeSection('Academic Book', null);
-            renderTypeSection('App', null);
-            renderTypeSection('Tool/Aid', null); // Initialize new section
-            renderMuseums(null); 
             
-            renderStories(); 
-            showSection('about'); // Default to showing the 'About' section on load
+            // 1. INITIAL RENDERING OF ALL SECTIONS
+            // Render the content for all sections once at the start
+            renderTypeSection('Digital Archive', 'digital-archive-list');
+            renderTypeSection('Books', 'books-list');
+            renderTypeSection('Apps', 'apps-list');
+            renderTypeSection('Learning Resources', 'learning-resources-list');
+            renderTypeSection('Museums', 'museums-list');
             
-            // Initializing the search bar filtering
-            document.getElementById('globalSearch').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
+            // 2. INITIAL VIEW
+            // Show the 'About' section by default and ensure its nav link is active
+            showSection('about', 'about');
+
+
+            // 3. NAVIGATION CLICKS
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const sectionName = this.getAttribute('data-section');
+                    let sectionId = sectionName + '-section';
+                    
+                    // Handle special cases for placeholder sections without a list
+                    if (sectionName === 'about' || sectionName === 'share-story' || sectionName === 'contact') {
+                        sectionId = sectionName; // Use the simple ID for these sections
+                    }
+                    
+                    // Reset search display when navigating away from search results
+                    document.getElementById('global-search').value = '';
+                    document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
+
+                    showSection(sectionId, sectionName);
+                });
+            });
+
+
+            // 4. GLOBAL SEARCH FUNCTIONALITY
+            const searchInput = document.getElementById('global-search');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
                 
+                // Filter the entire list of resources
                 const filtered = allResources.filter(resource => {
+                    // Create a list of fields to search in, converting them to lowercase
                     const searchFields = [
                         resource.title,
                         resource.name,
@@ -984,24 +619,25 @@
                         resource.language,
                         resource.coverage,
                         resource.publisher,
-                        resource.type
+                        resource.type // Include resource type in search
                     ].map(field => field ? field.toLowerCase() : '');
 
+                    // Check if any field includes the search term
                     return searchFields.some(field => field.includes(searchTerm));
                 });
                 
                 // Use the Digital Archive section to display global search results
                 if (searchTerm.length > 0) {
                     document.getElementById('digital-archive-title').textContent = `Search Results for "${this.value}" (${filtered.length} items)`;
-                    showSection('digital-archive-section');
-                    // Render the combined results as regional cards (isSearch = true)
-                    renderRegionalCards(filtered, 'digital-archive-list', null, true); 
+                    showSection('digital-archive-section', 'digital-archive'); // Show Digital Archive section
+                    // Render the combined results 
+                    renderGenericCards(filtered, 'digital-archive-list'); 
                 } else {
                     // Revert to default view when search is cleared
                     document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites`;
-                    showSection('about');
+                    showSection('about', 'about'); // Default back to About page
                     // Re-render the default Digital Archive view so it's ready when clicked next
-                    renderTypeSection('Digital Archive', null);
+                    renderTypeSection('Digital Archive', 'digital-archive-list');
                 }
             });
         });
