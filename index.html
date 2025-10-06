@@ -245,21 +245,87 @@
             background-color: #218838;
         }
 
-        /* --- PADLET STYLE BOARD (Placeholder) --- */
-        .padlet-placeholder {
-            min-height: 400px;
-            border: 2px dashed #ccc;
-            background-color: #fff;
-            padding: 1rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-style: italic;
-            color: #777;
+        /* --- NEW PADLET STYLE BOARD (Story Cards) --- */
+        .padlet-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin-top: 1.5rem;
         }
 
+        .story-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 200px;
+        }
+        
+        .story-card h3 {
+            color: #4CAF50;
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+        
+        .story-card p {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 1rem;
+            flex-grow: 1; 
+        }
+        
+        .story-meta-padlet {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 0.5rem;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 0.5rem;
+        }
+        
+        .story-meta-padlet span {
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .story-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            justify-content: flex-end;
+        }
+        .story-actions button {
+            background: none;
+            border: none;
+            color: #1A73E8;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .story-actions button:last-child {
+            color: #dc3545;
+        }
+        .story-actions button:hover {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+        .attachment-badge {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
         
         /* --- FOOTER --- */
         footer {
@@ -365,12 +431,13 @@
         </section>
 
         <section id="share-story" class="section">
-            <h2>Share Your Language Story</h2>
-            <p>We invite community members, learners, and elders to share your experiences, memories, and revitalization efforts in a public, interactive space. Please be mindful of cultural protocols when sharing.</p>
+            <h2>Community Language Stories & Resources</h2>
+            <p>We invite community members, learners, and elders to share your experiences, memories, and revitalization efforts in this interactive space. Your stories are **saved in your browser's local storage** and will be visible to everyone who visits this page (on this browser).</p>
 
             <div class="form-container">
-                <h3>Submit a New Story/Resource</h3>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <h3>Submit or Update a Story</h3>
+                <form id="storyForm">
+                    <input type="hidden" id="editingStoryId" value="">
                     <div class="form-group">
                         <label for="story-title">Title of Story or Resource</label>
                         <input type="text" id="story-title" name="story-title" required>
@@ -384,18 +451,17 @@
                         <textarea id="story-content" name="story-content" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="story-file">Attach File (Audio, Image, PDF)</label>
-                        <input type="file" id="story-file" name="story-file">
+                        <label for="story-file">Attach File Name (e.g., 'audio.mp3', 'image.jpg') - *File is not uploaded, only name is saved*</label>
+                        <input type="text" id="story-file" name="story-file" placeholder="Enter file name (optional)">
                     </div>
                     <div class="form-group">
-                        <button type="submit">Submit Story for Review</button>
+                        <button type="submit" id="submit-story-btn">Submit New Story</button>
                     </div>
                 </form>
             </div>
 
-            <div class="padlet-placeholder">
-                <p>--- Interactive Community Board Placeholder ---<br>This area would display user-submitted stories and allow editing/deletion after database and user authentication setup (like Padlet).</p>
-            </div>
+            <div id="padlet-board" class="padlet-board">
+                </div>
         </section>
 
         <section id="contact" class="section">
@@ -450,7 +516,7 @@
             { id: 110, title: "Lingit Yoo Xatangi: The Tlingit Language", desc: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and extensive audio materials developed by dedicated teachers.", language: "Tlingit", coverage: "Northwest Coast", publisher: "Community-based", type: "Learning Resources", url: "#" },
             { id: 111, title: "Sealaska Heritage Institute Language Department", desc: "Official Southeast Alaska language revitalization hub for Tlingit, Haida, and Tsimshian, providing downloadable materials, curricula, and learning resources.", language: "Tlingit, Haida, Tsimshian", coverage: "Northwest Coast", publisher: "Sealaska Heritage Institute", type: "Learning Resources", url: "#" },
             { id: 112, title: "Haida Language Main Page", desc: "Dedicated website for Haida language study, preservation, and revitalization efforts, offering linguistic resources and community-driven materials.", language: "Haida", coverage: "Northwest Coast", publisher: "Community-based", type: "Learning Resources", url: "#" },
-            { id: 113, title: "FirstVoices Northwest Coast Languages", desc: "Community-controlled digital platform featuring various Northwest Coast Indigenous languages, offering multimedia resources, keyboards, and collaborative tools.", language: "Multiple Salishan Languages", coverage: "Northwest Coast", publisher: "First Peoples Cultural Council", type: "Learning Resources", url: "#" },
+            { id: 113, title: "FirstVoices Northwest Coast Languages", desc: "Community-controlled digital platform featuring various Northwest Coast Indigenous languages, offering multimedia resources, keyboards, and collaborative tools.", language: "Multiple Salishan Languages", coverage: "Northwest Coast", type: "Learning Resources", url: "#" },
             { id: 114, title: "Yakama Nation Cultural Resources (Sahaptin)", desc: "Official tribal education program requiring two-year Sahaptin language instruction for students, featuring community-based learning.", language: "Sahaptin (Ichishkíin)", coverage: "Plateau", publisher: "Yakama Nation", type: "Learning Resources", url: "#" },
             { id: 115, title: "Secwepemc Language Department", desc: "Official language preservation program for Secwepemctsin (Shuswap) offering books, audio materials, and community-driven language revitalization efforts.", language: "Secwepemctsin (Shuswap)", coverage: "Plateau", publisher: "Secwepemc First Nation", type: "Learning Resources", url: "#" },
             { id: 116, title: "Syilx Okanagan Nation nsyilxcn Language", desc: "Official Okanagan Nation Alliance language resource featuring nsyilxcn (Colville-Okanagan) materials and community-based learning support.", language: "nsyilxcn (Colville-Okanagan)", coverage: "Plateau", publisher: "Syilx Okanagan Nation", type: "Learning Resources", url: "#" },
@@ -738,6 +804,118 @@
                     document.getElementById('digital-archive-title').textContent = `Digital Archives & Websites (${allResources.filter(r => r.type === 'Digital Archive').length} items)`;
                 }
             });
+            
+            
+            // --- NEW LOGIC FOR PADLET STYLE STORY SHARING WITH LOCAL STORAGE ---
+
+            let stories = JSON.parse(localStorage.getItem('communityStories')) || [];
+            let editingStoryId = null;
+
+            function saveStories() {
+                localStorage.setItem('communityStories', JSON.stringify(stories));
+            }
+
+            function renderStories() {
+                const container = document.getElementById('padlet-board');
+                if (!container) return; 
+
+                if (stories.length === 0) {
+                    container.innerHTML = `<p style="text-align: center; color: #777; padding: 3rem; background: #f0f0f0; border-radius: 8px;">Be the first to share a story! Use the form above to add your experience. Stories are saved locally in your browser.</p>`;
+                    return;
+                }
+
+                container.innerHTML = stories.map(story => `
+                    <div class="story-card" data-story-id="${story.id}">
+                        <h3>${story.title}</h3>
+                        <p>${story.content}</p>
+                        <div class="story-meta-padlet">
+                            <span>**Language:** ${story.language}</span>
+                            <span>**Posted On:** ${new Date(story.id).toLocaleDateString()}</span>
+                            ${story.file ? `<span>**Attachment:** <span class="attachment-badge">${story.file}</span></span>` : '<span>**Attachment:** None</span>'}
+                        </div>
+                        <div class="story-actions">
+                            <button onclick="editStory(${story.id})">Edit</button> | 
+                            <button onclick="deleteStory(${story.id})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // These functions need to be globally accessible for the onclick handlers in the rendered HTML
+            window.deleteStory = function(id) {
+                if (confirm("Are you sure you want to delete this story?")) {
+                    // Convert id to number for comparison with Date.now()
+                    stories = stories.filter(s => s.id !== Number(id)); 
+                    saveStories();
+                    renderStories();
+                }
+            }
+
+            window.editStory = function(id) {
+                const story = stories.find(s => s.id === Number(id));
+                
+                document.getElementById('story-title').value = story.title;
+                document.getElementById('story-language').value = story.language;
+                document.getElementById('story-content').value = story.content;
+                document.getElementById('story-file').value = story.file || '';
+
+                editingStoryId = Number(id);
+                document.getElementById('submit-story-btn').textContent = "Update Story";
+                
+                // Scroll to the form for better UX
+                const formContainer = document.querySelector('.form-container');
+                if (formContainer) {
+                    formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            document.getElementById('storyForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('story-title').value.trim();
+                const language = document.getElementById('story-language').value.trim();
+                const content = document.getElementById('story-content').value.trim();
+                const file = document.getElementById('story-file').value.trim();
+                
+                if (!title || !language || !content) {
+                    alert("Please fill in the Title, Language, and Story Content fields.");
+                    return;
+                }
+
+                if (editingStoryId) {
+                    // Update existing story
+                    const index = stories.findIndex(s => s.id === editingStoryId);
+                    if (index !== -1) {
+                        stories[index].title = title;
+                        stories[index].language = language;
+                        stories[index].content = content;
+                        stories[index].file = file; // Update or remove file name
+                    }
+                    editingStoryId = null;
+                } else {
+                    // Add new story
+                    const newStory = {
+                        id: Date.now(), // Unique ID based on timestamp
+                        title: title,
+                        language: language,
+                        content: content,
+                        file: file
+                    };
+                    stories.unshift(newStory); // Add to the beginning
+                }
+
+                saveStories();
+                renderStories();
+                
+                // Reset form and button
+                this.reset();
+                document.getElementById('submit-story-btn').textContent = "Submit New Story";
+            });
+            
+            // Ensure initial rendering of user stories happens when DOM is ready
+            renderStories();
+
+            // --- END NEW LOGIC ---
         });
     </script>
 </body>
