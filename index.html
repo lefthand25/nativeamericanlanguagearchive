@@ -242,6 +242,15 @@
             resize: vertical;
             min-height: 150px;
         }
+        /* Custom file input style to match professional look */
+        .form-group input[type="file"] {
+            border: 1px solid #ccc;
+            padding: 0.75rem;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            background: #fff;
+        }
         .form-group button {
             padding: 0.75rem 1.5rem;
             background-color: var(--accent-green); /* Green button for submission */
@@ -386,7 +395,7 @@
             <p>Linking Past, Present and Future Voices</p>
         </div>
         <div class="search-container">
-            <input type="search" id="global-search" placeholder="Search across all resources by region, language, or title...">
+            <input type="search" id="global-search" placeholder="Search across all resources by coverage area, language, or title...">
         </div>
     </header>
 
@@ -469,8 +478,9 @@
                         <textarea id="story-content" name="story-content" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="story-file">Attach File Name (e.g., 'audio.mp3', 'image.jpg') - *File is not uploaded, only name is saved*</label>
-                        <input type="text" id="story-file" name="story-file" placeholder="Enter file name (optional)">
+                        <label for="story-file">Attach File or Audio (Select the file to record its name)</label>
+                        <input type="file" id="story-file" name="story-file" accept="audio/*,image/*,video/*">
+                        <p style="font-size: 0.85rem; color: #dc3545; margin-top: 5px;">**Important:** The file name is saved locally, but the **file content** is not. For permanent storage, please use the **Contact** tab to submit the file via email or a secure link.</p>
                     </div>
                     <div class="form-group">
                         <button type="submit" id="submit-story-btn">Submit New Story</button>
@@ -615,7 +625,7 @@
             { id: 412, title: "Michif Lessons App", desc: "Available on mobile platforms, contains over 60 exercises teaching 1000 Michif words across 21 conversation topics with interactive games and difficulty levels.", language: "Michif", coverage: "Great Plains", publisher: "Mobile Platforms", type: "Apps", url: "#" },
             { id: 413, title: "Navajo MAIL 4+ App", desc: "Learn Navajo Language (Diné bizaad) app uniquely designed to challenge abilities and help users learn at their own pace. Features learning games and practice tests.", language: "Navajo", coverage: "Southwest", publisher: "Independent Developer", type: "Apps", url: "#" },
             { id: 414, title: "Learn Navajo Mobile Resources", desc: "Various mobile-optimized websites and resources available for learning Diné bizaad, including vocabulary builders and pronunciation guides accessible through mobile browsers.", language: "Navajo", coverage: "Southwest", publisher: "Various Mobile Resources", type: "Apps", url: "#" },
-            { id: 415, title: "Pueblo Language Digital Tools", desc: "Individual pueblos may have developed mobile accessible resources for their specific languages. Contact tribal education departments directly.", language: "Various Pueblo Languages", coverage: "Southwest", publisher: "Individual Pueblo Tribes", type: "Apps", url: "#" },
+            { id: 415, title: "Pueblo Language Digital Tools", desc: "Individual pueblos may have developed mobile accessible resources for their specific languages including children's books, cultural stories, and instructional resources.", language: "Various Pueblo Languages", coverage: "Southwest", publisher: "Individual Pueblo Tribes", type: "Apps", url: "#" },
             { id: 416, title: "Northern Paiute Digital Resources (Apps)", desc: "The Northern Paiute Language Project has developed computer-based learning materials and audio dictionaries. Contact UC Santa Cruz or tribal departments for current tools.", language: "Northern Paiute", coverage: "Great Basin", publisher: "UC Santa Cruz", type: "Apps", url: "#" },
             { id: 417, title: "Pyramid Lake Paiute Tribe Digital Materials (Apps)", desc: "The tribe's language department provides digital resources and may offer mobile accessible materials. Contact the tribal language program directly.", language: "Northern Paiute", coverage: "Great Basin", publisher: "Pyramid Lake Paiute Tribe", type: "Apps", url: "#" },
             { id: 418, title: "Nez Perce Tribe Digital Materials (Apps)", desc: "The Nez Perce Tribe's language department provides digital resources and may offer mobile-accessible learning materials. Contact the tribal language program directly.", language: "Nez Perce", coverage: "Plateau", publisher: "Nez Perce Tribe", type: "Apps", url: "#" },
@@ -681,8 +691,8 @@
                         <p>${resource.desc}</p>
                     </div>
                     <div class="resource-meta">
-                        <span>**Coverage Area:** <strong>${resource.coverage}</strong></span>
-                        <span>**Language:** <strong>${resource.language}</strong></span>
+                        <span>Coverage Area: <strong>${resource.coverage}</strong></span>
+                        <span>Language: <strong>${resource.language}</strong></span>
                         <span>Publisher: ${resource.publisher}</span>
                         <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
                     </div>
@@ -717,8 +727,8 @@
                     </div>
                     <div class="resource-meta">
                         <span>Type: <strong>${resource.type}</strong></span>
-                        <span>**Coverage Area:** <strong>${resource.coverage}</strong></span>
-                        <span>**Language:** <strong>${resource.language}</strong></span>
+                        <span>Coverage Area: <strong>${resource.coverage}</strong></span>
+                        <span>Language: <strong>${resource.language}</strong></span>
                         <span>Publisher: ${resource.publisher}</span>
                         <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
                     </div>
@@ -847,9 +857,9 @@
                         <h3>${story.title}</h3>
                         <p>${story.content}</p>
                         <div class="story-meta-padlet">
-                            <span>**Language:** ${story.language}</span>
-                            <span>**Posted On:** ${new Date(story.id).toLocaleDateString()}</span>
-                            ${story.file ? `<span>**Attachment:** <span class="attachment-badge">${story.file}</span></span>` : '<span>**Attachment:** None</span>'}
+                            <span>Language: ${story.language}</span>
+                            <span>Posted On: ${new Date(story.id).toLocaleDateString()}</span>
+                            ${story.file ? `<span>Attachment: <span class="attachment-badge">${story.file}</span></span>` : '<span>Attachment: None</span>'}
                         </div>
                         <div class="story-actions">
                             <button onclick="editStory(${story.id})">Edit</button> | 
@@ -875,7 +885,8 @@
                 document.getElementById('story-title').value = story.title;
                 document.getElementById('story-language').value = story.language;
                 document.getElementById('story-content').value = story.content;
-                document.getElementById('story-file').value = story.file || '';
+                // Note: File input must be cleared or handled specially for security reasons, so we only set the name when saving.
+                // The actual input is cleared on form reset, so we only need the saved file name.
 
                 editingStoryId = Number(id);
                 document.getElementById('submit-story-btn').textContent = "Update Story";
@@ -893,7 +904,10 @@
                 const title = document.getElementById('story-title').value.trim();
                 const language = document.getElementById('story-language').value.trim();
                 const content = document.getElementById('story-content').value.trim();
-                const file = document.getElementById('story-file').value.trim();
+                
+                // NEW: Read the file name from the input type="file" field
+                const fileInput = document.getElementById('story-file');
+                const file = fileInput.files.length > 0 ? fileInput.files[0].name : ''; 
                 
                 if (!title || !language || !content) {
                     alert("Please fill in the Title, Language, and Story Content fields.");
@@ -907,7 +921,8 @@
                         stories[index].title = title;
                         stories[index].language = language;
                         stories[index].content = content;
-                        stories[index].file = file; // Update or remove file name
+                        // Only update file name if a new file was selected, otherwise keep the old one
+                        stories[index].file = file || stories[index].file; 
                     }
                     editingStoryId = null;
                 } else {
