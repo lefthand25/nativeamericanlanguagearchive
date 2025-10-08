@@ -14,6 +14,14 @@
             background: #fff; 
         }
 
+        /* --- COLOR PALETTE UPDATE --- */
+        /* Primary Dark Color */
+        :root {
+            --primary-dark: #002147; /* Dark Navy Blue */
+            --link-color: #004488; /* Slightly lighter blue for links */
+            --accent-green: #218838; /* Darker Green for submission/stories */
+        }
+
         /* --- HEADER & BANNER --- */
         header { 
             background: #fff; 
@@ -33,8 +41,8 @@
         header h1 { 
             font-size: 2rem; 
             margin-bottom: 0.25rem; 
-            color: #222; 
-            font-weight: 500;
+            color: var(--primary-dark); /* Changed to Dark Navy */
+            font-weight: 600; /* Increased weight for presence */
             letter-spacing: normal;
         }
         header p { 
@@ -58,9 +66,9 @@
             transition: border-color 0.3s;
         }
         #global-search:focus {
-            border-color: #1A73E8;
+            border-color: var(--primary-dark); /* Changed to Dark Navy */
             outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+            box-shadow: 0 0 0 3px rgba(0, 33, 71, 0.2);
         }
 
         /* --- NAVIGATION --- */
@@ -90,11 +98,11 @@
         }
         nav ul li a:hover { 
             background-color: #f5f5f5; 
-            color: #1A73E8;
+            color: var(--link-color); /* Updated hover color */
         }
         nav ul li a.active {
-            border-bottom: 3px solid #1A73E8;
-            color: #1A73E8;
+            border-bottom: 3px solid var(--primary-dark); /* Changed active border to Dark Navy */
+            color: var(--primary-dark); /* Changed active link color to Dark Navy */
             font-weight: 600;
         }
         
@@ -162,7 +170,7 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
         .resource-card h3 {
-            color: #1A73E8;
+            color: var(--primary-dark); /* Changed to Dark Navy */
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
         }
@@ -173,22 +181,25 @@
             flex-grow: 1; 
         }
         .resource-meta {
-            font-size: 0.85rem;
-            color: #888;
+            font-size: 0.95rem; /* Increased font size for clarity */
+            color: #555; /* Darker text for better contrast */
             margin-top: 0.5rem;
         }
         .resource-meta span {
             display: block;
+            margin-bottom: 0.2rem;
         }
         .resource-meta strong {
             color: #000;
-            font-weight: 600;
+            font-weight: 700; /* Increased weight for visibility */
+            font-size: 1.05rem; /* Slightly larger text for key data */
+            text-transform: uppercase; /* Added subtle emphasis */
         }
         .resource-link {
             display: inline-block;
             margin-top: 1rem;
             padding: 0.5rem 1rem;
-            background-color: #3C82F7;
+            background-color: var(--link-color); /* Updated link button color */
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -196,7 +207,7 @@
             transition: background-color 0.2s;
         }
         .resource-link:hover {
-            background-color: #1A73E8;
+            background-color: var(--primary-dark); /* Darker hover color */
         }
 
         /* --- FORM STYLES --- */
@@ -233,7 +244,7 @@
         }
         .form-group button {
             padding: 0.75rem 1.5rem;
-            background-color: #28a745; /* Green button for submission */
+            background-color: var(--accent-green); /* Green button for submission */
             color: white;
             border: none;
             border-radius: 4px;
@@ -242,7 +253,14 @@
             transition: background-color 0.2s;
         }
         .form-group button:hover {
-            background-color: #218838;
+            background-color: #1d6e30; /* Darker green hover */
+        }
+        /* Contact Form Button (to match link button) */
+        #contact .form-group button {
+            background-color: var(--link-color);
+        }
+        #contact .form-group button:hover {
+            background-color: var(--primary-dark);
         }
 
         /* --- NEW PADLET STYLE BOARD (Story Cards) --- */
@@ -266,7 +284,7 @@
         }
         
         .story-card h3 {
-            color: #4CAF50;
+            color: var(--accent-green); /* Muted Green for distinction */
             font-size: 1.35rem;
             margin-bottom: 0.5rem;
             border-bottom: 1px solid #f0f0f0;
@@ -303,7 +321,7 @@
         .story-actions button {
             background: none;
             border: none;
-            color: #1A73E8;
+            color: var(--link-color); /* Consistent link color */
             cursor: pointer;
             font-size: 0.9rem;
             padding: 0;
@@ -314,7 +332,7 @@
             color: #dc3545;
         }
         .story-actions button:hover {
-            color: #0d47a1;
+            color: var(--primary-dark);
             text-decoration: underline;
         }
         .attachment-badge {
@@ -392,7 +410,7 @@
             <div class="about-content-wrapper">
                 <div class="about-text">
                     <p>Indigenous languages carry the **wisdom, stories and cultural heritage** of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where **indigenous communities, linguists and language enthusiasts** can come together to preserve oral traditions and support vital revitalization work.</p>
-                    <p style="margin-top: 1rem;">**Regarding organization:** We recognize that language is tied to Nation, Tribe, and Land. While the main tabs provide quick access by resource *type* (App, Book), **every resource is prominently tagged with its Coverage Region and Language**. This allows you to prioritize a geographical search and locate culturally relevant materials first. We are committed to ethical archiving practices and community control.</p>
+                    <p style="margin-top: 1rem;">**Regarding organization:** We recognize that language is tied to Nation, Tribe, and Land. While the main tabs provide quick access by resource *type* (App, Book), **every resource is prominently tagged with its Coverage Area and Language**. This allows you to prioritize a geographical search and locate culturally relevant materials first. We are committed to ethical archiving practices and community control.</p>
                 </div>
                 <div class="about-image">
                     <img src="boston-public-library-rFl5Fs69_-E-unsplash (1).jpg" alt="Historical image of three Native American men standing outside of tipis, representing heritage and culture.">
@@ -663,8 +681,8 @@
                         <p>${resource.desc}</p>
                     </div>
                     <div class="resource-meta">
-                        <span>**Region:** <strong>${resource.coverage}</strong></span>
-                        <span>Language: ${resource.language}</span>
+                        <span>**Coverage Area:** <strong>${resource.coverage}</strong></span>
+                        <span>**Language:** <strong>${resource.language}</strong></span>
                         <span>Publisher: ${resource.publisher}</span>
                         <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
                     </div>
@@ -687,7 +705,7 @@
             }
 
             if (resources.length === 0) {
-                container.innerHTML = `<p style="padding: 2rem; text-align: center; color: #555;">No resources found matching your search term. Try searching by language, region, or keyword.</p>`;
+                container.innerHTML = `<p style="padding: 2rem; text-align: center; color: #555;">No resources found matching your search term. Try searching by language, coverage area, or keyword.</p>`;
                 return;
             }
 
@@ -699,8 +717,8 @@
                     </div>
                     <div class="resource-meta">
                         <span>Type: <strong>${resource.type}</strong></span>
-                        <span>**Region:** <strong>${resource.coverage}</strong></span>
-                        <span>Language: ${resource.language}</span>
+                        <span>**Coverage Area:** <strong>${resource.coverage}</strong></span>
+                        <span>**Language:** <strong>${resource.language}</strong></span>
                         <span>Publisher: ${resource.publisher}</span>
                         <a href="${resource.url}" target="_blank" class="resource-link">Go to Resource</a>
                     </div>
