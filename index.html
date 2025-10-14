@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indigenous Voices Archive</title>
+    <title>Indigenous Voices Archive - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* ------------------------------------------- */
-        /* BASE STYLES & COLOR PALETTE (MONOCHROME) */
+        /* BASE STYLES & COLOR PALETTE (PROFESSIONAL) */
         /* ------------------------------------------- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            /* Monochromatic Colors: White, Black, and Grays */
-            --primary-dark: #000000; /* Black */
-            --secondary-dark: #333333; /* Dark Gray */
-            --link-color: #555555; /* Medium Gray for links/accents */
-            --highlight-color: #888888; /* Lighter Gray for highlights */
-            --light-bg: #f8f8f8; /* Very Light Gray for section breaks */
-            --border-color: #e0e0e0;
-            --text-color: #222;
+            --primary-blue: #004792; /* Professional Mid-Tone Blue */
+            --accent-teal: #1B998B; /* Modern Seafoam Teal */
+            --text-color: #222222;
             --white: #fff;
+            --light-bg: #F5F5F5; /* Soft Gray for section breaks */
+            --border-color: #e0e0e0;
         }
 
         body {
@@ -31,7 +28,7 @@
         }
 
         /* ------------------------------------------- */
-        /* HEADER & NAVIGATION (STICKY & RESPONSIVE)   */
+        /* HEADER & NAVIGATION (FIXED)   */
         /* ------------------------------------------- */
         header {
             background: var(--white);
@@ -39,25 +36,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* Using a simple black line for the border */
-            border-bottom: 3px solid var(--primary-dark);
+            border-bottom: 3px solid var(--primary-blue);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .logo-title {
             display: flex;
             align-items: center;
-            color: var(--primary-dark);
+            color: var(--primary-blue);
             text-decoration: none;
         }
         .logo-title i {
             font-size: 1.8rem;
             margin-right: 0.5rem;
-            /* Icon color set to black */
-            color: var(--primary-dark);
+            color: var(--accent-teal);
         }
         .logo-title h1 {
             font-size: 1.4rem;
@@ -66,72 +61,54 @@
 
         .desktop-nav a {
             text-decoration: none;
-            color: var(--primary-dark);
+            color: var(--primary-blue);
             margin-left: 1.5rem;
             font-weight: 500;
             transition: color 0.3s;
+            padding-bottom: 4px;
         }
-        .desktop-nav a:hover {
-            color: var(--link-color);
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--accent-teal);
+            border-bottom: 2px solid var(--accent-teal);
         }
 
         .cta-button {
-            /* CTA is a slightly different shade of gray for emphasis */
-            background-color: var(--secondary-dark) !important;
+            background-color: var(--accent-teal) !important;
             color: var(--white) !important;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             font-weight: 700 !important;
             margin-left: 2rem !important;
+            border-bottom: none !important; /* Override hover style */
         }
         .cta-button:hover {
-            background-color: var(--primary-dark) !important;
+            background-color: #167a6e !important;
         }
-
-        /* Mobile Menu Setup */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-dark);
-            cursor: pointer;
-        }
-        .mobile-menu {
-            display: none; 
-            position: absolute;
-            top: 100%; 
-            left: 0;
-            width: 100%;
-            background: var(--primary-dark);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 999;
-        }
-        .mobile-menu.active {
-            display: block; 
-        }
-        .mobile-menu a {
-            display: block;
-            padding: 1rem 2rem;
-            color: var(--white);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
+        
+        /* Mobile Menu Setup (Hidden by default) */
+        .hamburger { display: none; }
+        .mobile-menu { display: none; }
 
         /* ------------------------------------------- */
-        /* PROMINENT SEARCH & BANNER                   */
+        /* HOME PAGE BANNER & SEARCH                   */
         /* ------------------------------------------- */
         .search-banner {
             background: var(--light-bg);
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .search-banner h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
         }
         .search-container {
             display: flex;
             max-width: 800px;
-            margin: 0 auto 1rem;
-            border: 3px solid var(--primary-dark);
+            margin: 1.5rem auto 1rem;
+            border: 3px solid var(--primary-blue);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -143,7 +120,7 @@
             outline: none;
         }
         .search-container button {
-            background-color: var(--primary-dark);
+            background-color: var(--primary-blue);
             color: var(--white);
             padding: 1rem 1.5rem;
             border: none;
@@ -153,49 +130,48 @@
             transition: background-color 0.3s;
         }
         .search-container button:hover {
-            background-color: var(--secondary-dark);
+            background-color: #003a73;
         }
 
         /* ------------------------------------------- */
-        /* NEWS SECTION */
+        /* IMAGE STYLES (NEW) */
         /* ------------------------------------------- */
-        .news-section {
-            padding: 2rem;
-            background-color: var(--primary-dark);
-            color: var(--white);
+        .hero-image-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* Matches the padding of the header and content pages */
         }
-        .news-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        /* Changed text color in news to white on dark background */
-        .news-item h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--white); 
-        }
-        .news-item a {
-            color: var(--light-bg); /* Use light gray link on dark background */
-            text-decoration: underline;
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 3rem 0;
+            /* No border-radius for sharp corners */
+            border: 1px solid var(--border-color); 
         }
 
+        /* ------------------------------------------- */
+        /* CONTENT PAGES (Hidden by default, shown by JS)*/
+        /* ------------------------------------------- */
+        .content-page {
+            /* Initial state: Hidden. Only the home page is visible */
+            display: none; 
+            padding: 4rem 2rem;
+            min-height: 60vh;
+        }
+        
+        .content-page.active {
+            display: block;
+        }
 
-        /* ------------------------------------------- */
-        /* CATEGORIZED CONTENT GRID                    */
-        /* ------------------------------------------- */
-        .content-section {
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        .content-section.gray-bg {
-            background: var(--light-bg);
-        }
-        .content-section h2 {
-            font-size: 1.8rem;
+        .content-page h2 {
+            font-size: 2rem;
             margin-bottom: 2rem;
-            color: var(--primary-dark);
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center;
         }
         .content-grid {
             display: grid;
@@ -204,11 +180,12 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+        
+        /* Archive Card Styling */
         .archive-card {
             background: var(--white);
             border: 1px solid var(--border-color);
-            /* Card border is now a gray/white accent */
-            border-top: 5px solid var(--highlight-color); 
+            border-top: 5px solid var(--accent-teal); /* Use accent color on top */
             padding: 1.5rem;
             text-align: left;
             border-radius: 4px;
@@ -223,14 +200,13 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
         .archive-card h3 {
-            color: var(--primary-dark);
+            color: var(--primary-blue);
             margin-bottom: 0.5rem;
         }
-        /* Homeland Tag uses Link Color for subtle emphasis */
         .archive-card .homeland-tag {
             font-size: 0.8rem;
-            color: var(--link-color);
-            background: var(--light-bg); /* Very light gray background */
+            color: var(--accent-teal);
+            background: #e9f8f7; /* Very light teal background */
             padding: 0.3rem 0.6rem;
             border-radius: 3px;
             font-weight: 600;
@@ -238,56 +214,43 @@
             display: inline-block;
         }
         .archive-card a {
-            color: var(--primary-dark); /* Links are black */
-            text-decoration: underline;
+            color: var(--primary-blue);
+            text-decoration: none;
             font-weight: 600;
             margin-top: auto; 
         }
-        
-        .primary-button {
-            background-color: var(--primary-dark);
-            color: var(--white);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            font-weight: 700;
-            margin-top: 3rem;
-            display: inline-block;
-            transition: background-color 0.3s;
+        .archive-card a:hover {
+             text-decoration: underline;
         }
-        .primary-button:hover {
-            background-color: var(--secondary-dark);
-        }
-
-        /* ------------------------------------------- */
-        /* ABOUT SECTION STYLES */
-        /* ------------------------------------------- */
-        .about-section {
-            padding: 4rem 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .about-section h2 {
+        .content-page p.intro-text {
             text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
         }
 
         /* ------------------------------------------- */
         /* FOOTER                                      */
         /* ------------------------------------------- */
         footer {
-            background: var(--primary-dark);
+            background: var(--primary-blue);
             color: var(--white);
             padding: 2rem;
             text-align: center;
-            /* Footer accent is now just a plain line */
-            border-top: 5px solid var(--link-color); 
+            border-top: 5px solid var(--accent-teal);
         }
-
+        footer a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+        }
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
         /* ------------------------------------------- */
         /* MEDIA QUERIES (RESPONSIVE DESIGN)           */
         /* ------------------------------------------- */
-        
         @media (max-width: 1024px) {
             .content-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -297,16 +260,15 @@
             header { padding: 1rem; }
             .desktop-nav { display: none; }
             .hamburger { display: block; }
-            .search-container { flex-direction: column; border: none; }
-            .search-container input { border: 3px solid var(--primary-dark); border-radius: 8px 8px 0 0; margin-bottom: -1px; }
-            .search-container button { border-radius: 0 0 8px 8-px; }
             .content-grid { grid-template-columns: 1fr; }
+            .hero-image-container { padding: 0 1rem; }
+            .hero-image-container img { margin: 2rem 0; }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="logo-title">
+        <a href="#home" class="logo-title" id="logo-link">
             <i class="fas fa-book-reader" aria-hidden="true"></i>
             <h1>Indigenous Voices Archive</h1>
         </a>
@@ -320,203 +282,141 @@
             <a href="#about">About</a>
             <a href="#submit" class="cta-button">Submit Content</a>
         </nav>
-        <button class="hamburger" aria-label="Toggle Navigation" onclick="document.querySelector('.mobile-menu').classList.toggle('active')">
+        <button class="hamburger" aria-label="Toggle Navigation">
             <i class="fas fa-bars"></i>
         </button>
-        <nav class="mobile-menu">
-            <a href="#resources">Resources</a>
-            <a href="#digital-archive">Archive</a>
-            <a href="#museums">Museums</a>
-            <a href="#apps">Apps</a>
-            <a href="#books">Books</a>
-            <a href="#news">News</a>
-            <a href="#about">About</a>
-            <a href="#submit">Submit Content</a>
-        </nav>
     </header>
 
-    <main>
-        <section class="search-banner">
-            <div class="search-container">
-                <input type="text" placeholder="Search the archive by language, nation, or original homelands (e.g., Plateau, Southwest)..." aria-label="Search the archive">
-                <button><i class="fas fa-search"></i> Search</button>
-            </div>
-            <p>Preserving history. Revitalizing culture. Exploring linguistic heritage.</p>
-        </section>
+    <main id="main-content-container">
         
-        <section class="news-section" id="news">
-            <h2><i class="far fa-newspaper"></i> Vital News in Language Revitalization</h2>
-            <div class="news-item-list">
-                <div class="news-item">
-                    <h3>Historic National Plan Released</h3>
-                    <p>The Biden-Harris Administration released a 10-Year National Plan on Native Language Revitalization, calling for a **$16.7 billion** investment to support language nests, immersion schools, and mentor-apprentice programs across the U.S. </p>
-                    <a href="https://www.doi.gov/pressreleases/biden-harris-administration-releases-10-year-national-plan-native-language" target="_blank">Read Details <i class="fas fa-external-link-alt"></i></a>
+        <section class="content-page active" id="home">
+            <div class="search-banner">
+                <h2>Explore the Indigenous Voices Archive</h2>
+                <div class="search-container">
+                    <input type="text" placeholder="Search the archive by language, nation, or original homelands (e.g., Plateau, Southwest)..." aria-label="Search the archive">
+                    <button><i class="fas fa-search"></i> Search</button>
                 </div>
-                <div class="news-item">
-                    <h3>AI and Technology Boost</h3>
-                    <p>New projects are leveraging **AI and hologram technology** (like the Na-Cho Nyäk Dun Holopresence Initiative and Dartmouth's NüshuRescue) to document, preserve, and create resources for "low-resource" endangered languages like Northern Tutchone.</p>
-                </div>
-                <div class="news-item">
-                    <h3>First Nations/Métis Funding Autonomy (Canada)</h3>
-                    <p>The Canadian government announced a new distinction-based funding model to allocate funds **directly to First Nations and Métis Peoples** for self-led language strategies, including over $15.3 million for Michif revitalization.</p>
-                </div>
+                <p>Preserving history. Revitalizing culture. Exploring linguistic heritage.</p>
             </div>
+            
+            <div class="hero-image-container">
+                <img src="archive-hero.jpg" alt="Montage of digital screens displaying Indigenous language content and traditional art." aria-label="Featured image showcasing the archive's digital and cultural content" loading="lazy">
+            </div>
+            
+            <section style="padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Quick links to the most popular resources.</p>
+                <div class="content-grid">
+                     <div class="archive-card">
+                        <span class="homeland-tag">Eastern Woodlands</span>
+                        <h3>Cherokee Nation Language Platform</h3>
+                        <p class="language-tag">Language: Cherokee (Tsalagi)</p>
+                        <p>The Nation's official online learning hub offering a comprehensive curriculum and resources for fluency.</p>
+                        <a href="https://www.cherokee.org/language" target="_blank">Explore Platform <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="archive-card">
+                        <span class="homeland-tag">Great Plains</span>
+                        <h3>Sam Noble Museum Collection</h3>
+                        <p class="language-tag">Language: 175 Native American Languages</p>
+                        <p>Extensive collections with audio/video recordings, manuscripts, and teaching curricula.</p>
+                        <a href="https://samnoblemuseum.ou.edu/collections" target="_blank">Search Collections <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="archive-card">
+                        <span class="homeland-tag">Great Plains</span>
+                        <h3>Lakota Language Consortium App</h3>
+                        <p class="language-tag">Language: Lakota (Lakȟótiyapi)</p>
+                        <p>An interactive, gamified app designed for youth and adult learners, focusing on dictionary and phrases.</p>
+                        <a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
         </section>
 
-        <section class="content-section" id="resources">
+        <section class="content-page" id="resources">
             <h2>Websites & Language Resources</h2>
-            <p>A sample of critical online tools and organizations leading language instruction and documentation.</p>
+            <p class="intro-text">A curated selection of critical online tools and organizations leading language instruction and documentation.</p>
             <div class="content-grid">
-                <div class="archive-card">
-                    <span class="homeland-tag">Eastern Woodlands</span>
-                    <h3>Cherokee Nation Language Platform</h3>
-                    <p class="language-tag">Language: Cherokee (Tsalagi)</p>
-                    <p>The Cherokee Nation's official online learning hub offering a comprehensive curriculum, apps, and community resources for fluency.</p>
-                    <a href="https://www.cherokee.org/language" target="_blank">Explore the Platform <i class="fas fa-arrow-right"></i></a>
+                <div class="archive-card"><span class="homeland-tag">Eastern Woodlands</span><h3>Cherokee Nation Language Platform</h3><p class="language-tag">Language: Cherokee (Tsalagi)</p><p>The Nation's official online learning hub offering a comprehensive curriculum, apps, and community resources for fluency.</p><a href="https://www.cherokee.org/language" target="_blank">Explore the Platform <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Great Basin</span><h3>Northern Paiute Language Project</h3><p class="language-tag">Language: Northern Paiute (Numa)</p><p>A digital archive and teaching curriculum developed by the Reno-Sparks Indian Colony for community-based language transmission.</p><a href="https://www.rsic.org/nplp" target="_blank">Access Digital Lessons <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Alaska/Arctic</span><h3>Alaska Native Language Center</h3><p class="language-tag">Language: Multiple Alaska Native Languages</p><p>Major university-based research and documentation center, producing dictionaries, texts, and resources for over 20 languages.</p><a href="https://www.uaf.edu/anlc" target="_blank">View Research & Publications <i class="fas fa-arrow-right"></i></a></div>
                 </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Great Basin</span>
-                    <h3>Northern Paiute Language Project</h3>
-                    <p class="language-tag">Language: Northern Paiute (Numa)</p>
-                    <p>A digital archive and teaching curriculum developed by the Reno-Sparks Indian Colony for community-based language transmission.</p>
-                    <a href="https://www.rsic.org/nplp" target="_blank">Access Digital Lessons <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Alaska/Arctic</span>
-                    <h3>Alaska Native Language Center</h3>
-                    <p class="language-tag">Language: Multiple Alaska Native Languages</p>
-                    <p>Major university-based research and documentation center, producing dictionaries, texts, and resources for over 20 languages.</p>
-                    <a href="https://www.uaf.edu/anlc" target="_blank">View Research & Publications <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <a href="#" class="primary-button">View All Language Resources</a>
         </section>
 
-        <section class="content-section gray-bg" id="digital-archive">
+        <section class="content-page" id="digital-archive">
             <h2>Digital Archives & Audio Recordings</h2>
-            <p>Collections dedicated to linguistic research, field recordings, and oral histories.</p>
+            <p class="intro-text">Collections dedicated to linguistic research, field recordings, and oral histories from institutions across North America.</p>
             <div class="content-grid">
-                <div class="archive-card">
-                    <span class="homeland-tag">Continental US & Alaska</span>
-                    <h3>National Anthropological Archives</h3>
-                    <p class="language-tag">Resource Type: Recordings, Manuscripts</p>
-                    <p>Extensive linguistic manuscripts, documents, and recordings from various language families, including many endangered languages.</p>
-                    <a href="https://www.si.edu/naa" target="_blank">Browse the Collection <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Global Indigenous Languages</span>
-                    <h3>Low-Resource Language Technology</h3>
-                    <p class="language-tag">Resource Type: Software, Datasets</p>
-                    <p>A modern initiative focusing on building computational linguistic tools and datasets to support the digital presence of smaller languages.</p>
-                    <a href="#" target="_blank">Explore Technical Papers <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Southwest</span>
-                    <h3>Library of Congress: Acoma Field Recordings</h3>
-                    <p class="language-tag">Language: Keres</p>
-                    <p>Historic audio recordings of Acoma Pueblo language and oral traditions, providing invaluable documentation for language keepers.</p>
-                    <a href="#" target="_blank">Listen to Samples <i class="fas fa-arrow-right"></i></a>
-                </div>
+                <div class="archive-card"><span class="homeland-tag">Continental US & Alaska</span><h3>National Anthropological Archives</h3><p class="language-tag">Resource Type: Recordings, Manuscripts</p><p>Extensive linguistic manuscripts, documents, and recordings from various language families, including many endangered languages.</p><a href="https://www.si.edu/naa" target="_blank">Browse the Collection <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Global Indigenous Languages</span><h3>Low-Resource Language Technology</h3><p class="language-tag">Resource Type: Software, Datasets</p><p>A modern initiative focusing on building computational linguistic tools and datasets to support the digital presence of smaller languages.</p><a href="#" target="_blank">Explore Technical Papers <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Southwest</span><h3>Library of Congress: Acoma Field Recordings</h3><p class="language-tag">Language: Keres</p><p>Historic audio recordings of Acoma Pueblo language and oral traditions, providing invaluable documentation.</p><a href="#" target="_blank">Listen to Samples <i class="fas fa-arrow-right"></i></a></div>
             </div>
-            <a href="#" class="primary-button">View All Digital Archives</a>
         </section>
 
-        <section class="content-section" id="apps">
-            <h2>Mobile Apps & Digital Tools</h2>
-            <p>The latest in mobile applications and interactive software for language learning on the go.</p>
-            <div class="content-grid">
-                <div class="archive-card">
-                    <span class="homeland-tag">Eastern Woodlands</span>
-                    <h3>Seneca Language App (iOS/Android)</h3>
-                    <p class="language-tag">Language: Seneca (Onödowá'ga:')</p>
-                    <p>A vocabulary and phrase app created by the Seneca Nation to help connect users with everyday language use.</p>
-                    <a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Great Plains</span>
-                    <h3>Lakota Language Consortium App</h3>
-                    <p class="language-tag">Language: Lakota (Lakȟótiyapi)</p>
-                    <p>An interactive, gamified app designed for youth and adult learners, focusing on dictionary, phrases, and cultural terms.</p>
-                    <a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Northwest Coast</span>
-                    <h3>S'Klallam Language App</h3>
-                    <p class="language-tag">Language: S’Klallam (nəxʷsƛ̕ay̓əmúcən)</p>
-                    <p>A digital dictionary and phrasebook resource developed by the Port Gamble S'Klallam Tribe.</p>
-                    <a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <a href="#" class="primary-button">Browse All Apps</a>
-        </section>
-
-        <section class="content-section gray-bg" id="museums">
+        <section class="content-page" id="museums">
             <h2>Museums & Cultural Centers</h2>
-            <p>Institutions dedicated to preserving cultural materials, oral histories, and linguistic records.</p>
+            <p class="intro-text">Institutions dedicated to preserving cultural materials, oral histories, and linguistic records for research and community use.</p>
             <div class="content-grid">
-                <div class="archive-card">
-                    <span class="homeland-tag">Plateau</span>
-                    <h3>Secwépemc Museum & Heritage Park</h3>
-                    <p class="language-tag">Language: Secwepemctsin</p>
-                    <p>A Nation-managed cultural museum maintaining linguistic recordings, historical documents and cultural materials.</p>
-                    <a href="#" target="_blank">Contact Museum Directly <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Great Plains</span>
-                    <h3>Sam Noble Museum Collection</h3>
-                    <p class="language-tag">Language: 175 Native American Languages</p>
-                    <p>Extensive Native American Languages Collection with audio/video recordings, manuscripts, books, journals.</p>
-                    <a href="https://samnoblemuseum.ou.edu/collections" target="_blank">Search Collections Online <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Southwest</span>
-                    <h3>Heard Museum Library & Archives</h3>
-                    <p class="language-tag">Language: Southwest Indigenous Languages</p>
-                    <p>Major museum with a library and archives featuring over 40,000 items focusing on Pueblo, Navajo (Diné), and Apache cultures.</p>
-                    <a href="https://heard.org/library" target="_blank">Visit the Archives <i class="fas fa-arrow-right"></i></a>
-                </div>
+                <div class="archive-card"><span class="homeland-tag">Plateau</span><h3>Secwépemc Museum & Heritage Park</h3><p class="language-tag">Language: Secwepemctsin</p><p>A Nation-managed cultural museum maintaining linguistic recordings, historical documents and cultural materials.</p><a href="#" target="_blank">Contact Museum Directly <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Great Plains</span><h3>Sam Noble Museum Collection</h3><p class="language-tag">Language: 175 Native American Languages</p><p>Extensive Native American Languages Collection with audio/video recordings, manuscripts, books, journals.</p><a href="https://samnoblemuseum.ou.edu/collections" target="_blank">Search Collections Online <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Southwest</span><h3>Heard Museum Library & Archives</h3><p class="language-tag">Language: Southwest Indigenous Languages</p><p>Major museum with a library and archives featuring over 40,000 items focusing on Pueblo, Navajo (Diné), and Apache cultures.</p><a href="https://heard.org/library" target="_blank">Visit the Archives <i class="fas fa-arrow-right"></i></a></div>
             </div>
         </section>
 
-        <section class="content-section" id="books">
+        <section class="content-page" id="apps">
+            <h2>Mobile Apps & Digital Tools</h2>
+            <p class="intro-text">The latest in mobile applications and interactive software for language learning on the go, developed by tribal communities and partners.</p>
+            <div class="content-grid">
+                <div class="archive-card"><span class="homeland-tag">Eastern Woodlands</span><h3>Seneca Language App (iOS/Android)</h3><p class="language-tag">Language: Seneca (Onödowá'ga:')</p><p>A vocabulary and phrase app created by the Seneca Nation to help connect users with everyday language use.</p><a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Great Plains</span><h3>Lakota Language Consortium App</h3><p class="language-tag">Language: Lakota (Lakȟótiyapi)</p><p>An interactive, gamified app designed for youth and adult learners, focusing on dictionary, phrases, and cultural terms.</p><a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Northwest Coast</span><h3>S'Klallam Language App</h3><p class="language-tag">Language: S’Klallam (nəxʷsƛ̕ay̓əmúcən)</p><p>A digital dictionary and phrasebook resource developed by the Port Gamble S'Klallam Tribe.</p><a href="#" target="_blank">Download the App <i class="fas fa-arrow-right"></i></a></div>
+            </div>
+        </section>
+
+        <section class="content-page" id="books">
             <h2>Books & Dictionaries</h2>
-            <p>Essential written resources for in-depth study and documentation.</p>
+            <p class="intro-text">Essential written resources for in-depth study and documentation, including authoritative grammars and dictionaries.</p>
             <div class="content-grid">
-                <div class="archive-card">
-                    <span class="homeland-tag">Southwest</span>
-                    <h3>Navajo (Diné bizaad) Textbook</h3>
-                    <p class="language-tag">Language: Navajo (Diné bizaad)</p>
-                    <p>A comprehensive textbook used in language immersion and adult education settings, serving as a primary written source for learners.</p>
-                    <a href="#" target="_blank">Find a Copy <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">Northwest Coast</span>
-                    <h3>Tlingit Language Grammar and Dictionary</h3>
-                    <p class="language-tag">Language: Tlingit (Lingít)</p>
-                    <p>Definitive linguistic documentation, crucial for academic research and community-led curriculum development.</p>
-                    <a href="#" target="_blank">View the Publication <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="archive-card">
-                    <span class="homeland-tag">California</span>
-                    <h3>The Hupa Language: Handbook and Dictionary</h3>
-                    <p class="language-tag">Language: Hupa (Na:tinixwe)</p>
-                    <p>A cornerstone resource for Hupa speakers, providing extensive vocabulary and grammatical structure for language revitalization.</p>
-                    <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
+                <div class="archive-card"><span class="homeland-tag">Southwest</span><h3>Navajo (Diné bizaad) Textbook</h3><p class="language-tag">Language: Navajo (Diné bizaad)</p><p>A comprehensive textbook used in language immersion and adult education settings, serving as a primary written source for learners.</p><a href="#" target="_blank">Find a Copy <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">Northwest Coast</span><h3>Tlingit Language Grammar and Dictionary</h3><p class="language-tag">Language: Tlingit (Lingít)</p><p>Definitive linguistic documentation, crucial for academic research and community-led curriculum development.</p><a href="#" target="_blank">View the Publication <i class="fas fa-arrow-right"></i></a></div>
+                <div class="archive-card"><span class="homeland-tag">California</span><h3>The Hupa Language: Handbook and Dictionary</h3><p class="language-tag">Language: Hupa (Na:tinixwe)</p><p>A cornerstone resource for Hupa speakers, providing extensive vocabulary and grammatical structure for language revitalization.</p><a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a></div>
             </div>
-            <a href="#" class="primary-button">Browse All Books & Texts</a>
-        </section>
-
-        <section class="about-section" id="about">
-            <h2>About the Indigenous Voices Archive</h2>
-            <p>This archive is a digital repository built by and for Native American communities, dedicated to preserving, promoting, and making accessible the vital linguistic heritage of North America.</p>
-            <p>Our mission is to support language keepers, educators, and learners by centralizing resources, advocating for self-determination in linguistic efforts, and providing a platform free from colonial terms or bias.</p>
-            <p>We are grateful to the many nations and individuals who have contributed to the resources listed here. If you wish to **submit a resource** or partnership proposal, please use the contact form below.</p>
         </section>
         
-        <section id="submit" style="padding: 2rem; text-align: center; background: #eee;">
+        <section class="content-page" id="news">
+             <h2><i class="far fa-newspaper"></i> Vital News in Language Revitalization</h2>
+             <div class="news-item-list" style="max-width: 900px; margin: 0 auto;">
+                <p class="intro-text">Updates and articles on major initiatives, funding, and technological advancements in Indigenous language preservation.</p>
+                 <div class="news-item" style="border-bottom: 1px solid var(--border-color); padding: 1.5rem 0;">
+                     <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 0.5rem;">Historic National Plan Released</h3>
+                     <p>The Biden-Harris Administration released a 10-Year National Plan on Native Language Revitalization, calling for a **$16.7 billion** investment to support language nests, immersion schools, and mentor-apprentice programs across the U.S. </p>
+                     <a href="https://www.doi.gov/pressreleases/biden-harris-administration-releases-10-year-national-plan-native-language" target="_blank" style="color: var(--accent-teal); text-decoration: underline;">Read Details <i class="fas fa-external-link-alt"></i></a>
+                 </div>
+                 <div class="news-item" style="border-bottom: 1px solid var(--border-color); padding: 1.5rem 0;">
+                     <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 0.5rem;">AI and Technology Boost</h3>
+                     <p>New projects are leveraging **AI and hologram technology** to document, preserve, and create resources for "low-resource" endangered languages like Northern Tutchone.</p>
+                 </div>
+                 <div class="news-item" style="padding: 1.5rem 0;">
+                     <h3 style="color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 0.5rem;">First Nations/Métis Funding Autonomy (Canada)</h3>
+                     <p>The Canadian government announced a new distinction-based funding model to allocate funds **directly to First Nations and Métis Peoples** for self-led language strategies.</p>
+                 </div>
+             </div>
+         </section>
+        
+        <section class="content-page" id="about">
+            <h2>About the Indigenous Voices Archive</h2>
+            <div style="max-width: 900px; margin: 0 auto; text-align: left;">
+                <p style="margin-bottom: 1.5rem;">This archive is a digital repository built by and for Native American communities, dedicated to preserving, promoting, and making accessible the vital linguistic heritage of North America.</p>
+                <p style="margin-bottom: 1.5rem;">Our mission is to support language keepers, educators, and learners by centralizing resources, advocating for self-determination in linguistic efforts, and providing a platform free from colonial terms or bias.</p>
+                <p>We are grateful to the many nations and individuals who have contributed to the resources listed here. If you wish to **submit a resource** or partnership proposal, please use the contact form below.</p>
+            </div>
+        </section>
+
+        <section class="content-page" id="submit" style="text-align: center; background: var(--light-bg);">
             <h2>Submit Your Resource</h2>
-            <p>Form coming soon... Contact us to share a language app, book, or digital project.</p>
+            <p class="intro-text">We welcome contributions from tribal nations, cultural organizations, and academic partners. Please fill out the form below or contact us to discuss a partnership.</p>
+            <div style="max-width: 600px; margin: 0 auto; padding: 2rem; border: 1px solid var(--border-color); background: var(--white); border-radius: 8px;">
+                <p>*** Submission Form Coming Soon ***</p>
+                <p style="margin-top: 1rem;">For now, please email us directly at <a href="mailto:submit@voicesarchive.org" style="color: var(--accent-teal);">submit@voicesarchive.org</a></p>
+            </div>
         </section>
         
     </main>
@@ -524,14 +424,64 @@
     <footer>
         <p>&copy; 2025 Indigenous Voices Archive. Built with respect and a focus on preservation.</p>
         <div class="footer-links">
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#contact">Contact Us</a>
+            <a href="#privacy" style="margin: 0 0.5rem;">Privacy Policy</a>
+            <a href="#contact" style="margin: 0 0.5rem;">Contact Us</a>
         </div>
     </footer>
     
     <script>
-        document.querySelector('.hamburger').addEventListener('click', function() {
-            document.querySelector('.mobile-menu').classList.toggle('active');
+        // 1. Function to show/hide the correct page based on the URL hash
+        function navigate() {
+            // Get the current hash from the URL (e.g., "#apps")
+            let pageId = window.location.hash.substring(1) || 'home';
+            
+            // Get all content sections and navigation links
+            const pages = document.querySelectorAll('.content-page');
+            const navLinks = document.querySelectorAll('.desktop-nav a');
+
+            let pageFound = false;
+
+            // Hide all pages and remove the 'active' class from all nav links
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Find and activate the requested page
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+                pageFound = true;
+                // Update title based on page name
+                const titleText = pageId.charAt(0).toUpperCase() + pageId.slice(1).replace('-', ' ');
+                document.title = "Indigenous Voices Archive - " + titleText;
+            } else {
+                // If the hash doesn't match a page ID, default to home
+                document.getElementById('home').classList.add('active');
+                document.title = "Indigenous Voices Archive - Home";
+            }
+            
+            // Highlight the corresponding active navigation link
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === '#' + pageId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // 2. Event Listeners
+        // Call navigate() when the page loads (to check the initial hash)
+        window.addEventListener('load', navigate);
+        
+        // Call navigate() every time the hash changes (when a link is clicked)
+        window.addEventListener('hashchange', navigate);
+
+        // Ensure the logo returns to the home page
+        document.getElementById('logo-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.hash = '#home';
         });
     </script>
 </body>
