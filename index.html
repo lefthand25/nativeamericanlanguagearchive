@@ -116,17 +116,67 @@
         }
 
         /* ------------------------------------------- */
-        /* RESOURCES SECTION (CONTINUOUS SCROLL) */
+        /* RESOURCES SECTION (SEARCH & FILTERS) */
         /* ------------------------------------------- */
+
+        .resource-controls {
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons li button {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .filter-buttons li button:hover {
+            background-color: #e8e8e8;
+        }
+
+        .filter-buttons li button.active-filter {
+            background-color: var(--link-color);
+            color: var(--white);
+            border-color: var(--link-color);
+        }
+
+        /* RESOURCE CARDS (Continuous Scroll) */
         .resource-card {
-            background-color: var(--white); /* White background for continuous feel */
+            background-color: var(--white);
             border: 1px solid var(--border-color);
             padding: 1.5rem;
-            border-radius: 4px; /* Slightly smaller radius for a cleaner look */
-            margin-bottom: 20px; /* Space between continuous cards */
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03); /* Subtle shadow */
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
             transition: box-shadow 0.2s;
-            max-width: 800px; /* Constrain the width for readability in a continuous scroll */
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -136,7 +186,7 @@
         }
 
         .resource-card h3 {
-            color: var(--link-color); /* Highlight heading with link color */
+            color: var(--link-color);
             margin-top: 0;
             margin-bottom: 0.5rem;
             font-size: 1.4rem;
@@ -156,6 +206,17 @@
 
         .resource-card a:hover {
             text-decoration: underline;
+        }
+
+        .resource-card .tag {
+            display: inline-block;
+            background-color: var(--light-bg);
+            color: #555;
+            padding: 3px 8px;
+            margin-top: 10px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
 
@@ -250,70 +311,120 @@
 
         <section id="resources" class="page-section">
             <h2>Educational Resources & Databases</h2>
-            <p>A curated list of external resources, museums, and databases dedicated to Indigenous language preservation and cultural heritage. Scroll down to see the full list.</p>
+            <p>A curated list of external resources dedicated to Indigenous language preservation and cultural heritage. Use the search bar and filters to narrow your focus.</p>
 
-            <div class="resource-list"> <div class="resource-card">
+            <div class="resource-controls">
+                <input type="text" id="resource-search" class="search-bar" placeholder="Search resources, languages, or location...">
+
+                <ul class="filter-buttons">
+                    <li><button data-filter="all" class="active-filter">All</button></li>
+                    <li><button data-filter="books">Books</button></li>
+                    <li><button data-filter="museums">Museums</button></li>
+                    <li><button data-filter="apps">Apps</button></li>
+                    <li><button data-filter="digital-archive">Digital Archive</button></li>
+                    <li><button data-filter="learning-resources">Learning Resources</button></li>
+                    <li><button data-filter="news">News & Media</button></li>
+                </ul>
+            </div>
+
+            <div class="resource-list">
+                <div class="resource-card" data-category="learning-resources digital-archive">
                     <h3>Native Languages of the Americas (California Section)</h3>
                     <p>Small non-profit dedicated to language survival through internet technology. Provides accessible vocabulary and cultural background.</p>
                     <p>Coverage: California Languages</p>
                     <a href="https://www.nativelanguages.org/california.php" target="_blank">Visit Website</a>
+                    <span class="tag">Digital Archive</span>
+                    <span class="tag">Learning Resources</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="learning-resources">
                     <h3>California State Parks - California Indians Language</h3>
                     <p>Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages.</p>
                     <p>Coverage: California Languages</p>
                     <a href="https://www.parks.ca.gov/?page_id=23548" target="_blank">Visit Website</a>
+                    <span class="tag">Learning Resources</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="learning-resources digital-archive">
                     <h3>Cherokee Nation Language Platform</h3>
                     <p>Cherokee Nation's official online language learning platform.</p>
                     <p>Coverage: Eastern Woodlands (Cherokee)</p>
                     <a href="https://cn.learncherokee.org" target="_blank">Visit Website</a>
+                    <span class="tag">Learning Resources</span>
+                    <span class="tag">Digital Archive</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="learning-resources digital-archive">
                     <h3>Nez Perce/Sahaptin Language Resources</h3>
                     <p>Resources maintained by Yakama Nation, University of Alaska, and National Park Service, promoting the preservation of the Nimipuutímt language.</p>
                     <p>Coverage: Plateau (Nez Perce, Sahaptin)</p>
                     <a href="https://www.nps.gov/museum/exhibits/nepe/language.html" target="_blank">Visit National Park Service Resource</a>
+                    <span class="tag">Digital Archive</span>
+                    <span class="tag">Learning Resources</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="museums">
                     <h3>Secwepemc Museum & Heritage Park</h3>
                     <p>Plateau cultural museum maintaining linguistic recordings, historical documents, and cultural materials for research and education.</p>
                     <p>Coverage: Plateau (Secwepemctsin)</p>
                     <a href="https://secwepemcmuseum.ca/" target="_blank">Visit Museum Website</a>
+                    <span class="tag">Museums</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="museums digital-archive">
                     <h3>Sam Noble Museum</h3>
                     <p>Extensive Native American Languages Collection with 175 languages represented through audio/video recordings, manuscripts, books, and curricula.</p>
                     <p>Coverage: Plains (175 Native American Languages)</p>
                     <a href="https://samnoblemuseum.ou.edu/collections" target="_blank">Visit Collections</a>
+                    <span class="tag">Museums</span>
+                    <span class="tag">Digital Archive</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="museums">
                     <h3>Museum of Indian Arts and Culture</h3>
                     <p>World-renowned museum centering indigenous perspectives and voices of Pueblo, Navajo (Diné), and Apache cultures of the Southwest, featuring Native scholarship and oral histories.</p>
                     <p>Coverage: Southwest (Pueblo, Navajo, Apache Languages)</p>
                     <a href="http://miac.org" target="_blank">Visit Website</a>
+                    <span class="tag">Museums</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="museums">
                     <h3>Heard Museum</h3>
                     <p>Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives, focusing on Southwest Indigenous cultures.</p>
                     <p>Coverage: Southwest Languages</p>
                     <a href="http://heard.org" target="_blank">Visit Website</a>
+                    <span class="tag">Museums</span>
                 </div>
 
-                <div class="resource-card">
+                <div class="resource-card" data-category="museums">
                     <h3>Indian Pueblo Cultural Center</h3>
                     <p>Gateway to the 19 Pueblos with a museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists and cultural programs.</p>
                     <p>Coverage: Pueblo Languages</p>
                     <a href="http://indianpueblo.org" target="_blank">Visit Website</a>
+                    <span class="tag">Museums</span>
                 </div>
+
+                <div class="resource-card" data-category="books">
+                    <h3>Indigenous Language Learning Books</h3>
+                    <p>Placeholder for a list of highly recommended books and print publications on language study and history. Links to resources like tribal publishing houses or academic press pages would go here.</p>
+                    <a href="#">Explore Books (Placeholder)</a>
+                    <span class="tag">Books</span>
+                </div>
+
+                <div class="resource-card" data-category="apps">
+                    <h3>Native Language Mobile Apps</h3>
+                    <p>Placeholder for mobile applications developed by various tribes and organizations for on-the-go learning. Examples include Cherokee, Ojibwe, or Lakota language apps.</p>
+                    <a href="#">Find Apps (Placeholder)</a>
+                    <span class="tag">Apps</span>
+                </div>
+
+                <div class="resource-card" data-category="news">
+                    <h3>Indigenous Language News & Media</h3>
+                    <p>Placeholder for articles, documentaries, and news organizations focused on Indigenous language revitalization efforts and current events.</p>
+                    <a href="#">Read News (Placeholder)</a>
+                    <span class="tag">News & Media</span>
+                </div>
+
             </div>
         </section>
 
@@ -394,18 +505,61 @@
             }
         }
 
-        // 2. Event Listeners
-        // Call navigate() when the page loads (to check the initial hash)
-        window.addEventListener('load', navigate);
+        // 2. Resource Filtering Logic
+        const filterButtons = document.querySelectorAll('.filter-buttons button');
+        const resourceCards = document.querySelectorAll('.resource-card');
+        const searchInput = document.getElementById('resource-search');
 
-        // Call navigate() every time the hash changes (when a link is clicked)
+        function filterResources(filter) {
+            resourceCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const text = card.textContent.toLowerCase();
+                const searchTerm = searchInput.value.toLowerCase();
+
+                const matchesFilter = filter === 'all' || category.includes(filter);
+                const matchesSearch = title.includes(searchTerm) || text.includes(searchTerm);
+
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active filter button
+                filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+                this.classList.add('active-filter');
+
+                // Apply the new filter
+                filterResources(this.getAttribute('data-filter'));
+            });
+        });
+
+        // Search Input Logic
+        let activeFilter = 'all'; // Default to all
+        searchInput.addEventListener('keyup', function() {
+            // Get the currently active filter category
+            const activeFilterButton = document.querySelector('.filter-buttons button.active-filter');
+            activeFilter = activeFilterButton ? activeFilterButton.getAttribute('data-filter') : 'all';
+
+            filterResources(activeFilter);
+        });
+
+        // 3. Event Listeners
+        window.addEventListener('load', navigate);
         window.addEventListener('hashchange', navigate);
 
-        // Ensure the logo returns to the home page
         document.getElementById('logo-link').addEventListener('click', function(e) {
             e.preventDefault();
             window.location.hash = '#home';
         });
+
+        // Initialize filtering on load
+        window.addEventListener('load', () => filterResources('all'));
     </script>
 </body>
 </html>
