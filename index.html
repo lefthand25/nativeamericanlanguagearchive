@@ -6,7 +6,7 @@
     <title>Indigenous Voices Archive</title>
     <style>
         /* ------------------------------------------- */
-        /* BASE STYLES - BLACK TEXT ON WHITE BACKGROUND */
+        /* BASE STYLES - PROFESSIONAL ARCHIVE DESIGN */
         /* ------------------------------------------- */
         * { 
             margin: 0; 
@@ -15,222 +15,480 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', serif;
             line-height: 1.6;
-            color: #222;
-            background: #fff;
+            color: #2c2c2c;
+            background: #fafafa;
         }
 
         /* ------------------------------------------- */
-        /* HEADER & NAVIGATION */
+        /* HEADER - PROFESSIONAL ARCHIVE STYLE */
         /* ------------------------------------------- */
         header {
             background: #fff;
-            padding: 1.5rem 2rem;
-            border-bottom: 2px solid #222;
+            border-bottom: 3px solid #1a237e;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            background: #f8f8f8;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .header-main {
+            padding: 1rem 2rem;
         }
 
         .header-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo-title {
-            color: #222;
-            text-decoration: none;
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .logo-title h1 {
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #1a237e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #222;
+            font-weight: bold;
         }
 
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: #2c2c2c;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Navigation - Single Row */
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         nav a {
             text-decoration: none;
-            color: #222;
+            color: #2c2c2c;
             font-weight: 500;
-            transition: opacity 0.3s;
+            font-size: 0.95rem;
             padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
         }
 
         nav a:hover,
         nav a.active {
-            opacity: 0.6;
-            border-bottom: 2px solid #222;
+            color: #1a237e;
+            border-bottom-color: #1a237e;
+        }
+
+        /* Search in Header */
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .search-box input {
+            padding: 0.5rem 1rem;
+            border: none;
+            outline: none;
+            width: 250px;
+            font-size: 0.9rem;
+        }
+
+        .search-box button {
+            background: #1a237e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #303f9f;
         }
 
         /* ------------------------------------------- */
-        /* HERO SECTION */
+        /* HOME PAGE - ARCHIVE STYLE LAYOUT */
         /* ------------------------------------------- */
-        .hero {
-            background: #f5f5f5;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #444;
-            max-width: 800px;
+        .home-container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2.8rem;
+            color: #2c2c2c;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        /* Circulating Elements */
+        .rotating-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a237e;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Featured Collections - Archive Style */
+        .featured-collections {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .collection-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #1a237e;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .collection-card h3 {
+            color: #2c2c2c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .collection-meta {
+            font-size: 0.85rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .collection-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .collection-link {
+            color: #1a237e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s;
+        }
+
+        .collection-link:hover {
+            border-bottom-color: #1a237e;
         }
 
         /* ------------------------------------------- */
-        /* CONTENT PAGES */
+        /* CONTENT PAGES - ARCHIVE STYLE */
         /* ------------------------------------------- */
         .content-page {
             display: none;
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 3rem 2rem;
-            min-height: 60vh;
         }
 
         .content-page.active {
             display: block;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .content-page h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #222;
-            border-bottom: 2px solid #222;
-            padding-bottom: 0.5rem;
-        }
-
-        .intro-text {
+        .page-header {
             text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #1a237e;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #2c2c2c;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
             max-width: 800px;
-            margin: 0 auto 2rem;
-            color: #444;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Resource Lists - Archive Style */
+        .resources-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+        }
+
+        .filters-sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .filters-sidebar h3 {
+            color: #2c2c2c;
+            margin-bottom: 1rem;
             font-size: 1.1rem;
         }
 
-        /* ------------------------------------------- */
-        /* CONTINUOUS SCROLL RESOURCES */
-        /* ------------------------------------------- */
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
         .resources-list {
-            max-width: 900px;
-            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .resource-item {
-            background: #fff;
-            border-left: 4px solid #222;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .resource-item:hover {
+            background: #fafafa;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
         }
 
         .resource-category {
             display: inline-block;
-            background: #f5f5f5;
-            color: #222;
+            background: #1a237e;
+            color: white;
             padding: 0.3rem 0.8rem;
-            border-radius: 3px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            border: 1px solid #ddd;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
         }
 
         .resource-item h3 {
-            color: #222;
+            color: #2c2c2c;
             margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
         }
 
         .resource-meta {
             font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.75rem;
+            color: #1a237e;
+            margin-bottom: 1rem;
+            font-weight: 500;
         }
 
         .resource-item p {
-            color: #444;
-            margin-bottom: 1rem;
-            line-height: 1.6;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
         .resource-link {
-            display: inline-block;
-            color: #222;
+            color: #1a237e;
             text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid #222;
-            transition: opacity 0.3s;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s;
         }
 
         .resource-link:hover {
-            opacity: 0.6;
+            border-bottom-color: #1a237e;
         }
 
         /* ------------------------------------------- */
-        /* CONTACT FORM */
+        /* ABOUT PAGE SPECIAL STYLING */
         /* ------------------------------------------- */
-        .contact-info {
-            background: #f5f5f5;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        .contact-info h3 {
-            color: #222;
-            margin-bottom: 1rem;
-        }
-
-        .contact-info p {
-            color: #444;
-            margin-bottom: 0.5rem;
-        }
-
-        #contact-form {
-            max-width: 600px;
+        .about-content {
+            max-width: 900px;
             margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .about-content p {
+            margin-bottom: 2rem;
+        }
+
+        /* ------------------------------------------- */
+        /* CONTACT FORM - ARCHIVE STYLE */
+        /* ------------------------------------------- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background: white;
             padding: 2rem;
-            background: #f5f5f5;
             border-radius: 8px;
-            border: 1px solid #ddd;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        #contact-form label {
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-form label {
             display: block;
-            font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #222;
+            font-weight: 500;
+            color: #2c2c2c;
         }
 
-        #contact-form input,
-        #contact-form textarea {
+        .contact-form input,
+        .contact-form textarea {
             width: 100%;
             padding: 0.75rem;
             margin-bottom: 1rem;
@@ -240,87 +498,107 @@
             font-family: inherit;
         }
 
-        #contact-form textarea {
-            min-height: 150px;
+        .contact-form textarea {
+            min-height: 120px;
             resize: vertical;
         }
 
-        #contact-form button {
-            background: #222;
-            color: #fff;
+        .contact-form button {
+            background: #1a237e;
+            color: white;
             padding: 0.75rem 2rem;
             border: none;
             border-radius: 4px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: background 0.3s;
         }
 
-        #contact-form button:hover {
-            opacity: 0.8;
-        }
-
-        /* ------------------------------------------- */
-        /* NEWS SECTION */
-        /* ------------------------------------------- */
-        .news-item {
-            border-bottom: 1px solid #ddd;
-            padding: 1.5rem 0;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-item h3 {
-            color: #222;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .news-item p {
-            color: #444;
-            margin-bottom: 0.5rem;
-        }
-
-        .news-item a {
-            color: #222;
-            font-weight: 600;
-            text-decoration: underline;
+        .contact-form button:hover {
+            background: #303f9f;
         }
 
         /* ------------------------------------------- */
-        /* FOOTER */
+        /* FOOTER - ARCHIVE STYLE */
         /* ------------------------------------------- */
         footer {
-            background: #222;
-            color: #fff;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
+            background: #2c2c2c;
+            color: #ccc;
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
         }
 
-        footer p {
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: white;
             margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
-        footer a {
-            color: #fff;
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
             text-decoration: none;
-            margin: 0 1rem;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+            line-height: 1.6;
         }
 
-        footer a:hover {
-            opacity: 1;
-            text-decoration: underline;
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* ------------------------------------------- */
+        /* ANIMATIONS */
+        /* ------------------------------------------- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .rotating-element {
+            animation: rotate 20s linear infinite;
         }
 
         /* ------------------------------------------- */
         /* RESPONSIVE DESIGN */
         /* ------------------------------------------- */
+        @media (max-width: 1200px) {
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -333,12 +611,36 @@
                 gap: 1rem;
             }
 
-            .hero h2 {
-                font-size: 2rem;
+            .search-box input {
+                width: 200px;
             }
 
-            .resource-item {
-                padding: 1rem;
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+
+            .rotating-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
@@ -346,77 +648,196 @@
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <a href="#home" class="logo-title" id="logo-link">
-                <h1>Indigenous Voices Archive</h1>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="#resources" data-tab="resources">Resources</a></li>
-                    <li><a href="#archive" data-tab="archive">Archive</a></li>
-                    <li><a href="#museums" data-tab="museums">Museums</a></li>
-                    <li><a href="#apps" data-tab="apps">Apps</a></li>
-                    <li><a href="#books" data-tab="books">Books</a></li>
-                    <li><a href="#news" data-tab="news">News</a></li>
-                    <li><a href="#about" data-tab="about">About</a></li>
-                    <li><a href="#contact" data-tab="contact">Contact</a></li>
-                    <li><a href="#submit" data-tab="submit">Submit Content</a></li>
-                </ul>
-            </nav>
+        <div class="header-top">
+            Preserving Indigenous Languages for Future Generations
+        </div>
+        <div class="header-main">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">🗣</div>
+                    <div class="logo-text">
+                        <h1>Indigenous Voices Archive</h1>
+                        <p>Digital Language Preservation</p>
+                    </div>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#home" data-tab="home" class="active">Home</a></li>
+                        <li><a href="#books" data-tab="books">Books</a></li>
+                        <li><a href="#apps" data-tab="apps">Apps</a></li>
+                        <li><a href="#digital-archive" data-tab="digital-archive">Digital Archive</a></li>
+                        <li><a href="#museums" data-tab="museums">Museums</a></li>
+                        <li><a href="#news" data-tab="news">News</a></li>
+                        <li><a href="#about" data-tab="about">About</a></li>
+                        <li><a href="#contact" data-tab="contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-search">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search languages, resources..." id="main-search">
+                        <button type="button" onclick="performSearch()">🔍</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
     <main>
         <!-- HOME PAGE -->
         <section class="content-page active" id="home">
-            <div class="hero">
-                <h2>Preserving Indigenous Languages & Cultures</h2>
-                <p>A comprehensive digital archive dedicated to documenting, preserving, and celebrating Indigenous voices, languages, and cultural heritage.</p>
-            </div>
-            <div class="container" style="padding: 3rem 2rem;">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Featured Resources</h2>
-                <div class="resources-list">
-                    <div class="resource-item">
-                        <span class="resource-category">Eastern Woodlands</span>
-                        <h3>Cherokee Nation Language Platform</h3>
-                        <p class="resource-meta">Language: Cherokee (Tsalagi)</p>
-                        <p>The Nation's official online learning hub offering a comprehensive curriculum, apps, and community resources for Cherokee language preservation.</p>
-                        <a href="https://cnlearn.cherokee.org/" target="_blank" class="resource-link">Explore Platform →</a>
+            <div class="home-container">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h2>Preserving Indigenous Languages & Cultural Heritage</h2>
+                        <p>A comprehensive digital repository dedicated to documenting, preserving, and celebrating Indigenous voices, languages, and cultural heritage across North America. Discover resources, connect with communities, and support vital language revitalization efforts.</p>
+                        
+                        <div class="search-box" style="margin-top: 2rem;">
+                            <input type="text" placeholder="Search by language, region, or resource type..." id="hero-search">
+                            <button type="button" onclick="performSearch()">Search Archive</button>
+                        </div>
                     </div>
-                    <div class="resource-item">
-                        <span class="resource-category">Great Basin</span>
-                        <h3>Northern Paiute Language Project</h3>
-                        <p class="resource-meta">Language: Northern Paiute (Numa)</p>
-                        <p>A digital archive and teaching curriculum developed by the Reno-Sparks Indian Colony for community-based language revitalization.</p>
-                        <a href="https://paiute.ucsc.edu/" target="_blank" class="resource-link">Access Digital Lessons →</a>
+                    <div class="hero-image">
+                        <img src="hero-image.jpg" alt="Indigenous language preservation materials and cultural artifacts">
                     </div>
-                    <div class="resource-item">
-                        <span class="resource-category">Alaska/Arctic</span>
-                        <h3>Alaska Native Language Center</h3>
-                        <p class="resource-meta">Language: Multiple Alaska Native Languages</p>
-                        <p>Major university-based research and documentation center producing dictionaries, texts, and resources for over 20 languages.</p>
-                        <a href="https://www.uaf.edu/anlc/" target="_blank" class="resource-link">View Research & Publications →</a>
+                </div>
+
+                <div class="rotating-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Resources</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Languages</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Regions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Mobile Apps</span>
+                    </div>
+                </div>
+
+                <div class="featured-collections">
+                    <h2 class="section-title">Featured Collections</h2>
+                    <div class="collections-grid">
+                        <div class="collection-card">
+                            <h3>Cherokee Nation Language Platform</h3>
+                            <div class="collection-meta">Eastern Woodlands • Cherokee (Tsalagi)</div>
+                            <p>The Nation's official online learning hub offering comprehensive curriculum, apps, and community resources for Cherokee language preservation and education.</p>
+                            <a href="#digital-archive" class="collection-link">Explore Collection →</a>
+                        </div>
+                        <div class="collection-card">
+                            <h3>Northern Paiute Language Project</h3>
+                            <div class="collection-meta">Great Basin • Northern Paiute (Numa)</div>
+                            <p>Comprehensive documentation project creating audio dictionary and text collections for community language learning with thousands of words and cultural context.</p>
+                            <a href="#digital-archive" class="collection-link">Explore Collection →</a>
+                        </div>
+                        <div class="collection-card">
+                            <h3>Sealaska Heritage Institute</h3>
+                            <div class="collection-meta">Northwest Coast • Tlingit, Haida, Tsimshian</div>
+                            <p>Official Southeast Alaska language revitalization hub providing downloadable materials, audio dictionaries, and comprehensive learning resources.</p>
+                            <a href="#museums" class="collection-link">Explore Collection →</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- RESOURCES PAGE -->
-        <section class="content-page" id="resources">
-            <div class="container">
-                <h2>Websites & Language Resources</h2>
-                <p class="intro-text">A curated selection of critical online tools and organizations leading language instruction and documentation.</p>
-                <div class="resources-list" id="resources-list">
-                    <!-- Resources will be populated by JavaScript -->
+        <!-- BOOKS PAGE -->
+        <section class="content-page" id="books">
+            <div class="page-header">
+                <h2>Books & Publications</h2>
+                <p>Essential written resources for in-depth study and documentation, including authoritative grammars, dictionaries, and cultural materials.</p>
+            </div>
+            <div class="resources-container">
+                <div class="filters-sidebar">
+                    <h3>Filter Resources</h3>
+                    <div class="filter-group">
+                        <label for="books-region">Region</label>
+                        <select id="books-region">
+                            <option value="">All Regions</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="books-language">Language</label>
+                        <select id="books-language">
+                            <option value="">All Languages</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="books-search">Search</label>
+                        <input type="text" id="books-search" placeholder="Search books...">
+                    </div>
+                </div>
+                <div class="resources-list" id="books-list">
+                    <!-- Books will be populated by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <!-- ARCHIVE PAGE -->
-        <section class="content-page" id="archive">
-            <div class="container">
-                <h2>Digital Archives & Collections</h2>
-                <p class="intro-text">Collections dedicated to linguistic research, field recordings, and oral histories from institutions across North America.</p>
+        <!-- APPS PAGE -->
+        <section class="content-page" id="apps">
+            <div class="page-header">
+                <h2>Mobile Apps & Digital Tools</h2>
+                <p>Interactive mobile applications and digital tools for language learning, developed by Indigenous communities and educational partners.</p>
+            </div>
+            <div class="resources-container">
+                <div class="filters-sidebar">
+                    <h3>Filter Apps</h3>
+                    <div class="filter-group">
+                        <label for="apps-region">Region</label>
+                        <select id="apps-region">
+                            <option value="">All Regions</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="apps-language">Language</label>
+                        <select id="apps-language">
+                            <option value="">All Languages</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="apps-search">Search</label>
+                        <input type="text" id="apps-search" placeholder="Search apps...">
+                    </div>
+                </div>
+                <div class="resources-list" id="apps-list">
+                    <!-- Apps will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- DIGITAL ARCHIVE PAGE -->
+        <section class="content-page" id="digital-archive">
+            <div class="page-header">
+                <h2>Digital Archives & Language Resources</h2>
+                <p>Online platforms, digital collections, and language learning websites dedicated to Indigenous language preservation and education.</p>
+            </div>
+            <div class="resources-container">
+                <div class="filters-sidebar">
+                    <h3>Filter Archives</h3>
+                    <div class="filter-group">
+                        <label for="archive-region">Region</label>
+                        <select id="archive-region">
+                            <option value="">All Regions</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="archive-language">Language</label>
+                        <select id="archive-language">
+                            <option value="">All Languages</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="archive-search">Search</label>
+                        <input type="text" id="archive-search" placeholder="Search archives...">
+                    </div>
+                </div>
                 <div class="resources-list" id="archive-list">
                     <!-- Archives will be populated by JavaScript -->
                 </div>
@@ -425,119 +846,117 @@
 
         <!-- MUSEUMS PAGE -->
         <section class="content-page" id="museums">
-            <div class="container">
+            <div class="page-header">
                 <h2>Museums & Cultural Centers</h2>
-                <p class="intro-text">Institutions dedicated to preserving cultural materials, oral histories, and linguistic records for research and community use.</p>
+                <p>Institutions dedicated to preserving cultural materials, oral histories, and linguistic records for research and community use.</p>
+            </div>
+            <div class="resources-container">
+                <div class="filters-sidebar">
+                    <h3>Filter Museums</h3>
+                    <div class="filter-group">
+                        <label for="museums-region">Region</label>
+                        <select id="museums-region">
+                            <option value="">All Regions</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="museums-search">Search</label>
+                        <input type="text" id="museums-search" placeholder="Search museums...">
+                    </div>
+                </div>
                 <div class="resources-list" id="museums-list">
                     <!-- Museums will be populated by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <!-- APPS PAGE -->
-        <section class="content-page" id="apps">
-            <div class="container">
-                <h2>Mobile Apps & Digital Tools</h2>
-                <p class="intro-text">The latest in mobile applications and interactive software for language learning on the go.</p>
-                <div class="resources-list" id="apps-list">
-                    <!-- Apps will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- BOOKS PAGE -->
-        <section class="content-page" id="books">
-            <div class="container">
-                <h2>Books & Dictionaries</h2>
-                <p class="intro-text">Essential written resources for in-depth study and documentation, including authoritative grammars and dictionaries.</p>
-                <div class="resources-list" id="books-list">
-                    <!-- Books will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-
         <!-- NEWS PAGE -->
         <section class="content-page" id="news">
-            <div class="container">
-                <h2>Vital News in Language Revitalization</h2>
-                <p class="intro-text">Updates and articles on major initiatives, funding, and technological advancements in Indigenous language preservation.</p>
-                <div style="max-width: 900px; margin: 0 auto;">
-                    <div class="news-item">
-                        <h3>Historic National Plan Released</h3>
-                        <p>The Biden-Harris Administration released a 10-Year National Plan on Native Language Revitalization, calling for a $16.7 billion investment to support language nests, immersion schools, and mentor-apprentice programs across the U.S.</p>
-                        <a href="https://www.doi.gov/pressreleases/biden-harris-administration-releases-10-year-national-plan-native-language" target="_blank">Read Details →</a>
-                    </div>
-                    <div class="news-item">
-                        <h3>AI and Technology Boost</h3>
-                        <p>New projects are leveraging AI and hologram technology to document, preserve, and create resources for "low-resource" endangered languages like Northern Tutchone.</p>
-                    </div>
-                    <div class="news-item">
-                        <h3>First Nations/Métis Funding Autonomy (Canada)</h3>
-                        <p>The Canadian government announced a new distinction-based funding model to allocate funds directly to First Nations and Métis Peoples for self-led language strategies.</p>
-                    </div>
+            <div class="page-header">
+                <h2>Language Revitalization News</h2>
+                <p>Latest updates on Indigenous language preservation initiatives, funding opportunities, and community-led revitalization efforts.</p>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="resource-item">
+                    <h3>Historic National Plan Released</h3>
+                    <p>The Biden-Harris Administration released a 10-Year National Plan on Native Language Revitalization, calling for a $16.7 billion investment to support language nests, immersion schools, and mentor-apprentice programs across the U.S.</p>
+                    <a href="https://www.doi.gov/pressreleases/biden-harris-administration-releases-10-year-national-plan-native-language" target="_blank" class="resource-link">Read Full Article →</a>
+                </div>
+                <div class="resource-item">
+                    <h3>AI and Technology Advancement</h3>
+                    <p>New projects are leveraging AI and hologram technology to document, preserve, and create resources for low-resource endangered languages like Northern Tutchone, opening new possibilities for language documentation.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>First Nations/Métis Funding Autonomy (Canada)</h3>
+                    <p>The Canadian government announced a new distinction-based funding model to allocate funds directly to First Nations and Métis Peoples for self-led language strategies and community-driven revitalization programs.</p>
                 </div>
             </div>
         </section>
 
         <!-- ABOUT PAGE -->
         <section class="content-page" id="about">
-            <div class="container">
+            <div class="page-header">
                 <h2>About the Indigenous Voices Archive</h2>
-                <div style="max-width: 900px; margin: 0 auto;">
-                    <p style="margin-bottom: 1.5rem;">This archive is a digital repository built by and for Native American communities, dedicated to preserving, promoting, and making accessible the vital linguistic heritage of North America.</p>
-                    <p style="margin-bottom: 1.5rem;">Our mission is to support language keepers, educators, and learners by centralizing resources, advocating for self-determination in linguistic efforts, and providing a platform free from colonial terms or bias.</p>
-                    <p>We are grateful to the many nations and individuals who have contributed to the resources listed here. If you wish to submit a resource or partnership proposal, please use the contact form.</p>
-                </div>
+                <p>Preserving linguistic diversity and supporting community-led language revitalization efforts</p>
+            </div>
+            <div class="about-content">
+                <p>Indigenous languages carry the wisdom, stories, and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists, and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
+                
+                <p>Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
             </div>
         </section>
 
         <!-- CONTACT PAGE -->
         <section class="content-page" id="contact">
-            <div class="container">
-                <h2>Contact / Get in Touch</h2>
-                <div class="contact-info">
-                    <h3>Have Questions or Partnership Ideas?</h3>
-                    <p>The best way to reach us is by email:</p>
-                    <p><strong>Email: info@nativearchive.org</strong></p>
-                    <p style="margin-top: 1.5rem;">We welcome inquiries from tribal nations, researchers, and community members. Please use the form below to send a message.</p>
-                </div>
-                <h2 style="text-align: center; margin: 2rem 0 1rem;">Send Us a Message</h2>
-                <form id="contact-form" action="https://formspree.io/f/xovklenr" method="POST">
-                    <label for="contact-name">Your Name</label>
-                    <input type="text" id="contact-name" name="name" required>
-                    
-                    <label for="contact-email">Your Email</label>
-                    <input type="email" id="contact-email" name="_replyto" required>
-                    
-                    <label for="contact-subject">Subject</label>
-                    <input type="text" id="contact-subject" name="subject" required>
-                    
-                    <label for="contact-message">Message</label>
-                    <textarea id="contact-message" name="message" required></textarea>
-                    
-                    <button type="submit">Send Message</button>
-                </form>
+            <div class="page-header">
+                <h2>Contact</h2>
+                <p>Connect with us to contribute resources, propose partnerships or learn more about our mission</p>
             </div>
-        </section>
-
-        <!-- SUBMIT PAGE -->
-        <section class="content-page" id="submit">
-            <div class="container">
-                <h2>Submit Your Resource</h2>
-                <p class="intro-text">We welcome contributions from tribal nations, cultural organizations, and academic partners. Please fill out the form below or contact us to discuss a partnership.</p>
-                <div style="max-width: 600px; margin: 0 auto; padding: 2rem; border: 1px solid #ddd; background: #f5f5f5; border-radius: 8px; text-align: center;">
-                    <p><strong>Submission Form Coming Soon</strong></p>
-                    <p style="margin-top: 1rem;">For now, please email us directly at <a href="mailto:submit@voicesarchive.org" style="color: #222; text-decoration: underline;">submit@voicesarchive.org</a></p>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>We welcome inquiries from tribal nations, researchers, educators, and community members. Please use the form below to send us a message.</p>
+                </div>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/xovklenr" method="POST">
+                        <label>
+                            Your email:
+                            <input type="email" name="email" required>
+                        </label>
+                        <label>
+                            Your message:
+                            <textarea name="message" required></textarea>
+                        </label>
+                        <button type="submit">Send</button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Indigenous Voices Archive. Built with respect and a focus on preservation.</p>
-        <div>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#contact">Contact Us</a>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Indigenous Voices Archive</h3>
+                <p>Dedicated to preserving and celebrating Indigenous languages and cultural heritage through digital innovation and community partnership.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#about">About Us</a></p>
+                <p><a href="#contact">Contact</a></p>
+                <p><a href="#news">Latest News</a></p>
+                <p><a href="#digital-archive">Browse Archive</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <p><a href="#books">Books & Publications</a></p>
+                <p><a href="#apps">Mobile Apps</a></p>
+                <p><a href="#museums">Museums</a></p>
+                <p><a href="#digital-archive">Digital Collections</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Indigenous Voices Archive. Built with respect and a focus on preservation.</p>
         </div>
     </footer>
 
