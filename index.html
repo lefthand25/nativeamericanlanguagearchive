@@ -55,23 +55,13 @@
         }
 
         .logo-section {
+            /* Now only contains text, maintaining layout */
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: #1a237e;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+        /* REMOVED .logo-icon STYLES */
 
         .logo-text h1 {
             font-size: 1.8rem;
@@ -646,9 +636,10 @@
         
         /* --- NEW STYLES FOR DROPDOWN NAVIGATION --- */
         .dropdown {
-            float: left;
-            overflow: hidden;
-            position: relative; /* Essential for dropdown positioning */
+            /* Ensures list item fits in flex layout */
+            list-style: none;
+            position: relative; 
+            overflow: visible; /* Allow content to escape */
         }
 
         .dropdown .dropbtn {
@@ -668,7 +659,9 @@
             display: block; /* Important for padding/border to work correctly */
         }
 
-        .dropdown:hover .dropbtn, .dropdown-content a:hover,
+        /* Hover states apply to both the main link and its container */
+        .dropdown:hover .dropbtn, 
+        .dropdown-content a:hover,
         .dropdown .dropbtn.active {
             color: #1a237e;
             border-bottom-color: #1a237e;
@@ -679,12 +672,15 @@
             display: none;
             position: absolute;
             background-color: #fff;
-            min-width: 160px;
+            min-width: 180px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1001; 
             border-top: 3px solid #1a237e;
             padding-top: 5px; 
-            left: -10px; /* Align dropdown center under the link */
+            /* Adjust positioning relative to the dropdown link */
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap; /* Prevent links from wrapping */
         }
 
         .dropdown-content a {
@@ -696,6 +692,7 @@
             text-align: left;
             font-size: 0.95rem;
             transition: background-color 0.2s;
+            border-bottom: none; /* Override nav a border */
         }
         
         .dropdown-content a:hover {
@@ -711,74 +708,8 @@
             margin-left: 5px;
             font-size: 0.8em;
         }
-        
-        /* --- NEW STYLES FOR NEWS SECTION --- */
-        #news-articles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 30px 0;
-        }
-
-        .news-article {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
-        }
-
-        .news-article:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .news-header {
-            background-color: #1a237e;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .news-body {
-            padding: 20px;
-        }
-
-        .news-body h3 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.25rem;
-            line-height: 1.4;
-            font-weight: 500;
-        }
-
-        .news-body p {
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .news-article a {
-            display: inline-block;
-            color: #1a237e;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom 0.2s;
-        }
-
-        .news-article a:hover {
-            border-bottom: 2px solid #1a237e;
-        }
-
-        .news-meta {
-            font-size: 0.8rem;
-            color: #999;
-            margin-top: 10px;
-        }
     </style>
+
 </head>
 <body>
     <header>
@@ -788,7 +719,6 @@
         <div class="header-main">
             <div class="header-content">
                 <div class="logo-section">
-                    <div class="logo-icon">🗣</div>
                     <div class="logo-text">
                         <h1>Indigenous Voices Archive</h1>
                         <p>Digital Language Preservation</p>
@@ -798,9 +728,8 @@
                 <nav>
                     <ul>
                         <li><a href="#home" data-tab="home" class="active">Home</a></li>
-                        <li><a href="#about" data-tab="about">About</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropbtn">Resources <span class="arrow">▼</span></a>
+                            <a href="#" class="dropbtn" data-tab="resources">Resources <span class="arrow">▼</span></a>
                             <div class="dropdown-content">
                                 <a href="#digital-archive" data-tab="digital-archive">Digital Archive</a>
                                 <a href="#books" data-tab="books">Books & Publications</a>
@@ -808,7 +737,9 @@
                                 <a href="#museums" data-tab="museums">Museums & Centers</a>
                             </div>
                         </li>
-                        <li><a href="#latest-news" data-tab="latest-news">Latest News</a></li>
+                        <li><a href="#news" data-tab="news">Latest News</a></li>
+                        
+                        <li><a href="#about" data-tab="about">About</a></li>
                         <li><a href="#contact" data-tab="contact">Contact</a></li>
                     </ul>
                 </nav>
@@ -829,7 +760,7 @@
                 <div class="hero-section">
                     <div class="hero-content">
                         <h2>Preserving Indigenous Languages & Cultural Heritage</h2>
-                        <p>A comprehensive digital repository dedicated to documenting, preserving, and celebrating Indigenous voices, languages, and cultural heritage across North America. Discover resources, connect with communities, and support vital language revitalization efforts.</p>
+                        <p>A comprehensive digital repository dedicated to documenting, preserving and celebrating Indigenous voices, languages and cultural heritage across North America. Discover resources, connect with communities and support vital language revitalization efforts.</p>
                         
                         <div class="search-box" style="margin-top: 2rem;">
                             <input type="text" placeholder="Search by language, region, or resource type..." id="hero-search">
@@ -866,7 +797,7 @@
                         <div class="collection-card">
                             <h3>Cherokee Nation Language Platform</h3>
                             <div class="collection-meta">Eastern Woodlands • Cherokee (Tsalagi)</div>
-                            <p>The Nation's official online learning hub offering comprehensive curriculum, apps, and community resources for Cherokee language preservation and education.</p>
+                            <p>The Nation's official online learning hub offering comprehensive curriculum, apps and community resources for Cherokee language preservation and education.</p>
                             <a href="#digital-archive" class="collection-link">Explore Collection →</a>
                         </div>
                         <div class="collection-card">
@@ -878,7 +809,7 @@
                         <div class="collection-card">
                             <h3>Sealaska Heritage Institute</h3>
                             <div class="collection-meta">Northwest Coast • Tlingit, Haida, Tsimshian</div>
-                            <p>Official Southeast Alaska language revitalization hub providing downloadable materials, audio dictionaries, and comprehensive learning resources.</p>
+                            <p>Official Southeast Alaska language revitalization hub providing downloadable materials, audio dictionaries and comprehensive learning resources.</p>
                             <a href="#museums" class="collection-link">Explore Collection →</a>
                         </div>
                     </div>
@@ -889,7 +820,7 @@
         <section class="content-page" id="books">
             <div class="page-header">
                 <h2>Books & Publications</h2>
-                <p>Essential written resources for in-depth study and documentation, including authoritative grammars, dictionaries, and cultural materials.</p>
+                <p>Essential written resources for in-depth study and documentation, including authoritative grammars, dictionaries and cultural materials.</p>
             </div>
             <div class="resources-container">
                 <div class="filters-sidebar">
@@ -979,7 +910,7 @@
         <section class="content-page" id="museums">
             <div class="page-header">
                 <h2>Museums & Cultural Centers</h2>
-                <p>Institutions dedicated to preserving cultural materials, oral histories, and linguistic records for research and community use.</p>
+                <p>Institutions dedicated to preserving cultural materials, oral histories and linguistic records for research and community use.</p>
             </div>
             <div class="resources-container">
                 <div class="filters-sidebar">
@@ -1000,13 +931,26 @@
             </div>
         </section>
 
-        <section class="content-page" id="latest-news">
+        <section class="content-page" id="news">
             <div class="page-header">
-                <h2>Latest Developments in Language Revitalization</h2>
-                <p>News from Tribal Nations, research institutions and community-led initiatives showcasing current successes and funding opportunities across regions.</p>
+                <h2>Language Revitalization News</h2>
+                <p>Latest updates on Indigenous language preservation initiatives, funding opportunities and community-led revitalization efforts.</p>
             </div>
-            <div id="news-articles">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="resource-item">
+                    <h3>Historic National Plan Released</h3>
+                    <p>The Biden-Harris Administration released a 10-Year National Plan on Native Language Revitalization, calling for a $16.7 billion investment to support language nests, immersion schools and mentor-apprentice programs across the U.S.</p>
+                    <a href="https://www.doi.gov/pressreleases/biden-harris-administration-releases-10-year-national-plan-native-language" target="_blank" class="resource-link">Read Full Article →</a>
                 </div>
+                <div class="resource-item">
+                    <h3>AI and Technology Advancement</h3>
+                    <p>New projects are leveraging AI and hologram technology to document, preserve and create resources for low-resource endangered languages like Northern Tutchone, opening new possibilities for language documentation.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>First Nations/Métis Funding Autonomy (Canada)</h3>
+                    <p>The Canadian government announced a new distinction-based funding model to allocate funds directly to First Nations and Métis Peoples for self-led language strategies and community-driven revitalization programs.</p>
+                </div>
+            </div>
         </section>
 
         <section class="content-page" id="about">
@@ -1015,7 +959,7 @@
                 <p>Preserving linguistic diversity and supporting community-led language revitalization efforts</p>
             </div>
             <div class="about-content">
-                <p>Indigenous languages carry the wisdom, stories and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists, and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
+                <p>Indigenous languages carry the wisdom, stories and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
                 
                 <p>Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
             </div>
@@ -1029,7 +973,7 @@
             <div style="max-width: 600px; margin: 0 auto;">
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
-                    <p>We welcome inquiries from tribal nations, researchers, educators, and community members. Please use the form below to send us a message.</p>
+                    <p>We welcome inquiries from tribal nations, researchers, educators and community members. Please use the form below to send us a message.</p>
                 </div>
                 <div class="contact-form">
                     <form action="https://formspree.io/f/xovklenr" method="POST">
@@ -1058,7 +1002,7 @@
                 <h3>Quick Links</h3>
                 <p><a href="#about">About Us</a></p>
                 <p><a href="#contact">Contact</a></p>
-                <p><a href="#latest-news">Latest News</a></p>
+                <p><a href="#news">Latest News</a></p>
                 <p><a href="#digital-archive">Browse Archive</a></p>
             </div>
             <div class="footer-section">
