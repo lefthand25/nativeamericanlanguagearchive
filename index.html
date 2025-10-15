@@ -332,6 +332,7 @@
         /* CONTENT PAGES - ARCHIVE STYLE (CSS Target Fix) */
         /* ------------------------------------------- */
         .content-page {
+            /* Start all pages hidden */
             display: none;
             max-width: 1400px;
             margin: 0 auto;
@@ -340,7 +341,7 @@
             min-width: 1000px; 
         }
         
-        /* The section is only shown if its ID matches the URL hash (i.e. if it's "targeted") */
+        /* FIX: Only show the currently targeted section */
         #home:target,
         #books:target,
         #apps:target,
@@ -352,16 +353,13 @@
             display: block;
         }
 
-        /* Default to showing the home page if no hash is present in the URL (when first loading the site) */
+        /* FIX: Default to showing the home page if no hash is present in the URL */
         #home {
             display: block;
         }
 
-        /* Override the default display:block if another section is targeted */
-        #home:target ~ * > #home {
-            display: block; 
-        }
-        .content-page:target ~ .content-page:not(:target) {
+        /* FIX: Hide home page if ANY other content page is targeted */
+        main:has(.content-page:target) > #home:not(:target) {
             display: none;
         }
 
@@ -662,7 +660,7 @@
                         </div>
                     </div>
                     <div class="hero-image">
-                        <img src="Screenshot_20251015-050807.jpg" alt="Indigenous language preservation materials and cultural artifacts">
+                        <img src="Screenshot_20251015-051401.jpg" alt="Three men discussing documents">
                     </div>
                 </div>
 
