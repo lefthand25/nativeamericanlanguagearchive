@@ -19,11 +19,8 @@
             line-height: 1.6;
             color: #2c2c2c;
             background: #fafafa;
-            
-            /* --- NON-RESPONSIVE FIX: Ensures horizontal scroll on small screens --- */
             min-width: 1400px; 
-            /* ------------------------------------------------------------------- */
-        }
+              }
 
         /* ------------------------------------------- */
         /* HEADER - PROFESSIONAL ARCHIVE STYLE */
@@ -95,16 +92,16 @@
             border-bottom: 2px solid transparent;
         }
 
-        /* Highlight active link based on URL hash (pure CSS navigation fix) */
-        body:has(#home:target) a[href="#home"],
-        body:has(#books:target) a[href="#books"],
+       body:has(#home:target) a[href="#home"],
+       body:has(#books:target) a[href="#books"],
         body:has(#apps:target) a[href="#apps"],
         body:has(#digital-archive:target) a[href="#digital-archive"],
         body:has(#museums:target) a[href="#museums"],
         body:has(#news:target) a[href="#news"],
+        body:has(#share-story:target) a[href="#share-story"],
         body:has(#about:target) a[href="#about"],
         body:has(#contact:target) a[href="#contact"],
-        /* Highlight dropdown button when any sub-link is active */
+
         body:has(#digital-archive:target) #resources-dropdown,
         body:has(#books:target) #resources-dropdown,
         body:has(#apps:target) #resources-dropdown,
@@ -175,7 +172,6 @@
             margin-bottom: 1.5rem;
             font-weight: 400;
             line-height: 1.2;
-            /* NON-RESPONSIVE FIX: Set max-width to prevent overflow into the image area */
             max-width: 800px;
         }
 
@@ -184,12 +180,10 @@
             color: #555;
             margin-bottom: 2rem;
             line-height: 1.7;
-            /* NON-RESPONSIVE FIX: Allow text to wrap within its container */
             max-width: 600px; 
-            white-space: normal; /* IMPORTANT: Allows wrapping */
+            white-space: normal; 
         }
-        
-        /* Ensure search box text also doesn't wrap unnecessarily */
+
         .search-box input, .search-box button {
             white-space: nowrap;
         }
@@ -221,7 +215,6 @@
         .stat-item {
             text-align: center;
             animation: fadeInUp 2s ease-in-out;
-            /* NON-RESPONSIVE FIX: Prevent stats from stacking */
             flex-shrink: 0; 
             padding: 0 1rem;
         }
@@ -238,11 +231,10 @@
             color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
-            white-space: nowrap; /* Prevent wrapping */
+            white-space: nowrap; 
         }
 
-        /* Featured Collections - Archive Style */
-        .featured-collections {
+           .featured-collections {
             margin: 4rem 0;
         }
 
@@ -252,12 +244,10 @@
             margin-bottom: 2rem;
             text-align: center;
             font-weight: 400;
-            white-space: nowrap; /* Prevent wrapping */
+            white-space: nowrap;
         }
-
         .collections-grid {
             display: grid;
-            /* NON-RESPONSIVE FIX: Use fixed column width */
             grid-template-columns: repeat(3, 1fr); 
             gap: 2rem;
             margin-top: 2rem;
@@ -271,7 +261,6 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            /* NON-RESPONSIVE FIX: Prevent content from shrinking */
             min-width: 350px; 
             flex-shrink: 0;
         }
@@ -295,24 +284,22 @@
             color: #2c2c2c;
             margin-bottom: 1rem;
             font-size: 1.3rem;
-            white-space: nowrap; /* Prevent wrapping */
-        }
-
+            white-space: nowrap;
+       }     
         .collection-meta {
             font-size: 0.85rem;
             color: #8b4513;
             margin-bottom: 1rem;
             font-weight: 500;
-            white-space: nowrap; /* Prevent wrapping */
+            white-space: nowrap;
         }
 
         .collection-card p {
             color: #555;
             line-height: 1.6;
             margin-bottom: 1.5rem;
-            /* Allow description to wrap but fix width to maintain layout */
             max-width: 300px; 
-            white-space: normal; /* Allows wrapping for long descriptions */
+            white-space: normal;
         }
 
         .collection-link {
@@ -321,7 +308,7 @@
             font-weight: 500;
             border-bottom: 1px solid transparent;
             transition: border-bottom 0.3s;
-            white-space: nowrap; /* Prevent wrapping */
+            white-space: nowrap;
         }
 
         .collection-link:hover {
@@ -339,24 +326,22 @@
     padding: 3rem 2rem;
 }
 
-/* FIX: Only show the currently targeted section */
 #home:target,
 #books:target,
 #apps:target,
 #digital-archive:target,
 #museums:target,
 #news:target,
+#share-story:target,
 #about:target,
 #contact:target {
     display: block;
 }
 
-/* FIX: Default to showing the home page if no hash is present in the URL */
 #home {
     display: block;
 }
 
-/* FIX: Hide home page if ANY other content page is targeted */
 main:has(.content-page:target) > #home:not(:target) {
     display: none;
 }
@@ -449,151 +434,16 @@ main:has(.content-page:target) > #home:not(:target) {
     color: #555;
     line-height: 1.6;
 }
-
 /* ------------------------------------------- */
 /* ABOUT PAGE SPECIAL STYLING */
 /* ------------------------------------------- */
 .about-content {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #444;
+max-width: 900px;
+margin: 0 auto;
+font-size: 1.1rem;
+line-height: 1.8;
+color: #444;
 }
-
-/* ------------------------------------------- */
-/* CONTENT PAGES - ARCHIVE STYLE*/
-/* ------------------------------------------- */
-.content-page {
-    /* Start all pages hidden */
-    display: none;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-}
-
-/* FIX: Only show the currently targeted section */
-#home:target,
-#books:target,
-#apps:target,
-#digital-archive:target,
-#museums:target,
-#news:target,
-#about:target,
-#contact:target {
-    display: block;
-}
-
-/* FIX: Default to showing the home page if no hash is present in the URL */
-#home {
-    display: block;
-}
-
-/* FIX: Hide home page if ANY other content page is targeted */
-main:has(.content-page:target) > #home:not(:target) {
-    display: none;
-}
-
-.page-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid #1a237e;
-}
-
-.page-header h2 {
-    font-size: 2.5rem;
-    color: #2c2c2c;
-    margin-bottom: 1rem;
-    font-weight: 400;
-}
-
-.page-header p {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.7;
-}
-
-/* Resource Lists - Archive Style */
-.resources-container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 3rem;
-}
-
-.filters-sidebar {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    height: fit-content;
-    position: sticky;
-    top: 120px;
-}
-
-.filters-sidebar h3 {
-    color: #2c2c2c;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.filter-group {
-    margin-bottom: 1.5rem;
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #555;
-}
-
-.filter-group select,
-.filter-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.resources-list {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
-
-.resource-item {
-    padding: 2rem;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background 0.3s;
-}
-
-.resource-item h3 {
-    color: #2c2c2c;
-    margin-bottom: 0.5rem;
-}
-
-.resource-item p {
-    max-width: 700px;
-    color: #555;
-    line-height: 1.6;
-}
-
-/* ------------------------------------------- */
-/* ABOUT PAGE SPECIAL STYLING */
-/* ------------------------------------------- */
-.about-content {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #444;
-}
-
 /* ------------------------------------------- */
 /* UPDATED CONTACT SECTION WITH IMAGE */
 /* ------------------------------------------- */
@@ -886,23 +736,24 @@ footer {
                 </div>
                 
                 <nav>
-                    <ul>
-                        <li><a href="#home" data-tab="home">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropbtn" id="resources-dropdown" data-tab="resources">Resources <span class="arrow">▼</span></a>
-                            <div class="dropdown-content">
-                                <a href="#digital-archive" data-tab="digital-archive">Digital Archive</a>
-                                <a href="#books" data-tab="books">Books & Publications</a>
-                                <a href="#apps" data-tab="apps">Mobile Apps</a>
-                                <a href="#museums" data-tab="museums">Museums & Centers</a>
-                            </div>
-                        </li>
-                        <li><a href="#news" data-tab="news">Latest News</a></li>
-                        
-                        <li><a href="#about" data-tab="about">About</a></li>
-                        <li><a href="#contact" data-tab="contact">Contact</a></li>
-                    </ul>
-                </nav>
+    <ul>
+        <li><a href="#home" data-tab="home">Home</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropbtn" id="resources-dropdown"
+            data-tab="resources">Resources <span class="arrow">▼</span></a>
+            <div class="dropdown-content">
+                <a href="#digital-archive" data-tab="digital-archive">Digital Archive</a>
+                <a href="#books" data-tab="books">Books & Publications</a>
+                <a href="#apps" data-tab="apps">Mobile Apps</a>
+                <a href="#museums" data-tab="museums">Museums & Centers</a>
+            </div>
+        </li>
+        <li><a href="#news" data-tab="news">Latest News</a></li>
+        <li><a href="#share-story" data-tab="share-story">Share a Story</a></li>
+        <li><a href="#about" data-tab="about">About</a></li>
+        <li><a href="#contact" data-tab="contact">Contact</a></li>
+    </ul>
+</nav>
 
                 <div class="header-search">
                     <div class="search-box">
@@ -919,14 +770,8 @@ footer {
             <div class="hero-section">
                 <div class="hero-content">
                     <h2>Preserving Indigenous Languages & Cultural Heritage</h2>
-                    <p>A comprehensive digital repository dedicated to documenting, preserving and celebrating Indigenous voices, languages and cultural heritage across North America. Discover resources, connect with communities and support vital language revitalization efforts.</p>
-                    
-                    <div class="search-box" style="margin-top: 2rem;">
-                        <input type="text" placeholder="Search by language, region, or resource type..." id="hero-search">
-                        <button type="button" onclick="performSearch()">Search Archive</button>
-                    </div>
-                </div>
-                
+                    <p>A digital archive documenting and preserving Indigenous languages and cultural heritage across North America. Discover resources, connect with communities, and support language revitalization efforts.</p>
+               </div>
                 <div class="hero-image">
                     <img src="boston-public-library-rFl5Fs69_-E-unsplash.jpg"
                          alt="Historical photograph of Indigenous leaders in traditional regalia">
@@ -1012,7 +857,7 @@ footer {
         <section class="content-page" id="apps">
             <div class="page-header">
                 <h2>Mobile Apps & Digital Tools</h2>
-                <p>Interactive mobile applications and digital tools for language learning, developed by Indigenous communities and educational partners.</p>
+                <p>Mobile applications and digital tools for language learning, developed by Indigenous communities and educational partners.</p>
             </div>
             <div class="resources-container">
                 <div class="filters-sidebar">
@@ -1043,7 +888,7 @@ footer {
         <section class="content-page" id="digital-archive">
             <div class="page-header">
                 <h2>Digital Archives & Language Resources</h2>
-                <p>Online platforms, digital collections and language learning websites dedicated to Indigenous language preservation and education.</p>
+           <p>Online platforms, digital collections, and language learning websites for Indigenous language preservation and education.</p>
             </div>
             <div class="resources-container">
                 <div class="filters-sidebar">
@@ -1074,7 +919,7 @@ footer {
         <section class="content-page" id="museums">
             <div class="page-header">
                 <h2>Museums & Cultural Centers</h2>
-                <p>Institutions dedicated to preserving cultural materials, oral histories and linguistic records for research and community use.</p>
+                <p>Institutions preserving cultural materials, oral histories, and linguistic records for research and community use.</p>
             </div>
             <div class="resources-container">
                 <div class="filters-sidebar">
@@ -1099,7 +944,7 @@ footer {
         <section class="content-page" id="news">
             <div class="page-header">
                 <h2>Language Revitalization News</h2>
-                <p>Latest updates on Indigenous language preservation initiatives, funding opportunities and community-led revitalization efforts.</p>
+                <p>Updates on Indigenous language preservation initiatives, funding opportunities, and community-led revitalization efforts.</p>
             </div>
             <div style="max-width: 900px; margin: 0 auto; min-width: 800px;">
                 <div class="resource-item">
@@ -1117,33 +962,83 @@ footer {
                 </div>
             </div>
         </section>
+<section class="content-page" id="share-story">
+    <div class="page-header">
+        <h2>Share a Story</h2>
+        <p>Share your language preservation stories and experiences</p>
+    </div>
+    <div class="contact-wrapper">
+        <div class="contact-image-section">
+            <img src="boston-public-library-MzykKEYuhic-unsplash.jpg"
+                alt="Historical photograph of Indigenous woman reading">
+            <div class="image-credit">Photo courtesy of Boston Public Library</div>
+        </div>
+        <div class="contact-form-section">
+            <h3 style="margin-bottom: 1.5rem; color: #2c2c2c; font-size: 1.5rem;">Share Your Story</h3>
+            <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="story-first-name">FIRST NAME</label>
+                        <input type="text" id="story-first-name" name="firstName"
+                            placeholder="Please enter first name..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-last-name">LAST NAME</label>
+                        <input type="text" id="story-last-name" name="lastName"
+                            placeholder="Please enter last name..." required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="story-email">EMAIL</label>
+                        <input type="email" id="story-email" name="email"
+                            placeholder="Please enter email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-language">LANGUAGE/TRIBE</label>
+                        <input type="text" id="story-language" name="language"
+                            placeholder="Please enter language or tribe...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="story-content">YOUR STORY</label>
+                    <textarea id="story-content" name="story" rows="8"
+                        placeholder="Share your language learning journey, preservation efforts, or cultural experiences..." required></textarea>
+                </div>
+                <input type="hidden" name="_next"
+                    value="https://lefthand25.github.io/nativeamericanlanguagearchive/#share-story">
+                <button type="submit" class="submit-btn">Share Story</button>
+            </form>
+        </div>
+    </div>
+</section>
 
-        <section class="content-page" id="about">
+<section class="content-page" id="about">
             <div class="page-header">
                 <h2>About the Indigenous Voices Archive</h2>
                 <p>Preserving linguistic diversity and supporting community-led language revitalization efforts</p>
             </div>
             <div class="about-content" style="max-width: 900px; margin: 0 auto; white-space: normal; min-width: 800px;">
-                <p>Indigenous languages carry the wisdom, stories and cultural heritage of communities that have stewarded this land for thousands of years. Yet many of these irreplaceable linguistic treasures face the threat of disappearing forever. Our platform serves as a digital sanctuary where indigenous communities, linguists and language enthusiasts can come together to preserve oral traditions and support vital revitalization work.</p>
+                <p>Indigenous languages represent thousands of years of cultural knowledge and heritage. Many face endangerment today. This platform connects Indigenous communities, linguists, and language learners with resources for language preservation and revitalization.</p>
                 
-                <p>Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
+                <p>Find resources for learners, documentation projects led by native speakers, and tools to help communities preserve ancestral languages. This space supports those reconnecting with heritage languages, participating in revitalization efforts, or learning about Indigenous cultures.</p>
             </div>
         </section>
 <section class="content-page" id="contact">
     <div class="page-header">
         <h2>Get in Touch</h2>
-        <p>We welcome inquiries from tribal nations, researchers, educators and community members</p>
+        <p>Contact us with inquiries about the archive</p>
     </div>
     
     <div class="contact-wrapper">
         <div class="contact-image-section">
-            <img src="boston-public-library-MzykKEYuhic-unsplash.jpg" 
+            <img src="boston-public-library-MzykKEyvhic-unsplash.jpg" 
                  alt="Historical photograph of Indigenous woman reading">
             <div class="image-credit">Photo courtesy of Boston Public Library</div>
         </div>
         
         <div class="contact-form-section">
-            <h3 style="margin-bottom: 1.5rem; color: #2c2c2c; font-size: 1.5rem;">Share Your Story</h3>
+            <h3 style="margin-bottom: 1.5rem; color: #2c2c2c; font-size: 1.5rem;">Contact us</h3>
             <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
                 <div class="form-row">
                     <div class="form-group">
@@ -1174,7 +1069,7 @@ footer {
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="6" 
-                              placeholder="Please enter query..." required></textarea>
+                              placeholder="Please enter message..." required></textarea>
                 </div>
                 
                 <!-- Hidden field for Formspree to know where to redirect after submission -->
@@ -1308,9 +1203,9 @@ footer {
                 ? `<span class="resource-category">${resource.type}</span>` 
                 : '';
 
-            const link = resource.identifier 
-                ? `<a href="${resource.identifier.startsWith('http') ? resource.identifier : 'https://' + resource.identifier}" target="_blank" class="resource-link">View Resource →</a>` 
-                : `<span class="resource-link" style="color:#999; cursor:default;">No direct link available</span>`;
+            const link = resource.identifier
+    ? `<a href="${resource.identifier.startsWith('http') ? resource.identifier : 'https://' + resource.identifier}" target="_blank" class="resource-link">View Resource →</a>`
+    : '';  // Empty string instead of "No direct link available"
 
             item.innerHTML = `
                 ${categoryTag}
@@ -1359,14 +1254,22 @@ footer {
     // 4. PLACEHOLDER SEARCH FUNCTION (For button clicks)
     // ----------------------------------------------------
     function performSearch() {
-        const query = document.getElementById('main-search').value || document.getElementById('hero-search').value;
-        if (query) {
-            alert(`Searching the archive for: "${query}"...\n\n(Note: This is a placeholder function, as actual search logic requires a backend or more complex client-side indexing.)`);
-        } else {
-            alert("Please enter a search term.");
-        }
-    }
+const query = document.getElementById('main-search').value.trim();
+if (query) {
+// Basic client-side search through all resources
+const results = languageResources.filter(resource => {
+const searchText = `${resource.title} ${resource.description} ${resource.language} ${resource.coverage}`.toLowerCase();
+return searchText.includes(query.toLowerCase());
+});
+console.log(`Found ${results.length} results for "${query}"`);
+// You could redirect to a results page or show results inline
+alert(`Found ${results.length} resources matching "${query}"`);
+} else {
+alert("Please enter a search term.");
+}
+}
 
 </script>
 </body>
 </html>
+ 
