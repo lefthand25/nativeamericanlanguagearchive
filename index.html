@@ -329,278 +329,546 @@
         }
 
         /* ------------------------------------------- */
-        /* CONTENT PAGES - ARCHIVE STYLE (CSS Target Fix) */
-        /* ------------------------------------------- */
-        .content-page {
-            /* Start all pages hidden */
-            display: none;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            /* NON-RESPONSIVE FIX: Ensure minimum width for all content pages */
-            min-width: 1000px; 
-        }
-        
-        /* FIX: Only show the currently targeted section */
-        #home:target,
-        #books:target,
-        #apps:target,
-        #digital-archive:target,
-        #museums:target,
-        #news:target,
-        #about:target,
-        #contact:target {
-            display: block;
-        }
+/* CONTENT PAGES - ARCHIVE STYLE*/
+/* ------------------------------------------- */
+.content-page {
+    /* Start all pages hidden */
+    display: none;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
 
-        /* FIX: Default to showing the home page if no hash is present in the URL */
-        #home {
-            display: block;
-        }
+/* FIX: Only show the currently targeted section */
+#home:target,
+#books:target,
+#apps:target,
+#digital-archive:target,
+#museums:target,
+#news:target,
+#about:target,
+#contact:target {
+    display: block;
+}
 
-        /* FIX: Hide home page if ANY other content page is targeted */
-        main:has(.content-page:target) > #home:not(:target) {
-            display: none;
-        }
+/* FIX: Default to showing the home page if no hash is present in the URL */
+#home {
+    display: block;
+}
 
+/* FIX: Hide home page if ANY other content page is targeted */
+main:has(.content-page:target) > #home:not(:target) {
+    display: none;
+}
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #1a237e;
-        }
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #1a237e;
+}
 
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c2c2c;
-            margin-bottom: 1rem;
-            font-weight: 400;
-            white-space: nowrap; /* Prevent wrapping */
-        }
+.page-header h2 {
+    font-size: 2.5rem;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
 
-        .page-header p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.7;
-            /* NON-RESPONSIVE FIX: Allow wrapping for header description */
-            white-space: normal; 
-        }
+.page-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
 
-        /* Resource Lists - Archive Style */
-        .resources-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 3rem;
-        }
+/* Resource Lists - Archive Style */
+.resources-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+}
 
-        .filters-sidebar {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            height: fit-content;
-            position: sticky;
-            top: 120px;
-            /* NON-RESPONSIVE FIX: Fixed width */
-            min-width: 250px;
-        }
+.filters-sidebar {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+}
 
-        .filters-sidebar h3 {
-            color: #2c2c2c;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            white-space: nowrap;
-        }
+.filters-sidebar h3 {
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
 
-        .filter-group {
-            margin-bottom: 1.5rem;
-        }
+.filter-group {
+    margin-bottom: 1.5rem;
+}
 
-        .filter-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #555;
-            white-space: nowrap;
-        }
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
 
-        .filter-group select,
-        .filter-group input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
+.filter-group select,
+.filter-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
 
-        .resources-list {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-            /* NON-RESPONSIVE FIX: Enforce minimum width for list */
-            min-width: 800px;
-        }
+.resources-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
 
-        .resource-item {
-            padding: 2rem;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.3s;
-        }
+.resource-item {
+    padding: 2rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.3s;
+}
 
-        .resource-item h3 {
-            white-space: nowrap; /* Prevent wrapping */
-        }
+.resource-item h3 {
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+}
 
-        .resource-item p {
-            /* Allow description to wrap but fix width to maintain layout */
-            max-width: 700px; 
-            white-space: normal; /* Allows wrapping for resource descriptions */
-        }
+.resource-item p {
+    max-width: 700px;
+    color: #555;
+    line-height: 1.6;
+}
 
+/* ------------------------------------------- */
+/* ABOUT PAGE SPECIAL STYLING */
+/* ------------------------------------------- */
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+}
 
-        /* ------------------------------------------- */
-        /* ABOUT PAGE SPECIAL STYLING */
-        /* ------------------------------------------- */
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
-            /* NON-RESPONSIVE FIX: Allow wrapping in about page */
-            white-space: normal; 
-            min-width: 800px;
-        }
+/* ------------------------------------------- */
+/* CONTENT PAGES - ARCHIVE STYLE*/
+/* ------------------------------------------- */
+.content-page {
+    /* Start all pages hidden */
+    display: none;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
 
-        /* ------------------------------------------- */
-        /* CONTACT FORM - ARCHIVE STYLE */
-        /* ------------------------------------------- */
-        .contact-container {
-            /* NON-RESPONSIVE FIX: Fixed column layout */
-            display: flex; 
-            gap: 4rem;
-            max-width: 900px;
-            margin: 0 auto;
-            /* NON-RESPONSIVE FIX: Fixed widths */
-            min-width: 900px;
-        }
+/* FIX: Only show the currently targeted section */
+#home:target,
+#books:target,
+#apps:target,
+#digital-archive:target,
+#museums:target,
+#news:target,
+#about:target,
+#contact:target {
+    display: block;
+}
 
-        .contact-info, .contact-form {
-             /* NON-RESPONSIVE FIX: Equal fixed width */
-            flex: 1 1 500px; 
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+/* FIX: Default to showing the home page if no hash is present in the URL */
+#home {
+    display: block;
+}
 
-        .contact-form input,
-        .contact-form textarea {
-            white-space: normal; /* Allow text fields to wrap if needed */
-        }
+/* FIX: Hide home page if ANY other content page is targeted */
+main:has(.content-page:target) > #home:not(:target) {
+    display: none;
+}
 
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #1a237e;
+}
 
-        /* ------------------------------------------- */
-        /* FOOTER - ARCHIVE STYLE */
-        /* ------------------------------------------- */
-        footer {
-            background: #2c2c2c;
-            color: #ccc;
-            padding: 3rem 2rem 2rem;
-            margin-top: 4rem;
-        }
+.page-header h2 {
+    font-size: 2.5rem;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            /* NON-RESPONSIVE FIX: Fixed grid layout */
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 3rem;
-            min-width: 1000px;
-        }
+.page-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
 
-        /* ------------------------------------------- */
-        /* DROPDOWN STYLES */
-        /* ------------------------------------------- */
-        .dropdown {
-            list-style: none;
-            position: relative; 
-            overflow: visible; 
-            flex-shrink: 0; /* Prevent from shrinking in the nav bar */
-        }
+/* Resource Lists - Archive Style */
+.resources-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+}
 
-        .dropdown .dropbtn {
-            font-size: 0.95rem; 
-            font-weight: 500;
-            border: none;
-            outline: none;
-            color: #2c2c2c;
-            padding: 0.5rem 0; 
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-            text-decoration: none; 
-            border-bottom: 2px solid transparent; 
-            transition: all 0.3s ease;
-            display: block;
-            white-space: nowrap;
-        }
+.filters-sidebar {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+}
 
-        .dropdown:hover .dropbtn, 
-        .dropdown-content a:hover {
-            color: #1a237e;
-            border-bottom-color: #1a237e;
-            background-color: transparent;
-        }
+.filters-sidebar h3 {
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 180px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001; 
-            border-top: 3px solid #1a237e;
-            padding-top: 5px; 
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap; 
-        }
+.filter-group {
+    margin-bottom: 1.5rem;
+}
 
-        .dropdown-content a {
-            float: none;
-            color: #2c2c2c;
-            padding: 10px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-            font-size: 0.95rem;
-            transition: background-color 0.2s;
-            border-bottom: none; 
-            white-space: nowrap;
-        }
-        
-        .dropdown-content a:hover {
-            background-color: #f0f0f0;
-            color: #1a237e;
-        }
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+.filter-group select,
+.filter-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
 
-        .arrow {
-            margin-left: 5px;
-            font-size: 0.8em;
-        }
-    </style>
+.resources-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.resource-item {
+    padding: 2rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.3s;
+}
+
+.resource-item h3 {
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+}
+
+.resource-item p {
+    max-width: 700px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ------------------------------------------- */
+/* ABOUT PAGE SPECIAL STYLING */
+/* ------------------------------------------- */
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+/* ------------------------------------------- */
+/* UPDATED CONTACT SECTION WITH IMAGE */
+/* ------------------------------------------- */
+.contact-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.contact-image-section {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 120px;
+}
+
+.contact-image-section img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+.contact-form-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    transition: border-color 0.3s;
+    background: #fafafa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1a237e;
+    background: white;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #ccc;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    width: 100%;
+    background: #1a237e;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background: #303f9f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+}
+
+/* ------------------------------------------- */
+/* FOOTER - ARCHIVE STYLE */
+/* ------------------------------------------- */
+footer {
+    background: #2c2c2c;
+    color: #ccc;
+    padding: 3rem 2rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+}
+
+.footer-section h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #444;
+    font-size: 0.9rem;
+}
+
+/* ------------------------------------------- */
+/* DROPDOWN STYLES */
+/* ------------------------------------------- */
+.dropdown {
+    list-style: none;
+    position: relative;
+    overflow: visible;
+    flex-shrink: 0;
+}
+
+.dropdown .dropbtn {
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    color: #2c2c2c;
+    padding: 0.5rem 0;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    display: block;
+    white-space: nowrap;
+}
+
+.dropdown:hover .dropbtn,
+.dropdown-content a:hover {
+    color: #1a237e;
+    border-bottom-color: #1a237e;
+    background-color: transparent;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-top: 3px solid #1a237e;
+    padding-top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.dropdown-content a {
+    float: none;
+    color: #2c2c2c;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+    border-bottom: none;
+    white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+    color: #1a237e;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.arrow {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+/* ------------------------------------------- */
+/* RESPONSIVE DESIGN - MOBILE OPTIMIZATION */
+/* ------------------------------------------- */
+@media screen and (max-width: 1200px) {
+    .resources-container {
+        grid-template-columns: 200px 1fr;
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content-page {
+        padding: 2rem 1rem;
+    }
+
+    .page-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .resources-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .filters-sidebar {
+        position: static;
+    }
+
+    .resource-item {
+        padding: 1.5rem;
+    }
+
+    .resource-item p {
+        max-width: 100%;
+    }
+
+    .about-content {
+        font-size: 1rem;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+</style>
 
 </head>
 <body>
@@ -1074,4 +1342,3 @@
 </script>
 </body>
 </html>
- 
