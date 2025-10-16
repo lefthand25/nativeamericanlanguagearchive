@@ -1129,35 +1129,63 @@ footer {
                 <p>Here, you'll find resources for learners, documentation projects led by native speakers and tools to help communities preserve their ancestral languages. We believe every language represents a unique way of understanding the world and preserving linguistic diversity enriches us all. Whether you're reconnecting with your heritage language, supporting revitalization efforts or exploring how people communicate across cultures, this space honors the voices that have echoed across generations and ensures they continue to thrive.</p>
             </div>
         </section>
-
-        <section class="content-page" id="contact">
-            <div class="page-header">
-                <h2>Contact</h2>
-                <p>Connect with us to contribute resources, propose partnerships or learn more about our mission</p>
-            </div>
-            <div class="contact-container" style="max-width: 900px; margin: 0 auto; min-width: 900px; display: flex;">
-                <div class="contact-info">
-                    <h3>Get in Touch</h3>
-                    <p style="white-space: normal;">We welcome inquiries from tribal nations, researchers, educators and community members. Please use the form below to send us a message.</p>
+<section class="content-page" id="contact">
+    <div class="page-header">
+        <h2>Get in Touch</h2>
+        <p>We welcome inquiries from tribal nations, researchers, educators and community members</p>
+    </div>
+    
+    <div class="contact-wrapper">
+        <div class="contact-image-section">
+            <img src="boston-public-library-MzykKEYuhic-unsplash.jpg" 
+                 alt="Historical photograph of Indigenous woman reading">
+            <div class="image-credit">Photo courtesy of Boston Public Library</div>
+        </div>
+        
+        <div class="contact-form-section">
+            <h3 style="margin-bottom: 1.5rem; color: #2c2c2c; font-size: 1.5rem;">Share Your Story</h3>
+            <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">FIRST NAME</label>
+                        <input type="text" id="first-name" name="firstName" 
+                               placeholder="Please enter first name..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">LAST NAME</label>
+                        <input type="text" id="last-name" name="lastName" 
+                               placeholder="Please enter last name..." required>
+                    </div>
                 </div>
-                <div class="contact-form">
-                    <form action="https://formspree.io/f/xovklenr" method="POST">
-                        <label>
-                            Your email:
-                            <input type="email" name="email" required>
-                        </label>
-                        <label>
-                            Your message:
-                            <textarea name="message" required></textarea>
-                        </label>
-                        <button type="submit">Send</button>
-                    </form>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">EMAIL</label>
+                        <input type="email" id="email" name="email" 
+                               placeholder="Please enter email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">PHONE NUMBER</label>
+                        <input type="tel" id="phone" name="phone" 
+                               placeholder="Please enter phone number...">
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" 
+                              placeholder="Please enter query..." required></textarea>
+                </div>
+                
+                <!-- Hidden field for Formspree to know where to redirect after submission -->
+                <input type="hidden" name="_next" value="https://lefthand25.github.io/nativeamericanlanguagearchive/#contact">
+                
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+            <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Indigenous Voices Archive</h3>
