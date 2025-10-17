@@ -2640,28 +2640,93 @@ const newsResources = [
 
 // Export for use in other modules
 export default newsResources;
+….. 
+// ===================================================================
+// NAVIGATION SYSTEM
+// ===================================================================
 
-// ----------------------------------------------------
-// NEWS RENDERING FUNCTION
-// ----------------------------------------------------
+function initNavigation() {
+    const navLinks = document.querySelectorAll('[data-page]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageName = link.getAttribute('data-page');
+            showPage(pageName);
+            
+            document.querySelectorAll('nav a, nav button').forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+}
 
-/**
- * Renders news items into the news list element.
- */
-function renderNewsItems() {
+function showPage(pageName) {
+    console.log('📄 Showing page:', pageName);
+    
+    document.querySelectorAll('.content-page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    const targetPage = document.getElementById(pageName);
+    if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+}
+
+// ===================================================================
+// RENDERING FUNCTIONS
+// ===================================================================
+
+function renderResources(resources, listId) {
+    const listElement = document.getElementById(listId);
+    if (!listElement) return;
+
+    listElement.innerHTML = '';
+
+    if (resources.length === 0) {
+        listElement.innerHTML = '<p style="padding: 2rem;">No resources found in this category.</p>';
+        return;
+    }
+
+    resources.forEach(resource => {
+        const item = document.createElement('div');
+        item.className = 'resource-item';
+        
+        const categoryTag = resource.resourceType
+            ? `<span class="resource-category">${resource.resourceType}</span>`
+            : '';
+
+        const link = resource.webLink && resource.webLink !== 'N/A'
+            ? `<a href="${resource.webLink.startsWith('http') ? resource.webLink : 'https://' + resource.webLink}" target="_blank" class="resource-link">View Resource →</a>`
+            : '';
+
+        item.innerHTML = `
+            ${categoryTag}
+            <h3>${resource.title}</h3>
+            <div class="resource-meta">${resource.language} • ${resource.geographicCoverage} • ${resource.Source || 'Unknown'}</div>
+            <p>${resource.description}</p>
+            ${link}
+        `;
+        listElement.appendChild(item);
+    });
+    
+    console.log(`✅ Rendered ${resources.length} items to ${listId}`);
+}
+
+function renderNews() {
     const newsContainer = document.getElementById('news-list');
     if (!newsContainer) return;
     
     newsContainer.innerHTML = '';
     
-    // Show most recent 15 items
     const recentNews = newsResources.slice(0, 15);
     
     recentNews.forEach(item => {
         const newsItem = document.createElement('div');
         newsItem.className = 'resource-item';
         
-        const typeTag = item.type ? `<span class="resource-category" style="display: inline-block; background: #1a237e; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem; margin-bottom: 0.5rem;">${item.type}</span>` : '';
+        const typeTag = item.type ? `<span class="resource-category">${item.type}</span>` : '';
         
         const dateFormatted = new Date(item.date).toLocaleDateString('en-US', { 
             year: 'numeric', 
@@ -2672,123 +2737,227 @@ function renderNewsItems() {
         newsItem.innerHTML = `
             ${typeTag}
             <h3>${item.title}</h3>
-            <div class="resource-meta" style="color: #8b4513; font-size: 0.9rem; margin-bottom: 0.5rem;">
-                ${dateFormatted}
-            </div>
-            <p style="white-space: normal;">${item.summary}</p>
-            ${item.source ? `<a href="${item.source}" target="_blank" class="resource-link" style="color: #1a237e; text-decoration: none; font-weight: 500;">Read Full Article →</a>` : ''}
+            <div class="resource-meta">${dateFormatted}</div>
+            <p>${item.summary}</p>
+            ${item.source ? `<a href="${item.source}" target="_blank" class="resource-link">Read Full Article →</a>` : ''}
         `;
         
         newsContainer.appendChild(newsItem);
     });
+    
+    console.log(`✅ Rendered ${recentNews.length} news items`);
 }
-
-/**
- * Filters the main data array by category.
- * @param {string} category - The category to filter by (e.g., 'books', 'digital-archive').
- * @returns {Array<Object>} The filtered array of resources.
- */
 
 function getResourcesByCategory(category) {
-return indigenousLanguageResources.filter(r => r.category === category);
+    return indigenousLanguageResources.filter(r => r.category === category);
 }
 
+function populateFilters() {
+    const regions = [...new Set(indigenousLanguageResources.map(r => r.geographicCoverage))].sort();
+    const languages = [...new Set(indigenousLanguageResources.map(r => r.language))].sort();
 
-// ----------------------------------------------------
-// 3. INITIALIZATION
-// ----------------------------------------------------
-function initializeArchive() {
-    console.log('=== Initializing Indigenous Voices Archive ===');
+    populateSelect('books-region', regions);
+    populateSelect('books-language', languages);
+    populateSelect('apps-region', regions);
+    populateSelect('apps-language', languages);
+    populateSelect('archive-region', regions);
+    populateSelect('archive-language', languages);
+    populateSelect('museums-region', regions);
+}
+
+function populateSelect(selectId, options) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
     
-    // 1. Get filtered data for each section
+    const allOption = select.querySelector('option[value=""]');
+    select.innerHTML = '';
+    if (allOption) select.appendChild(allOption);
+    
+    options.forEach(option => {
+        if (option) {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            select.appendChild(opt);
+        }
+    });
+}
+
+function setupFilterListeners(booksData, archiveData, museumsData, appsData) {
+    ['books-region', 'books-language', 'books-search'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => filterBooks(booksData));
+            element.addEventListener('input', () => filterBooks(booksData));
+        }
+    });
+    
+    ['apps-region', 'apps-language', 'apps-search'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => filterApps(appsData));
+            element.addEventListener('input', () => filterApps(appsData));
+        }
+    });
+    
+    ['archive-region', 'archive-language', 'archive-search'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => filterArchive(archiveData));
+            element.addEventListener('input', () => filterArchive(archiveData));
+        }
+    });
+    
+    ['museums-region', 'museums-search'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => filterMuseums(museumsData));
+            element.addEventListener('input', () => filterMuseums(museumsData));
+        }
+    });
+}
+
+function filterBooks(booksData) {
+    const region = document.getElementById('books-region').value;
+    const language = document.getElementById('books-language').value;
+    const search = document.getElementById('books-search').value.toLowerCase();
+
+    let filtered = booksData.filter(item => {
+        const matchesRegion = !region || item.geographicCoverage === region;
+        const matchesLanguage = !language || item.language === language;
+        const matchesSearch = !search ||
+            item.title.toLowerCase().includes(search) ||
+            item.description.toLowerCase().includes(search);
+        return matchesRegion && matchesLanguage && matchesSearch;
+    });
+
+    renderResources(filtered, 'books-list');
+}
+
+function filterApps(appsData) {
+    const region = document.getElementById('apps-region').value;
+    const language = document.getElementById('apps-language').value;
+    const search = document.getElementById('apps-search').value.toLowerCase();
+
+    let filtered = appsData.filter(item => {
+        const matchesRegion = !region || item.geographicCoverage === region;
+        const matchesLanguage = !language || item.language === language;
+        const matchesSearch = !search ||
+            item.title.toLowerCase().includes(search) ||
+            item.description.toLowerCase().includes(search);
+        return matchesRegion && matchesLanguage && matchesSearch;
+    });
+
+    renderResources(filtered, 'apps-list');
+}
+
+function filterArchive(archiveData) {
+    const region = document.getElementById('archive-region').value;
+    const language = document.getElementById('archive-language').value;
+    const search = document.getElementById('archive-search').value.toLowerCase();
+    
+    let filtered = archiveData.filter(item => {
+        const matchesRegion = !region || item.geographicCoverage === region;
+        const matchesLanguage = !language || item.language === language;
+        const matchesSearch = !search || 
+            item.title.toLowerCase().includes(search) ||
+            item.description.toLowerCase().includes(search);
+        return matchesRegion && matchesLanguage && matchesSearch;
+    });
+    
+    renderResources(filtered, 'archive-list');
+}
+
+function filterMuseums(museumsData) {
+    const region = document.getElementById('museums-region').value;
+    const search = document.getElementById('museums-search').value.toLowerCase();
+    
+    let filtered = museumsData.filter(item => {
+        const matchesRegion = !region || item.geographicCoverage === region;
+        const matchesSearch = !search || 
+            item.title.toLowerCase().includes(search) ||
+            item.description.toLowerCase().includes(search);
+        return matchesRegion && matchesSearch;
+    });
+    
+    renderResources(filtered, 'museums-list');
+}
+
+function performSearch() {
+    const query = document.getElementById('main-search').value.trim().toLowerCase();
+    if (!query) {
+        alert("Please enter a search term.");
+        return;
+    }
+
+    const results = indigenousLanguageResources.filter(resource => {
+        const searchText = `${resource.title} ${resource.description} ${resource.language} ${resource.geographicCoverage}`.toLowerCase();
+        return searchText.includes(query);
+    });
+    
+    console.log(`🔍 Found ${results.length} results for "${query}"`);
+    alert(`Found ${results.length} resources matching "${query}"\n\nCheck the console for details.`);
+    
+    if (results.length > 0) {
+        console.table(results.map(r => ({
+            Title: r.title,
+            Language: r.language,
+            Region: r.geographicCoverage,
+            Category: r.category
+        })));
+    }
+}
+
+// ===================================================================
+// INITIALIZATION
+// ===================================================================
+
+function init() {
+    console.log('=== 🚀 Initializing Indigenous Voices Archive ===');
+    
+    initNavigation();
+    
     const booksData = getResourcesByCategory('books');
     const archiveData = getResourcesByCategory('digital-archive');
     const museumsData = getResourcesByCategory('museums');
     const appsData = getResourcesByCategory('apps');
-
-    console.log('Data counts:', {
+    
+    console.log('📊 Data counts:', {
         books: booksData.length,
         archives: archiveData.length,
         museums: museumsData.length,
         apps: appsData.length,
+        news: newsResources.length,
         total: indigenousLanguageResources.length
     });
-
-    // 2. Render data to their respective sections immediately
-    console.log('Rendering books...');
+    
     renderResources(booksData, 'books-list');
-    
-    console.log('Rendering archives...');
     renderResources(archiveData, 'archive-list');
-    
-    console.log('Rendering museums...');
     renderResources(museumsData, 'museums-list');
-    
-    console.log('Rendering apps...');
     renderResources(appsData, 'apps-list');
+    renderNews();
     
-    console.log('Rendering news...');
-    renderNewsItems();
-
-    // 3. Populate filter dropdowns
     populateFilters();
-
-    // 4. Add filter event listeners
     setupFilterListeners(booksData, archiveData, museumsData, appsData);
     
-    // 5. Setup search functionality
-    const searchButton = document.querySelector('.search-box button');
+    const searchBtn = document.getElementById('search-btn');
     const searchInput = document.getElementById('main-search');
     
-    if (searchButton && searchInput) {
-        searchButton.addEventListener('click', performSearch);
+    if (searchBtn) searchBtn.addEventListener('click', performSearch);
+    if (searchInput) {
         searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
+            if (e.key === 'Enter') performSearch();
         });
     }
     
-    console.log('=== Archive initialization complete ===');
+    console.log('=== ✅ Archive Initialization Complete ===');
 }
 
-// Run immediately if DOM is already loaded, otherwise wait
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeArchive);
+    document.addEventListener('DOMContentLoaded', init);
 } else {
-    initializeArchive();
+    init();
 }
-
-// ----------------------------------------------------
-// SEARCH FUNCTIONALITY
-// ----------------------------------------------------
-function performSearch() {
-const query = document.getElementById('main-search').value.trim().toLowerCase();
-if (!query) {
-alert("Please enter a search term.");
-return;
-}
-
-// Search through all resources
-const results = indigenousLanguageResources.filter(resource => {
-const searchText = `${resource.title} ${resource.description} ${resource.language} ${resource.geographicCoverage}`.toLowerCase();
-return searchText.includes(query);
-});
-    console.log(`Found ${results.length} results for "${query}"`);
-    alert(`Found ${results.length} resources matching "${query}"\n\nCheck the console for details.`);
-    
-
-// Display results in console as a table
-if (results.length > 0) {
-console.table(results.map(r => ({
-Title: r.title,
-Language: r.language,
-Region: r.geographicCoverage,
-Category: r.category
-})));
-}
-}
-
-</script>
+    </script>
 </body>
 </html>
