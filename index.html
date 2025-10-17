@@ -1803,15 +1803,14 @@ function getResourcesByCategory(category) {
 // ----------------------------------------------------
 // 3. INITIALIZATION
 // ----------------------------------------------------
-// 1. Get filtered data for each section
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Get filtered data for each section
     const booksData = getResourcesByCategory('books');
     const archiveData = getResourcesByCategory('digital-archive');
     const museumsData = getResourcesByCategory('museums');
     const appsData = getResourcesByCategory('apps');
 
-    // 2. Render data to their respective sections upon load
-document.addEventListener('DOMContentLoaded', () => {
-    // Render all resources
+    // 2. Render data to their respective sections
     renderResources(booksData, 'books-list');
     renderResources(archiveData, 'archive-list');
     renderResources(museumsData, 'museums-list');
@@ -1821,11 +1820,11 @@ document.addEventListener('DOMContentLoaded', () => {
         renderResources(appsData, 'apps-list');
     }
     
-    // Populate filter dropdowns
+    // 3. Populate filter dropdowns
     populateFilters();
     
-    // Add filter event listeners
-    setupFilterListeners();
+    // 4. Add filter event listeners
+    setupFilterListeners(booksData, archiveData, museumsData, appsData);
 });
 
 // Function to populate all filter dropdowns
@@ -1872,13 +1871,13 @@ function populateSelect(selectId, options) {
 }
 
 // Setup filter listeners for all sections
-function setupFilterListeners() {
+function setupFilterListeners(booksData, archiveData, museumsData, appsData) {
     // Books filters
     ['books-region', 'books-language', 'books-search'].forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            element.addEventListener('change', () => filterBooks());
-            element.addEventListener('input', () => filterBooks());
+            element.addEventListener('change', () => filterBooks(booksData));
+            element.addEventListener('input', () => filterBooks(booksData));
         }
     });
     
@@ -1886,8 +1885,8 @@ function setupFilterListeners() {
     ['apps-region', 'apps-language', 'apps-search'].forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            element.addEventListener('change', () => filterApps());
-            element.addEventListener('input', () => filterApps());
+            element.addEventListener('change', () => filterApps(appsData));
+            element.addEventListener('input', () => filterApps(appsData));
         }
     });
     
@@ -1895,8 +1894,8 @@ function setupFilterListeners() {
     ['archive-region', 'archive-language', 'archive-search'].forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            element.addEventListener('change', () => filterArchive());
-            element.addEventListener('input', () => filterArchive());
+            element.addEventListener('change', () => filterArchive(archiveData));
+            element.addEventListener('input', () => filterArchive(archiveData));
         }
     });
     
@@ -1904,14 +1903,14 @@ function setupFilterListeners() {
     ['museums-region', 'museums-search'].forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            element.addEventListener('change', () => filterMuseums());
-            element.addEventListener('input', () => filterMuseums());
+            element.addEventListener('change', () => filterMuseums(museumsData));
+            element.addEventListener('input', () => filterMuseums(museumsData));
         }
     });
 }
 
 // Filter functions for each section
-function filterBooks() {
+function filterBooks(booksData) {
     const region = document.getElementById('books-region').value;
     const language = document.getElementById('books-language').value;
     const search = document.getElementById('books-search').value.toLowerCase();
@@ -1928,7 +1927,7 @@ function filterBooks() {
     renderResources(filtered, 'books-list');
 }
 
-function filterApps() {
+function filterApps(appsData) {
     const region = document.getElementById('apps-region').value;
     const language = document.getElementById('apps-language').value;
     const search = document.getElementById('apps-search').value.toLowerCase();
@@ -1945,7 +1944,7 @@ function filterApps() {
     renderResources(filtered, 'apps-list');
 }
 
-function filterArchive() {
+function filterArchive(archiveData) {
     const region = document.getElementById('archive-region').value;
     const language = document.getElementById('archive-language').value;
     const search = document.getElementById('archive-search').value.toLowerCase();
@@ -1962,7 +1961,7 @@ function filterArchive() {
     renderResources(filtered, 'archive-list');
 }
 
-function filterMuseums() {
+function filterMuseums(museumsData) {
     const region = document.getElementById('museums-region').value;
     const search = document.getElementById('museums-search').value.toLowerCase();
     
