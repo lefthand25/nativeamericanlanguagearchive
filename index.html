@@ -1943,62 +1943,34 @@
     renderResources(filtered, 'museums-list');
     }
 
-    // ----------------------------------------------------
-    // 4.  SEARCH FUNCTION
-    // ----------------------------------------------------
-    function performSearch() {
-    const query = document.getElementById('main-search').value.trim();
+function initializePage() {
+    // Determine current page based on hash
+    const currentPage = window.location.hash.substring(1) || 'home';
 
-    if (!query) {
-        alert("Please enter a search term.");
-        return;
+    // 🌟 THE CORRECTION:
+    // If the page is one of the four resource sections, call the function
+    // that handles data filtering and rendering for that section.
+    if (['books', 'apps', 'digital-archive', 'museums'].includes(currentPage)) {
+        applyFiltersAndRender(currentPage); 
+    }
+    // ----------------------------------------------------------------------
+    
+    // Special handling for news page
+    if (currentPage === 'news') {
+        loadNews();
     }
 
-    // Search through ALL resources including news
-    const languageResults = languageResources.filter(resource => {
-        const searchText = `${resource.title} ${resource.description} ${resource.language} ${resource.coverage}`.toLowerCase();
-        return searchText.includes(query.toLowerCase());
-    });
-
-    const newsResults = newsResources.filter(item => {
-        const searchText = `${item.title} ${item.summary} ${item.type}`.toLowerCase();
-        return searchText.includes(query.toLowerCase());
-    });
-
-    const totalResults = languageResults.length + newsResults.length;
-
-    // Navigate to a results view
-    if (totalResults === 0) {
-        alert(`No results found for "${query}"`);
-        return;
+    // Check if a search is active and re-render search results
+    const searchResults = document.getElementById('search-results');
+    if (searchResults && currentPage !== 'home') {
+        performSearch();
+    } else if (currentPage === 'home') {
+        clearSearch();
     }
-
-    // Create and show search results section
-    showSearchResults(query, languageResults, newsResults);
-    }
-
-    function showSearchResults(query, languageResults, newsResults) {
-    // Check if search results section already exists, if not create it
-    let searchSection = document.getElementById('search-results');
-
-    if (!searchSection) {
-        searchSection = document.createElement('section');
-        searchSection.id = 'search-results';
-        searchSection.className = 'content-page';
-        document.querySelector('main').appendChild(searchSection);
-    }
-
-    // Hide all other sections
-    document.querySelectorAll('.content-page').forEach(page => {
-        page.style.display = 'none';
-    });
-
-    // Show search results section
-    searchSection.style.display = 'block';
-
-    const totalResults = languageResults.length + newsResults.length;
-
-    // Build the search results HTML
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
     searchSection.innerHTML = `
         <div class="page-header">
             <h2>Search Results</h2>
