@@ -1,2027 +1,462 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indigenous Voices Archive</title>
-    <style>
-        /* ------------------------------------------- */
-        /* BASE STYLES - PROFESSIONAL ARCHIVE DESIGN */
-        /* ------------------------------------------- */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            line-height: 1.6;
-            color: #2c2c2c;
-            background: #fafafa;
-            min-width: 1400px; 
-              }
-
-        /* ------------------------------------------- */
-        /* HEADER - PROFESSIONAL ARCHIVE STYLE */
-        /* ------------------------------------------- */
-        header {
-            background: #fff;
-            border-bottom: 3px solid #1a237e;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-top {
-            background: #f8f8f8;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #ddd;
-            font-size: 0.9rem;
-            text-align: center;
-            color: #666;
-        }
-
-        .header-main {
-            padding: 1rem 2rem;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-text h1 {
-            font-size: 1.8rem;
-            color: #2c2c2c;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-text p {
-            font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
-        }
-
-        /* Navigation - Single Row */
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #2c2c2c;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
-
-       body:has(#home:target) a[href="#home"],
-       body:has(#books:target) a[href="#books"],
-        body:has(#apps:target) a[href="#apps"],
-        body:has(#digital-archive:target) a[href="#digital-archive"],
-        body:has(#museums:target) a[href="#museums"],
-        body:has(#news:target) a[href="#news"],
-        body:has(#share-story:target) a[href="#share-story"],
-        body:has(#about:target) a[href="#about"],
-        body:has(#contact:target) a[href="#contact"],
-
-        body:has(#digital-archive:target) #resources-dropdown,
-        body:has(#books:target) #resources-dropdown,
-        body:has(#apps:target) #resources-dropdown,
-        body:has(#museums:target) #resources-dropdown,
-        /* Default active state for home */
-        body:not(:has(:target)) a[href="#home"],
-        nav a:hover {
-            color: #1a237e;
-            border-bottom-color: #1a237e;
-        }
-
-        /* Search in Header */
-        .header-search {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .search-box {
-            display: flex;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            overflow: hidden;
-            background: white;
-        }
-
-        .search-box input {
-            padding: 0.5rem 1rem;
-            border: none;
-            outline: none;
-            width: 200px; 
-            font-size: 0.9rem;
-        }
-
-        .search-box button {
-            background: #1a237e;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .search-box button:hover {
-            background: #303f9f;
-        }
-
-        /* ------------------------------------------- */
-        /* HOME PAGE - ARCHIVE STYLE LAYOUT */
-        /* ------------------------------------------- */
-        .home-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .hero-section {
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero-content h2 {
-            font-size: 2.8rem;
-            color: #2c2c2c;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            line-height: 1.2;
-            max-width: 800px;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            max-width: 600px; 
-            white-space: normal; 
-        }
-
-        .search-box input, .search-box button {
-            white-space: nowrap;
-        }
-
-        .hero-image {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        /* Circulating Elements */
-        .rotating-stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .stat-item {
-            text-align: center;
-            animation: fadeInUp 2s ease-in-out;
-            flex-shrink: 0; 
-            padding: 0 1rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #1a237e;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            white-space: nowrap; 
-        }
-
-           .featured-collections {
-            margin: 4rem 0;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: #2c2c2c;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 400;
-            white-space: nowrap;
-        }
-        .collections-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .collection-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            min-width: 350px; 
-            flex-shrink: 0;
-        }
-
-        .collection-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #1a237e;
-        }
-
-        .collection-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .collection-card h3 {
-            color: #2c2c2c;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            white-space: nowrap;
-       }     
-        .collection-meta {
-            font-size: 0.85rem;
-            color: #8b4513;
-            margin-bottom: 1rem;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .collection-card p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            max-width: 300px; 
-            white-space: normal;
-        }
-
-        .collection-link {
-            color: #1a237e;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid transparent;
-            transition: border-bottom 0.3s;
-            white-space: nowrap;
-        }
-
-        .collection-link:hover {
-            border-bottom-color: #1a237e;
-        }
-
-        /* ------------------------------------------- */
-/* CONTENT PAGES - ARCHIVE STYLE*/
-/* ------------------------------------------- */
-.content-page {
-    /* Start all pages hidden */
-    display: none;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-}
-
-#home:target,
-#books:target,
-#apps:target,
-#digital-archive:target,
-#museums:target,
-#news:target,
-#share-story:target,
-#about:target,
-#contact:target {
-    display: block;
-}
-
-#home {
-    display: block;
-}
-
-main:has(.content-page:target) > #home:not(:target) {
-    display: none;
-}
-
-.page-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid #1a237e;
-}
-
-.page-header h2 {
-    font-size: 2.5rem;
-    color: #2c2c2c;
-    margin-bottom: 1rem;
-    font-weight: 400;
-}
-
-.page-header p {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.7;
-}
-
-/* Resource Lists - Archive Style */
-.resources-container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 3rem;
-}
-
-.filters-sidebar {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    height: fit-content;
-    position: sticky;
-    top: 120px;
-}
-
-.filters-sidebar h3 {
-    color: #2c2c2c;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.filter-group {
-    margin-bottom: 1.5rem;
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #555;
-}
-
-.filter-group select,
-.filter-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.resources-list {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
-
-.resource-item {
-    padding: 2rem;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background 0.3s;
-}
-
-.resource-item h3 {
-    color: #2c2c2c;
-    margin-bottom: 0.5rem;
-}
-
-.resource-item p {
-    max-width: 700px;
-    color: #555;
-    line-height: 1.6;
-}
-/* ------------------------------------------- */
-/* ABOUT PAGE SPECIAL STYLING */
-/* ------------------------------------------- */
-.about-content {
-max-width: 900px;
-margin: 0 auto;
-font-size: 1.1rem;
-line-height: 1.8;
-color: #444;
-}
-/* ------------------------------------------- */
-/* UPDATED CONTACT SECTION WITH IMAGE */
-/* ------------------------------------------- */
-.contact-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-.contact-image-section {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    position: sticky;
-    top: 120px;
-}
-
-.contact-image-section img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    display: block;
-}
-
-.contact-form-section {
-    background: white;
-    padding: 3rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.875rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    transition: border-color 0.3s;
-    background: #fafafa;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #1a237e;
-    background: white;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #ccc;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-.submit-btn {
-    width: 100%;
-    background: #1a237e;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 1rem;
-}
-
-.submit-btn:hover {
-    background: #303f9f;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
-}
-
-/* ------------------------------------------- */
-/* FOOTER - ARCHIVE STYLE */
-/* ------------------------------------------- */
-footer {
-    background: #2c2c2c;
-    color: #ccc;
-    padding: 3rem 2rem 2rem;
-    margin-top: 4rem;
-}
-
-.footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 3rem;
-}
-
-.footer-section h3 {
-    color: #fff;
-    margin-bottom: 1rem;
-}
-
-.footer-section a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.footer-section a:hover {
-    color: #fff;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #444;
-    font-size: 0.9rem;
-}
-
-/* ------------------------------------------- */
-/* DROPDOWN STYLES */
-/* ------------------------------------------- */
-.dropdown {
-    list-style: none;
-    position: relative;
-    overflow: visible;
-    flex-shrink: 0;
-}
-
-.dropdown .dropbtn {
-    font-size: 0.95rem;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    color: #2c2c2c;
-    padding: 0.5rem 0;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-    cursor: pointer;
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
-    display: block;
-    white-space: nowrap;
-}
-
-.dropdown:hover .dropbtn,
-.dropdown-content a:hover {
-    color: #1a237e;
-    border-bottom-color: #1a237e;
-    background-color: transparent;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1001;
-    border-top: 3px solid #1a237e;
-    padding-top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-}
-
-.dropdown-content a {
-    float: none;
-    color: #2c2c2c;
-    padding: 10px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    font-size: 0.95rem;
-    transition: background-color 0.2s;
-    border-bottom: none;
-    white-space: nowrap;
-}
-
-.dropdown-content a:hover {
-    background-color: #f0f0f0;
-    color: #1a237e;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.arrow {
-    margin-left: 5px;
-    font-size: 0.8em;
-}
-
-/* ------------------------------------------- */
-/* RESPONSIVE DESIGN - MOBILE OPTIMIZATION */
-/* ------------------------------------------- */
-@media screen and (max-width: 1200px) {
-    .resources-container {
-        grid-template-columns: 200px 1fr;
-        gap: 2rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .content-page {
-        padding: 2rem 1rem;
-    }
-
-    .page-header h2 {
-        font-size: 1.8rem;
-    }
-
-    .resources-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .filters-sidebar {
-        position: static;
-    }
-
-    .resource-item {
-        padding: 1.5rem;
-    }
-
-    .resource-item p {
-        max-width: 100%;
-    }
-
-    .about-content {
-        font-size: 1rem;
-    }
-
-    .contact-container {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-</style>
-
-</head>
-<body>
-    <header>
-        <div class="header-top">
-            Preserving Indigenous Languages for Future Generations
-        </div>
-        <div class="header-main">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo-text">
-                        <h1>Indigenous Voices Archive</h1>
-                        <p>Digital Language Preservation</p>
-                    </div>
-                </div>
-                
-                <nav>
-    <ul>
-        <li><a href="#home" data-tab="home">Home</a></li>
-        <li class="dropdown">
-            <a href="#" class="dropbtn" id="resources-dropdown"
-            data-tab="resources">Resources <span class="arrow">▼</span></a>
-            <div class="dropdown-content">
-                <a href="#digital-archive" data-tab="digital-archive">Digital Archive</a>
-                <a href="#books" data-tab="books">Books & Publications</a>
-                <a href="#apps" data-tab="apps">Mobile Apps</a>
-                <a href="#museums" data-tab="museums">Museums & Centers</a>
-            </div>
-        </li>
-        <li><a href="#news" data-tab="news">Latest News</a></li>
-        <li><a href="#share-story" data-tab="share-story">Share a Story</a></li>
-        <li><a href="#about" data-tab="about">About</a></li>
-        <li><a href="#contact" data-tab="contact">Contact</a></li>
-    </ul>
-</nav>
-
-                <div class="header-search">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search languages, resources..." id="main-search">
-                        <button type="button" onclick="performSearch()">🔍</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-<main>
-    <section class="content-page" id="home">
-        <div class="home-container">
-            <div class="hero-section">
-                <div class="hero-content">
-                    <h2>Preserving Indigenous Languages & Cultural Heritage</h2>
-                    <p>A digital archive documenting and preserving Indigenous languages and cultural heritage across North America. Discover resources, connect with communities, and support language revitalization efforts.</p>
-               </div>
-                <div class="hero-image">
-                    <img src="boston-public-library-rFl5Fs69_-E-unsplash.jpg"
-                         alt="Historical photograph of Indigenous leaders in traditional regalia">
-                    <div class="image-credit">Photo courtesy of Boston Public Library</div>
-                </div>
-            </div>
-            
-            <div class="rotating-stats">
-                <div class="stat-item">
-                    <span class="stat-number">100+</span>
-                    <span class="stat-label">Resources</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Languages</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">25+</span>
-                    <span class="stat-label">Regions</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Mobile Apps</span>
-                </div>
-            </div>
-                <div class="featured-collections">
-                    <h2 class="section-title">Featured Collections</h2>
-                    <div class="collections-grid">
-                        <div class="collection-card">
-                            <h3>Cherokee Nation Language Platform</h3>
-                            <div class="collection-meta">Eastern Woodlands • Cherokee (Tsalagi)</div>
-                            <p>The Nation's official online learning hub offering comprehensive curriculum, apps and community resources for Cherokee language preservation and education.</p>
-                            <a href="#digital-archive" class="collection-link">Explore Collection →</a>
-                        </div>
-                        <div class="collection-card">
-                            <h3>Northern Paiute Language Project</h3>
-                            <div class="collection-meta">Great Basin • Northern Paiute (Numa)</div>
-                            <p>Comprehensive documentation project creating audio dictionary and text collections for community language learning with thousands of words and cultural context.</p>
-                            <a href="#digital-archive" class="collection-link">Explore Collection →</a>
-                        </div>
-                        <div class="collection-card">
-                            <h3>Sealaska Heritage Institute</h3>
-                            <div class="collection-meta">Northwest Coast • Tlingit, Haida, Tsimshian</div>
-                            <p>Official Southeast Alaska language revitalization hub providing downloadable materials, audio dictionaries and comprehensive learning resources.</p>
-                            <a href="#museums" class="collection-link">Explore Collection →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-page" id="books">
-            <div class="page-header">
-                <h2>Books & Publications</h2>
-                <p>Essential written resources for in-depth study and documentation, including authoritative grammars, dictionaries and cultural materials.</p>
-            </div>
-            <div class="resources-container">
-                <div class="filters-sidebar">
-                    <h3>Filter Resources</h3>
-                    <div class="filter-group">
-                        <label for="books-region">Region</label>
-                        <select id="books-region">
-                            <option value="">All Regions</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="books-language">Language</label>
-                        <select id="books-language">
-                            <option value="">All Languages</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="books-search">Search</label>
-                        <input type="text" id="books-search" placeholder="Search books...">
-                    </div>
-                </div>
-                <div class="resources-list" id="books-list">
-                    <p style="padding: 2rem;">Loading books and publications...</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-page" id="apps">
-            <div class="page-header">
-                <h2>Mobile Apps & Digital Tools</h2>
-                <p>Mobile applications and digital tools for language learning, developed by Indigenous communities and educational partners.</p>
-            </div>
-            <div class="resources-container">
-                <div class="filters-sidebar">
-                    <h3>Filter Apps</h3>
-                    <div class="filter-group">
-                        <label for="apps-region">Region</label>
-                        <select id="apps-region">
-                            <option value="">All Regions</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="apps-language">Language</label>
-                        <select id="apps-language">
-                            <option value="">All Languages</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="apps-search">Search</label>
-                        <input type="text" id="apps-search" placeholder="Search apps...">
-                    </div>
-                </div>
-                <div class="resources-list" id="apps-list">
-                    <p style="padding: 2rem;">No mobile app resources were found in the provided data. Please add new entries with category="apps".</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-page" id="digital-archive">
-            <div class="page-header">
-                <h2>Digital Archives & Language Resources</h2>
-           <p>Online platforms, digital collections, and language learning websites for Indigenous language preservation and education.</p>
-            </div>
-            <div class="resources-container">
-                <div class="filters-sidebar">
-                    <h3>Filter Archives</h3>
-                    <div class="filter-group">
-                        <label for="archive-region">Region</label>
-                        <select id="archive-region">
-                            <option value="">All Regions</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="archive-language">Language</label>
-                        <select id="archive-language">
-                            <option value="">All Languages</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="archive-search">Search</label>
-                        <input type="text" id="archive-search" placeholder="Search archives...">
-                    </div>
-                </div>
-                <div class="resources-list" id="archive-list">
-                    <p style="padding: 2rem;">Loading digital archives and resources...</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-page" id="museums">
-            <div class="page-header">
-                <h2>Museums & Cultural Centers</h2>
-                <p>Institutions preserving cultural materials, oral histories, and linguistic records for research and community use.</p>
-            </div>
-            <div class="resources-container">
-                <div class="filters-sidebar">
-                    <h3>Filter Museums</h3>
-                    <div class="filter-group">
-                        <label for="museums-region">Region</label>
-                        <select id="museums-region">
-                            <option value="">All Regions</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="museums-search">Search</label>
-                        <input type="text" id="museums-search" placeholder="Search museums...">
-                    </div>
-                </div>
-                <div class="resources-list" id="museums-list">
-                    <p style="padding: 2rem;">Loading museums and cultural centers...</p>
-                </div>
-            </div>
-</section>
-
-<section class="content-page" id="news">
-    <div class="page-header">
-        <h2>Language Revitalization News</h2>
-        <p>Updates on Indigenous language preservation initiatives, funding opportunities, and community-led revitalization efforts.</p>
-    </div>
-    <div style="max-width: 900px; margin: 0 auto; min-width: 800px;" id="news-list">
-        <p style="padding: 2rem;">Loading latest news...</p>
-    </div>
-</section>
-
-<section class="content-page" id="share-story">
-    <div class="page-header">
-        <h2>Share a Story</h2>
-        <p>Share your language preservation stories and experiences</p>
-    </div>
-    <div class="contact-wrapper">
-        <div class="contact-image-section">
-            <img src="boston-public-library-MzykKEYuhic-unsplash.jpg"
-                alt="Historical photograph of Indigenous woman reading">
-            <div class="image-credit">Photo courtesy of Boston Public Library</div>
-        </div>
-        <div class="contact-form-section">
-            <h3 style="margin-bottom: 1.5rem; color: #2c2c2c; font-size: 1.5rem;">Share Your Story</h3>
-            <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="story-first-name">FIRST NAME</label>
-                        <input type="text" id="story-first-name" name="firstName"
-                            placeholder="Please enter first name..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="story-last-name">LAST NAME</label>
-                        <input type="text" id="story-last-name" name="lastName"
-                            placeholder="Please enter last name..." required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="story-email">EMAIL</label>
-                        <input type="email" id="story-email" name="email"
-                            placeholder="Please enter email..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="story-language">LANGUAGE/TRIBE</label>
-                        <input type="text" id="story-language" name="language"
-                            placeholder="Please enter language or tribe...">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="story-content">YOUR STORY</label>
-                    <textarea id="story-content" name="story" rows="8"
-                        placeholder="Share your language learning journey, preservation efforts, or cultural experiences..." required></textarea>
-                </div>
-                <input type="hidden" name="_next"
-                    value="https://lefthand25.github.io/nativeamericanlanguagearchive/#share-story">
-                <button type="submit" class="submit-btn">Share Story</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<section class="content-page" id="about">
-    <div class="page-header">
-        <h2>About the Indigenous Voices Archive</h2>
-        <p>Preserving linguistic diversity and supporting community-led language revitalization efforts</p>
-    </div>
-    <div class="about-content" style="max-width: 900px; margin: 0 auto; white-space: normal; min-width: 800px;">
-        <p>Indigenous languages represent thousands of years of cultural knowledge and heritage. Many face endangerment today. This platform connects Indigenous communities, linguists, and language learners with resources for language preservation and revitalization.</p>
-        
-        <p>Find resources for learners, documentation projects led by native speakers, and tools to help communities preserve ancestral languages. This space supports those reconnecting with heritage languages, participating in revitalization efforts, or learning about Indigenous cultures.</p>
-    </div>
-</section>
-
-<section class="content-page" id="contact">
-    <div class="page-header">
-        <h2>Get in Touch</h2>
-        <p>Contact us with inquiries about the archive</p>
-    </div>
-    
-    <div class="contact-wrapper">
-        <div class="contact-image-section">
-            <img src="boston-public-library-MzykKEyvhic-unsplash.jpg" 
-                 alt="Historical photograph of Indigenous woman reading">
-            <div class="image-credit">Photo courtesy of Boston Public Library</div>
-        </div>
-        
-        <div class="contact-form-section">
-            <h3 style="margin-bottom: 1.5rem; color: #2c2c2c; font-size: 1.5rem;">Contact us</h3>
-            <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="first-name">FIRST NAME</label>
-                        <input type="text" id="first-name" name="firstName" 
-                               placeholder="Please enter first name..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last-name">LAST NAME</label>
-                        <input type="text" id="last-name" name="lastName" 
-                               placeholder="Please enter last name..." required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">EMAIL</label>
-                        <input type="email" id="email" name="email" 
-                               placeholder="Please enter email..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">PHONE NUMBER</label>
-                        <input type="tel" id="phone" name="phone" 
-                               placeholder="Please enter phone number...">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="6" 
-                              placeholder="Please enter message..." required></textarea>
-                </div>
-                
-                <input type="hidden" name="_next" value="https://lefthand25.github.io/nativeamericanlanguagearchive/#contact">
-                
-                <button type="submit" class="submit-btn">Submit</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>Indigenous Voices Archive</h3>
-            <p>Dedicated to preserving and celebrating Indigenous languages and cultural heritage through digital innovation and community partnership.</p>
-        </div>
-        <div class="footer-section">
-            <h3>Quick Links</h3>
-            <p><a href="#about">About Us</a></p>
-            <p><a href="#contact">Contact</a></p>
-            <p><a href="#news">Latest News</a></p>
-            <p><a href="#digital-archive">Browse Archive</a></p>
-        </div>
-        <div class="footer-section">
-            <h3>Resources</h3>
-            <p><a href="#books">Books & Publications</a></p>
-            <p><a href="#apps">Mobile Apps</a></p>
-            <p><a href="#museums">Museums</a></p>
-            <p><a href="#digital-archive">Digital Collections</a></p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2025 Indigenous Voices Archive. Built with respect and a focus on preservation.</p>
-    </div>
-</footer>
-
-<script>
-
-    // ----------------------------------------------------
-    // 1. INTEGRATED RESOURCE DATA
-    // ----------------------------------------------------
-    const languageResources = [
-/* --- WEBSITE RESOURCES (Digital Archive) --- */
-/* California */
-        { title: "Native Languages of the Americas (California Section)", type: "Website", coverage: "California", description: "Small non-profit organization dedicated to Native American language survival through internet technology. Provides accessible vocabulary, cultural background, and pronunciation guides for hundreds of California languages, serving as gateway to specialized materials", identifier: "https://www.native-languages.org/california.htm", language: "California Languages", publisher: "Native Languages Org", category: "digital-archive" },
-        { title: "California State Parks - California Indians Language Groups", type: "Website", coverage: "California", description: "Educational resource documenting California's 12,000-year cultural heritage and sixty-four distinct indigenous languages. Emphasizes the linguistic diversity crisis and current preservation efforts for languages in life-and-death struggle for survival.", identifier: "https://www.parks.ca.gov/?page_id=23548", language: "California Languages", publisher: "CA State Parks", category: "digital-archive" },
-        { title: "College of the Redwoods - Local Languages Guide", type: "Digital Archive", coverage: "California", description: "Library guide supporting student understanding of northwestern California Indigenous languages including Tolowa, Karuk, Hupa, Yurok, Wiyot, Mattole, and Tsnungwe. Provides educational resources for cultural awareness and historical understanding.", identifier: "https://redwoods.libguides.com/native-americans/languages", language: "Multiple CA Languages", publisher: "College of the Redwoods", category: "digital-archive" },
-        
-        // Eastern Woodlands
-        { title: "Cherokee Nation Language Platform", type: "Website", coverage: "Eastern Woodlands", description: "Cherokee Nation's official online language learning platform offering free Cherokee language classes taught by Ed Fields. Features self-paced courses, interactive learning portal, and comprehensive resources for Cherokee language students and educators seeking structured instruction.", identifier: "https://cnlearn.cherokee.org/", language: "Cherokee", publisher: "Cherokee Nation", category: "digital-archive" },
-        { title: "Cherokee Learner Community Resources", type: "Website", coverage: "Eastern Woodlands", description: "Community-driven educational resource collection accumulated by Cherokee language students. Provides curated materials, learning guides, grammar references, and practical resources specifically designed for Cherokee language learners at various proficiency levels and learning styles.", identifier: "https://cherokeelearner.com/", language: "Cherokee", publisher: "Community-based", category: "digital-archive" },
-        { title: "Eastern Band Cherokee Immersion Program", type: "Website", coverage: "Eastern Woodlands", description: "Eastern Band Cherokee immersion program offering online Cherokee lessons, dictionary database, and language preservation resources. Addresses Cherokee language emergency status through educational materials supporting Cherokee Nation, UKB, and EBCI collaborative revitalization efforts.", identifier: "https://newkituwah.com/", language: "Cherokee", publisher: "Eastern Band Cherokee", category: "digital-archive" },
-        { title: "Ojibwe Language Learning Platform", type: "Website", coverage: "Eastern Woodlands", description: "Comprehensive Anishinaabemowin learning website providing beginner through advanced lessons, immersion support materials, and master-apprentice program resources. Features oral tradition integration with structured lessons for new learners without prior language knowledge requirements.", identifier: "https://ojibwe.net/", language: "Ojibwe", publisher: "Community-based", category: "digital-archive" },
-        { title: "Learning Ojibwe Platform", type: "Website", coverage: "Eastern Woodlands", description: "Dedicated platform focused specifically on Ojibwe language instruction and cultural education. Provides structured learning materials, teaching resources, and community support for speakers, learners, and educators working with Native language acquisition and preservation.", identifier: "https://learningojibwe.com/", language: "Ojibwe", publisher: "Community-based", category: "digital-archive" },
-        { title: "Western Carolina University Cherokee Collection", type: "Digital Archive", coverage: "Eastern Woodlands", description: "Academic research collection featuring Cherokee-language materials including children's books, textbooks, hymnals, biblical translations, and KPEP publications. Offers interactive language experiences and Special Collections access for comprehensive Cherokee language study and research.", identifier: "https://www.wcu.edu/library/cherokee/index.aspx", language: "Cherokee", publisher: "Western Carolina University", category: "digital-archive" },
-        
-        // Great Basin
-        { title: "Northern Paiute Language Project", type: "Digital Archive", coverage: "Great Basin", description: "Comprehensive documentation project creating audio dictionary and text collections for community language learning. Features thousands of words with pronunciation guides, cultural context, and collaborative community-based approach to Northern Paiute language preservation and revitalization efforts.", identifier: "https://paiute.ucsc.edu/", language: "Northern Paiute", publisher: "UC Santa Cruz", category: "digital-archive" },
-        { title: "Shoshoni Language Project", type: "Digital Archive", coverage: "Great Basin", description: "Academic language preservation initiative housing Wick R. Miller Collection archive with irreplaceable texts, images, and audio recordings. Provides illustrated books, traditional tales, and digital resources supporting Shoshoni language use and learning.", identifier: "https://shoshoniproject.utah.edu/", language: "Shoshoni", publisher: "University of Utah", category: "digital-archive" },
-        { title: "Shoshoni Talking Dictionary", type: "Digital Archive", coverage: "Great Basin", description: "Searchable online language resource supporting Newe Taikwa (Shoshoni) language use and encouraging new speakers. Features thousands of entries with audio pronunciation, cultural context, and comprehensive vocabulary for language learners and community members.", identifier: "https://shoshoniproject.utah.edu/language-materials/shoshoni-talking-dictionary/index.php", language: "Shoshoni", publisher: "University of Utah", category: "digital-archive" },
-        { title: "Pyramid Lake Paiute Tribe Language Department", type: "Website", coverage: "Great Basin", description: "Tribal language preservation program offering community-based instruction and cultural education. Provides resources for Northern Paiute language learning, cultural preservation, and community engagement supporting tribal sovereignty and linguistic heritage maintenance.", identifier: "https://plpt.nsn.us/language/", language: "Northern Paiute", publisher: "Pyramid Lake Paiute Tribe", category: "digital-archive" },
-        { title: "Shoshone-Bannock Tribes Language & Cultural Preservation", type: "Website", coverage: "Great Basin", description: "Tribal department providing instruction in both Shoshone and Bannock languages by tribal member instructors. Combines language learning with cultural values, traditional knowledge, and tribal history education for comprehensive cultural preservation.", identifier: "https://www.sbtribes.com/language-culture/", language: "Shoshone, Bannock", publisher: "Shoshone-Bannock Tribes", category: "digital-archive" },
-        { title: "California Language Archive - Northern Paiute Resources", type: "Digital Archive", coverage: "Great Basin", description: "Academic repository featuring linguistic documentation, grammatical analysis, and cultural materials for Northern Paiute language. Provides scholarly resources, research materials, and educational content supporting language study and preservation efforts.", identifier: "https://cla.berkeley.edu/languages/northern-paiute.html", language: "Northern Paiute", publisher: "UC Berkeley", category: "digital-archive" },
-        
-        // Northwest Coast
-        { title: "Lingít Yoo X̱ʼatángi - The Tlingit Language", type: "Website", coverage: "Northwest Coast", description: "Comprehensive Tlingit language learning platform offering lessons, MOOC courses, dictionaries, and community resources. Features extensive audio materials, workbooks, verb dictionaries, and collaborative learning tools developed by dedicated Tlingit language teachers and speakers.", identifier: "https://tlingitlanguage.com/", language: "Tlingit", publisher: "Community-based", category: "digital-archive" },
-        { title: "Sealaska Heritage Institute Language Department", type: "Website", coverage: "Northwest Coast", description: "Official Southeast Alaska language revitalization hub for Lingít (Tlingit), X̱aad Kíl (Haida), and Sm'algyax (Tsimshian). Provides downloadable materials, audio dictionaries, curricula, student books, and comprehensive learning resources with community oversight.", identifier: "https://sealaskaheritage.org/shi-language-department/", language: "Tlingit, Haida, Tsimshian", publisher: "Sealaska Heritage Institute", category: "digital-archive" },
-        { title: "Haida Language Main Page", type: "Website", coverage: "Northwest Coast", description: "Dedicated website for Haida language study, preservation, and revitalization efforts. Offers linguistic resources, cultural context, and community-driven materials supporting X̱aad Kíl language learning and cultural preservation initiatives.", identifier: "http://haidalanguage.org/", language: "Haida", publisher: "Community-based", category: "digital-archive" },
-        { title: "Yukon Native Language Centre - Tlingit Resources", type: "Digital Archive", coverage: "Northwest Coast", description: "Academic center providing Interior Tlingit language materials including noun dictionaries, story books, language lessons, and audio resources. Features collaborative projects between linguists and community members for comprehensive language documentation.", identifier: "https://ynlc.ca/about-the-tlingit-language/", language: "Interior Tlingit", publisher: "Yukon Native Language Centre", category: "digital-archive" },
-        { title: "University of Alaska Southeast - X̱aad Kíl Resources", type: "Digital Archive", coverage: "Northwest Coast", description: "Academic library guide featuring Haida language revitalization resources, historical linguistic studies, and comparative Northwest Coast language materials. Provides scholarly resources supporting Haida language research and community learning efforts.", identifier: "https://uas.alaska.libguides.com/c.php?g=1436288&p=10664169", language: "Haida", publisher: "University of Alaska Southeast", category: "digital-archive" },
-        { title: "FirstVoices - Northwest Coast Languages", type: "Website", coverage: "Northwest Coast", description: "Community-controlled digital platform featuring various Northwest Coast Indigenous languages including Halkomelem, Squamish, and other Salishan languages. Offers multimedia resources, keyboards, and collaborative tools for language preservation and learning.", identifier: "https://www.firstvoices.com/", language: "Multiple Salishan Languages", publisher: "First Peoples' Cultural Council", category: "digital-archive" },
-        
-        // Plateau
-        { title: "Nez Perce Language Resources - OLAC", type: "Digital Archive", coverage: "Plateau", description: "Online Language Archives Community repository providing access to Nez Perce (nimípuutímt) language materials including historical recordings, linguistic analyses, and cultural documentation. Features ACLS collection materials from prominent linguists.", identifier: "http://www.language-archives.org/language/nez", language: "Nez Perce", publisher: "OLAC", category: "digital-archive" },
-        { title: "Yakama Nation Cultural Resources", type: "Website", coverage: "Plateau", description: "Official tribal education program requiring two-year Sahaptin language instruction for students. Features community-based learning with elders, parents, and tribal members actively involved in teaching Ichishkíin language, reading, writing, and cultural context through comprehensive curriculum.", identifier: "https://www.yakama.org/academics/", language: "Sahaptin (Ichishkíin)", publisher: "Yakama Nation", category: "digital-archive" },
-        { title: "Secwepemc Language Department", type: "Website", coverage: "Plateau", description: "Official language preservation program for Secwepemctsín (Shuswap) offering books, audio materials, and educational resources. Provides community-driven language revitalization efforts supporting Interior Salishan language learning with cultural context and traditional knowledge integration.", identifier: "Contact through Secwepemc First Nation", language: "Secwepemctsín (Shuswap)", publisher: "Secwepemc First Nation", category: "digital-archive" },
-        { title: "Syilx Okanagan Nation nsyilxcən Language", type: "Website", coverage: "Plateau", description: "Official Okanagan Nation Alliance language resource featuring nsyilxcən (Colville-Okanagan) materials and cultural information. Distinguishes Syilx language from neighboring Salishan peoples while providing linguistic resources and community-based learning support for all districts.", identifier: "https://syilx.org/about-us/syilx-nation/nsyilxen-language/", language: "nsyilxcən (Colville-Okanagan)", publisher: "Syilx Okanagan Nation", category: "digital-archive" },
-        { title: "University of Oregon Northwest Indian Language Institute", type: "Website", coverage: "Plateau", description: "Provides Sahaptin language classes and teacher training for Yakama and other Sahaptin languages. Academic support for language revitalization efforts with community partnerships and culturally appropriate pedagogical methods for Indigenous language instruction.", identifier: "University of Oregon", language: "Sahaptin Languages", publisher: "University of Oregon", category: "digital-archive" },
-        { title: "Thompson Rivers University Salish Resources", type: "Digital Archive", coverage: "Plateau", description: "Academic library guide featuring Interior Salish language materials including storytelling traditions, legends, songs, and oratory from Shuswap, Nlaka'pamux, and other Salishan-speaking communities. Provides scholarly resources and cultural documentation from Bitterroot Mountains to Pacific regions.", identifier: "https://libguides.tru.ca/indigenouslanguages/salish", language: "Interior Salish Languages", publisher: "Thompson Rivers University", category: "digital-archive" },
-        
-        // Great Plains
-        { title: "Fort Belknap Language Preservation Program", type: "Website", coverage: "Great Plains", description: "A tribally-run program based in Harlem, Montana, serving the Fort Belknap Indian Reservation. Focuses on community-based preservation of Assiniboine and Gros Ventre languages, working directly with elders to document language use and create educational materials for younger generations in an authentic cultural context.", identifier: "https://www.ftbelknaplanguagepreservation.com/", language: "Assiniboine, Gros Ventre", publisher: "Fort Belknap Tribes", category: "digital-archive" },
-        { title: "Fort Peck Community College", type: "Website", coverage: "Great Plains", description: "Fort Peck Community College operates Native language immersion programs for Dakota and Nakota (Assiniboine) languages, including pre-school immersion schools and community education services. The college provides structured language and cultural preservation through academic programs, community services, and specialized immersion methods integrated with traditional teaching approaches.", identifier: "https://www.fpcc.edu/", language: "Dakota, Nakota (Assiniboine)", publisher: "Fort Peck Community College", category: "digital-archive" },
-        { title: "Indiana University - Fort Belknap Research", type: "Digital Archive", coverage: "Great Plains", description: "Academic research documenting oral traditions and language use at Fort Belknap Reservation and Carry The Kettle Reserve in Saskatchewan. Captures cross-border dialectical variations through university-community partnerships, focusing on language within cultural storytelling and ceremonial contexts with audio recordings and analysis.", identifier: "https://indigenousknowledge.indiana.edu/research-and-educational-activity/educational/", language: "Assiniboine, Gros Ventre", publisher: "Indiana University", category: "digital-archive" },
-        { title: "Native-Languages.org - Assiniboine", type: "Website", coverage: "Great Plains", description: "Online collection providing accessible Assiniboine vocabulary, pronunciation guides, and cultural background alongside hundreds of other Native languages. Serves as a reliable starting point with basic information and bibliographic references, functioning as a gateway to more specialized materials for general audiences.", identifier: "http://Native-Languages.org", language: "Assiniboine", publisher: "Native Languages Org", category: "digital-archive" },
-        { title: "Montana Digital Academy - Indigenous Language Courses", type: "Website", coverage: "Great Plains", description: "Online high school courses launched 2023, serving grades 9-12 across Montana with academic credit. Provides formal Indigenous language education within state education system, making quality instruction accessible to remote students and legitimizing Native language study through official academic pathways.", identifier: "https://montanadigitalacademy.org/programs/indigenous-language/", language: "Multiple Montana Languages", publisher: "Montana Digital Academy", category: "digital-archive" },
-        { title: "Aaniiih Nakoda College", type: "Website", coverage: "Great Plains", description: "Aaniiih Nakoda College on Fort Belknap Reservation is specifically charged with preserving and promoting both A'anin (Gros Ventre) and Nakoda (Assiniboine) languages, cultures, and histories. The college leads language immersion programs and integrates both languages into early childhood education. Originally Fort Belknap College, it was renamed in 2011 to reflect its dual tribal mission. ANC partners with Indiana University on comprehensive K-12 Nakoda curriculum development featuring traditional elder narratives.", identifier: "https://www.nakonauniversity.org/", language: "A'anin (Gros Ventre), Nakoda", publisher: "Aaniiih Nakoda College", category: "digital-archive" },
-        { title: "100 Nakona Words - Fort Peck Series", type: "Video", coverage: "Great Plains", description: "This video presents 100 Nakona (Assiniboine) words and phrases combined with Plains Indian Sign Language from Fort Peck Reservation in Montana. Created by Dr. Lanny Real Bird and produced by Fort Peck Community College in 2010, it uses interactive learning methods to teach vocabulary through visual and audio formats. The complete series includes volumes 1 and 2 with around 400 entries total, available as flashcards, DVDs, and CDs through Fort Peck Community College.", identifier: "https://www.youtube.com/watch?v=b4GW-CQ3tOQ", language: "Nakona (Assiniboine)", publisher: "Fort Peck Community College", category: "digital-archive" },
-
-// --- BOOK RESOURCES (Books & Publications) ---
-        // California
-        { title: "HathiTrust Digital Library", type: "Digital Archive", coverage: "California", description: "California Native Collections - Millions of digitized books online including rare materials on California Native languages. Full-view volumes are freely available for public domain works (pre-1930 publications), government documents, and copyright-permitted materials.", identifier: "-", language: "California Languages", publisher: "HathiTrust", category: "books" },
-        { title: "Surviving Through the Days", type: "Book", coverage: "California", description: "Anthology of treasures from oral literature of Native California, assembled by editor sensitive to language, culture, and history. Features translations of Native California stories and songs with cultural context", identifier: "-", language: "Multiple California Languages", publisher: "Various Publishers", category: "books" },
-        { title: "Handbook of North American Indians, Volume 8 (California)", type: "Book", coverage: "California", description: "Smithsonian Institution's scholarly reference series on Native American studies, with Volume 8 dedicated to California tribes. Authoritative academic resource covering linguistic, cultural, and historical documentation.", identifier: "-", language: "California Languages", publisher: "Smithsonian Institution", category: "books" },
-        { title: "Kumeyaay Library Department - California Indian Books", type: "Book Collection", coverage: "California", description: "Approved book list deemed culturally accurate by Kumeyaay panel for describing Southern California and northern Mexico Indigenous peoples. Recommended reading covering culture, research, entertainment, history, and survival of California Native Americans.", identifier: "-", language: "Kumeyaay and Southern California Languages", publisher: "Kumeyaay Library Department", category: "books" },
-        { title: "Coast Miwok & California Native American History Collection", type: "Book Collection", coverage: "California", description: "Staff-curated collection focusing on Coast Miwok people, culture, and history. Resources document transformation from peaceful peninsula existence through Spanish, Mexican, and American settler contact periods.", identifier: "-", language: "Coast Miwok", publisher: "Marin Library", category: "books" },
-        { title: "Indigenous & Native Culture Books", type: "Book Collection", coverage: "California", description: "Collection celebrating Native people's resilience, perseverance, and strength, including specialized titles like \"Chumash Ethnobotany: Plant Knowledge Among the Chumash People of Southern California\" and \"The Rediscovery of America: Native Peoples.\"", identifier: "-", language: "Multiple California Languages", publisher: "ForestWatch Store", category: "books" },
-        
-        // Eastern Woodlands
-        { title: "Native American Language and Culture Preservation Project", type: "Digital Archive", coverage: "Eastern Woodlands", description: "New York State Library's 66-reel microfilm collection featuring books on Native American education, 17th-century Jesuit relations, religious works in Iroquoian and Algonquin languages, captivity accounts, and historical publications documenting linguistic and cultural heritage.", identifier: "-", language: "Iroquoian and Algonquin Languages", publisher: "New York State Library", category: "books" },
-        { title: "Cherokees Writing the Keetoowah Way Collection", type: "Book Collection", coverage: "Eastern Woodlands", description: "Comprehensive translation collection including Dollie Duncan letters, Echota Funeral Notices, Willie Jumper Stories, government documents, speeches, and expanded historical materials providing authentic Cherokee language documentation and cultural context.", identifier: "-", language: "Cherokee", publisher: "Various Cherokee Communities", category: "books" },
-        
-        // Great Basin
-        { title: "Southern Ute Cultural Center Publications", type: "Book Collection", coverage: "Great Basin", description: "Community-created educational materials including language learning books, cultural guides, and traditional stories in Ute language. Features tribal member contributions, cultural context, and pedagogical resources for Ute language instruction and cultural preservation efforts.", identifier: "-", language: "Ute", publisher: "Southern Ute Cultural Center", category: "books" },
-        { title: "University Linguistic Collections", type: "Academic Publications", coverage: "Great Basin", description: "Academic publications from institutions like UC Berkeley, University of Utah, and other research centers providing grammatical analyses, dictionaries, and ethnolinguistic studies of Great Basin language families through peer-reviewed scholarly works.", identifier: "-", language: "Great Basin Language Families", publisher: "Multiple Universities", category: "books" },
-        { title: "Traditional Story Collections", type: "Book Collection", coverage: "Great Basin", description: "Compiled collections of traditional tales, oral histories, and cultural narratives preserved in original Great Basin languages. Features community-approved translations, cultural annotations, and educational materials supporting language learning through storytelling traditions.", identifier: "-", language: "Multiple Great Basin Languages", publisher: "Various Tribal Communities", category: "books" },
-        
-        // Northwest Coast
-        { title: "Sealaska Heritage Institute Publications", type: "Book Collection", coverage: "Northwest Coast", description: "Comprehensive collection of dictionaries, workbooks, and cultural materials for Tlingit, Haida, and Tsimshian languages. Features the most comprehensive dictionaries ever published for these languages plus teaching materials, cultural context, and community-approved educational resources.", identifier: "-", language: "Tlingit, Haida, Tsimshian", publisher: "Sealaska Heritage Institute", category: "books" },
-        { title: "Tlingit Language Materials Collection", type: "Book Collection", coverage: "Northwest Coast", description: "Extensive library of Beginning Tlingit workbooks by X'unei, Tlingit Dictionary drafts, Verb Dictionary by Constance Naish, and cultural materials developed by dedicated language teachers, researchers, and community advocates over decades.", identifier: "-", language: "Tlingit", publisher: "Various Tlingit Communities", category: "books" },
-        
-        // Plateau
-        { title: "Nez Perce Language Materials", type: "Book Collection", coverage: "Plateau", description: "Historical collection including ACLS materials by Livingston Farrand, Archie Phinney, Morris Swadesh, and tribal members. Features traditional stories, linguistic analyses, and cultural documentation preserved from early 20th-century fieldwork with Upper and Lower dialect materials.", identifier: "-", language: "Nez Perce", publisher: "Various Academic Institutions", category: "books" },
-        { title: "Sahaptin Language Collections", type: "Book Collection", coverage: "Plateau", description: "Academic and community publications covering Yakama, Umatilla, Warm Springs dialects with grammatical analyses, vocabulary collections, and cultural materials. Features University of Oregon research and tribal educational resources supporting Ichishkíin language revitalization and classroom instruction.", identifier: "-", language: "Sahaptin (Yakama, Umatilla, Warm Springs)", publisher: "University of Oregon & Tribal Communities", category: "books" },
-        { title: "Interior Salish Publications", type: "Book Collection", coverage: "Plateau", description: "Comprehensive collections including Secwepemctsín dictionaries, grammatical studies by A.H. Kuipers, and cultural materials for Shuswap, Thompson, Okanagan-Colville, and other Interior Salishan languages. Features both academic research and community-developed educational materials.", identifier: "-", language: "Interior Salishan Languages", publisher: "Academic & Tribal Institutions", category: "books" },
-        { title: "Plateau Penutian Studies", type: "Academic Publications", coverage: "Plateau", description: "Academic publications covering Klamath-Modoc language family with linguistic documentation, grammatical analyses, and comparative studies. University presses provide scholarly materials supporting research and preservation efforts for these southern Plateau languages.", identifier: "-", language: "Klamath-Modoc", publisher: "University Presses", category: "books" },
-        
-        // Great Plains
-        { title: "A Grammar of Nakoda (Assiniboine)", type: "Academic Book", coverage: "Great Plains", description: "This is the first complete grammatical analysis of Assiniboine language. Provides comprehensive linguistic analysis including phonetics, morphology, and syntax for academic researchers and serious learners. Represents groundbreaking scholarly documentation filling a major gap in Assiniboine language resources.", identifier: "-", language: "Assiniboine (Nakoda)", publisher: "Linda A. Cumberland", category: "books" },
-        { title: "A Concise Dictionary of Nakoda (Assiniboine)", type: "Dictionary", coverage: "Great Plains", description: "A publication created with community member Wilma Kennedy. Offers the most current comprehensive dictionary for practical use by learners, teachers, and community members. Represents collaborative academic-community work ensuring both scholarly accuracy and cultural authenticity.", identifier: "-", language: "Assiniboine (Nakoda)", publisher: "Vincent Collette", category: "books" },
-        { title: "Caddo Language Grammar and Materials", type: "Academic Publications", coverage: "Great Plains", description: "Published August 2018 Caddo grammar and in-depth 2004 examination of Caddo verb structure. Academic publications supporting comprehensive language study with linguistic analysis and educational frameworks for language instruction and preservation efforts.", identifier: "-", language: "Caddo", publisher: "Academic Publishers", category: "books" },
-        { title: "Pawnee Educational Materials", type: "Educational Books", coverage: "Great Plains", description: "Alphabet book acting as quick reference guide for beginners and novice learners. Instructional materials available from Pawnee Nation Education Department with tribal approval and cultural relevance for community-based learning initiatives.", identifier: "-", language: "Pawnee", publisher: "Pawnee Nation Education Department", category: "books" },
-        { title: "Cheyenne and Arapaho Language Books and CDs", type: "Educational Materials", coverage: "Great Plains", description: "Educational materials produced by Cheyenne and Arapaho Tribes Language Program helping preserve and teach Arapaho language. Features culturally appropriate content maintaining traditions and ensuring language continuation for future generations.", identifier: "-", language: "Cheyenne and Arapaho", publisher: "Cheyenne and Arapaho Tribes Language Program", category: "books" },
-        
-        // Southwest
-        { title: "Diné Bizaad: Speak, Read, Write Navajo", type: "Textbook", coverage: "Southwest", description: "Comprehensive textbook providing structured approach to Navajo language learning with grammar instruction, vocabulary building, and cultural context. Features systematic progression through language fundamentals with audio components available through various platforms.", identifier: "-", language: "Navajo (Diné bizaad)", publisher: "Various Publishers", category: "books" },
-        { title: "Navajo Audio Programs (Audible)", type: "Audio Books", coverage: "Southwest", description: "Professional audio language learning programs available through Audible platform providing pronunciation guidance, conversational practice, and immersive listening experiences. Supplements textbook learning with authentic native speaker instruction and cultural immersion.", identifier: "-", language: "Navajo (Diné bizaad)", publisher: "Audible Platform", category: "books" },
-        { title: "Academic Southwest Language Publications", type: "Academic Books", coverage: "Southwest", description: "University presses and academic institutions publish scholarly works covering Southwest Indigenous linguistics, including grammatical analyses of Tanoan, Keresan, and Yuman language families. Features peer-reviewed research supporting language documentation and revitalization efforts.", identifier: "-", language: "Tanoan, Keresan, Yuman Languages", publisher: "University Presses", category: "books" },
-        { title: "Pueblo Language Educational Materials", type: "Educational Books", coverage: "Southwest", description: "Various pueblos have developed educational materials in their specific languages including children's books, cultural stories, and instructional resources. Materials are typically available through tribal education departments with community oversight and cultural appropriate content.", identifier: "-", language: "Various Pueblo Languages", publisher: "Tribal Education Departments", category: "books" },
-        { title: "Hopi Language Learning Resources", type: "Educational Materials", coverage: "Southwest", description: "Books, audio recordings, and educational materials available for learning Hopi language with cultural context. Resources include traditional stories, vocabulary guides, and grammatical instruction supporting both academic study and community-based learning initiatives.", identifier: "-", language: "Hopi", publisher: "Hopi Cultural Preservation Office", category: "books" },
-
-// --- MUSEUM RESOURCES (Museums & Cultural Centers) ---
-        // Nationwide
-        { title: "Smithsonian NMAI", type: "Museum", coverage: "Nationwide", description: "National Museum of the American Indian's educational initiative", identifier: "https://americanindian.si.edu/nk360", language: "Multiple Languages", publisher: "Smithsonian Institution", category: "museums" },
-        
-        // California
-        { title: "California Indian Museum and Cultural Center", type: "Museum", coverage: "California", description: "Dedicated to educating the public about California Indian history, culture, and contemporary life from an Indian perspective", identifier: "Contact museum directly", language: "California Languages", publisher: "California Indian Museum", category: "museums" },
-        { title: "Marin Museum of the American Indian", type: "Museum", coverage: "California", description: "Located on actual Miwok Village site in Novato, devoted to Native American culture with focus on local Miwok heritage", identifier: "Contact museum directly", language: "Miwok Languages", publisher: "Marin Museum", category: "museums" },
-        { title: "Malki Museum", type: "Museum", coverage: "California", description: "Promotes scholarship and cultural awareness while encouraging preservation of Southern California Indian Cultures", identifier: "Contact museum directly", language: "Southern CA Languages", publisher: "Malki Museum", category: "museums" },
-        { title: "Barona Cultural Center & Museum", type: "Museum", coverage: "California", description: "Offers outreach programs and educational content on Native American studies and local San Diego County history", identifier: "Contact museum directly", language: "San Diego County Languages", publisher: "Barona Cultural Center", category: "museums" },
-        
-        // Eastern Woodlands
-        { title: "Woodland Cultural Centre", type: "Museum", coverage: "Eastern Woodlands", description: "Indigenous preservation museum dedicated to strengthening Indigenous language and culture", identifier: "https://woodlandculturalcentre.ca/", language: "Iroquoian Languages", publisher: "Woodland Cultural Centre", category: "museums" },
-        
-        // Great Basin
-        { title: "Stewart Indian School Cultural Center", type: "Museum", coverage: "Great Basin", description: "Cultural center and museum preserving the heritage of the former Stewart Indian School with focus on Great Basin tribal cultures", identifier: "https://stewartindianschool.com/museum/", language: "Nevada Tribal Languages", publisher: "Stewart Indian School", category: "museums" },
-        
-        // Plateau
-        { title: "Nez Perce National Historical Park", type: "Museum", coverage: "Plateau", description: "Plateau cultural museum maintaining linguistic recordings, historical documents, and cultural materials for research and education", identifier: "Contact park directly", language: "Nez Perce", publisher: "National Park Service", category: "museums" },
-        { title: "Yakama Nation Cultural Center", type: "Museum", coverage: "Plateau", description: "Plateau cultural museum maintaining linguistic recordings, historical documents, and cultural materials for research and education", identifier: "Contact center directly", language: "Sahaptin", publisher: "Yakama Nation", category: "museums" },
-        { title: "Secwepemc Museum", type: "Museum", coverage: "Plateau", description: "Plateau cultural museum maintaining linguistic recordings, historical documents, and cultural materials for research and education", identifier: "Contact museum directly", language: "Secwepemctsín", publisher: "Secwepemc Nation", category: "museums" },
-        
-        // Great Plains
-        { title: "Sam Noble Museum", type: "Museum", coverage: "Great Plains", description: "Extensive Native American Languages Collection with 175+ languages represented through audio/video recordings, manuscripts, books, journals, and teaching curricula", identifier: "https://samnoblemuseum.ou.edu/collections-and-research/native-american-languages/", language: "175+ Native American Languages", publisher: "University of Oklahoma", category: "museums" },
-        
-        // Southwest
-        { title: "Museum of Indian Arts and Culture", type: "Museum", coverage: "Southwest", description: "World-renowned museum centering Indigenous perspectives and voices of Pueblo, Navajo (Diné) and Apache cultures of the Southwest, featuring Native scholarship and oral histories", identifier: "https://www.newmexicoculture.org/museums/museum-of-indian-arts-culture", language: "Pueblo, Navajo, Apache Languages", publisher: "New Mexico Dept of Cultural Affairs", category: "museums" },
-        { title: "Heard Museum", type: "Museum", coverage: "Southwest", description: "Major museum with 12 galleries of American Indian art, over 40,000 items including library and archives with 34,000+ volumes, focus on Southwest Indigenous cultures", identifier: "https://heard.org/", language: "Southwest Languages", publisher: "Heard Museum", category: "museums" },
-        { title: "Indian Pueblo Cultural Center", type: "Museum", coverage: "Southwest", description: "Gateway to the 19 Pueblos with museum and exhibition galleries featuring Pueblo culture, murals by Pueblo artists, and cultural programs", identifier: "https://indianpueblo.org/", language: "Pueblo Languages", publisher: "Indian Pueblo Cultural Center", category: "museums" },
-
-// --- APPS  ---
-        { title: "Yapi Kapi", type: "App", coverage: "California", description: "UC Berkeley app making California Indian artifacts available online. Provides special tools for teachers and students, with classroom accounts, sub-accounts, assignment relay, and artifact collection viewing/commenting features.", identifier: null, language: "California Languages", publisher: "UC Berkeley", category: "apps" },
-        { title: "Pomoan Languages Apps", type: "App", coverage: "California", description: "Small selection of mobile applications for Pomoan language family from northern California. Part of The Language Conservancy's indigenous North American language app collection, designed for language learning and preservation efforts. Available on iOS/Android app stores", identifier: "App Stores", language: "Pomoan Languages", publisher: "The Language Conservancy", category: "apps" },
-
-        { title: "FirstVoices Mobile App", type: "App", coverage: "Eastern Woodlands", description: "British Columbia-based platform offering keyboard and dictionary apps for 100+ Indigenous languages including Eastern Woodlands varieties. Provides community-driven language preservation tools with audio pronunciation guides and cultural context for learners of all levels.", identifier: null, language: "Multiple Languages", publisher: "FirstVoices", category: "apps" },
-        { title: "Ogoki Learning App", type: "App", coverage: "Eastern Woodlands", description: "Specialized developer with over 170 Indigenous language learning apps created over 10+ years. Partners directly with tribes and schools across Canada and United States to create culturally appropriate, community-validated language learning tools and interactive educational resources.", identifier: null, language: "Multiple Languages", publisher: "Ogoki Learning", category: "apps" },
-        { title: "FREELANG Dictionary App", type: "App", coverage: "Eastern Woodlands", description: "Comprehensive multilingual dictionary platform available as Android app or online tool with reverse lookup functionality. Includes Indigenous language dictionaries with downloadable offline access for convenient learning and reference in remote areas.", identifier: null, language: "Multiple Languages", publisher: "FREELANG", category: "apps" },
-
-        { title: "Newe Daygwap - Eastern Shoshone App", type: "App", coverage: "Great Basin", description: "Fremont County School District #21's official Eastern Shoshone language learning application. Provides community-developed educational content for Eastern Shoshone language learners with tribal oversight and culturally appropriate instruction methods for students and community members.", identifier: null, language: "Eastern Shoshone", publisher: "Fremont County School District #21", category: "apps" },
-        { title: "Northern Paiute Digital Resources", type: "App", coverage: "Great Basin", description: "The Northern Paiute Language Project has developed computer-based learning materials and audio dictionaries, though specific mobile apps may be in development. Community members should contact UC Santa Cruz or tribal language departments for current digital learning tools.", identifier: null, language: "Northern Paiute", publisher: "UC Santa Cruz", category: "apps" },
-        { title: "Pyramid Lake Paiute Tribe Digital Materials", type: "App", coverage: "Great Basin", description: "The tribe's language department provides digital resources and may offer mobile-accessible materials. Contact the tribal language program directly for information about current digital learning tools and community-specific language applications available to tribal members.", identifier: null, language: "Northern Paiute", publisher: "Pyramid Lake Paiute Tribe", category: "apps" },
-
-        { title: "SHI Haida Language App (Xaad Kíl)", type: "App", coverage: "Northwest Coast", description: "Sealaska Heritage Institute's official Haida language learning application launched in 2023. Features audio pronunciation of words and phrases, video content, and community-developed educational materials for Xaad Kíl learners with tribal oversight and cultural context.", identifier: null, language: "Haida", publisher: "Sealaska Heritage Institute", category: "apps" },
-        { title: "SHI Tsimshian Language App (Sm'algyax)", type: "App", coverage: "Northwest Coast", description: "Companion application to the Haida app, providing Tsimshian language instruction through audio, video, and interactive content. Developed by Sealaska Heritage Institute with community input and tribal language experts for authentic cultural preservation.", identifier: null, language: "Tsimshian", publisher: "Sealaska Heritage Institute", category: "apps" },
-
-        { title: "Nez Perce Tribe Digital Materials", type: "App", coverage: "Plateau", description: "The Nez Perce Tribe's language department provides digital resources and may offer mobile-accessible learning materials. Community members should contact the tribal language program directly for information about current digital learning tools and nimipuutímt language applications.", identifier: null, language: "Nez Perce", publisher: "Nez Perce Tribe", category: "apps" },
-        { title: "Yakama Nation Language App", type: "App", coverage: "Plateau", description: "The Yakama Nation Tribal School requires two years of Sahaptin language instruction and may have developed digital learning tools. Contact the Yakama Nation Cultural Resources program for information about available mobile learning materials and Ichishkíin language apps.", identifier: null, language: "Sahaptin", publisher: "Yakama Nation", category: "apps" },
-        { title: "FirstVoices Mobile Platform", type: "App", coverage: "Plateau", description: "Various Plateau Indigenous languages are represented on FirstVoices mobile platform including Interior Salishan languages. Community-controlled digital platform providing keyboards, dictionaries, and multimedia resources for language preservation with tribal oversight and cultural appropriate content.", identifier: null, language: "Interior Salishan", publisher: "FirstVoices", category: "apps" },
-
-        { title: "Stoney Nakoda Vocab Builder App", type: "App", coverage: "Great Plains", description: "Free mobile app for Android/iOS focusing on Canadian Stoney dialect, closely related to American Assiniboine. Provides vocabulary exercises and basic learning tools in convenient mobile format. Useful for comparative study of dialectical variations and accessible to younger learners for daily practice", identifier: "App Stores", language: "Stoney Nakoda", publisher: null, category: "apps" },
-        { title: "The Arapaho language app", type: "App", coverage: "Great Plains", description: "The Arapaho language app was developed by fluent elders of the Northern Arapaho tribe in partnership with Arapahoe Schools from March 2015 to November 2016. It features translations by the Arapaho Elders Community Association, affirming the sacredness of the language, and is available for free download on the Apple Store.", identifier: "Apple Store", language: "Arapaho", publisher: "Northern Arapaho Tribe / Arapahoe Schools", category: "apps" },
-        { title: "DeciphAR RLLC Blackfoot Translation App", type: "App", coverage: "Great Plains", description: "Apple and Android app stores (free) Created by Mount Royal University Library and Red Crow Community College. Translates Blackfoot signage in the Riddell Library Learning Centre with augmented reality features for immersive language learning experiences.", identifier: "App Stores", language: "Blackfoot", publisher: "Mount Royal University Library / Red Crow Community College", category: "apps" },
-        { title: "Michif Lessons App", type: "App", coverage: "Great Plains", description: "Available on mobile platforms. Contains over 60 exercises teaching 1000+ Michif words across 21 conversation topics. Categories include numbers, months, animals, weather, body parts, and cultural concepts with interactive games and difficulty levels.", identifier: "Mobile Platforms", language: "Michif", publisher: null, category: "apps" },
-
-        { title: "Navajo M(A)L 4+ App", type: "App", coverage: "Southwest", description: "Learn Navajo Language (Diné bizaad) app uniquely designed to challenge abilities and help users learn at their own pace. Features Navajo learning games, practice tests, study materials, and interactive exercises for comprehensive language acquisition.", identifier: null, language: "Navajo", publisher: null, category: "apps" },
-        { title: "Learn Navajo Mobile Resources", type: "App", coverage: "Southwest", description: "Various mobile-optimized websites and resources are available for learning Diné bizaad, including vocabulary builders and pronunciation guides accessible through mobile browsers for convenient on-the-go learning and practice.", identifier: null, language: "Navajo", publisher: null, category: "apps" },
-        { title: "Pueblo Language Digital Tools", type: "App", coverage: "Southwest", description: "Individual pueblos may have developed mobile-accessible resources for their specific languages. Contact tribal education departments directly for information about available digital learning tools and community-specific language applications.", identifier: null, language: "Various Pueblo Languages", publisher: "Individual Pueblo Tribes", category: "apps" },
-
-// ---------------------------------------------------- //
- NEWS/CHRONOLOGICAL RESOURCES DATA
- // ----------------------------------------------------
+// ====================================================================
+// NEWS & CHRONOLOGICAL RESOURCES DATA
+// ====================================================================
+// Comprehensive timeline of Indigenous language revitalization efforts,
+// research, policy changes, and community initiatives from 1643 to present.
+// Organized chronologically (newest first) for easy reference.
+// ====================================================================
 
 const newsResources = [
-  // 2025 - Recent
+  // ==================== 2025 ====================
   {
     date: "2025-07-23",
-    title: "Native America Calling: language revitalization apps, games, classroom lessons",
-    type: "News / Education",
+    title: "Native America Calling: Language Revitalization Apps, Games, Classroom Lessons",
+    type: "News/Education",
     summary: "Announcement of a multi-year initiative to create digital tools (apps, games) teaching Denaakk'e and possibly other Native languages, especially in school contexts.",
     source: "https://indianz.com/News/2025/07/23/native-america-calling-language-revitalization-apps-games-and-classroom-lessons-help-keep-native-languages-vital/"
   },
   {
     date: "2025-07-14",
     title: "Last Fluent Speaker of Ancient Native American Language Dies (Caddo)",
-    type: "News / Obituary",
+    type: "News/Obituary",
     summary: "Edmond Johnson, last fluent speaker of the Caddo language, passed away at age 95 — marking a symbolic and cultural loss.",
     source: "https://people.com/last-fluent-speaker-of-ancient-native-american-language-dies-at-95-11775193"
   },
   {
     date: "2025-06-23",
-    title: "How language revitalization boosts Indigenous health (UBC study)",
-    type: "Research / Health",
+    title: "How Language Revitalization Boosts Indigenous Health (UBC Study)",
+    type: "Research/Health",
     summary: "New research from the University of British Columbia shows that speaking Indigenous languages correlates with improved mental health and well-being. The interdisciplinary scoping review found that language vitality is linked to lower suicide rates, better educational outcomes and social cohesion.",
     source: "https://indigenous.ubc.ca/2025/06/23/how-language-revitalization-boosts-indigenous-health/"
   },
   {
     date: "2025-04-15",
-    title: "Language lives on for tribes in Oklahoma despite determined erasure attempts",
-    type: "News / Education",
+    title: "Language Lives On for Tribes in Oklahoma Despite Determined Erasure Attempts",
+    type: "News/Education",
     summary: "Tribes in Oklahoma are reclaiming languages in public schools despite historical suppression. In Lawton, Comanche and Kiowa language courses are offered to high schoolers, taught by tribal educators.",
     source: "https://www.kosu.org/race-culture/2025-04-15/language-lives-on-for-tribes-in-oklahoma-despite-determined-erasure-attempts"
   },
   {
     date: "2025-03-29",
-    title: "'We play for Indian country': Bilingual Basketball league preserving Indigenous languages",
-    type: "News / Community Program",
+    title: "'We Play for Indian Country': Bilingual Basketball League Preserving Indigenous Languages",
+    type: "News/Community",
     summary: "A sports + language initiative combining basketball camps with bilingual Indigenous-language instruction (e.g. Ichiskíin).",
     source: "https://www.theguardian.com/us-news/2025/mar/29/bilingual-basketball-league-indigenous-languages"
   },
   {
-    date: "2025-03",
+    date: "2025-03-01",
     title: "LakotaBERT: A Transformer-based Model for Low Resource Lakota Language",
-    type: "Research / AI",
+    type: "Research/AI",
     summary: "Introduces a large language model (LLM) tailored to Lakota to assist with language modeling, revitalization, and computational support.",
     source: "https://arxiv.org/abs/2503.18212"
   },
   {
-    date: "2025-02",
+    date: "2025-02-01",
     title: "Speech Synthesis for Ojibwe, Mi'kmaq, Maliseet",
-    type: "Research / Language Tech",
+    type: "Research/Technology",
     summary: "A multilingual text-to-speech (TTS) system built for several Indigenous languages to improve access to audio and speech tools.",
     source: "https://arxiv.org/abs/2502.02703"
   },
   {
     date: "2025-01-09",
-    title: "10-Year National Plan on Native Language Revitalization released",
-    type: "Policy / U.S. Government",
+    title: "10-Year National Plan on Native Language Revitalization Released",
+    type: "Policy/Federal",
     summary: "The U.S. administration publishes a strategic plan for Native language revitalization, aiming to support language nests, immersion schools, teacher training, and community-led efforts.",
     source: "https://aildi.arizona.edu/news/10-year-national-plan-native-language-revitalization-released"
   },
   {
-    date: "2025-01",
+    date: "2025-01-01",
     title: "Is It Navajo? Accurate Language Detection in Endangered Athabaskan Languages",
-    type: "Research / NLP",
+    type: "Research/NLP",
     summary: "A machine-learning classifier to detect endangered Athabaskan languages (including Navajo) with high accuracy — pushing forward technological support for underresourced languages.",
     source: "https://arxiv.org/abs/2501.15773"
   },
   {
-    date: "2025-spring",
+    date: "2025-01-01",
     title: "Indigenous Language Revitalization: The Klamath and Cherokee Tribes",
-    type: "Thesis / Case Studies",
+    type: "Academic/Thesis",
     summary: "Recent undergraduate honors thesis comparing revitalization efforts in the Klamath and Cherokee communities; identifies how different historical, cultural, and geographic contexts affect models for language revitalization.",
     source: "https://pdxscholar.library.pdx.edu/honorstheses/1621/"
   },
   {
-    date: "2025-mid",
+    date: "2025-01-01",
     title: "Developing a Mixed-Methods Pipeline for Community-Oriented Digitization of Kwak'wala Legacy Texts",
-    type: "Research / Digital Humanities",
+    type: "Research/Digital",
     summary: "Digitization and OCR work on historic Kwak'wala texts (British Columbia) to preserve and transcribe them for modern community use.",
     source: "https://arxiv.org/abs/2506.01775"
   },
   {
-    date: "2025-mid",
+    date: "2025-01-01",
     title: "Navigating Change in Indigenous Community Language Projects",
-    type: "Academic / Grant Reports",
+    type: "Academic/Research",
     summary: "Reports on community language & culture subawards across U.S. and Canada and how funds are channeled and used in Indigenous language projects.",
     source: "https://collaborations.miami.edu/articles/10.33596/coll.146"
   },
 
-  // 2024
+  // ==================== 2024 ====================
   {
-    date: "2024-12",
-    title: "Biden announces plan to 'revive' Native American languages",
-    type: "News / Policy",
+    date: "2024-12-09",
+    title: "Biden Announces Plan to 'Revive' Native American Languages",
+    type: "Policy/Federal",
     summary: "President Biden's administration lifts the profile of language revitalization, proposing immersion programs, funding, and acknowledgment of historical harm.",
     source: "https://nypost.com/2024/12/09/us-news/biden-dons-tribal-blanket-announces-plan-to-revive-native-american-languages/"
   },
   {
-    date: "2024-09",
-    title: "A school banned Indigenous students from using their language. A century later, it's teaching Cherokee",
-    type: "News / Historical Reconciliation",
+    date: "2024-09-21",
+    title: "A School Banned Indigenous Students from Using Their Language. A Century Later, It's Teaching Cherokee",
+    type: "News/Reconciliation",
     summary: "Duke University, which once ran a boarding school forbidding Cherokee, now offers Cherokee classes — symbolic of shifting institutional attitudes.",
     source: "https://www.theguardian.com/us-news/2024/sep/21/duke-university-cherokee-language"
   },
   {
     date: "2024-08-21",
-    title: "Cherokee Central School works to preserve language and culture",
-    type: "News / Education",
+    title: "Cherokee Central School Works to Preserve Language and Culture",
+    type: "News/Education",
     summary: "On the Qualla Boundary (EBCI, NC), Cherokee Central School integrates Cherokee language throughout instruction. The district shifted to a 'co-teaching model' where language teachers co-lead classrooms.",
     source: "https://www.ednc.org/08-21-2024-a-first-day-at-cherokee-central-school/"
   },
   {
     date: "2024-07-01",
     title: "Beyond Words: The Power of Native Language Revitalization",
-    type: "Article / Advocacy",
+    type: "Article/Advocacy",
     summary: "Emphasis on how language survival is central to community success; discusses challenges and community-driven solutions.",
     source: "https://www.ncai.org/news/beyond-words-the-power-of-native-language-revitalization"
   },
   {
     date: "2024-03-28",
-    title: "New resource offers a starting point in the journey of Indigenous language revitalization",
-    type: "Academic / Education",
+    title: "New Resource Offers a Starting Point in the Journey of Indigenous Language Revitalization",
+    type: "Academic/Education",
     summary: "University of Alberta's SILR program published 'Towards Indigenous Language Revitalization: An Informative Resource'. This guide helps communities plan language programs (pre-K to post-secondary) with an Indigenous-led approach.",
     source: "https://www.ualberta.ca/en/folio/2024/03/new-resource-offers-starting-point-in-journey-of-indigenous-language-revitalization.html"
   },
   {
     date: "2024-03-11",
-    title: "Enrollment in tribal language courses grows in Oklahoma as tribes aim to increase fluency",
-    type: "News / Education",
+    title: "Enrollment in Tribal Language Courses Grows in Oklahoma as Tribes Aim to Increase Fluency",
+    type: "News/Education",
     summary: "Oklahoma public schools report surging participation in Indigenous language classes. In 2022-23, 3,314 students took Native language courses (over 1,000 more than the year prior).",
     source: "https://oklahomavoice.com/2024/03/11/enrollment-in-tribal-language-courses-grows-in-oklahoma-as-tribes-aim-to-increase-fluency/"
   },
   {
-    date: "2024-02",
-    title: "Virginia Beavert dies at 102 — Preserver of Sahaptin language",
-    type: "Obituary / Linguist Legacy",
+    date: "2024-02-01",
+    title: "Virginia Beavert Dies at 102 — Preserver of Sahaptin Language",
+    type: "News/Obituary",
     summary: "Virginia Beavert, a key figure in documenting and revitalizing Sahaptin, passes away — her work had lasting impact in her lifetime.",
     source: "https://www.wsj.com/us-news/education/virginia-beavert-who-preserved-a-language-the-u-s-tried-to-erase-dies-at-102-41b1464f"
   },
   {
     date: "2024-01-29",
-    title: "TikTok, immersive learning revitalizing Cherokee language",
-    type: "News / Technology",
+    title: "TikTok, Immersive Learning Revitalizing Cherokee Language",
+    type: "News/Technology",
     summary: "The Cherokee Nation leverages media and tech for language revival. During the pandemic the tribe launched social-media campaigns and even a Cherokee-language video game.",
     source: "https://ictnews.org/news/tiktok-immersive-learning-revitalizing-cherokee-language/"
   },
   {
-    date: "2024",
+    date: "2024-01-01",
     title: "The Indigenous Languages of the Americas: History and Classification (Campbell, 2024)",
-    type: "Scholarly Book / Classification & History",
+    type: "Academic/Book",
     summary: "New book (2024) by Lyle Campbell (et al.) giving an updated survey of Indigenous languages of the Americas: diversity, classification, past and present status, naming and naming issues.",
     source: "https://academic.oup.com/book/57386/chapter/464712182"
   },
   {
-    date: "2024-recent",
-    title: "The Language Conservancy transitions to full Indigenous leadership",
-    type: "Organizational / Nonprofit",
+    date: "2024-01-01",
+    title: "The Language Conservancy Transitions to Full Indigenous Leadership",
+    type: "Organization/Nonprofit",
     summary: "The Language Conservancy (an NGO in Indigenous-language revitalization) formally shifts governance to Indigenous leadership, centering Indigenous decision-making.",
     source: "https://languageconservancy.org/"
   },
 
-  // 2023
+  // ==================== 2023 ====================
   {
     date: "2023-11-30",
-    title: "Crow (Apsáalooke) picture books released at storytelling event",
-    type: "News / Community Education",
+    title: "Crow (Apsáalooke) Picture Books Released at Storytelling Event",
+    type: "News/Community",
     summary: "In Crow Agency, Montana, tribal schools celebrated new language materials. Two Crow language children's books were launched at a storytelling night.",
     source: "https://languageconservancy.org/tlc-november-2023-newsletter/"
   },
   {
     date: "2023-11-28",
-    title: "Tech is helping preserve endangered Indigenous tongues",
-    type: "News / Technology",
+    title: "Tech Is Helping Preserve Endangered Indigenous Tongues",
+    type: "News/Technology",
     summary: "Axios reports that across the Americas, Indigenous language experts increasingly use apps and tech for revitalization. Notes UNESCO's warning that 40–50% of 6,000+ Indigenous languages could vanish by century's end.",
     source: "https://www.axios.com/2023/11/28/latin-america-indigenous-language-tech-preservation"
   },
   {
     date: "2023-11-16",
-    title: "Kehkimin Wolastoqey Language Immersion School unveils inaugural language textbook",
-    type: "News / Community Education",
+    title: "Kehkimin Wolastoqey Language Immersion School Unveils Inaugural Language Textbook",
+    type: "News/Education",
     summary: "At a Nov 16, 2023 gala in Fredericton, NB, the Kehkimin Wolastoqey Immersion School launched its first language textbook Wolastoqewatu! ('Speak Wolastoqey!').",
     source: "https://languageconservancy.org/tlc-november-2023-newsletter/"
   },
   {
     date: "2023-10-23",
-    title: "To sustain hope for Indigenous language revitalization, funding must change",
-    type: "Opinion / Review",
+    title: "To Sustain Hope for Indigenous Language Revitalization, Funding Must Change",
+    type: "Opinion/Policy",
     summary: "A critical piece urging structural reforms to language funding mechanisms to better support sustainable revitalization.",
     source: "https://www.indigenouswatchdog.org/update/to-sustain-hope-for-indigenous-language-revitalization-funding-must-change/"
   },
 
-  // 2022
+  // ==================== 2022 ====================
   {
-    date: "2022",
-    title: "Health effects of Indigenous language use and revitalization: a realist review",
-    type: "Public Health / Review Article",
+    date: "2022-01-01",
+    title: "Health Effects of Indigenous Language Use and Revitalization: A Realist Review",
+    type: "Research/Health",
     summary: "Systematic review showing that Indigenous language use and revitalization are linked to beneficial health outcomes (mental health, community well-being, etc.).",
     source: "https://equityhealthj.biomedcentral.com/articles/10.1186/s12939-022-01782-6"
   },
   {
-    date: "2022",
-    title: "NEH funds UO project to re-awaken 'dormant' Native languages",
-    type: "Academic / Research",
+    date: "2022-01-01",
+    title: "NEH Funds UO Project to Re-awaken 'Dormant' Native Languages",
+    type: "Academic/Research",
     summary: "UOregon linguist Gabriela Pérez Báez received a $326K NEH grant (2021) to strengthen distance learning in Indigenous languages during COVID-19. Project aims to support over 65 Native communities.",
     source: "https://cas.uoregon.edu/sponsored-research/sponsored-research-2021-2022/perez-baez-strengthening-distance-learning-indigenous-languages-response-covid-19-pandemic"
   },
 
-  // 2021
+  // ==================== 2021 ====================
   {
-    date: "2021-12",
-    title: "Recirculating and revitalizing words: Lexical legacies in Native American language preservation",
-    type: "Journal Article / Language Documentation",
+    date: "2021-12-01",
+    title: "Recirculating and Revitalizing Words: Lexical Legacies in Native American Language Preservation",
+    type: "Academic/Journal",
     summary: "Examines the importance of words themselves (wordlists, names, vocabulary) and their stories in language preservation for communities.",
     source: "https://lddjournal.org/article/id/1273/"
   },
 
-  // 2020
+  // ==================== 2020 ====================
   {
-    date: "2020",
-    title: "Musings on Native American language reclamation and sociolinguistics",
-    type: "Sociolinguistics / Theory",
+    date: "2020-01-01",
+    title: "Musings on Native American Language Reclamation and Sociolinguistics",
+    type: "Academic/Theory",
     summary: "Discusses how framing Indigenous languages as 'endangered' can replicate colonial perspectives; emphasizes community-led reclamation and decolonial approaches.",
     source: "https://www.degruyterbrill.com/document/doi/10.1515/ijsl-2020-2086/html"
   },
 
-  // 2019
+  // ==================== 2019 ====================
   {
     date: "2019-12-18",
-    title: "UN proclaims International Decade of Indigenous Languages (2022–2032)",
-    type: "International / UN",
+    title: "UN Proclaims International Decade of Indigenous Languages (2022–2032)",
+    type: "Policy/International",
     summary: "In Dec 2019 the UN General Assembly declared 2022–2032 the International Decade of Indigenous Languages. Led by UNESCO, this global initiative mobilizes action worldwide.",
     source: "https://www.unesco.org/en/decades/indigenous-languages"
   },
   {
     date: "2019-06-21",
-    title: "Canada enacts Indigenous Languages Act",
-    type: "Policy / Government",
+    title: "Canada Enacts Indigenous Languages Act",
+    type: "Policy/Federal",
     summary: "Canada's Indigenous Languages Act received Royal Assent on June 21, 2019. It supports First Nations, Inuit and Métis efforts to reclaim, preserve and revitalize languages.",
     source: "https://www.canada.ca/en/canadian-heritage/services/indigenous-languages-act.html"
   },
   {
     date: "2019-05-09",
-    title: "How Canada's proposed Indigenous Languages Act fails to deliver",
-    type: "Policy Critique",
+    title: "How Canada's Proposed Indigenous Languages Act Fails to Deliver",
+    type: "Opinion/Policy",
     summary: "A commentary on Bill C-91 in Canada, arguing the legislation is insufficient and under-resourced for true language restoration.",
     source: "https://yellowheadinstitute.org/2019/05/09/how-canadas-proposed-indigenous-languages-act-fails-to-deliver/"
   },
 
-  // 2018
+  // ==================== 2018 ====================
   {
     date: "2018-12-17",
     title: "The Native American Languages Early Publication Project",
-    type: "Archival / Historical Publications",
+    type: "Archive/Historical",
     summary: "Smithsonian project makes accessible early Christian literature (Bibles, prayer books, hymnals, dictionaries) translated into Native American languages from 19th and early 20th century.",
     source: "https://www.naturalhistory.si.edu/research/anthropology/programs/recovering-voices/outreach/news-research-updates/native-american-languages-early-publication-project"
   },
 
-  // 2015
+  // ==================== 2015 ====================
   {
-    date: "2015",
+    date: "2015-01-01",
     title: "Native American Language Education as Policy–in–Practice: Native American Languages Act of 1990/1992",
-    type: "Policy / Education",
+    type: "Academic/Policy",
     summary: "An interpretative policy analysis of how the Native American Languages Act has been put into practice since enactment: what works, challenges, and alignment with goals.",
     source: "https://ncela.ed.gov/resources/journal-native-american-language-education-as-policy-in-practice-an-interpretative-policy"
   },
   {
-    date: "2015",
+    date: "2015-01-01",
     title: "New Deal Navajo Linguistics and Language Documentation",
-    type: "Academic Thesis / History",
+    type: "Academic/Thesis",
     summary: "Explores archival and linguistic work done during the 'New Deal' era concerning Navajo: standardization, documentation, role of linguists, how the tribe interfaced with U.S. government.",
     source: "https://digitalrepository.unm.edu/anth_etds/50/"
   },
 
-  // 2014
+  // ==================== 2014 ====================
   {
-    date: "2014",
+    date: "2014-01-01",
     title: "Language Ideologies and Cherokee Revitalization",
-    type: "Journal Article / Sociolinguistics",
+    type: "Academic/Journal",
     summary: "Examines attitudes, identity, and ideology among Cherokee immersion school stakeholders: beliefs about who should learn, what is legitimate, and how practical or hopeful the effort is.",
     source: "https://ncela.ed.gov/resources/journal-language-ideologies-and-cherokee-revitalization"
   },
 
-  // 2012
+  // ==================== 2012 ====================
   {
-    date: "2012",
-    title: "Re-differentiation as collective intelligence: The Ktunaxa language online community",
-    type: "Academic Paper / Language Community",
+    date: "2012-01-01",
+    title: "Re-differentiation as Collective Intelligence: The Ktunaxa Language Online Community",
+    type: "Academic/Digital",
     summary: "Looks at how the Ktunaxa online community self-organizes to reverse simplification caused by historical trauma, using online/digital tools as part of identity and language community rebuilding.",
     source: "https://arxiv.org/abs/1204.3891"
   },
 
-  // 2005
+  // ==================== 2005 ====================
   {
     date: "2005-07-13",
-    title: "Task Force on Aboriginal Languages and Cultures report delivered to Minister",
-    type: "Government / Policy",
+    title: "Task Force on Aboriginal Languages and Cultures Report Delivered to Minister",
+    type: "Policy/Federal",
     summary: "Canada's federal government receives the 'Towards a New Beginning' report recommending a national strategy for Indigenous languages and cultures.",
     source: "https://www.canada.ca/en/news/archive/2005/07/task-force-report-aboriginal-languages-cultures-received-minister-frulla.html"
   },
 
-  // 2001
+  // ==================== 2001 ====================
   {
-    date: "2001",
-    title: "The Green Book of Language Revitalization in Practice (selected chapter: 'Native Language Planning: A Pilot Process in the Acoma Pueblo Community')",
-    type: "Edited Volume / Revitalization Case Study",
+    date: "2001-01-01",
+    title: "The Green Book of Language Revitalization in Practice (Acoma Pueblo Case Study)",
+    type: "Academic/Book",
     summary: "Case studies showing how local Indigenous communities (e.g. Acoma Pueblo) are planning language revitalization: planning, curriculum, community participation.",
     source: "https://brill.com/downloadpdf/book/edcoll/9789004261723/B9789004261723-s031.pdf"
   },
 
-  // 1997
+  // ==================== 1997 ====================
   {
-    date: "1997",
+    date: "1997-01-01",
     title: "American Indian Languages: The Historical Linguistics of Native America",
-    type: "Scholarly Book / Linguistics",
+    type: "Academic/Book",
     summary: "A major work by Lyle Campbell surveying the historical linguistics of Native American languages across the Americas — classification, history, and relationships of languages.",
     source: "https://academic.oup.com/book/48052"
   },
 
-  // 1992
+  // ==================== 1992 ====================
   {
-    date: "1992",
-    title: "Language Maintenance And Language Renewal Among Cherokee People in Oklahoma",
-    type: "Academic / Linguistics",
+    date: "1992-01-01",
+    title: "Language Maintenance and Language Renewal Among Cherokee People in Oklahoma",
+    type: "Academic/Linguistics",
     summary: "Explores the issues and methods around maintaining and renewing Cherokee language in Oklahoma. Looks at community effort, educator role, obstacles such as lack of materials and speaker decline.",
     source: "https://journals.ku.edu/kwpl/article/view/17386"
   },
 
-  // 1990
+  // ==================== 1990 ====================
   {
     date: "1990-10-30",
-    title: "Native American Languages Act enacted (US)",
-    type: "Policy / Government",
+    title: "Native American Languages Act Enacted (US)",
+    type: "Policy/Federal",
     summary: "The U.S. Congress passed the Native American Languages Act (P.L. 101-477) on Oct 30, 1990. This landmark law reversed prior suppression policies and established federal support for Native languages.",
     source: "https://www.nlm.nih.gov/nativevoices/timeline/570.html"
   },
 
-  // 1980s
+  // ==================== 1980s ====================
   {
-    date: "1980/1987",
+    date: "1987-01-01",
     title: "The Navajo Language: A Grammar and Colloquial Dictionary — Robert W. Young & William Morgan",
-    type: "Descriptive Grammar / Dictionary",
+    type: "Academic/Reference",
     summary: "Comprehensive grammar and lexicon for Navajo — a modern, practical resource used by scholars, teachers, and community programs.",
     source: "https://archive.org/details/navajolanguagegr0000youn"
   },
 
-  // 1978
+  // ==================== 1978 ====================
   {
-    date: "1978",
+    date: "1978-01-01",
     title: "Handbook of North American Indians — Volume 17: Languages (Smithsonian)",
-    type: "Reference / Synthesis",
+    type: "Academic/Reference",
     summary: "Edited volume summarizing the state of knowledge on North American languages: classification, contact, writing systems, and bibliographies.",
     source: "https://archive.org/details/handbookofnorth008stur"
   },
 
-  // 1970s-2001
+  // ==================== 1970s-2001 ====================
   {
-    date: "1970s-2001",
-    title: "Kenneth L. Hale — fieldwork and papers",
-    type: "Linguist / Field Methods & Advocacy",
+    date: "1970-01-01",
+    title: "Kenneth L. Hale — Fieldwork and Papers",
+    type: "Academic/Archive",
     summary: "Ken Hale's career (field grammars, strong community collaboration ethics, training of Indigenous linguists) exemplifies later 20th-century best practices in documentation and advocacy.",
     source: "https://linguistics.mit.edu/hale/papers/"
   },
 
-  // 1943-1957
+  // ==================== 1943-1957 ====================
   {
-    date: "1943-1957",
-    title: "Ádahooníłígíí (Navajo Agency newspaper/publication)",
-    type: "Indigenous / Bilingual Publication",
+    date: "1943-01-01",
+    title: "Ádahooníłígíí (Navajo Agency Newspaper/Publication)",
+    type: "Historical/Publication",
     summary: "An important Navajo-language (initially fully Navajo, later bilingual) newspaper. Played a role in Navajo orthography standardization and news dissemination during mid-20th century.",
     source: "https://en.wikipedia.org/wiki/%C3%81dahoon%C3%AD%C5%82%C3%ADg%C3%AD%C3%AD"
   },
 
-  // 1911-1922
+  // ==================== 1911-1922 ====================
   {
-    date: "1911-1922",
+    date: "1911-01-01",
     title: "Handbook of American Indian Languages (Franz Boas, ed.; Bulletin 40, Bureau of American Ethnology)",
-    type: "Foundational Reference / Descriptive Linguistics",
+    type: "Academic/Reference",
     summary: "Multi-volume descriptive work (Boas and contributors) containing grammars, texts and analyses of many Native languages — a cornerstone resource for early 20th-century documentation.",
     source: "https://archive.org/details/handbookofameric00boas"
   },
 
-  // 1912
+  // ==================== 1912 ====================
   {
-    date: "1912",
+    date: "1912-01-01",
     title: "The Takelma Language of Southwestern Oregon — Edward Sapir",
-    type: "Grammar / Field Description",
+    type: "Academic/Grammar",
     summary: "Edward Sapir's detailed grammar of Takelma (published as part of the Boas volumes) is a classic early field grammar for a language that is now effectively dormant.",
     source: "https://theswissbay.ch/pdf/Books/Linguistics/Mega%20linguistics%20pack/North%20American/Penutian/Takelma%20Language%20of%20Southwestern%20Oregon%20%28Sapir%29%20%281912%29.pdf"
   },
 
-  // 1907-1959
+  // ==================== 1907-1959 ====================
   {
-    date: "1907-1959",
-    title: "Papers of John Peabody Harrington (extensive field notes and recordings)",
-    type: "Archival Collection / Primary Data",
+    date: "1907-01-01",
+    title: "Papers of John Peabody Harrington (Extensive Field Notes and Recordings)",
+    type: "Archive/Primary",
     summary: "Harrington amassed enormous notebooks, recordings and lexical slips documenting 100+ languages (esp. California, Southwest). His papers are an indispensable primary source.",
     source: "https://www.archives.gov/nhprc/projects/catalog/john-peabody-harrington"
   },
 
-  // 1891
+  // ==================== 1891 ====================
   {
-    date: "1891",
-    title: "Linguistic Stocks of American Indians North of Mexico (map / report)",
-    type: "Map / Classification (Powell)",
+    date: "1891-01-01",
+    title: "Linguistic Stocks of American Indians North of Mexico (Powell Map/Report)",
+    type: "Historical/Classification",
     summary: "John Wesley Powell's influential 1891 map and accompanying description classifies language stocks across North America and became a foundational reference for later Americanist linguistics.",
     source: "https://digitalcollections.nypl.org/items/510d47d9-7d9f-a3d9-e040-e00a18064a99"
   },
 
-  // 18th century
+  // ==================== 1700s ====================
   {
-    date: "1700s",
-    title: "Travel accounts and vocabularies published by explorers, traders, colonial officials",
-    type: "Explorer / Colonial Grammar / Vocabulary",
+    date: "1700-01-01",
+    title: "Travel Accounts and Vocabularies Published by Explorers, Traders, Colonial Officials",
+    type: "Historical/Colonial",
     summary: "Throughout the 18th century, many travelogues, diaries and colonial reports included vocabularies recording local indigenous languages.",
     source: "https://ian.hypotheses.org/1829"
   },
 
-  // 1701-1870
+  // ==================== 1701-1870 ====================
   {
-    date: "1701-1870",
+    date: "1701-01-01",
     title: "Colonial Missionaries' Papers from America and the West Indies (1701–1870)",
-    type: "Archive / Missionary Reports",
+    type: "Archive/Missionary",
     summary: "Contains missionary reports, sermons, letters, etc., some of which involve indigenous language use, language interactions, translation, or vocabulary inclusion.",
     source: "https://britishonlinearchives.com/collections/18/colonial-missionaries-papers-from-america-and-the-west-indies-1701-1870"
   },
 
-  // 1663/1666
+  // ==================== 1663/1666 ====================
   {
-    date: "1663/1666",
-    title: "John Eliot's translations & grammar works (Algonquian / Massachusett)",
-    type: "Missionary / Bible / Grammar",
+    date: "1663-01-01",
+    title: "John Eliot's Translations & Grammar Works (Algonquian/Massachusett)",
+    type: "Historical/Missionary",
     summary: "Eliot translated the Bible into Massachusett (1663) and wrote The Indian Grammar Begun (1666). Foundational texts in Native American-language lexicon and literacy efforts.",
     source: "https://en.wikipedia.org/wiki/John_Eliot_%28missionary%29"
   },
 
-  // 1643
+  // ==================== 1643 ====================
   {
-    date: "1643",
+    date: "1643-01-01",
     title: "A Key into the Language of America — Roger Williams",
-    type: "Grammar / Vocabulary",
+    type: "Historical/Grammar",
     summary: "One of the earliest published works (in English) about a Native American language (Narragansett, Algonquian). Includes vocabulary, grammar notes, and cultural observations.",
     source: "https://en.wikipedia.org/wiki/A_Key_into_the_Language_of_America"
   },
 
-// Early 1600s
+  // ==================== Early 1600s ====================
   {
-    date: "1603/early 1600s",
-    title: "Jesuit & Dominican grammars / catechisms for Quechua, Aymara, etc.",
-    type: "Missionary / Grammar / Catechism",
+    date: "1603-01-01",
+    title: "Jesuit & Dominican Grammars/Catechisms for Quechua, Aymara, etc.",
+    type: "Historical/Missionary",
     summary: "Early printed works in the Andes region for Indigenous languages. Include grammars, dictionaries, catechisms — among the first systematic efforts to document indigenous languages in colonial Latin America.",
     source: "https://jesuitportal.bc.edu/publications/symposia/2019symposium/symposia-dejo/"
-  } 
+  }
 ];
 
-// ----------------------------------------------------
-// 2. RESOURCE RENDERING LOGIC
-// ----------------------------------------------------
-
-/**
- * Renders resource items into the specified list element.
- * @param {Array<Object>} resources - The array of resource objects.
- * @param {string} listId - The ID of the HTML element (e.g., 'books-list') to render into.
- */
-function renderResources(resources, listId) {
-    const listElement = document.getElementById(listId);
-    if (!listElement) return;
-
-    listElement.innerHTML = ''; 
-
-    if (resources.length === 0) {
-        listElement.innerHTML = `<p style="padding: 2rem;">No resources found in this category.</p>`;
-        return;
-    }
-
-    resources.forEach(resource => {
-        const item = document.createElement('div');
-        item.className = 'resource-item';
-
-        const categoryTag = resource.type 
-            ? `<span class="resource-category">${resource.type}</span>` 
-            : '';
-
-        const link = resource.identifier
-            ? `<a href="${resource.identifier.startsWith('http') ? resource.identifier : 'https://' + resource.identifier}" target="_blank" class="resource-link">View Resource →</a>`
-            : '';  // Empty string instead of "No direct link available"
-
-        item.innerHTML = `
-            ${categoryTag}
-            <h3>${resource.title}</h3>
-            <div class="resource-meta">
-                ${resource.language} &bullet; ${resource.coverage} &bullet; Published by: ${resource.publisher || 'Unknown'}
-            </div>
-            <p>${resource.description}</p>
-            ${link}
-        `;
-        listElement.appendChild(item);
-    });
-}
-
-// ----------------------------------------------------
-// NEWS RENDERING FUNCTION
-// ----------------------------------------------------
-
-/**
- * Renders news items into the news list element.
- */
-function renderNewsItems() {
-    const newsContainer = document.getElementById('news-list');
-    if (!newsContainer) return;
-    
-    newsContainer.innerHTML = '';
-    
-    // Show most recent 15 items
-    const recentNews = newsResources.slice(0, 15);
-    
-    recentNews.forEach(item => {
-        const newsItem = document.createElement('div');
-        newsItem.className = 'resource-item';
-        
-        const typeTag = item.type ? `<span class="resource-category" style="display: inline-block; background: #1a237e; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem; margin-bottom: 0.5rem;">${item.type}</span>` : '';
-        
-        const dateFormatted = new Date(item.date).toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
-        
-        newsItem.innerHTML = `
-            ${typeTag}
-            <h3>${item.title}</h3>
-            <div class="resource-meta" style="color: #8b4513; font-size: 0.9rem; margin-bottom: 0.5rem;">
-                ${dateFormatted}
-            </div>
-            <p style="white-space: normal;">${item.summary}</p>
-            ${item.source ? `<a href="${item.source}" target="_blank" class="resource-link" style="color: #1a237e; text-decoration: none; font-weight: 500;">Read Full Article →</a>` : ''}
-        `;
-        
-        newsContainer.appendChild(newsItem);
-    });
-}
-
-/**
- * Filters the main data array by category.
- * @param {string} category - The category to filter by (e.g., 'books', 'digital-archive').
- * @returns {Array<Object>} The filtered array of resources.
- */
-
-function getResourcesByCategory(category) {
-    return languageResources.filter(r => r.category === category);
-}
-
-// ----------------------------------------------------
-// 3. INITIALIZATION
-// ----------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Get filtered data for each section
-    const booksData = getResourcesByCategory('books');
-    const archiveData = getResourcesByCategory('digital-archive');
-    const museumsData = getResourcesByCategory('museums');
-    const appsData = getResourcesByCategory('apps');
-
-    // 2. Render data to their respective sections
-    renderResources(booksData, 'books-list');
-    renderResources(archiveData, 'archive-list');
-    renderResources(museumsData, 'museums-list');
-    renderNewsItems();
-    
-    if (appsData.length > 0) {
-        renderResources(appsData, 'apps-list');
-    }
-
-    // 3. Populate filter dropdowns
-    populateFilters();
-
-    // 4. Add filter event listeners
-    setupFilterListeners(booksData, archiveData, museumsData, appsData);
-    
-    // 5. Setup search functionality
-    const searchButton = document.querySelector('.search-box button');
-    const searchInput = document.getElementById('main-search');
-    
-    if (searchButton && searchInput) {
-        searchButton.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-    }
-});
-
-
-// Function to populate all filter dropdowns
-function populateFilters() {
-    // Get unique regions and languages from all resources
-    const regions = [...new Set(languageResources.map(r => r.coverage))].sort();
-    const languages = [...new Set(languageResources.map(r => r.language))].sort();
-    
-    // Populate Books filters
-    populateSelect('books-region', regions);
-    populateSelect('books-language', languages);
-    
-    // Populate Apps filters
-    populateSelect('apps-region', regions);
-    populateSelect('apps-language', languages);
-    
-    // Populate Archive filters
-    populateSelect('archive-region', regions);
-    populateSelect('archive-language', languages);
-    
-    // Populate Museums filters
-    populateSelect('museums-region', regions);
-}
-
-// Helper function to populate a select element
-function populateSelect(selectId, options) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-    
-    // Keep the "All" option
-    const allOption = select.querySelector('option[value=""]');
-    select.innerHTML = '';
-    if (allOption) select.appendChild(allOption);
-    
-    // Add options
-    options.forEach(option => {
-        if (option) {
-            const opt = document.createElement('option');
-            opt.value = option;
-            opt.textContent = option;
-            select.appendChild(opt);
-        }
-    });
-}
-
-// Setup filter listeners for all sections
-function setupFilterListeners(booksData, archiveData, museumsData, appsData) {
-    // Books filters
-    ['books-region', 'books-language', 'books-search'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener('change', () => filterBooks(booksData));
-            element.addEventListener('input', () => filterBooks(booksData));
-        }
-    });
-    
-    // Apps filters
-    ['apps-region', 'apps-language', 'apps-search'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener('change', () => filterApps(appsData));
-            element.addEventListener('input', () => filterApps(appsData));
-        }
-    });
-    
-    // Archive filters
-    ['archive-region', 'archive-language', 'archive-search'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener('change', () => filterArchive(archiveData));
-            element.addEventListener('input', () => filterArchive(archiveData));
-        }
-    });
-    
-    // Museums filters
-    ['museums-region', 'museums-search'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener('change', () => filterMuseums(museumsData));
-            element.addEventListener('input', () => filterMuseums(museumsData));
-        }
-    });
-}
-
-// Filter functions for each section
-function filterBooks(booksData) {
-    const region = document.getElementById('books-region').value;
-    const language = document.getElementById('books-language').value;
-    const search = document.getElementById('books-search').value.toLowerCase();
-    
-    let filtered = booksData.filter(item => {
-        const matchesRegion = !region || item.coverage === region;
-        const matchesLanguage = !language || item.language === language;
-        const matchesSearch = !search || 
-            item.title.toLowerCase().includes(search) ||
-            item.description.toLowerCase().includes(search);
-        return matchesRegion && matchesLanguage && matchesSearch;
-    });
-    
-    renderResources(filtered, 'books-list');
-}
-
-function filterApps(appsData) {
-    const region = document.getElementById('apps-region').value;
-    const language = document.getElementById('apps-language').value;
-    const search = document.getElementById('apps-search').value.toLowerCase();
-    
-    let filtered = appsData.filter(item => {
-        const matchesRegion = !region || item.coverage === region;
-        const matchesLanguage = !language || item.language === language;
-        const matchesSearch = !search || 
-            item.title.toLowerCase().includes(search) ||
-            item.description.toLowerCase().includes(search);
-        return matchesRegion && matchesLanguage && matchesSearch;
-    });
-    
-    renderResources(filtered, 'apps-list');
-}
-
-function filterArchive(archiveData) {
-    const region = document.getElementById('archive-region').value;
-    const language = document.getElementById('archive-language').value;
-    const search = document.getElementById('archive-search').value.toLowerCase();
-    
-    let filtered = archiveData.filter(item => {
-        const matchesRegion = !region || item.coverage === region;
-        const matchesLanguage = !language || item.language === language;
-        const matchesSearch = !search || 
-            item.title.toLowerCase().includes(search) ||
-            item.description.toLowerCase().includes(search);
-        return matchesRegion && matchesLanguage && matchesSearch;
-    });
-    
-    renderResources(filtered, 'archive-list');
-}
-
-function filterMuseums(museumsData) {
-    const region = document.getElementById('museums-region').value;
-    const search = document.getElementById('museums-search').value.toLowerCase();
-    
-    let filtered = museumsData.filter(item => {
-        const matchesRegion = !region || item.coverage === region;
-        const matchesSearch = !search || 
-            item.title.toLowerCase().includes(search) ||
-            item.description.toLowerCase().includes(search);
-        return matchesRegion && matchesSearch;
-    });
-    
-    renderResources(filtered, 'museums-list');
-}
-
-// ----------------------------------------------------
-// SEARCH FUNCTIONALITY
-// ----------------------------------------------------
-function performSearch() {
-    const query = document.getElementById('main-search').value.trim().toLowerCase();
-    
-    if (!query) {
-        alert("Please enter a search term.");
-        return;
-    }
-
-    // Search through all resources
-    const results = languageResources.filter(resource => {
-        const searchText = `${resource.title} ${resource.description} ${resource.language} ${resource.coverage}`.toLowerCase();
-        return searchText.includes(query);
-    });
-
-    console.log(`Found ${results.length} results for "${query}"`);
-    alert(`Found ${results.length} resources matching "${query}"\n\nCheck the console for details.`);
-    
-    // Display results in console as a table
-    if (results.length > 0) {
-        console.table(results.map(r => ({
-            Title: r.title,
-            Language: r.language,
-            Region: r.coverage,
-            Category: r.category
-        })));
-    }
-}
-
-</script>
-</body>
-</html>
+// Export for use in other modules
+export default newsResources;
