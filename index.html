@@ -1693,13 +1693,14 @@ const newsResources = [
     source: "https://en.wikipedia.org/wiki/A_Key_into_the_Language_of_America"
   },
 
-  // Early 1600s
+// Early 1600s
   {
     date: "1603/early 1600s",
     title: "Jesuit & Dominican grammars / catechisms for Quechua, Aymara, etc.",
     type: "Missionary / Grammar / Catechism",
     summary: "Early printed works in the Andes region for Indigenous languages. Include grammars, dictionaries, catechisms — among the first systematic efforts to document indigenous languages in colonial Latin America.",
     source: "https://jesuitportal.bc.edu/publications/symposia/2019symposium/symposia-dejo/"
+  }
 ];
 
 // ----------------------------------------------------
@@ -1794,19 +1795,15 @@ function renderNewsItems() {
  * @param {string} category - The category to filter by (e.g., 'books', 'digital-archive').
  * @returns {Array<Object>} The filtered array of resources.
  */
+
 function getResourcesByCategory(category) {
     return languageResources.filter(r => r.category === category);
 }
-    
-    (category) {
-        return languageResources.filter(r => r.category === category);
-    }
 
-    // ----------------------------------------------------
-    // 3. INITIALIZATION
-    // ----------------------------------------------------
-
-    // 1. Get filtered data for each section
+// ----------------------------------------------------
+// 3. INITIALIZATION
+// ----------------------------------------------------
+// 1. Get filtered data for each section
     const booksData = getResourcesByCategory('books');
     const archiveData = getResourcesByCategory('digital-archive');
     const museumsData = getResourcesByCategory('museums');
