@@ -19,7 +19,7 @@ body {
   line-height: 1.6;
   color: #2c2c2c;
   background: #fafafa;
-  min-width: 320px;
+  min-width: 1400px;
 }
 
 /* ------------------------------------------- */
@@ -215,91 +215,67 @@ main {
 /* ------------------------------------------- */
 /* RESOURCE CARDS */
 /* ------------------------------------------- */
-
 .resources-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* ✓ Add responsive breakpoints */
-@media (max-width: 1200px) {
-    .resources-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .resources-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    body {
-        min-width: auto;
-    }
-    
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .resource-card {
   background: #fff;
-  border: 1px solid #ddd;
-  padding: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1.5rem;
   transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .resource-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border-color: #bbb;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: #000000;
 }
 
 .resource-card h3 {
   color: #000000;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   margin-bottom: 0.8rem;
   line-height: 1.4;
-  font-weight: 600;
 }
 
 .resource-meta {
-  font-size: 0.85rem;
-  color: #888;
+  display: flex;
+  gap: 0.8rem;
   margin-bottom: 1rem;
-  font-style: italic;
+  flex-wrap: wrap;
+}
+
+.resource-meta span {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #555;
 }
 
 .resource-description {
   color: #555;
   font-size: 0.95rem;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
+  margin-bottom: 1rem;
 }
 
 .resource-footer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 0;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
 }
 
 .resource-link {
-  color: #2c7be5;
+  color: #000000;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
@@ -310,7 +286,6 @@ main {
 .resource-source {
   font-size: 0.85rem;
   color: #888;
-  margin-top: 0.8rem;
 }
 
 /* ------------------------------------------- */
@@ -467,6 +442,7 @@ footer {
   font-size: 1.1rem;
 }
 </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
 
@@ -509,69 +485,29 @@ footer {
   
   <!-- HOME PAGE -->
   <section class="page-section active" id="home">
-    <div style="display: flex; gap: 3rem; align-items: center; margin-bottom: 3rem; padding: 2rem 0;">
-      <div style="flex: 1;">
-        <h2 style="font-size: 2.5rem; color: #000000; margin-bottom: 1rem; font-weight: 400; line-height: 1.3;">Preserving Indigenous Languages & Cultural Heritage</h2>
-        <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
-          A digital archive documenting and preserving Indigenous languages and cultural heritage across North America. Discover resources, connect with communities, and support language revitalization efforts.
-        </p>
-      </div>
-      <div style="flex: 0 0 300px;">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop" alt="Indigenous Heritage" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-        <p style="font-size: 0.8rem; color: #888; margin-top: 0.5rem; font-style: italic;">Photo courtesy of Boston Public Library</p>
-      </div>
+    <div class="page-header">
+      <h2>Welcome to the Indigenous Voices Archive</h2>
+      <p>Your gateway to Indigenous language preservation, revitalization, and education resources.</p>
     </div>
-
-    <!-- Statistics -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 4rem; text-align: center;">
-      <div>
-        <div style="font-size: 3rem; color: #4a5568; font-weight: 300; margin-bottom: 0.5rem;">100+</div>
-        <div style="font-size: 0.9rem; color: #718096; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;">Resources</div>
-      </div>
-      <div>
-        <div style="font-size: 3rem; color: #4a5568; font-weight: 300; margin-bottom: 0.5rem;">50+</div>
-        <div style="font-size: 0.9rem; color: #718096; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;">Languages</div>
-      </div>
-      <div>
-        <div style="font-size: 3rem; color: #4a5568; font-weight: 300; margin-bottom: 0.5rem;">25+</div>
-        <div style="font-size: 0.9rem; color: #718096; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;">Regions</div>
-      </div>
-      <div>
-        <div style="font-size: 3rem; color: #4a5568; font-weight: 300; margin-bottom: 0.5rem;">15+</div>
-        <div style="font-size: 0.9rem; color: #718096; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;">Mobile Apps</div>
-      </div>
-    </div>
-
-    <!-- Featured Collections -->
-    <div style="margin-bottom: 3rem;">
-      <h2 style="font-size: 1.8rem; color: #2c2c2c; text-align: center; margin-bottom: 2rem; font-weight: 400;">Featured Collections</h2>
-      
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-        <div style="border: 1px solid #e0e0e0; padding: 2rem; border-radius: 6px; background: #fff;">
-          <h3 style="font-size: 1.2rem; color: #000000; margin-bottom: 0.8rem;">Cherokee Nation Language Platform</h3>
-          <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem; font-style: italic;">Eastern Woodlands • Cherokee (Tsalagi)</p>
-          <p style="font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 1.5rem;">
-            The Nation's official online learning hub offering comprehensive curriculum, apps and community resources for Cherokee language preservation and education.
-          </p>
-          <a href="#digital-archive" style="color: #000000; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Explore Collection →</a>
+    <div style="padding: 2rem 0;">
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        This comprehensive archive brings together digital resources, publications, mobile applications, and cultural institutions dedicated to preserving and revitalizing Indigenous languages across North America.
+      </p>
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        Explore our curated collection of over 150 resources spanning digital archives, books, mobile apps, museums, and the latest news in Indigenous language revitalization efforts.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
+          <h3 style="color: #000000; margin-bottom: 0.5rem;">150+ Resources</h3>
+          <p style="color: #666;">Comprehensive collection of language preservation materials</p>
         </div>
-
-        <div style="border: 1px solid #e0e0e0; padding: 2rem; border-radius: 6px; background: #fff;">
-          <h3 style="font-size: 1.2rem; color: #000000; margin-bottom: 0.8rem;">Northern Paiute Language Project</h3>
-          <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem; font-style: italic;">Great Basin • Northern Paiute (Numu)</p>
-          <p style="font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 1.5rem;">
-            Comprehensive documentation project creating audio dictionary and text collections for community language learning with thousands of words and cultural context.
-          </p>
-          <a href="#digital-archive" style="color: #000000; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Explore Collection →</a>
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
+          <h3 style="color: #000000; margin-bottom: 0.5rem;">50+ Languages</h3>
+          <p style="color: #666;">Covering Indigenous languages across North America</p>
         </div>
-
-        <div style="border: 1px solid #e0e0e0; padding: 2rem; border-radius: 6px; background: #fff;">
-          <h3 style="font-size: 1.2rem; color: #000000; margin-bottom: 0.8rem;">Sealaska Heritage Institute</h3>
-          <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem; font-style: italic;">Northwest Coast • Tlingit, Haida, Tsimshian</p>
-          <p style="font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 1.5rem;">
-            Official Southeast Alaska language revitalization hub providing downloadable materials, audio dictionaries and comprehensive learning resources.
-          </p>
-          <a href="#digital-archive" style="color: #000000; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Explore Collection →</a>
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
+          <h3 style="color: #000000; margin-bottom: 0.5rem;">Latest News</h3>
+          <p style="color: #666;">Stay updated with revitalization efforts and research</p>
         </div>
       </div>
     </div>
@@ -585,29 +521,29 @@ footer {
     </div>
     
     <div class="filters-section">
-  <div class="filter-group">
-    <label>Region</label>
-    <select class="region-filter">
-      <option value="all">All Regions</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Language</label>
-    <select class="language-filter">
-      <option value="all">All Languages</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Search</label>
-    <input type="text" class="search-input" placeholder="Search...">
-  </div>
-</div>
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search resources...">
+      </div>
+    </div>
     
-    <div class="resources-grid resources-container"> 
+    <div class="resources-grid" id="resources-container">
       <p class="no-results">Loading resources...</p>
     </div>
     
-    <div class="pagination-controls"></div> 
+    <div id="pagination-controls"></div>
   </section>
 
   <!-- BOOKS PAGE -->
@@ -618,29 +554,29 @@ footer {
     </div>
     
     <div class="filters-section">
-  <div class="filter-group">
-    <label>Region</label>
-    <select class="region-filter">
-      <option value="all">All Regions</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Language</label>
-    <select class="language-filter">
-      <option value="all">All Languages</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Search</label>
-    <input type="text" class="search-input" placeholder="Search...">
-  </div>
-</div>
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search books...">
+      </div>
+    </div>
     
-    <div class="resources-grid resources-container"> 
+    <div class="resources-grid" id="resources-container">
       <p class="no-results">Loading books and publications...</p>
     </div>
     
-    <div class="pagination-controls"></div> 
+    <div id="pagination-controls"></div>
   </section>
 
   <!-- APPS PAGE -->
@@ -651,29 +587,29 @@ footer {
     </div>
     
     <div class="filters-section">
-  <div class="filter-group">
-    <label>Region</label>
-    <select class="region-filter">
-      <option value="all">All Regions</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Language</label>
-    <select class="language-filter">
-      <option value="all">All Languages</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Search</label>
-    <input type="text" class="search-input" placeholder="Search...">
-  </div>
-</div>
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search apps...">
+      </div>
+    </div>
     
-    <div class="resources-grid resources-container"> 
+    <div class="resources-grid" id="resources-container">
       <p class="no-results">Loading mobile apps and tools...</p>
     </div>
     
-    <div class="pagination-controls"></div> 
+    <div id="pagination-controls"></div>
   </section>
 
   <!-- MUSEUMS PAGE -->
@@ -684,29 +620,29 @@ footer {
     </div>
     
     <div class="filters-section">
-  <div class="filter-group">
-    <label>Region</label>
-    <select class="region-filter">
-      <option value="all">All Regions</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Language</label>
-    <select class="language-filter">
-      <option value="all">All Languages</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label>Search</label>
-    <input type="text" class="search-input" placeholder="Search...">
-  </div>
-</div>
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search museums...">
+      </div>
+    </div>
     
-    <div class="resources-grid resources-container"> 
+    <div class="resources-grid" id="resources-container">
       <p class="no-results">Loading museums and cultural centers...</p>
     </div>
     
-    <div class="pagination-controls"></div> 
+    <div id="pagination-controls"></div>
   </section>
 
   <!-- NEWS PAGE -->
@@ -2262,7 +2198,8 @@ const newsResources = [
     summary: "Early printed works in the Andes region for Indigenous languages. Include grammars, dictionaries, catechisms among the first systematic efforts to document indigenous languages in colonial Latin America.",
     source: "https://jesuitportal.bc.edu/publications/symposia/2019symposium/symposia-dejo/"
   }
-];
+]
+;
 
 // ====================================================================
 // APPLICATION LOGIC
@@ -2566,4 +2503,3 @@ function formatDate(dateString) {
 
 </body>
 </html>
-
