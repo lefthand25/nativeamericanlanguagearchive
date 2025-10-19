@@ -521,7 +521,35 @@ footer {
 .stat-box h3 {
   color: #000000;
   margin-bottom: 0.5rem;
-  fo
+  font-size: 1.1rem;
+}
+
+.stat-box p {
+  color: #666;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 1200px) {
+  .home-content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .home-image-column {
+    position: relative;
+    top: 0;
+  }
+  
+  .home-image-column .hero-image img {
+    height: 350px;
+  }
+}
+</style>
+</head>
+<body>
 
 <!--HEADER -->
 <header>
