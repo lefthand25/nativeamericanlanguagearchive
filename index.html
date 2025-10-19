@@ -538,9 +538,50 @@ footer {
         <div class="image-credit">Photo courtesy of Boston Public Library</div>
       </div>
     </div>
+
+  /* Update statistics to work better in narrower space */
+.home-text-column .stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.home-text-column .stat-box {
+  background: #f8f8f8;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #000000;
+}
+
+.home-text-column .stat-box h3 {
+  color: #000000;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.home-text-column .stat-box p {
+  color: #666;
+  margin: 0;
+} 
   </div>
-</section>
-    /* ------------------------------------------- */
+</section>  
+<div class="stats-grid">
+  <div class="stat-box">
+    <h3>150+ Resources</h3>
+    <p>Comprehensive collection of language preservation materials</p>
+  </div>
+  <div class="stat-box">
+    <h3>50+ Languages</h3>
+    <p>Covering Indigenous languages across North America</p>
+  </div>
+  <div class="stat-box">
+    <h3>Latest News</h3>
+    <p>Stay updated with revitalization efforts and research</p>
+  </div>
+</div>
+  
+/* ------------------------------------------- */
 /* HOME PAGE TWO-COLUMN LAYOUT */
 /* ------------------------------------------- */
 
@@ -589,52 +630,7 @@ footer {
   font-size: 0.85rem;
   text-align: center;
 }
-
-/* Statistics boxes - stacked vertically in left column */
-.stats-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
 }
-
-.stat-box {
-  background: #f8f8f8;
-  padding: 1.5rem;
-  border-radius: 6px;
-  border-left: 4px solid #000000;
-}
-
-.stat-box h3 {
-  color: #000000;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.stat-box p {
-  color: #666;
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-/* Responsive: Stack on smaller screens */
-@media (max-width: 1200px) {
-  .home-content-wrapper {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .home-image-column {
-    position: relative;
-    top: 0;
-  }
-  
-  .home-image-column .hero-image img {
-    height: 350px;
-  }
-}
-
   <!-- DIGITAL ARCHIVE PAGE -->
   <section class="page-section" id="digital-archive">
     <div class="page-header">
