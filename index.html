@@ -540,29 +540,100 @@ footer {
     </div>
   </div>
 </section>
-    <div style="padding: 2rem 0;">
-      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-        This archive brings together digital resources, publications, mobile applications and cultural institutions dedicated to preserving and revitalizing Indigenous languages across North America.
-      </p>
-      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-        Explore our curated collection of over 150 resources spanning digital archives, books, mobile apps, museums, and the latest news in Indigenous language revitalization efforts.
-      </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
-          <h3 style="color: #000000; margin-bottom: 0.5rem;">150+ Resources</h3>
-          <p style="color: #666;">Comprehensive collection of language preservation materials</p>
-        </div>
-        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
-          <h3 style="color: #000000; margin-bottom: 0.5rem;">50+ Languages</h3>
-          <p style="color: #666;">Covering Indigenous languages across North America</p>
-        </div>
-        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
-          <h3 style="color: #000000; margin-bottom: 0.5rem;">Latest News</h3>
-          <p style="color: #666;">Stay updated with revitalization efforts and research</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    /* ------------------------------------------- */
+/* HOME PAGE TWO-COLUMN LAYOUT */
+/* ------------------------------------------- */
+
+/* Two-column wrapper for home page */
+.home-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+.home-text-column {
+  /* Text content stays on the left */
+}
+
+.home-image-column {
+  /* Image stays on the right - sticky positioning */
+  position: sticky;
+  top: 100px;
+}
+
+/* Update hero image for home page */
+.home-image-column .hero-image {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  height: 100%;
+}
+
+.home-image-column .hero-image img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.image-credit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Statistics boxes - stacked vertically in left column */
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.stat-box {
+  background: #f8f8f8;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #000000;
+}
+
+.stat-box h3 {
+  color: #000000;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.stat-box p {
+  color: #666;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 1200px) {
+  .home-content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .home-image-column {
+    position: relative;
+    top: 0;
+  }
+  
+  .home-image-column .hero-image img {
+    height: 350px;
+  }
+}
 
   <!-- DIGITAL ARCHIVE PAGE -->
   <section class="page-section" id="digital-archive">
