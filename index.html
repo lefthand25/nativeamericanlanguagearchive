@@ -1,182 +1,711 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Indigenous Voices Archive</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indigenous Voices Archive</title>
+<style>
+/* ------------------------------------------- */
+/* BASE STYLES - PROFESSIONAL ARCHIVE DESIGN */
+/* ------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  line-height: 1.6;
+  color: #2c2c2c;
+  background: #fafafa;
+  min-width: 1400px;
+}
+
+/* ------------------------------------------- */
+/* HEADER - PROFESSIONAL ARCHIVE STYLE */
+/* ------------------------------------------- */
+header {
+  background: #fff;
+  border-bottom: 3px solid #000000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-top {
+  background: #f8f8f8;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #666;
+}
+
+.header-main {
+  padding: 1rem 2rem;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-text h1 {
+  font-size: 1.8rem;
+  color: #2c2c2c;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+
+.logo-text p {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Navigation - Single Row */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #2c2c2c;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+nav a:hover,
+nav a.active {
+  color: #000000;
+  border-bottom-color: #000000;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  min-width: 280px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-top: 2px solid #000000;
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+  background: #000000;
+  color: #fff;
+}
+
+/* ------------------------------------------- */
+/* MAIN CONTENT AREA */
+/* ------------------------------------------- */
+main {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.page-section {
+  display: none;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.page-section.active {
+  display: block;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #000000;
+}
+
+.page-header h2 {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ------------------------------------------- */
+/* FILTERS SECTION */
+/* ------------------------------------------- */
+.filters-section {
+  background: #f8f8f8;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+/* ------------------------------------------- */
+/* RESOURCE CARDS */
+/* ------------------------------------------- */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.resource-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: #000000;
+}
+
+.resource-card h3 {
+  color: #000000;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.resource-meta {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.resource-meta span {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #555;
+}
+
+.resource-description {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.resource-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.resource-link {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.resource-link:hover {
+  text-decoration: underline;
+}
+
+.resource-source {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ------------------------------------------- */
+/* NEWS CARDS */
+/* ------------------------------------------- */
+.news-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.news-card {
+  background: #fff;
+  border-left: 4px solid #000000;
+  padding: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.news-date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.news-card h3 {
+  color: #000000;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.news-type {
+  display: inline-block;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.news-summary {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.news-link {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.news-link:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------- */
+/* PAGINATION CONTROLS */
+/* ------------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: #f8f8f8;
+  border-radius: 6px;
+  margin-top: 2rem;
+}
+
+.pagination-info {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.page-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #2c2c2c;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+  background: #000000;
+  color: #fff;
+  border-color: #000000;
+}
+
+.page-btn.active {
+  background: #000000;
+  color: #fff;
+  border-color: #000000;
+  font-weight: 600;
+}
+
+.page-ellipsis {
+  padding: 0.5rem;
+  color: #999;
+}
+
+/* ------------------------------------------- */
+/* FOOTER */
+/* ------------------------------------------- */
+footer {
+  background: #2c2c2c;
+  color: #fff;
+  padding: 2rem;
+  margin-top: 4rem;
+  border-top: 3px solid #000000;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  margin-bottom: 0.5rem;
+}
+
+.footer-content a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ------------------------------------------- */
+/* UTILITY CLASSES */
+/* ------------------------------------------- */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+  font-size: 1.1rem;
+}
+</style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <h1>Indigenous Voices Archive</h1>
-    <nav>
-      <ul>
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li class="dropdown">
-          <a href="#" class="nav-link">Resources ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="#digital-archive" class="nav-link">Digital Archive</a></li>
-            <li><a href="#books" class="nav-link">Books & Publications</a></li>
-            <li><a href="#apps" class="nav-link">Mobile Apps</a></li>
-            <li><a href="#museums" class="nav-link">Museums & Centers</a></li>
-          </ul>
-        </li>
-        <li><a href="#news" class="nav-link">News</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main>
-
-    <!-- HOME -->
-    <section id="home" class="page-section active">
-      <h2>Welcome</h2>
-      <p>Preserving Indigenous languages and cultural heritage.</p>
-    </section>
-
-    <!-- DIGITAL ARCHIVE -->
-    <section id="digital-archive" class="page-section">
-      <h2>Digital Archive</h2>
-      <div class="filters-section">
-        <select id="region-filter-digital"><option value="all">All Regions</option></select>
-        <select id="language-filter-digital"><option value="all">All Languages</option></select>
-        <input type="text" id="search-digital" placeholder="Search...">
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    Preserving Indigenous Languages for Future Generations
+  </div>
+  <div class="header-main">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-text">
+          <h1>Indigenous Voices Archive</h1>
+          <p>A Comprehensive Resource Database</p>
+        </div>
       </div>
-      <div class="resources-grid" id="digital-archive-container"></div>
-      <div class="pagination" id="pagination-digital"></div>
-    </section>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li class="dropdown">
+            <a href="#digital-archive" id="resources-dropdown">Resources ▾</a>
+            <div class="dropdown-content">
+              <a href="#digital-archive">Digital Archives & Online Platforms</a>
+              <a href="#books">Books & Publications</a>
+              <a href="#apps">Mobile Apps & Digital Tools</a>
+              <a href="#museums">Museums & Cultural Centers</a>
+            </div>
+          </li>
+          <li><a href="#news">News & Timeline</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-    <!-- BOOKS -->
-    <section id="books" class="page-section">
+<!-- MAIN CONTENT -->
+<main>
+  
+  <!-- HOME PAGE -->
+  <section class="page-section active" id="home">
+    <div class="page-header">
+      <h2>Welcome to the Indigenous Voices Archive</h2>
+      <p>Your gateway to Indigenous language preservation, revitalization, and education resources.</p>
+    </div>
+    <div style="padding: 2rem 0;">
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        This comprehensive archive brings together digital resources, publications, mobile applications, and cultural institutions dedicated to preserving and revitalizing Indigenous languages across North America.
+      </p>
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        Explore our curated collection of over 150 resources spanning digital archives, books, mobile apps, museums, and the latest news in Indigenous language revitalization efforts.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
+          <h3 style="color: #000000; margin-bottom: 0.5rem;">150+ Resources</h3>
+          <p style="color: #666;">Comprehensive collection of language preservation materials</p>
+        </div>
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
+          <h3 style="color: #000000; margin-bottom: 0.5rem;">50+ Languages</h3>
+          <p style="color: #666;">Covering Indigenous languages across North America</p>
+        </div>
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #000000;">
+          <h3 style="color: #000000; margin-bottom: 0.5rem;">Latest News</h3>
+          <p style="color: #666;">Stay updated with revitalization efforts and research</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL ARCHIVE PAGE -->
+  <section class="page-section" id="digital-archive">
+    <div class="page-header">
+      <h2>Digital Archives & Online Platforms</h2>
+      <p>Online platforms, digital collections, and language learning websites for Indigenous language preservation and education.</p>
+    </div>
+    
+    <div class="filters-section">
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search resources...">
+      </div>
+    </div>
+    
+    <div class="resources-grid" id="resources-container">
+      <p class="no-results">Loading resources...</p>
+    </div>
+    
+    <div id="pagination-controls"></div>
+  </section>
+
+  <!-- BOOKS PAGE -->
+  <section class="page-section" id="books">
+    <div class="page-header">
       <h2>Books & Publications</h2>
-      <div class="filters-section">
-        <select id="region-filter-books"><option value="all">All Regions</option></select>
-        <select id="language-filter-books"><option value="all">All Languages</option></select>
-        <input type="text" id="search-books" placeholder="Search...">
+      <p>Essential written resources for in-depth study and documentation, including authoritative grammars, dictionaries and cultural materials.</p>
+    </div>
+    
+    <div class="filters-section">
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
       </div>
-      <div class="resources-grid" id="books-container"></div>
-      <div class="pagination" id="pagination-books"></div>
-    </section>
-
-    <!-- APPS -->
-    <section id="apps" class="page-section">
-      <h2>Mobile Apps</h2>
-      <div class="filters-section">
-        <select id="region-filter-apps"><option value="all">All Regions</option></select>
-        <select id="language-filter-apps"><option value="all">All Languages</option></select>
-        <input type="text" id="search-apps" placeholder="Search...">
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
       </div>
-      <div class="resources-grid" id="apps-container"></div>
-      <div class="pagination" id="pagination-apps"></div>
-    </section>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search books...">
+      </div>
+    </div>
+    
+    <div class="resources-grid" id="resources-container">
+      <p class="no-results">Loading books and publications...</p>
+    </div>
+    
+    <div id="pagination-controls"></div>
+  </section>
 
-    <!-- MUSEUMS -->
-    <section id="museums" class="page-section">
+  <!-- APPS PAGE -->
+  <section class="page-section" id="apps">
+    <div class="page-header">
+      <h2>Mobile Apps & Digital Tools</h2>
+      <p>Interactive mobile applications and digital tools for language learning, practice, and daily use.</p>
+    </div>
+    
+    <div class="filters-section">
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search apps...">
+      </div>
+    </div>
+    
+    <div class="resources-grid" id="resources-container">
+      <p class="no-results">Loading mobile apps and tools...</p>
+    </div>
+    
+    <div id="pagination-controls"></div>
+  </section>
+
+  <!-- MUSEUMS PAGE -->
+  <section class="page-section" id="museums">
+    <div class="page-header">
       <h2>Museums & Cultural Centers</h2>
-      <div class="filters-section">
-        <select id="region-filter-museums"><option value="all">All Regions</option></select>
-        <select id="language-filter-museums"><option value="all">All Languages</option></select>
-        <input type="text" id="search-museums" placeholder="Search...">
+      <p>Physical and virtual institutions preserving Indigenous languages, cultures, and heritage.</p>
+    </div>
+    
+    <div class="filters-section">
+      <div class="filter-group">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+        </select>
       </div>
-      <div class="resources-grid" id="museums-container"></div>
-      <div class="pagination" id="pagination-museums"></div>
-    </section>
+      <div class="filter-group">
+        <label for="language-filter">Language</label>
+        <select id="language-filter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search</label>
+        <input type="text" id="search-input" placeholder="Search museums...">
+      </div>
+    </div>
+    
+    <div class="resources-grid" id="resources-container">
+      <p class="no-results">Loading museums and cultural centers...</p>
+    </div>
+    
+    <div id="pagination-controls"></div>
+  </section>
 
-    <!-- NEWS -->
-    <section id="news" class="page-section">
-      <h2>Language Revitalization News</h2>
-      <div class="news-grid" id="news-container"></div>
-    </section>
+  <!-- NEWS PAGE -->
+  <section class="page-section" id="news">
+    <div class="page-header">
+      <h2>News & Chronological Resources</h2>
+      <p>Latest developments, research, and historical timeline of Indigenous language revitalization efforts.</p>
+    </div>
+    
+    <div class="news-grid" id="news-container">
+      <p class="no-results">Loading news and timeline...</p>
+    </div>
+    
+    <div id="news-pagination-controls"></div>
+  </section>
 
-  </main>
+  <!-- ABOUT PAGE -->
+  <section class="page-section" id="about">
+    <div class="page-header">
+      <h2>About This Archive</h2>
+      <p>Our mission and commitment to Indigenous language preservation.</p>
+    </div>
+    <div style="padding: 2rem 0;">
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        The Indigenous Voices Archive is a comprehensive digital repository dedicated to preserving, promoting, and revitalizing Indigenous languages across North America. Our mission is to provide accessible, organized, and up-to-date resources for language learners, educators, researchers, and community members.
+      </p>
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        We recognize that Indigenous languages are not merely communication tools but living embodiments of unique worldviews, cultural knowledge, and ancestral wisdom. Each language represents thousands of years of human experience and connection to the land.
+      </p>
+      <p style="font-size: 1.1rem; line-height: 1.8;">
+        This archive serves as a bridge between traditional knowledge keepers and new generations of learners, supporting the vital work of language revitalization happening in communities across the continent.
+      </p>
+    </div>
+  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Indigenous Voices Archive.</p>
-  </footer>
+  <!-- CONTACT PAGE -->
+  <section class="page-section" id="contact">
+    <div class="page-header">
+      <h2>Contact Us</h2>
+      <p>Get in touch with questions, suggestions, or to contribute resources.</p>
+    </div>
+    <div style="padding: 2rem 0;">
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        We welcome contributions, corrections, and suggestions for additional resources. If you know of Indigenous language materials that should be included in this archive, please reach out to us.
+      </p>
+      <p style="font-size: 1.1rem; line-height: 1.8;">
+        For inquiries, please contact us through the appropriate channels for your community or organization.
+      </p>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
-</body>
-</html>
-body { font-family: 'Georgia', 'Times New Roman' sans-serif; background: #f8f8f8; margin: 0; }
+</main>
 
-header {
-  background: #2f2f2f;
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Indigenous Voices Archive. All rights reserved.</p>
+    <p>Dedicated to the preservation and revitalization of Indigenous languages.</p>
+  </div>
+</footer>
 
-nav ul { list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0; }
-nav a { color: white; text-decoration: none; }
-
-.dropdown { position: relative; }
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 2rem;
-  background: #444;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.dropdown:hover .dropdown-menu { display: block; }
-
-.page-section { display: none; padding: 1rem; }
-.page-section.active { display: block; }
-
-.filters-section {
-  display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-}
-.filters-section select, .filters-section input {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.resources-grid, .news-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.resource-card, .news-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.resource-footer { display: flex; justify-content: space-between; margin-top: .5rem; }
-.resource-link, .news-link { color: #0077cc; text-decoration: none; }
-
-.pagination {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-.page-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  background: #fff;
-  cursor: pointer;
-}
-.page-btn.active {
-  background: #0077cc;
-  color: white;
-  font-weight: bold;
-}
-.page-btn:disabled {
-  background: #eee;
-  cursor: default;
-}
-
+<!-- SCRIPTS -->
+<script>
 // ===================================================================
 // INDIGENOUS LANGUAGE ARCHIVE - RESOURCE DATABASE
 // ===================================================================
@@ -1211,7 +1740,6 @@ const indigenousLanguageResources = [
   }
 ];
 
-
 // ====================================================================
 // NEWS & CHRONOLOGICAL RESOURCES DATA
 // ====================================================================
@@ -1673,138 +2201,307 @@ const newsResources = [
 ]
 ;
 
+// ====================================================================
+// APPLICATION LOGIC
+// ====================================================================
 
-// ============================================================
-// PAGE NAVIGATION
-// ============================================================
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const targetId = e.target.getAttribute('href').substring(1);
-    document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-    const targetSection = document.getElementById(targetId);
-    if (targetSection) targetSection.classList.add('active');
+let currentCategory = 'digital-archive';
+let currentPage = 1;
+let itemsPerPage = 9;
+let filteredResources = [];
+let currentNewsPage = 1;
+let newsPerPage = 10;
 
-    if (targetId === 'digital-archive') loadResources('digital-archive', 'digital-archive-container', 'digital');
-    if (targetId === 'books') loadResources('books', 'books-container', 'books');
-    if (targetId === 'apps') loadResources('apps', 'apps-container', 'apps');
-    if (targetId === 'museums') loadResources('museums', 'museums-container', 'museums');
-    if (targetId === 'news') loadNews();
-  });
+document.addEventListener('DOMContentLoaded', function() {
+  setupNavigation();
+  loadResources();
+  loadNews();
 });
 
-// ============================================================
-// FILTER + PAGINATION
-// ============================================================
-const ITEMS_PER_PAGE = 10;
-
-function loadResources(category, containerId, key) {
-  const container = document.getElementById(containerId);
-  const paginationEl = document.getElementById(`pagination-${key}`);
-  const regionFilter = document.getElementById(`region-filter-${key}`);
-  const languageFilter = document.getElementById(`language-filter-${key}`);
-  const searchInput = document.getElementById(`search-${key}`);
-
-  const allResources = indigenousLanguageResources.filter(r => r.category === category);
-
-  // Build filter options
-  const regions = [...new Set(allResources.map(r => r.geographicCoverage))];
-  const languages = [...new Set(allResources.map(r => r.language))];
-  regionFilter.innerHTML = `<option value="all">All Regions</option>` + regions.map(r => `<option value="${r}">${r}</option>`).join('');
-  languageFilter.innerHTML = `<option value="all">All Languages</option>` + languages.map(l => `<option value="${l}">${l}</option>`).join('');
-
-  let currentPage = 1;
-
-  function applyFilters() {
-    const regionVal = regionFilter.value;
-    const langVal = languageFilter.value;
-    const searchVal = searchInput.value.toLowerCase();
-
-    return allResources.filter(r => {
-      const regionMatch = regionVal === 'all' || r.geographicCoverage === regionVal;
-      const langMatch = langVal === 'all' || r.language === langVal;
-      const searchMatch = r.title.toLowerCase().includes(searchVal);
-      return regionMatch && langMatch && searchMatch;
-    });
-  }
-
-  function renderList(page = 1) {
-    const filtered = applyFilters();
-    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-
-    const start = (page - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    const items = filtered.slice(start, end);
-
-    container.innerHTML = '';
-    if (items.length === 0) {
-      container.innerHTML = '<p>No results found.</p>';
-    } else {
-      items.forEach(resource => {
-        const card = document.createElement('div');
-        card.classList.add('resource-card');
-        card.innerHTML = `
-          <h3>${resource.title}</h3>
-          <div class="resource-meta">
-            <span>${resource.geographicCoverage}</span>
-            <span>${resource.language}</span>
-          </div>
-          <p>${resource.description}</p>
-          <div class="resource-footer">
-            <a href="${resource.webLink}" target="_blank" class="resource-link">Visit</a>
-            <span>${resource.Source}</span>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // Render pagination
-    paginationEl.innerHTML = '';
-    if (totalPages > 1) {
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.classList.add('page-btn');
-        btn.textContent = i;
-        if (i === page) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          currentPage = i;
-          renderList(i);
-        });
-        paginationEl.appendChild(btn);
+function setupNavigation() {
+  const navLinks = document.querySelectorAll('nav a');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+      
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(targetId).classList.add('active');
+      
+      if (targetId !== 'home' && targetId !== 'about' && targetId !== 'contact' && targetId !== 'news') {
+        currentCategory = targetId;
+        currentPage = 1;
+        loadResources();
+      } else if (targetId === 'news') {
+        currentNewsPage = 1;
+        loadNews();
       }
-    }
-  }
-
-  regionFilter.onchange = () => { currentPage = 1; renderList(); };
-  languageFilter.onchange = () => { currentPage = 1; renderList(); };
-  searchInput.oninput = () => { currentPage = 1; renderList(); };
-
-  renderList();
-}
-
-// ============================================================
-// NEWS LOADER
-// ============================================================
-function loadNews() {
-  const container = document.getElementById('news-container');
-  container.innerHTML = '';
-
-  if (newsData.length === 0) {
-    container.innerHTML = '<p>No news available.</p>';
-    return;
-  }
-
-  newsData.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('news-card');
-    card.innerHTML = `
-      <div class="news-date">${item.date}</div>
-      <h3>${item.title}</h3>
-      <div class="news-type">${item.type}</div>
-      <p>${item.summary}</p>
-      <a href="${item.link}" target="_blank" class="news-link">Read more</a>
-    `;
-    container.appendChild(card);
+    });
   });
 }
+function loadResources() {
+    const section = document.getElementById(currentCategory);
+    if (!section) return;
+    
+const regionFilter = section.querySelector('.region-filter');
+    const languageFilter = section.querySelector('.language-filter');
+    const searchInput = section.querySelector('.search-input');
+    const container = section.querySelector('.resources-container');
+
+  const categoryResources = indigenousLanguageResources.filter(r => r.category === currentCategory);
+  
+  populateFilters(regionFilter, languageFilter, categoryResources);
+  
+  regionFilter.addEventListener('change', () => { currentPage = 1; filterAndDisplay(); });
+  languageFilter.addEventListener('change', () => { currentPage = 1; filterAndDisplay(); });
+  searchInput.addEventListener('input', () => { currentPage = 1; filterAndDisplay(); });
+  
+  filterAndDisplay();
+  
+  function filterAndDisplay() {
+    const regionValue = regionFilter.value;
+    const languageValue = languageFilter.value;
+    const searchValue = searchInput.value.toLowerCase();
+    
+    filteredResources = categoryResources.filter(resource => {
+      const matchesRegion = regionValue === 'all' || resource.geographicCoverage === regionValue;
+      const matchesLanguage = languageValue === 'all' || resource.language === languageValue;
+      const matchesSearch = searchValue === '' || 
+        resource.title.toLowerCase().includes(searchValue) ||
+        resource.description.toLowerCase().includes(searchValue) ||
+        resource.language.toLowerCase().includes(searchValue);
+      
+      return matchesRegion && matchesLanguage && matchesSearch;
+    });
+    
+    displayResources(container, section);
+  }
+}
+
+function populateFilters(regionFilter, languageFilter, resources) {
+  const regions = [...new Set(resources.map(r => r.geographicCoverage))].sort();
+  const languages = [...new Set(resources.map(r => r.language))].sort();
+  
+  regionFilter.innerHTML = '<option value="all">All Regions</option>';
+  regions.forEach(region => {
+    const option = document.createElement('option');
+    option.value = region;
+    option.textContent = region;
+    regionFilter.appendChild(option);
+  });
+  
+  languageFilter.innerHTML = '<option value="all">All Languages</option>';
+  languages.forEach(language => {
+    const option = document.createElement('option');
+    option.value = language;
+    option.textContent = language;
+    languageFilter.appendChild(option);
+  });
+}
+
+function displayResources(container, section) {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const pageResources = filteredResources.slice(startIndex, endIndex);
+  
+  if (pageResources.length === 0) {
+    container.innerHTML = '<p class="no-results">No resources found matching your criteria.</p>';
+    section.querySelector('.pagination-controls').innerHTML = '';
+    return;
+  }
+  
+  let resourceHTML = '';
+  for (let i = 0; i < pageResources.length; i++) {
+    const resource = pageResources[i];
+    resourceHTML += '<div class="resource-card">';
+    resourceHTML += '<h3>' + escapeHtml(resource.title) + '</h3>';
+    resourceHTML += '<div class="resource-meta">' + escapeHtml(resource.geographicCoverage) + ' • ' + escapeHtml(resource.language) + '</div>';
+    resourceHTML += '<p class="resource-description">' + escapeHtml(resource.description) + '</p>';
+    resourceHTML += '<div class="resource-footer">';
+    if (resource.webLink && resource.webLink !== 'null') {
+  // This is sufficient since "null" string is falsy enough
+}
+      resourceHTML += '<a href="' + escapeHtml(resource.webLink) + '" class="resource-link" target="_blank" rel="noopener">Visit Resource →</a>';
+    } else {
+      resourceHTML += '<span class="resource-link" style="color: #999;">Contact source for access</span>';
+    }
+    resourceHTML += '</div>';
+    resourceHTML += '<div style="font-size: 0.85rem; color: #888; margin-top: 0.8rem;">' + escapeHtml(resource.Source) + '</div>';
+    resourceHTML += '</div>';
+  }
+  container.innerHTML = resourceHTML;
+  
+  displayPagination(section.querySelector('.pagination-controls'), filteredResources.length);
+}
+
+function displayPagination(container, totalItems) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  
+  if (totalPages <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  let paginationHTML = '<div class="pagination">';
+  paginationHTML += `<div class="pagination-info">Showing ${(currentPage - 1) * itemsPerPage + 1}-${Math.min(currentPage * itemsPerPage, totalItems)} of ${totalItems} resources</div>`;
+  paginationHTML += '<div class="pagination-buttons">';
+  
+  if (currentPage > 1) {
+    paginationHTML += '<button class="page-btn" onclick="goToPage(' + (currentPage - 1) + ')">← Previous</button>';
+  }
+  
+  const maxButtons = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+  let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+  
+  if (endPage - startPage < maxButtons - 1) {
+    startPage = Math.max(1, endPage - maxButtons + 1);
+  }
+  
+  if (startPage > 1) {
+    paginationHTML += '<button class="page-btn" onclick="goToPage(1)">1</button>';
+    if (startPage > 2) {
+      paginationHTML += '<span class="page-ellipsis">...</span>';
+    }
+  }
+  
+  for (let i = startPage; i <= endPage; i++) {
+    paginationHTML += '<button class="page-btn ' + (i === currentPage ? 'active' : '') + '" onclick="goToPage(' + i + ')">' + i + '</button>';
+  }
+  
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      paginationHTML += '<span class="page-ellipsis">...</span>';
+    }
+    paginationHTML += '<button class="page-btn" onclick="goToPage(' + totalPages + ')">' + totalPages + '</button>';
+  }
+  
+  if (currentPage < totalPages) {
+    paginationHTML += '<button class="page-btn" onclick="goToPage(' + (currentPage + 1) + ')">Next →</button>';
+  }
+  
+  paginationHTML += '</div></div>';
+  container.innerHTML = paginationHTML;
+}
+window.goToPage = function(page) {  
+    currentPage = page;
+    const section = document.getElementById(currentCategory);
+    const container = section.querySelector('.resources-container');  
+    displayResources(container, section);
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function loadNews() {
+  const container = document.getElementById('news-container');
+  const paginationContainer = document.getElementById('news-pagination-controls');
+  displayNews(container, paginationContainer);
+}
+
+function displayNews(container, paginationContainer) {
+  const startIndex = (currentNewsPage - 1) * newsPerPage;
+  const endIndex = startIndex + newsPerPage;
+  const pageNews = newsResources.slice(startIndex, endIndex);
+  
+  if (pageNews.length === 0) {
+    container.innerHTML = '<p class="no-results">No news items available.</p>';
+    paginationContainer.innerHTML = '';
+    return;
+  }
+  
+  let newsHTML = '';
+  for (let i = 0; i < pageNews.length; i++) {
+    const news = pageNews[i];
+    newsHTML += '<div class="news-card">';
+    newsHTML += '<div class="news-date">' + formatDate(news.date) + '</div>';
+    newsHTML += '<h3>' + escapeHtml(news.title) + '</h3>';
+    newsHTML += '<span class="news-type">' + escapeHtml(news.type) + '</span>';
+    newsHTML += '<p class="news-summary">' + escapeHtml(news.summary) + '</p>';
+    newsHTML += '<a href="' + escapeHtml(news.source) + '" class="news-link" target="_blank" rel="noopener">Read More →</a>';
+    newsHTML += '</div>';
+  }
+  container.innerHTML = newsHTML;
+  
+  displayNewsPagination(paginationContainer, newsResources.length);
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function displayNewsPagination(container, totalItems) {
+  const totalPages = Math.ceil(totalItems / newsPerPage);
+  
+  if (totalPages <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  let paginationHTML = '<div class="pagination">';
+  paginationHTML += '<div class="pagination-info">Showing ' + ((currentNewsPage - 1) * newsPerPage + 1) + '-' + Math.min(currentNewsPage * newsPerPage, totalItems) + ' of ' + totalItems + ' items</div>';
+  paginationHTML += '<div class="pagination-buttons">';
+  
+  if (currentNewsPage > 1) {
+    paginationHTML += '<button class="page-btn" onclick="goToNewsPage(' + (currentNewsPage - 1) + ')">← Previous</button>';
+  }
+  
+  const maxButtons = 5;
+  let startPage = Math.max(1, currentNewsPage - Math.floor(maxButtons / 2));
+  let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+  
+  if (endPage - startPage < maxButtons - 1) {
+    startPage = Math.max(1, endPage - maxButtons + 1);
+  }
+  
+  if (startPage > 1) {
+    paginationHTML += '<button class="page-btn" onclick="goToNewsPage(1)">1</button>';
+    if (startPage > 2) {
+      paginationHTML += '<span class="page-ellipsis">...</span>';
+    }
+  }
+  
+  for (let i = startPage; i <= endPage; i++) {
+    paginationHTML += '<button class="page-btn ' + (i === currentNewsPage ? 'active' : '') + '" onclick="goToNewsPage(' + i + ')">' + i + '</button>';
+  }
+  
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      paginationHTML += '<span class="page-ellipsis">...</span>';
+    }
+    paginationHTML += '<button class="page-btn" onclick="goToNewsPage(' + totalPages + ')">' + totalPages + '</button>';
+  }
+  
+  if (currentNewsPage < totalPages) {
+    paginationHTML += '<button class="page-btn" onclick="goToNewsPage(' + (currentNewsPage + 1) + ')">Next →</button>';
+  }
+  
+  paginationHTML += '</div></div>';
+  container.innerHTML = paginationHTML;
+}
+
+window.goToNewsPage = function(page) {  
+    currentNewsPage = page;
+    const container = document.getElementById('news-container');
+    const paginationContainer = document.getElementById('news-pagination-controls');
+    displayNews(container, paginationContainer);
+    document.getElementById('news').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+}
+</script>
+
+</body>
+</html>
+
 
