@@ -23,8 +23,18 @@ body {
 /* ------------------------------------------- */
 /* MEDIA QUERY FOR SMALLER SCREENS */
 /* ------------------------------------------- */
-@media (max-width: 1024px) { /* Targeting tablets and phones */
+@media (max-width: 1024px) { 
   
+  /* CRITICAL ADDITION: Prevents any content from forcing overflow */
+  body {
+    overflow-x: hidden; 
+  }
+
+  /* Ensure the header is mobile-friendly */
+  .header-main {
+    flex-direction: column;
+    /* ... rest of the media query ... */
+  } 
   /* Ensure the header is mobile-friendly */
   .header-main {
     flex-direction: column;
@@ -42,20 +52,23 @@ body {
   .header-nav li {
     margin: 0.5rem 0; 
   }
-  
-  /* Make sure the main content is full width */
-  main {
-    padding: 1rem; 
-  }
+/* Code to replace it with: */
+main {
+  max-width: 1400px; /* New: Allows it to shrink */
+  width: 95%;        /* New: Tells it to use 95% of the screen width when max-width is exceeded */
+  margin: 0 auto;
+  padding: 2rem 0;
+  flex-grow: 1;
+}  
 
-  /* Adjust the image container and image */
-  .main-image-container {
-    width: 100%; /* Use full available width */
-    max-width: 100%;
-    margin-bottom: 1.5rem;
-    overflow: hidden; /* Prevent image overflow */
-  }
-  
+/* Code to replace it with: */
+.main-image-container {
+  width: 100%;
+  max-width: 100%; /* New: Ensures it respects its parent's width */
+  height: auto;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
   .main-image {
     width: 100%; /* Image fills its container */
     height: auto;
