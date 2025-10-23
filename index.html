@@ -454,35 +454,38 @@ footer {
   font-size: 1.1rem;
 }
 
-/------------------------------------------- */
-/* HOME PAGE LAYOUT */
 /* ------------------------------------------- */
+/* HOME PAGE TWO-COLUMN LAYOUT */
+/* ------------------------------------------- */
+/* Two-column wrapper for home page */
 .home-content-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: start;
   margin-top: 2rem;
-  margin-bottom: 3rem;
 }
 
 .home-text-column {
+  /* Text content stays on the left */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
 .home-image-column {
+  /* Image stays on the right - sticky positioning */
   position: sticky;
   top: 100px;
 }
 
+/* Update hero image for home page */
 .home-image-column .hero-image {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   height: 100%;
+  margin-bottom: 2rem;
 }
 
 .home-image-column .hero-image img {
@@ -503,50 +506,13 @@ footer {
   text-align: center;
 }
 
+/* Statistics boxes - moved to bottom of layout */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-}
-
-.stat-box {
-  background: #f8f8f8;
-  padding: 1.5rem;
-  border-radius: 6px;
-  border-left: 4px solid #000000;
-}
-
-.stat-box h3 {
-  color: #000000;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.stat-box p {
-  color: #666;
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 1200px) {
-  .home-content-wrapper {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .home-image-column {
-    position: relative;
-    top: 0;
-  }
-  
-  .home-image-column .hero-image img {
-    height: 350px;
-  }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
+  margin-top: 3rem;
+  grid-column: 1 / -1;
 }
 </style>
 </head>
