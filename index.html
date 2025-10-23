@@ -13,28 +13,60 @@ body {
   line-height: 1.6;
   color: #2c2c2c;
   background: #fafafa;
-  min-width: 1400px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
 }
 
-/* Mobile responsive fix */
-@media (max-width: 768px) {
+/* ------------------------------------------- */
+/* MEDIA QUERY FOR SMALLER SCREENS (e.g., Tablets and Phones) */
+/* ------------------------------------------- */
+@media (max-width: 1400px) {
+  
+  /* Prevent horizontal scrolling and ensure full width */
   body {
     min-width: 100%;
     width: 100%;
     overflow-x: hidden;
   }
-}
+  
+  /* Stack the header elements vertically */
+  .header-main {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem;
+  }
 
-/* Mobile responsive fix */
-@media (max-width: 768px) {
-  body {
-    min-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
+  /* Adjust the logo/title size */
+  .header-title h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Force the main navigation to stack vertically on small screens */
+  .header-nav ul {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+  }
+  
+  /* Give the main nav links some room */
+  .header-nav li {
+    margin: 0.5rem 0; 
+  }
+
+  /* Make the news/resource section display as a single column */
+  .news-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  /* Center the controls/buttons */
+  .news-controls {
+    flex-direction: column;
+    align-items: center;
   }
 }
  
