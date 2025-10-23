@@ -8,8 +8,9 @@
 /* ------------------------------------------- */
 /* BASE STYLES - PROFESSIONAL ARCHIVE DESIGN */
 /* ------------------------------------------- */
+
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Georgia', 'Times New New Roman', serif;
   line-height: 1.6;
   color: #2c2c2c;
   background: #fafafa;
@@ -17,56 +18,60 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-}
+}  
 
 /* ------------------------------------------- */
-/* MEDIA QUERY FOR SMALLER SCREENS (e.g., Tablets and Phones) */
+/* MEDIA QUERY FOR SMALLER SCREENS */
 /* ------------------------------------------- */
-@media (max-width: 1400px) {
+@media (max-width: 1024px) { /* Targeting tablets and phones */
   
-  /* Prevent horizontal scrolling and ensure full width */
-  body {
-    min-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-  
-  /* Stack the header elements vertically */
+  /* Ensure the header is mobile-friendly */
   .header-main {
     flex-direction: column;
     align-items: center;
     padding: 1rem 1rem;
-  }
-
-  /* Adjust the logo/title size */
-  .header-title h1 {
-    font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 0.5rem;
   }
 
-  /* Force the main navigation to stack vertically on small screens */
+  /* Make the main navigation stack vertically */
   .header-nav ul {
     flex-direction: column;
-    align-items: center;
     padding-top: 0.5rem;
   }
   
-  /* Give the main nav links some room */
   .header-nav li {
     margin: 0.5rem 0; 
   }
-
-  /* Make the news/resource section display as a single column */
-  .news-grid {
-    grid-template-columns: 1fr;
-    padding: 1rem;
+  
+  /* Make sure the main content is full width */
+  main {
+    padding: 1rem; 
   }
 
-  /* Center the controls/buttons */
+  /* Adjust the image container and image */
+  .main-image-container {
+    width: 100%; /* Use full available width */
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    overflow: hidden; /* Prevent image overflow */
+  }
+  
+  .main-image {
+    width: 100%; /* Image fills its container */
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Force the news/resource section into a single column */
+  .news-grid {
+    grid-template-columns: 1fr;
+    padding: 0; /* Remove side padding for smaller screens */
+  }
+
   .news-controls {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
   }
 }
  
