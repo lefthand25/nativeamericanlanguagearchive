@@ -74,20 +74,23 @@ main {
     height: auto;
     object-fit: cover;
   }
-
-  /* Force the news/resource section into a single column */
-  .news-grid {
-    grid-template-columns: 1fr;
-    padding: 0; /* Remove side padding for smaller screens */
-  }
-
+.news-grid {
+  grid-template-columns: 1fr;
+  /* Use full viewport width and prevent overflow */
+  width: 100vw; 
+  max-width: 100%;
+  padding: 0 1rem; /* Add padding back for content readability */
+}
   .news-controls {
     flex-direction: column;
     align-items: center;
     gap: 10px;
   }
-}
- 
+.news-content {
+  min-width: 0; /* Important for flex/grid items to shrink */
+  }
+} 
+  
 /* ------------------------------------------- */
 /* HEADER - PROFESSIONAL ARCHIVE STYLE */
 /* ------------------------------------------- */
