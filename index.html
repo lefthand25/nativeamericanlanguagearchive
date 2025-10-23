@@ -8,7 +8,6 @@
 /* ------------------------------------------- */
 /* BASE STYLES - PROFESSIONAL ARCHIVE DESIGN */
 /* ------------------------------------------- */
-
 body {
   font-family: 'Georgia', 'Times New New Roman', serif;
   line-height: 1.6;
@@ -18,7 +17,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-}  
+  overflow-x: hidden; 
+}
 
 /* ------------------------------------------- */
 /* MEDIA QUERY FOR SMALLER SCREENS */
@@ -52,14 +52,15 @@ body {
   .header-nav li {
     margin: 0.5rem 0; 
   }
-/* Code to replace it with: */
 main {
-  max-width: 1400px; /* New: Allows it to shrink */
-  width: 95%;        /* New: Tells it to use 95% of the screen width when max-width is exceeded */
+  max-width: 1400px;
+  width: 95%;
   margin: 0 auto;
   padding: 2rem 0;
   flex-grow: 1;
-}  
+  /* CRITICAL ADDITION: This prevents internal elements from forcing a horizontal scroll on the main area */
+  overflow: hidden; 
+}
 
 /* Code to replace it with: */
 .main-image-container {
@@ -76,10 +77,19 @@ main {
   }
 .news-grid {
   grid-template-columns: 1fr;
-  /* Use full viewport width and prevent overflow */
-  width: 100vw; 
+  /* Use a safe percentage width */
+  width: 100%; 
   max-width: 100%;
-  padding: 0 1rem; /* Add padding back for content readability */
+  padding: 0 1rem; 
+}
+  
+  query): */
+.news-grid {
+  grid-template-columns: 1fr;
+  /* Use a safe percentage width */
+  width: 100%; 
+  max-width: 100%;
+  padding: 0 1rem; 
 }
   .news-controls {
     flex-direction: column;
@@ -108,7 +118,7 @@ header {
   padding: 0.5rem 0;
   border-bottom: 1px solid #ddd;
   font-size: 0.9rem;
-  text-align: center;
+ xt-align: center;
   color: #666;
 }
 
